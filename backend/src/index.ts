@@ -1,12 +1,9 @@
-import express, { Request, Response } from 'express';
+import './LoadEnv'; // Must be the first import
+import app from './App';
+import logger from './shared/Logger';
 
-const app = express();
-
-app.get('/', function (req: Request, res: Response) {
-  console.log('Hola desde: ', req.url);
-  res.send('Hola Mundo, desde node typescript');
-});
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+// Start the server
+const port = Number(process.env.PORT || 3000);
+app.listen(port, () => {
+  logger.info('Express server started on port: ' + port);
 });
