@@ -1,6 +1,6 @@
-export interface User {
+export interface UserModel {
   document: string;
-  documentType: string;
-  pasword: string;
+  documentType: boolean;
+  password: string;
   active: boolean;
 }

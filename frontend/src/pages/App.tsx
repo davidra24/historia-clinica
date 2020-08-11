@@ -1,10 +1,16 @@
 import React from 'react';
-
+import { Loading } from '../components/loading';
+import { useSelector } from 'react-redux';
+import { IStore } from '../redux/types';
+import { Router } from '../router';
 function App() {
+  const loading = useSelector((state: IStore) => state.loading);
+
   return (
-    <div className='App'>
-      <h1>Hola mundo</h1>
-    </div>
+    <>
+      <Router />
+      {loading && <Loading />}
+    </>
   );
 }
 
