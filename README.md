@@ -2,7 +2,7 @@
 
 El presente proyecto, corresponde al desarrollo del _prototipo de historia clinica digitalizada para IPS Colombianas_, bajo el estándar [FHIR](https://hl7.org/FHIR/).
 
-Dicho estándar, corresponde a un estándar global conocido como el [HL7](http://www.hl7.org/index.cfm), el cuál es un conjunto de estándares para facilitar el intercambio electrónico de inormación clinica; que utiliza una notación de lenguaje unificado de modelado [UML](https://es.wikipedia.org/wiki/Lenguaje_unificado_de_modelado).
+Dicho estándar, corresponde a un estándar global conocido como el [HL7](http://www.hl7.org/index.cfm), el cuál es un conjunto de estándares para facilitar el intercambio electrónico de inormación clinica.
 
 ## Fast Healthcare Interoperability Resources (FHIR)
 
