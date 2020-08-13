@@ -48,7 +48,7 @@ export class HealthCenterController {
   async getOneHealthCenter(req: Request, res: Response) {
     const { idCenter } = req.params;
     await db
-      .one(() => healthCenterDB.getOneHealthCenter(parseInt(idCenter)))
+      .one(() => healthCenterDB.getOneHealthCenter(idCenter))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
@@ -91,9 +91,7 @@ export class HealthCenterController {
     const { idCenter } = req.params;
     const { HealthCenter } = await decryptRequest(req);
     await db
-      .none(() =>
-        healthCenterDB.updateHealthCenter(parseInt(idCenter), HealthCenter)
-      )
+      .none(() => healthCenterDB.updateHealthCenter(idCenter, HealthCenter))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
@@ -114,7 +112,7 @@ export class HealthCenterController {
   async deleteHealthCenter(req: Request, res: Response) {
     const { idCenter } = req.params;
     await db
-      .result(() => healthCenterDB.deleteHealthCenter(parseInt(idCenter)))
+      .result(() => healthCenterDB.deleteHealthCenter(idCenter))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,

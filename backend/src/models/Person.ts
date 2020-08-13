@@ -8,7 +8,7 @@ export interface PersonModel {
   genre: string;
   dateBirth: Date;
   email: string;
-  civilState: string;
+  civilState: number;
   photo: string;
   phone: string;
 }

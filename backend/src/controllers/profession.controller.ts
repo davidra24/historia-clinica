@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
-import { db } from '../database';
-import professionDB from '../database/Professions.database';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import express, { Request, Response } from "express";
+import { db } from "../database";
+import professionDB from "../database/Professions.database";
+import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
 
 export class ProfessionController {
   app = express();
@@ -13,13 +13,13 @@ export class ProfessionController {
       .none(professionDB.createTable)
       .then(() => ({
         ok: true,
-        status: 'success creating table',
-        message: 'profession table created',
+        status: "success creating table",
+        message: "profession table created",
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: 'unsuccess creating table',
+        status: "unsuccess creating table",
         message: error,
         data: null,
       }));
@@ -30,15 +30,15 @@ export class ProfessionController {
       .then((professions) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting all professions',
-          message: 'Se han obtenido todas las profesiones de la base de datos',
+          status: "success getting all professions",
+          message: "Se han obtenido todas las profesiones de la base de datos",
           data: professions,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting all professions',
+          status: "unsuccess getting all professions",
           message: `Ha ocurrido un error inesperado al obtener todas las profesiones`,
           data: error.message.toString(),
         })
@@ -51,7 +51,7 @@ export class ProfessionController {
       .then((profession) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting one profession',
+          status: "success getting one profession",
           message: `Se ha obtenido la profesion ${id}`,
           data: profession,
         })
@@ -59,7 +59,7 @@ export class ProfessionController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting one profession',
+          status: "unsuccess getting one profession",
           message: `Ha ocurrido un error inesperado al obtener la profesion ${id}`,
           data: error.message,
         })
@@ -72,7 +72,7 @@ export class ProfessionController {
       .then((profession) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success inserting profession',
+          status: "success inserting profession",
           message: `Se ha creado la profesion ${Profession.id} correctamente`,
           data: profession,
         })
@@ -80,7 +80,7 @@ export class ProfessionController {
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess inserting profession',
+          status: "unsuccess inserting profession",
           message: `Ha ocurrido un error inesperado con la profesion ${Profession.id}`,
           data: error.toString(),
         });
@@ -94,7 +94,7 @@ export class ProfessionController {
       .then((profession) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success updating profession',
+          status: "success updating profession",
           message: `Se ha actualizado la profesion ${Profession.id} correctamente`,
           data: profession,
         })
@@ -102,7 +102,7 @@ export class ProfessionController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess updating profession',
+          status: "unsuccess updating profession",
           message: `Ha ocurrido un error inesperado al actualizar la profesion ${id}`,
           data: error.toString(),
         })
@@ -115,7 +115,7 @@ export class ProfessionController {
       .then((profession) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success deleting profession',
+          status: "success deleting profession",
           message: `Se ha eliminado la profesion ${id} correctamente`,
           data: profession,
         })
@@ -123,7 +123,7 @@ export class ProfessionController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess deleting profession',
+          status: "unsuccess deleting profession",
           message: `Ha ocurrido un error inesperado al eliminar la profesion ${id} correctamente`,
           data: error.toString(),
         })

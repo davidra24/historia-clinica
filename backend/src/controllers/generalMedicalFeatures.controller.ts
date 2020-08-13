@@ -17,12 +17,19 @@ export class GeneralMedicalFeaturesController {
         message: "general medical features table created",
         data: null,
       }))
-      .catch((error) => ({
-        ok: false,
-        status: "unsuccess creating table",
-        message: error,
-        data: null,
-      }));
+      .catch(
+        (error) => (
+          console.log(error),
+          {
+            return: {
+              ok: false,
+              status: "unsuccess creating table",
+              message: error,
+              data: null,
+            },
+          }
+        )
+      );
   }
   async getGeneralMedicalFeatures(req: Request, res: Response) {
     await db

@@ -4,7 +4,7 @@ import { SALT } from '../util/constants';
 
 const TABLE_NAME = 'USERS';
 const COL_DOCUMENT = 'document';
-const COL_DOCUMENT_TYPE = 'document_type';
+const COL_DOCUMENT_TYPE = 'documenttype';
 const COL_PASSWORD = 'password';
 const COL_ACTIVE = 'active';
 

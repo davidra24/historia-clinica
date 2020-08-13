@@ -1,6 +1,6 @@
 export interface UserModel {
   document: string;
-  documentType: boolean;
   password: string;
+  documentType: boolean;
   active: boolean;
 }

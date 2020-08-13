@@ -72,8 +72,6 @@ export class UserController {
   async insertUser(req: Request, res: Response) {
     const { user } = await decryptRequest(req);
     const userExist = await db.oneOrNone(userDB.getOneUser(user.document));
-    console.log('exist', userExist);
-
     if (!userExist) {
       await db
         .none(() => userDB.insertUser(user))

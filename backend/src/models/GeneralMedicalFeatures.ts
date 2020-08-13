@@ -1,5 +1,6 @@
 export interface GeneralMedicalFeaturesModel {
   id: string;
+  id_query: string;
   height: number;
   weight: number;
   drink: boolean;

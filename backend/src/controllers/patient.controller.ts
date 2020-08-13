@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
-import { db } from '../database';
-import patientDB from '../database/Patients.database';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import express, { Request, Response } from "express";
+import { db } from "../database";
+import patientDB from "../database/Patients.database";
+import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
 
 export class PatientController {
   app = express();
@@ -13,13 +13,13 @@ export class PatientController {
       .none(patientDB.createTable)
       .then(() => ({
         ok: true,
-        status: 'success creating table',
-        message: 'patient table created',
+        status: "success creating table",
+        message: "patient table created",
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: 'unsuccess creating table',
+        status: "unsuccess creating table",
         message: error,
         data: null,
       }));
@@ -30,15 +30,15 @@ export class PatientController {
       .then((patient) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting all patients',
-          message: 'Se han obtenido todos los pacientes de la base de datos',
+          status: "success getting all patients",
+          message: "Se han obtenido todos los pacientes de la base de datos",
           data: patient,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting all patients',
+          status: "unsuccess getting all patients",
           message: `Ha ocurrido un error inesperado al obtener todos los pacientes`,
           data: error.message.toString(),
         })
@@ -51,7 +51,7 @@ export class PatientController {
       .then((patient) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting one patient',
+          status: "success getting one patient",
           message: `Se han obtenido el paciente ${document}`,
           data: patient,
         })
@@ -59,7 +59,7 @@ export class PatientController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting one patient',
+          status: "unsuccess getting one patient",
           message: `Ha ocurrido un error inesperado al obtener el paciente ${document}`,
           data: error.message,
         })
@@ -72,7 +72,7 @@ export class PatientController {
       .then((patient) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success inserting patient',
+          status: "success inserting patient",
           message: `Se han creado el paciente ${Patient.document} correctamente`,
           data: patient,
         })
@@ -80,7 +80,7 @@ export class PatientController {
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess inserting patient',
+          status: "unsuccess inserting patient",
           message: `Ha ocurrido un error inesperado con el paciente ${Patient.document}`,
           data: error.toString(),
         });
@@ -94,7 +94,7 @@ export class PatientController {
       .then((patient) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success updating patient',
+          status: "success updating patient",
           message: `Se han actualizado el paciente ${Patient.document} correctamente`,
           data: patient,
         })
@@ -102,7 +102,7 @@ export class PatientController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess updating patient',
+          status: "unsuccess updating patient",
           message: `Ha ocurrido un error inesperado al actualizar el paciente ${document}`,
           data: error.toString(),
         })
@@ -115,7 +115,7 @@ export class PatientController {
       .then((patient) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success deleting patient',
+          status: "success deleting patient",
           message: `Se han eliminado el paciente ${document} correctamente`,
           data: patient,
         })
@@ -123,7 +123,7 @@ export class PatientController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess deleting patient',
+          status: "unsuccess deleting patient",
           message: `Ha ocurrido un error inesperado al eliminar el paciente ${document} correctamente`,
           data: error.toString(),
         })
