@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 
 export const TextMessage = (
   id: string,
-  value?: any,
+  value: any = {},
   defaultMessage?: string
 ): any => (
   <FormattedMessage

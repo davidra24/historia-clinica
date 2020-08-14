@@ -4,22 +4,29 @@ import ReactDOM from 'react-dom';
 import store from './redux/reducer';
 import App from './pages/App';
 import * as serviceWorker from './services/serviceWorker';
-import './styles/index.scss';
 
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
 import { ScrollToTop } from './components/ScrollTop';
 import { Provider } from 'react-redux';
 import { LangProvider, LOCALES } from './lang';
+import './styles/index.css';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#33ab9f',
+    },
+  },
+});
 
 ReactDOM.render(
   <StrictMode>
     <LangProvider locale={LOCALES.SPANISH}>
       <Provider store={store}>
         <ScrollToTop>
-          <App></App>
+          <MuiThemeProvider theme={theme}>
+            <App></App>
+          </MuiThemeProvider>
         </ScrollToTop>
       </Provider>
     </LangProvider>

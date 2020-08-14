@@ -1,6 +1,7 @@
 export interface IStore {
   loading: boolean;
   isAuth: boolean;
+  openMenu: boolean;
   user: string;
 }
 
@@ -12,5 +13,6 @@ export interface IAction {
 export const defaultStore: IStore = {
   loading: false,
   isAuth: false,
+  openMenu: false,
   user: '',
 };

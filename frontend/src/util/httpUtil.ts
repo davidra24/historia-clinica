@@ -13,7 +13,7 @@ export const get = async (service: string) => {
   }
 };
 
-export const post = async (service: string, body: object, token?: string) => {
+export const post = async (service: string, body: any, token?: string) => {
   try {
     const options = {
       method: 'POST',

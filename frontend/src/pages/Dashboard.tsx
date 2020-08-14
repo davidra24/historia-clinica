@@ -1,8 +1,10 @@
 import React from 'react';
+import { Container } from '../containers';
 
 export const Dashboard = () => (
   <>
-    <h1>Hola mundo</h1>
-    <h2>Dashboard</h2>
+    <Container>
+      <h1>Dashboard</h1>
+    </Container>
   </>
 );

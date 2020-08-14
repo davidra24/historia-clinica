@@ -1,40 +1,51 @@
-import React, { useRef } from 'react';
-import { Card } from 'primereact/card';
+import React, { useState } from 'react';
 import { TextMessage } from '../lang/TextMessage';
 import { useDispatch } from 'react-redux';
 import { Loading } from '../redux/actions';
 import { FormSign } from '../components/FormSign';
 import { useHistory } from 'react-router';
-import { useInputValue } from '../hooks/useInput';
 import { IUser } from '../data/IUser';
 import { post } from '../util/httpUtil';
 import { HTTP_LOGIN } from '../util/constants';
-import { Messages } from 'primereact/messages';
-import { errorMessage } from '../util/UtilMsgs';
+import { SnackBarAlert } from '../util/Alert';
+import { useInputValue } from '../hooks/useInput';
+import { useCookies } from 'react-cookie';
 
 export const Login = () => {
+  const [open, setOpen] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const inputDocument = useInputValue('');
   const inputPassword = useInputValue('');
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+
   const dispatch = useDispatch();
   const history = useHistory();
-  let messages = useRef<any>(null);
 
-  const login = async (e: any) => {
-    e.preventDefault();
+  const login = async () => {
+    const document = inputDocument.value;
+    const password = inputPassword.value;
+    const user: IUser = { document, password };
     dispatch(Loading(true));
-    const user: IUser = {
-      document: inputDocument.value,
-      password: inputPassword.value,
-    };
-    const data = await post(HTTP_LOGIN, user);
-    if (!data.ok) {
-      errorMessage(
-        messages,
-        TextMessage('login.authError-title'),
-        TextMessage(data.message)
-      );
+    const response = await post(HTTP_LOGIN, user);
+    if (!response.ok) {
+      setAlertTitle('signup.authError-title');
+      setErrorMessage(response.message);
+      setOpen(true);
+    } else {
+      const { token } = response.data;
+
+      setCookie('token', token, { path: '/' });
+      history.push('/');
     }
     dispatch(Loading(false));
+  };
+
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   const volver = () => {
@@ -42,21 +53,31 @@ export const Login = () => {
   };
 
   return (
-    <div className='p-grid p-justify-center p-align-center'>
-      <Messages className='p-col-10 p-md-8 p-lg-7' ref={messages} />
-      <Card className='p-col-10 p-md-8 p-lg-6'>
+    <>
+      <SnackBarAlert
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        severity='error'
+        title={TextMessage(alertTitle)}
+        message={{
+          children: TextMessage(errorMessage),
+        }}
+      />
+      <div className='flex justify-center items-center'>
         <FormSign
           title={TextMessage('login.title')}
-          inputDocument={inputDocument}
-          inputPassword={inputPassword}
           leftButton={{
             onClick: volver,
             label: TextMessage('login.signup'),
             className: 'p-button-success',
           }}
-          rightButton={{ onSubmit: login, label: TextMessage('login.signin') }}
+          onSubmit={login}
+          rightButton={{ label: TextMessage('login.signin') }}
+          inputDocument={inputDocument}
+          inputPassword={inputPassword}
         />
-      </Card>
-    </div>
+      </div>
+    </>
   );
 };

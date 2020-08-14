@@ -1,9 +1,10 @@
 export interface signTypes {
   title: string;
-  inputDocument: any;
-  inputPassword: any;
+  onSubmit: any;
   leftButton: any;
   rightButton: any;
   person?: Partial<boolean>;
   setPerson?: Function;
+  inputDocument: any;
+  inputPassword: any;
 }

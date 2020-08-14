@@ -1,6 +1,5 @@
-@import './_variables';
-@import './sass/_layout';
-@import './_overrides';
+@import './css/layout.css';
+@import './main.css';
 
 body {
   margin: 0;
