@@ -1,22 +1,22 @@
-import { AttentionCenterModel } from 'src/models/AttentionCenter';
+import { AttentionCenterModel } from "src/models/AttentionCenter";
 
-const TABLE_NAME = 'ATTENTIONCENTERS';
-const COL_ID_CENTER = 'id';
-const COL_DOCUMENT = 'document';
-const COL_ID_SPECIALTY = 'id_specialty';
-const COL_ACTIVE = 'active';
+const TABLE_NAME = "ATTENTIONCENTERS";
+const COL_ID_CENTER = "id";
+const COL_DOCUMENT = "document";
+const COL_ID_SPECIALTY = "idSpecialty";
+const COL_ACTIVE = "active";
 
-const FOREIGN_KEY_HEALTHCARETEAM = 'atec_fk_idp';
-const FOREIGN_KEY_HEALTHCENTERS = 'atec_fk_idc';
-const FOREIGN_KEY_SPECIALTIES = 'atec_fk_ide';
+const FOREIGN_KEY_HEALTHCARETEAM = "atec_fk_idp";
+const FOREIGN_KEY_HEALTHCENTERS = "atec_fk_idc";
+const FOREIGN_KEY_SPECIALTIES = "atec_fk_ide";
 
-const FOREIGN_TABLE_HEALTHCARETEAM = 'HEALTHCARETEAM';
-const FOREIGN_TABLE_HEALTHCENTERS = 'HEALTHCENTERS';
-const FOREIGN_TABLE_SPECIALTIES = 'SPECIALTIES';
+const FOREIGN_TABLE_HEALTHCARETEAM = "HEALTHCARETEAM";
+const FOREIGN_TABLE_HEALTHCENTERS = "HEALTHCENTERS";
+const FOREIGN_TABLE_SPECIALTIES = "SPECIALTIES";
 
-const COL_FK_HEALTHCARETEAM = 'document';
-const COL_FK_HEALTHCENTERS = 'id';
-const COL_FK_SPECIALTIES = 'id';
+const COL_FK_HEALTHCARETEAM = "document";
+const COL_FK_HEALTHCENTERS = "id";
+const COL_FK_SPECIALTIES = "id";
 
 export default {
   createTable: (): string => `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COL_ID_CENTER} TEXT NOT NULL, 

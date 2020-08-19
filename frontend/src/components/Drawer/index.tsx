@@ -1,10 +1,13 @@
 import React from 'react';
-import { HighlightOff } from '@material-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../../redux/types';
 import { menu } from '../../redux/actions';
 import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
+import { MenuListPatient } from './MenuListPatient';
+import { SvgIcon } from '@material-ui/core';
+import { MENU_ICON, CLOSE_MENU_ICON } from '../../util/svgIcons';
+import { TextMessage } from '../../lang/TextMessage';
 
 export const Drawer = ({ children }: any) => {
   const openMenu = useSelector((state: IStore) => state.openMenu);
@@ -27,17 +30,9 @@ export const Drawer = ({ children }: any) => {
                 dispatch(menu(true));
               }}
             >
-              <svg
-                fill='none'
-                stroke='currentColor'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                viewBox='0 0 24 24'
-                className='w-8 h-8'
-              >
-                <path d='M4 6h16M4 12h16M4 18h16'></path>
-              </svg>
+              <SvgIcon>
+                <path d={MENU_ICON}></path>
+              </SvgIcon>
             </button>
           </div>
           <Link
@@ -46,23 +41,26 @@ export const Drawer = ({ children }: any) => {
           >
             <img src={logo} alt='Logo' className={`w-8 md:w-12`} />
             <h1 className='text-xs md:text-base'>
-              <strong>HISTORIA CLÍNICA DIGITAL</strong>
+              <strong>{TextMessage('app.title')}</strong>
             </h1>
           </Link>
         </div>
       </nav>
       <aside
-        className={`transform top-0 left-0 w-11/12 md:w-6/12 lg:w-4/12 xl:w-3/12 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
-          openMenu ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`transform top-0 left-0 w-11/12 md:w-6/12 lg:w-4/12 xl:w-3/12 bg-white 
+          fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
+            openMenu ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
-        <div className='flex justify-end cursor-pointer pr-5 pt-5'>
-          <HighlightOff
-            className='text-6xl'
-            color='primary'
-            style={{ fontSize: 30 }}
-            onClick={() => dispatch(menu(false))}
-          />
+        <div className='flex flex-col space-y-3'>
+          <div className='flex items-center justify-end cursor-pointer pr-3 pt-3'>
+            <SvgIcon onClick={() => dispatch(menu(false))}>
+              <path d={CLOSE_MENU_ICON}></path>
+            </SvgIcon>
+          </div>
+          <div className='flex flex-col'>
+            <MenuListPatient />
+          </div>
         </div>
       </aside>
       <main

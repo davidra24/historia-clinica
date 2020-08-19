@@ -1,5 +1,5 @@
 export interface HealthCenterModel {
-  idCenter: number;
+  id: string;
   name: string;
   website: string;
   phone: string;

@@ -52,6 +52,7 @@
     "eject": "react-scripts eject",
     "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
     "dev": "yarn build:css && yarn start",
+    "devnt": "yarn start",
     "prod": "yarn build:css && yarn build"
   },
   "eslintConfig": {

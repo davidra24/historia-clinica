@@ -28,8 +28,8 @@ export default {
     healthCenter: HealthCenterModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DOCUMENT}, ${COL_NAME}, ${COL_WEBSITE},${COL_PHONE},
           ${COL_DIRECTION},${COL_EMAIL},${COL_SCHEDULE},${COL_DESCRIPTION}) 
-          VALUES (${healthCenter.idCenter}, '${healthCenter.name}','${healthCenter.website}','${healthCenter.phone}',
-            '${healthCenter.direction}','${healthCenter.email}',${healthCenter.schedule},'${healthCenter.description}')`,
+          VALUES ('${healthCenter.id}', '${healthCenter.name}','${healthCenter.website}','${healthCenter.phone}',
+            '${healthCenter.direction}','${healthCenter.email}','${healthCenter.schedule}','${healthCenter.description}')`,
   deleteHealthCenter: (id: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_DOCUMENT} = ${id}`,
   updateHealthCenter: (
@@ -37,5 +37,5 @@ export default {
     healthCenter: HealthCenterModel
   ) => `UPDATE ${TABLE_NAME} SET ${COL_NAME} = '${healthCenter.name}', ${COL_WEBSITE}='${healthCenter.website}',
         ${COL_PHONE}='${healthCenter.phone}', ${COL_DIRECTION}='${healthCenter.direction}',${COL_EMAIL}='${healthCenter.email}',
-        ${COL_SCHEDULE}=${healthCenter.schedule},${COL_DESCRIPTION} = '${healthCenter.description}' WHERE ${COL_DOCUMENT} = ${id}`,
+        ${COL_SCHEDULE}='${healthCenter.schedule}',${COL_DESCRIPTION} = '${healthCenter.description}' WHERE ${COL_DOCUMENT} = '${id}'`,
 };

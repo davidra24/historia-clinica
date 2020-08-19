@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import { IStore, defaultStore, IAction } from './types';
-import { LOADING, AUTH, OPEN_MENU } from './constants.redux';
+import { LOADING, AUTH, OPEN_MENU, LANG } from './constants.redux';
 
 const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
   switch (action.type) {
@@ -10,6 +10,8 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, isAuth: action.payload };
     case OPEN_MENU:
       return { ...state, openMenu: action.payload };
+    case LANG:
+      return { ...state, language: action.payload };
     default:
       return state;
   }

@@ -66,37 +66,37 @@ export class PeopleController {
       );
   }
   async insertPerson(req: Request, res: Response) {
-    const { Person } = await decryptRequest(req);
+    const { person } = await decryptRequest(req);
     await db
-      .none(() => peopleDB.insertPerson(Person))
-      .then((person) =>
+      .none(() => peopleDB.insertPerson(person))
+      .then((persona) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting person",
-          message: `Se han creado la persona ${Person.document} correctamente`,
-          data: person,
+          message: `Se han creado la persona ${person.document} correctamente`,
+          data: persona,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting person",
-          message: `Ha ocurrido un error inesperado con la persona ${Person.document}`,
+          message: `Ha ocurrido un error inesperado con la persona ${person.document}`,
           data: error.toString(),
         });
       });
   }
   async updatePerson(req: Request, res: Response) {
     const { document } = req.params;
-    const { Person } = await decryptRequest(req);
+    const { person } = await decryptRequest(req);
     await db
-      .none(() => peopleDB.updatePerson(document, Person))
-      .then((person) =>
+      .none(() => peopleDB.updatePerson(document, person))
+      .then((persona) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating person",
-          message: `Se han actualizado la persona ${Person.document} correctamente`,
-          data: person,
+          message: `Se han actualizado la persona ${person.document} correctamente`,
+          data: persona,
         })
       )
       .catch((error) =>

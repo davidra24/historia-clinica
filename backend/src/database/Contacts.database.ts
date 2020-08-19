@@ -15,7 +15,7 @@ export default {
   insertContact: (
     contact: ContactModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DOCUMENT}, ${COL_NAME}, ${COL_PHONE}, ${COL_EMAIL},${COL_DIRECTION}) 
-          VALUES ('${contact.document}', '${contact.name}','${contact.phone}','${contact.email}','${contact.email}','${contact.direction}')`,
+          VALUES ('${contact.document}', '${contact.name}','${contact.phone}','${contact.email}','${contact.direction}')`,
   deleteContact: (document: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_DOCUMENT} = '${document}'`,
   updateContact: (

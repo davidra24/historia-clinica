@@ -2,11 +2,11 @@ import { PatientModel } from "src/models/Patient";
 
 const TABLE_NAME = "PATIENTS";
 const COL_DOCUMENT = "document";
+const COL_ID_PROFESSION = "idProfession";
+const COL_ADDITIONAL_INFORMATION = "additionalInformation";
 const COL_STRATUM = "stratum";
-const COL_ADDITIONAL_INFORMATION = "additional_information";
 const COL_DECEASED = "deceased";
-const COL_DECEASED_DATE = "deceaced_date";
-const COL_ID_PROFESSION = "id_profession";
+const COL_DECEASED_DATE = "deceacedDate";
 
 const FOREIGN_KEY_PERSON = "per_fk_doc";
 const FOREIGN_KEY_PROFESSION = "pac_fk_idp";
@@ -29,12 +29,12 @@ export default {
   insertPatient: (
     patient: PatientModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DOCUMENT}, ${COL_ID_PROFESSION}, ${COL_ADDITIONAL_INFORMATION}, ${COL_STRATUM},${COL_DECEASED},${COL_DECEASED_DATE}) 
-    VALUES ('${patient.document}', '${patient.idProfesion}','${patient.additionalInformation}',${patient.stratum},${patient.deceased},${patient.deceasedDate})`,
+    VALUES ('${patient.document}', '${patient.idProfesion}','${patient.additionalInformation}',${patient.stratum},${patient.deceased},'${patient.deceasedDate}')`,
   deletePatient: (document: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_DOCUMENT} = ${document}`,
   updatePatient: (
     document: string,
     patient: PatientModel
   ) => `UPDATE ${TABLE_NAME} SET ${COL_ID_PROFESSION} = '${patient.idProfesion}', ${COL_ADDITIONAL_INFORMATION}='${patient.additionalInformation}',
-           ${COL_STRATUM} = ${patient.stratum},${COL_DECEASED}=${patient.deceased},${COL_DECEASED_DATE}=${patient.deceasedDate} WHERE ${COL_DOCUMENT} = '${document}'`,
+           ${COL_STRATUM} = ${patient.stratum},${COL_DECEASED}=${patient.deceased},${COL_DECEASED_DATE}='${patient.deceasedDate}' WHERE ${COL_DOCUMENT} = '${document}'`,
 };

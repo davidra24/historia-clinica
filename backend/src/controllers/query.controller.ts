@@ -66,37 +66,37 @@ export class QueryController {
       );
   }
   async insertQuery(req: Request, res: Response) {
-    const { Query } = await decryptRequest(req);
+    const { query } = await decryptRequest(req);
     await db
-      .none(() => queryDB.insertQuery(Query))
-      .then((query) =>
+      .none(() => queryDB.insertQuery(query))
+      .then((consulta) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting query",
-          message: `Se ha creado la consulta ${Query.id} correctamente`,
-          data: query,
+          message: `Se ha creado la consulta correctamente`,
+          data: consulta,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting query",
-          message: `Ha ocurrido un error inesperado con la consulta ${Query.id}`,
+          message: `Ha ocurrido un error inesperado con la consulta`,
           data: error.toString(),
         });
       });
   }
   async updateQuery(req: Request, res: Response) {
     const { id } = req.params;
-    const { Query } = await decryptRequest(req);
+    const { query } = await decryptRequest(req);
     await db
-      .none(() => queryDB.updateQuery(id, Query))
-      .then((query) =>
+      .none(() => queryDB.updateQuery(id, query))
+      .then((consulta) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating query",
-          message: `Se ha actualizado la consulta ${Query.id} correctamente`,
-          data: query,
+          message: `Se ha actualizado la consulta ${query.id} correctamente`,
+          data: consulta,
         })
       )
       .catch((error) =>

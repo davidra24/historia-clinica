@@ -67,14 +67,14 @@ export class AttentionCenterController {
       );
   }
   async insertAttentionCenter(req: Request, res: Response) {
-    const { AttentionCenter } = await decryptRequest(req);
+    const { attentionCenter } = await decryptRequest(req);
     await db
-      .none(() => attentionCenterDB.insertAttentionCenter(AttentionCenter))
+      .none(() => attentionCenterDB.insertAttentionCenter(attentionCenter))
       .then((centrosDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting attention center",
-          message: `Se ha creado el centro de atencion ${AttentionCenter.id}, ${AttentionCenter.document} correctamente`,
+          message: `Se ha creado el centro de atencion ${attentionCenter.id}, ${attentionCenter.document} correctamente`,
           data: centrosDeAtencion,
         })
       )
@@ -82,7 +82,7 @@ export class AttentionCenterController {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting attention center",
-          message: `Ha ocurrido un error inesperado el centro de atencion ${AttentionCenter.id}, ${AttentionCenter.document}`,
+          message: `Ha ocurrido un error inesperado el centro de atencion ${attentionCenter.id}, ${attentionCenter.document}`,
           data: error.toString(),
         });
       });
@@ -102,7 +102,7 @@ export class AttentionCenterController {
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating attention center",
-          message: `Se ha actualizado el centro de atencion ${attentionCenter.id}, ${attentionCenter.document} correctamente`,
+          message: `Se ha actualizado el centro de atencion ${idCenter}, ${document} correctamente`,
           data: centroDeAtencion,
         })
       )

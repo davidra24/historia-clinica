@@ -5,7 +5,7 @@ export interface PersonModel {
   secondName: string;
   Lastname: string;
   lastSecondName: string;
-  genre: string;
+  genre: number;
   dateBirth: Date;
   email: string;
   civilState: number;

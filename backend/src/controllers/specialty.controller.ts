@@ -67,37 +67,37 @@ export class SpecialtyController {
       );
   }
   async insertSpecialty(req: Request, res: Response) {
-    const { Specialty } = await decryptRequest(req);
+    const { specialty } = await decryptRequest(req);
     await db
-      .none(() => specialtyDB.insertSpecialty(Specialty))
-      .then((specialty) =>
+      .none(() => specialtyDB.insertSpecialty(specialty))
+      .then((especialidad) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting specialty",
-          message: `Se ha creado la especialidad ${Specialty.id} correctamente`,
-          data: specialty,
+          message: `Se ha creado la especialidad correctamente`,
+          data: especialidad,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting specialty",
-          message: `Ha ocurrido un error inesperado con la especialidad ${Specialty.id}`,
+          message: `Ha ocurrido un error inesperado con la especialidad`,
           data: error.toString(),
         });
       });
   }
   async updateSpecialty(req: Request, res: Response) {
     const { id } = req.params;
-    const { Specialty } = await decryptRequest(req);
+    const { specialty } = await decryptRequest(req);
     await db
-      .none(() => specialtyDB.updateSpecialty(id, Specialty))
-      .then((specialty) =>
+      .none(() => specialtyDB.updateSpecialty(id, specialty))
+      .then((especialidad) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating specialty",
-          message: `Se ha actualizado la especialidad ${Specialty.id} correctamente`,
-          data: specialty,
+          message: `Se ha actualizado la especialidad ${specialty.id} correctamente`,
+          data: especialidad,
         })
       )
       .catch((error) =>

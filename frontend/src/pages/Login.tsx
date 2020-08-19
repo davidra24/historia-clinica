@@ -64,7 +64,7 @@ export const Login = () => {
           children: TextMessage(errorMessage),
         }}
       />
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center pt-10 w-12/12 h-screen'>
         <FormSign
           title={TextMessage('login.title')}
           leftButton={{

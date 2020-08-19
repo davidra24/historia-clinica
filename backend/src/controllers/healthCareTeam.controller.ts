@@ -67,39 +67,39 @@ export class HealthCareTeamController {
       );
   }
   async insertHealthCareTeam(req: Request, res: Response) {
-    const { HealthCareTeam } = await decryptRequest(req);
+    const { healthCareTeam } = await decryptRequest(req);
     await db
-      .none(() => healthCareTeamDB.insertHealthCareTeam(HealthCareTeam))
-      .then((healthCareTeam) =>
+      .none(() => healthCareTeamDB.insertHealthCareTeam(healthCareTeam))
+      .then((CareTeam) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting health care team",
-          message: `Se han creado el profesional de la salud ${HealthCareTeam.document} correctamente`,
-          data: healthCareTeam,
+          message: `Se han creado el profesional de la salud ${healthCareTeam.document} correctamente`,
+          data: CareTeam,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting health care team",
-          message: `Ha ocurrido un error inesperado con el profesional de la salud ${HealthCareTeam.document}`,
+          message: `Ha ocurrido un error inesperado con el profesional de la salud ${healthCareTeam.document}`,
           data: error.toString(),
         });
       });
   }
   async updateHealthCareTeam(req: Request, res: Response) {
     const { document } = req.params;
-    const { HealthCareTeam } = await decryptRequest(req);
+    const { healthCareTeam } = await decryptRequest(req);
     await db
       .none(() =>
-        healthCareTeamDB.updateHealthCareTeam(document, HealthCareTeam)
+        healthCareTeamDB.updateHealthCareTeam(document, healthCareTeam)
       )
-      .then((healthCareTeam) =>
+      .then((CareTeam) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating health care team",
-          message: `Se han actualizado el profesional de la salud ${HealthCareTeam.document} correctamente`,
-          data: healthCareTeam,
+          message: `Se han actualizado el profesional de la salud ${healthCareTeam.document} correctamente`,
+          data: CareTeam,
         })
       )
       .catch((error) =>

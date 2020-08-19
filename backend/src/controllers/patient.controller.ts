@@ -66,37 +66,37 @@ export class PatientController {
       );
   }
   async insertPatient(req: Request, res: Response) {
-    const { Patient } = await decryptRequest(req);
+    const { patient } = await decryptRequest(req);
     await db
-      .none(() => patientDB.insertPatient(Patient))
-      .then((patient) =>
+      .none(() => patientDB.insertPatient(patient))
+      .then((paciente) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting patient",
-          message: `Se han creado el paciente ${Patient.document} correctamente`,
-          data: patient,
+          message: `Se han creado el paciente ${patient.document} correctamente`,
+          data: paciente,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting patient",
-          message: `Ha ocurrido un error inesperado con el paciente ${Patient.document}`,
+          message: `Ha ocurrido un error inesperado con el paciente ${patient.document}`,
           data: error.toString(),
         });
       });
   }
   async updatePatient(req: Request, res: Response) {
     const { document } = req.params;
-    const { Patient } = await decryptRequest(req);
+    const { patient } = await decryptRequest(req);
     await db
-      .none(() => patientDB.updatePatient(document, Patient))
-      .then((patient) =>
+      .none(() => patientDB.updatePatient(document, patient))
+      .then((paciente) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating patient",
-          message: `Se han actualizado el paciente ${Patient.document} correctamente`,
-          data: patient,
+          message: `Se han actualizado el paciente ${patient.document} correctamente`,
+          data: paciente,
         })
       )
       .catch((error) =>

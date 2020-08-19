@@ -27,12 +27,12 @@ export class ProfessionController {
   async getProfessions(req: Request, res: Response) {
     await db
       .any(professionDB.getAllProfessions)
-      .then((professions) =>
+      .then((profesions) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success getting all professions",
           message: "Se han obtenido todas las profesiones de la base de datos",
-          data: professions,
+          data: profesions,
         })
       )
       .catch((error) =>
@@ -48,55 +48,55 @@ export class ProfessionController {
     const { id } = req.params;
     await db
       .one(() => professionDB.getOneProfession(id))
-      .then((profession) =>
+      .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success getting one profession",
-          message: `Se ha obtenido la profesion ${id}`,
-          data: profession,
+          message: `Se ha obtenido la profesion`,
+          data: profesion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess getting one profession",
-          message: `Ha ocurrido un error inesperado al obtener la profesion ${id}`,
+          message: `Ha ocurrido un error inesperado al obtener la profesion`,
           data: error.message,
         })
       );
   }
   async insertProfession(req: Request, res: Response) {
-    const { Profession } = await decryptRequest(req);
+    const { profession } = await decryptRequest(req);
     await db
-      .none(() => professionDB.insertProfession(Profession))
-      .then((profession) =>
+      .none(() => professionDB.insertProfession(profession))
+      .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting profession",
-          message: `Se ha creado la profesion ${Profession.id} correctamente`,
-          data: profession,
+          message: `Se ha creado la profesion correctamente`,
+          data: profesion,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting profession",
-          message: `Ha ocurrido un error inesperado con la profesion ${Profession.id}`,
+          message: `Ha ocurrido un error inesperado con la profesion`,
           data: error.toString(),
         });
       });
   }
   async updateProfession(req: Request, res: Response) {
     const { id } = req.params;
-    const { Profession } = await decryptRequest(req);
+    const { profession } = await decryptRequest(req);
     await db
-      .none(() => professionDB.updateProfession(id, Profession))
-      .then((profession) =>
+      .none(() => professionDB.updateProfession(id, profession))
+      .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating profession",
-          message: `Se ha actualizado la profesion ${Profession.id} correctamente`,
-          data: profession,
+          message: `Se ha actualizado la profesion ${profession.id} correctamente`,
+          data: profesion,
         })
       )
       .catch((error) =>
@@ -112,12 +112,12 @@ export class ProfessionController {
     const { id } = req.params;
     await db
       .result(() => professionDB.deleteProfession(id))
-      .then((profession) =>
+      .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success deleting profession",
           message: `Se ha eliminado la profesion ${id} correctamente`,
-          data: profession,
+          data: profesion,
         })
       )
       .catch((error) =>

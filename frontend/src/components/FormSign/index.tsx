@@ -16,6 +16,8 @@ import {
   validationsDocument,
   validationsPasswordUser,
 } from '../../util/validations';
+import { IStore } from '../../redux/types';
+import { useSelector } from 'react-redux';
 
 export const FormSign = ({
   title,
@@ -28,22 +30,23 @@ export const FormSign = ({
   inputPassword,
 }: signTypes) => {
   const { handleSubmit, register, errors } = useForm();
+  const loading = useSelector((state: IStore) => state.loading);
 
   return (
     <>
       <div className='h-12 w-auto w-12/12 md:w-10/12 lg:w-8/12 xl:w-6/12'>
         <Card className='flex flex-col justify-center'>
-          <div className='flex justify-center'>
-            <img className='login__logo' src={logo} alt='heartbeat' />
+          <div className='flex justify-center pt-2'>
+            <img src={logo} alt='heartbeat' />
           </div>
-          <div className='login__title flex justify-center'>
-            <h1>
+          <div className='flex justify-center mb-2'>
+            <h1 className='text-2xl'>
               <strong>{title}</strong>
             </h1>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col justify-center space-y-2 px-10 mb-5'>
-              <FormControl className='login__input'>
+              <FormControl>
                 <TextField
                   id='float-document'
                   name='document'
@@ -51,6 +54,7 @@ export const FormSign = ({
                   variant='outlined'
                   label={TextMessage('signForm.document')}
                   type={person !== undefined && person ? 'number' : 'text'}
+                  disabled={loading}
                   {...inputDocument}
                 />
               </FormControl>
@@ -65,6 +69,7 @@ export const FormSign = ({
                   variant='outlined'
                   type='password'
                   label={TextMessage('signForm.password')}
+                  disabled={loading}
                   {...inputPassword}
                 />
               </FormControl>
@@ -87,6 +92,7 @@ export const FormSign = ({
                         onChange={() => {
                           setPerson(!person);
                         }}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -102,6 +108,7 @@ export const FormSign = ({
                         onChange={() => {
                           setPerson(!person);
                         }}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -110,12 +117,22 @@ export const FormSign = ({
             )}
             <div className='flex justify-around my-10'>
               <div className='p-col-12 p-md-6'>
-                <Button variant='outlined' color='secondary' {...leftButton}>
+                <Button
+                  variant='outlined'
+                  color='secondary'
+                  disabled={loading}
+                  {...leftButton}
+                >
                   {leftButton.label}
                 </Button>
               </div>
               <div className='p-col-12 p-md-6'>
-                <Button variant='outlined' color='primary' type='submit'>
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  disabled={loading}
+                  type='submit'
+                >
                   {rightButton.label}
                 </Button>
               </div>

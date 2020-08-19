@@ -17,19 +17,12 @@ export class GeneralMedicalFeaturesController {
         message: "general medical features table created",
         data: null,
       }))
-      .catch(
-        (error) => (
-          console.log(error),
-          {
-            return: {
-              ok: false,
-              status: "unsuccess creating table",
-              message: error,
-              data: null,
-            },
-          }
-        )
-      );
+      .catch((error) => ({
+        ok: false,
+        status: "unsuccess creating table",
+        message: error,
+        data: null,
+      }));
   }
   async getGeneralMedicalFeatures(req: Request, res: Response) {
     await db
@@ -74,46 +67,46 @@ export class GeneralMedicalFeaturesController {
       );
   }
   async insertGeneralMedicalFeatures(req: Request, res: Response) {
-    const { GeneralMedicalFeatures } = await decryptRequest(req);
+    const { generalMedicalFeatures } = await decryptRequest(req);
     await db
       .none(() =>
         generalMedicalFeaturesDB.insertGeneralMedicalFeatures(
-          GeneralMedicalFeatures
+          generalMedicalFeatures
         )
       )
-      .then((generalMedicalFeatures) =>
+      .then((MedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting general medical features",
-          message: `Se han creado las caracteristicas medicas generales ${GeneralMedicalFeatures.id} correctamente`,
-          data: generalMedicalFeatures,
+          message: `Se han creado las caracteristicas medicas generales ${generalMedicalFeatures.id} correctamente`,
+          data: MedicalFeatures,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting general medical features",
-          message: `Ha ocurrido un error inesperado con las caracteristicas medicas generales ${GeneralMedicalFeatures.id}`,
+          message: `Ha ocurrido un error inesperado con las caracteristicas medicas generales ${generalMedicalFeatures.id}`,
           data: error.toString(),
         });
       });
   }
   async updateGeneralMedicalFeatures(req: Request, res: Response) {
     const { id } = req.params;
-    const { GeneralMedicalFeatures } = await decryptRequest(req);
+    const { generalMedicalFeatures } = await decryptRequest(req);
     await db
       .none(() =>
         generalMedicalFeaturesDB.updateGeneralMedicalFeatures(
           id,
-          GeneralMedicalFeatures
+          generalMedicalFeatures
         )
       )
-      .then((generalMedicalFeatures) =>
+      .then((MedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating general medical features",
-          message: `Se han actualizado las caracteristicas medicas generales ${GeneralMedicalFeatures.id} correctamente`,
-          data: generalMedicalFeatures,
+          message: `Se han actualizado las caracteristicas medicas generales ${generalMedicalFeatures.id} correctamente`,
+          data: MedicalFeatures,
         })
       )
       .catch((error) =>

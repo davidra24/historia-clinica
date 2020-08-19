@@ -19,7 +19,7 @@ export default {
   insertHealthCareTeam: (
     healthCareTeam: HealthCareTeamModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DOCUMENT}) 
-            VALUES '(${healthCareTeam.document}')`,
+            VALUES ('${healthCareTeam.document}')`,
   deleteHealthCareTeam: (document: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_DOCUMENT} = '${document}'`,
   updateHealthCareTeam: (

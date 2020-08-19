@@ -2,7 +2,7 @@ export interface QueryModel {
   id: string;
   date: Date;
   document: string;
-  idCenter: number;
+  idCenter: string;
   professionalDocument: string;
   annotation: string;
 }

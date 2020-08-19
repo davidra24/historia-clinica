@@ -67,37 +67,37 @@ export class HealthCenterController {
       );
   }
   async insertHealthCenter(req: Request, res: Response) {
-    const { HealthCenter } = await decryptRequest(req);
+    const { healthCenter } = await decryptRequest(req);
     await db
-      .none(() => healthCenterDB.insertHealthCenter(HealthCenter))
-      .then((healthCenter) =>
+      .none(() => healthCenterDB.insertHealthCenter(healthCenter))
+      .then((Center) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting health center",
-          message: `Se han creado el centro de salud ${HealthCenter.idCenter} correctamente`,
-          data: healthCenter,
+          message: `Se han creado el centro de salud ${healthCenter.idCenter} correctamente`,
+          data: Center,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting health center",
-          message: `Ha ocurrido un error inesperado con el centro de salud ${HealthCenter.idCenter}`,
+          message: `Ha ocurrido un error inesperado con el centro de salud ${healthCenter.idCenter}`,
           data: error.toString(),
         });
       });
   }
   async updateHealthCenter(req: Request, res: Response) {
     const { idCenter } = req.params;
-    const { HealthCenter } = await decryptRequest(req);
+    const { healthCenter } = await decryptRequest(req);
     await db
-      .none(() => healthCenterDB.updateHealthCenter(idCenter, HealthCenter))
-      .then((healthCenter) =>
+      .none(() => healthCenterDB.updateHealthCenter(idCenter, healthCenter))
+      .then((Center) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success updating health center",
-          message: `Se han actualizado el centro de salud ${HealthCenter.idCenter} correctamente`,
-          data: healthCenter,
+          message: `Se han actualizado el centro de salud ${healthCenter.idCenter} correctamente`,
+          data: Center,
         })
       )
       .catch((error) =>

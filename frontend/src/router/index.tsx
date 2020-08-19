@@ -5,15 +5,19 @@ import { SignUp } from '../pages/SignUp';
 import { NotFound } from '../pages/NotFound';
 import { Dashboard } from '../pages/Dashboard';
 import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import ScrollToTop from '../components/ScrollTop';
 
 export const Router = () => (
   <BrowserRouter>
-    <Switch>
-      <Route path='/login' component={Login} exact />
-      <Route path='/signup' component={SignUp} exact />
-      <PrivateRoute path='/' component={Dashboard} exact />
-      <Route path='/404' component={NotFound} />
-      <Redirect to='/404' />
-    </Switch>
+    <ScrollToTop>
+      <Switch>
+        <PublicRoute path='/login' component={Login} exact />
+        <PublicRoute path='/signup' component={SignUp} exact />
+        <PrivateRoute path='/' component={Dashboard} exact />
+        <Route path='/404' component={NotFound} />
+        <Redirect to='/404' />
+      </Switch>
+    </ScrollToTop>
   </BrowserRouter>
 );

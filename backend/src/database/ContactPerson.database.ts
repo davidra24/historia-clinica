@@ -1,8 +1,8 @@
 import { ContactPersonModel } from "src/models/ContactPerson";
 
 const TABLE_NAME = "CONTACT_PERSON";
-const COL_USER_DOCUMENT = "user_document";
-const COL_CONTACT_DOCUMENT = "contact_document";
+const COL_USER_DOCUMENT = "userDocument";
+const COL_CONTACT_DOCUMENT = "contactDocument";
 
 const FOREIGN_KEY_PEOPLE = "con_fk_doc";
 const FOREIGN_KEY_CONTACTS = "con_fk_idc";

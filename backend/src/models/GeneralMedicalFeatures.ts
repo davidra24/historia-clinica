@@ -1,6 +1,6 @@
 export interface GeneralMedicalFeaturesModel {
   id: string;
-  id_query: string;
+  idQuery: string;
   height: number;
   weight: number;
   drink: boolean;
@@ -9,7 +9,7 @@ export interface GeneralMedicalFeaturesModel {
   manias: string;
   familyBackground: string;
   medicalHistory: string;
-  surgery_history: string;
-  traumatic_background: string;
-  allergy_history: string;
+  surgeryHistory: string;
+  traumaticBackground: string;
+  allergyHistory: string;
 }

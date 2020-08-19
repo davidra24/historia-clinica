@@ -73,7 +73,7 @@ export class EPSController {
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting EPS",
-          message: `Se ha creado la EPS ${EPS.id} correctamente`,
+          message: `Se ha creado la EPS correctamente`,
           data: eps,
         })
       )
@@ -81,7 +81,7 @@ export class EPSController {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting EPS",
-          message: `Ha ocurrido un error inesperado con la EPS ${EPS.id}`,
+          message: `Ha ocurrido un error inesperado con la EPS`,
           data: error.toString(),
         });
       });

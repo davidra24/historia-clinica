@@ -2,6 +2,12 @@ import { LOCALES } from '../locales';
 
 export default {
   [LOCALES.SPANISH]: {
+    //APP
+    'app.title': 'HISTORIA CLÍNICA DIGITAL',
+    //LANGUAGE
+    'lang.selectedLang': 'Idioma',
+    'lang.spanish': 'Español',
+    'lang.english': 'Inglés',
     //LOGIN
     'login.title': 'Iniciar Sesión',
     'login.signup': 'Registrarse',

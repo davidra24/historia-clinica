@@ -66,14 +66,14 @@ export class ContactController {
       );
   }
   async insertContact(req: Request, res: Response) {
-    const { Contact } = await decryptRequest(req);
+    const { contact } = await decryptRequest(req);
     await db
-      .none(() => contactDB.insertContact(Contact))
+      .none(() => contactDB.insertContact(contact))
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: "success inserting contact",
-          message: `Se ha creado el contacto ${Contact.document} correctamente`,
+          message: `Se ha creado el contacto ${contact.document} correctamente`,
           data: contacto,
         })
       )
@@ -81,7 +81,7 @@ export class ContactController {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess inserting contact",
-          message: `Ha ocurrido un error inesperado con el contacto ${Contact.document}`,
+          message: `Ha ocurrido un error inesperado con el contacto ${contact.document}`,
           data: error.toString(),
         });
       });
