@@ -21,7 +21,7 @@ export class UserController {
         message: 'User table created',
         data: null,
       }))
-      .catch((error) => ({
+      .catch((error: any) => ({
         ok: false,
         status: 'unsuccess creating table',
         message: error,
@@ -34,17 +34,17 @@ export class UserController {
       .then((usuarios) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting all users',
-          message: 'Se han obtenido todos los usuarios de la base de datos',
+          status: 200,
+          message: 'getUsers.success',
           data: usuarios,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting all users',
-          message: `Ha ocurrido un error inesperado al obtener todos los usuarios`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getUsers.error',
+          data: error.toString(),
         })
       );
   }
@@ -55,17 +55,17 @@ export class UserController {
       .then((usuario) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success getting one user',
-          message: `Se ha obtenido el usuario ${document}`,
+          status: 200,
+          message: 'getUser.success',
           data: usuario,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess getting one user',
+          status: 500,
           message: 'signup.authError-body',
-          data: error.message,
+          data: error.toString(),
         })
       );
   }
@@ -108,16 +108,16 @@ export class UserController {
       .then((usuario) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: 'success updating user',
-          message: `Se ha actualizado el usuario ${user.document} correctamente`,
+          status: 200,
+          message: 'updateUser.success',
           data: usuario,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'unsuccess updating user',
-          message: `Ha ocurrido un error inesperado al actualizar al usuario ${document}`,
+          status: 500,
+          message: 'updateUser.error',
           data: error.toString(),
         })
       );
@@ -130,7 +130,7 @@ export class UserController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 'success deleting user',
-          message: `Se ha eliminado al usuario ${document} correctamente`,
+          message: 'deleteUser.success',
           data: user,
         })
       )
@@ -138,7 +138,7 @@ export class UserController {
         cryptedResponse(res, 500, {
           ok: false,
           status: 'unsuccess deleting user',
-          message: `Ha ocurrido un error inesperado al eliminar al usuario ${document}`,
+          message: 'deleteUser.error',
           data: error.toString(),
         })
       );

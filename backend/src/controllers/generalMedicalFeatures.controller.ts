@@ -30,18 +30,18 @@ export class GeneralMedicalFeaturesController {
       .then((generalMedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all general medical features",
+          status: 200,
           message:
-            "Se han obtenido todas las caracteristicas medicas generales de la base de datos",
+            'getGeneralMedicalFeatures.success',
           data: generalMedicalFeatures,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all general medical features",
-          message: `Ha ocurrido un error inesperado al obtener todas las caracteristicas medicas generales`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getGeneralMedicalFeatures.error',
+          data: error.toString(),
         })
       );
   }
@@ -52,17 +52,17 @@ export class GeneralMedicalFeaturesController {
       .then((generalMedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one general medical features",
-          message: `Se han obtenido las caracteristicas medicas generales ${id}`,
+          status: 200,
+          message: 'getOneGeneralMedicalFeatures.success',
           data: generalMedicalFeatures,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one general medical features",
-          message: `Ha ocurrido un error inesperado al obtener las caracteristicas medicas generales ${id}`,
-          data: error.message,
+          status: 500,
+          message: 'getOneGeneralMedicalFeatures.error',
+          data: error.toString(),
         })
       );
   }
@@ -77,16 +77,16 @@ export class GeneralMedicalFeaturesController {
       .then((MedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting general medical features",
-          message: `Se han creado las caracteristicas medicas generales ${generalMedicalFeatures.id} correctamente`,
+          status: 200,
+          message: 'insertGeneralMedicalFeatures.success',
           data: MedicalFeatures,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting general medical features",
-          message: `Ha ocurrido un error inesperado con las caracteristicas medicas generales ${generalMedicalFeatures.id}`,
+          status: 500,
+          message: 'insertGeneralMedicalFeatures.error',
           data: error.toString(),
         });
       });
@@ -104,16 +104,16 @@ export class GeneralMedicalFeaturesController {
       .then((MedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating general medical features",
-          message: `Se han actualizado las caracteristicas medicas generales ${generalMedicalFeatures.id} correctamente`,
+          status: 200,
+          message: 'updateGeneralMedicalFeatures.success',
           data: MedicalFeatures,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating general medical features",
-          message: `Ha ocurrido un error inesperado al actualizar las caracteristicas medicas generales ${id}`,
+          status: 500,
+          message: 'updateGeneralMedicalFeatures.error',
           data: error.toString(),
         })
       );
@@ -125,16 +125,16 @@ export class GeneralMedicalFeaturesController {
       .then((generalMedicalFeatures) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting general medical features",
-          message: `Se han eliminado las caracteristicas medicas generales ${id} correctamente`,
+          status: 200,
+          message: 'deleteGeneralMedicalFeatures.success',
           data: generalMedicalFeatures,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting general medical features",
-          message: `Ha ocurrido un error inesperado al eliminar las caracteristicas medicas generales ${id} correctamente`,
+          status: 500,
+          message: 'deleteGeneralMedicalFeatures.error',
           data: error.toString(),
         })
       );

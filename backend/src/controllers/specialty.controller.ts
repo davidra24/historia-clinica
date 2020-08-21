@@ -30,18 +30,17 @@ export class SpecialtyController {
       .then((Specialties) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all specialties",
-          message:
-            "Se han obtenido todas las especialidades de la base de datos",
+          status: 200,
+          message:'getSpecialties.success',
           data: Specialties,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all specialties",
-          message: `Ha ocurrido un error inesperado al obtener todas las especialidades`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getSpecialties.error',
+          data: error.toString(),
         })
       );
   }
@@ -52,17 +51,17 @@ export class SpecialtyController {
       .then((specialty) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one specialty",
-          message: `Se ha obtenido la especialidad ${id}`,
+          status: 200,
+          message: 'getSpecialty.success',
           data: specialty,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one specialty",
-          message: `Ha ocurrido un error inesperado al obtener la especialidad ${id}`,
-          data: error.message,
+          status: 500,
+          message: 'getSpecialty.error',
+          data: error.toString(),
         })
       );
   }
@@ -73,16 +72,16 @@ export class SpecialtyController {
       .then((especialidad) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting specialty",
-          message: `Se ha creado la especialidad correctamente`,
+          status: 200,
+          message: 'insertSpecialty.success',
           data: especialidad,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting specialty",
-          message: `Ha ocurrido un error inesperado con la especialidad`,
+          status: 500,
+          message: 'insertSpecialty.error',
           data: error.toString(),
         });
       });
@@ -95,16 +94,16 @@ export class SpecialtyController {
       .then((especialidad) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating specialty",
-          message: `Se ha actualizado la especialidad ${specialty.id} correctamente`,
+          status: 200,
+          message: 'updateSpecialty.success',
           data: especialidad,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating specialty",
-          message: `Ha ocurrido un error inesperado al actualizar la especialidad ${id}`,
+          status: 500,
+          message: 'updateSpecialty.error',
           data: error.toString(),
         })
       );
@@ -116,16 +115,16 @@ export class SpecialtyController {
       .then((specialty) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting specialty",
-          message: `Se ha eliminado la especialidad ${id} correctamente`,
+          status: 200,
+          message: 'deleteSpecialty.success',
           data: specialty,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting specialty",
-          message: `Ha ocurrido un error inesperado al eliminar la especialidad ${id} correctamente`,
+          status: 500,
+          message: 'deleteSpecialty.error',
           data: error.toString(),
         })
       );

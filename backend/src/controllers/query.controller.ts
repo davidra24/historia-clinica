@@ -30,17 +30,17 @@ export class QueryController {
       .then((Queries) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all queries",
-          message: "Se han obtenido todas las consultas de la base de datos",
+          status: 200,
+          message: 'getQueries.success',
           data: Queries,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all queries",
-          message: `Ha ocurrido un error inesperado al obtener todas las consultas`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getQueries.error',
+          data: error.toString(),
         })
       );
   }
@@ -51,17 +51,17 @@ export class QueryController {
       .then((query) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one query",
-          message: `Se ha obtenido la consulta ${id}`,
+          status: 200,
+          message: 'getQuery.success',
           data: query,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one query",
-          message: `Ha ocurrido un error inesperado al obtener la consulta ${id}`,
-          data: error.message,
+          status: 500,
+          message: 'getQuery.error',
+          data: error.toString(),
         })
       );
   }
@@ -72,16 +72,16 @@ export class QueryController {
       .then((consulta) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting query",
-          message: `Se ha creado la consulta correctamente`,
+          status: 200,
+          message: 'insertQuery.success',
           data: consulta,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting query",
-          message: `Ha ocurrido un error inesperado con la consulta`,
+          status: 500,
+          message: 'insertQuery.error',
           data: error.toString(),
         });
       });
@@ -94,16 +94,16 @@ export class QueryController {
       .then((consulta) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating query",
-          message: `Se ha actualizado la consulta ${query.id} correctamente`,
+          status: 200,
+          message: 'updateQuery.success',
           data: consulta,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating query",
-          message: `Ha ocurrido un error inesperado al actualizar la consulta ${id}`,
+          status: 500,
+          message: 'updateQuery.error',
           data: error.toString(),
         })
       );
@@ -115,16 +115,16 @@ export class QueryController {
       .then((query) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting query",
-          message: `Se ha eliminado la consulta ${id} correctamente`,
+          status: 200,
+          message: 'deleteQuery.success',
           data: query,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting query",
-          message: `Ha ocurrido un error inesperado al eliminar la consulta ${id} correctamente`,
+          status: 500,
+          message: 'deleteQuery.error',
           data: error.toString(),
         })
       );

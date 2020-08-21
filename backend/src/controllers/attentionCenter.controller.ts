@@ -30,18 +30,18 @@ export class AttentionCenterController {
       .then((centrosDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all attention centers",
+          status: 200,
           message:
-            "Se han obtenido todos los centros de atencion de la base de datos",
+            'getAttentionCenters.success',
           data: centrosDeAtencion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all attention centers",
-          message: `Ha ocurrido un error inesperado al obtener todos los centros de atencion`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getAttentionCenters.error',
+          data: error.toString(),
         })
       );
   }
@@ -52,17 +52,17 @@ export class AttentionCenterController {
       .then((centroDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one attention center",
-          message: `Se ha obtenido el centro de atencion ${id}, ${document}`,
+          status: 200,
+          message: 'getAttentionCenter.success',
           data: centroDeAtencion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one attention center",
-          message: `Ha ocurrido un error inesperado al obtener el centro de atencion ${id}, ${document}`,
-          data: error.message,
+          status: 500,
+          message: 'getAttentionCenter.error',
+          data: error.toString(),
         })
       );
   }
@@ -73,16 +73,16 @@ export class AttentionCenterController {
       .then((centrosDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting attention center",
-          message: `Se ha creado el centro de atencion ${attentionCenter.id}, ${attentionCenter.document} correctamente`,
+          status: 200,
+          message: 'insertAttentionCenter.success',
           data: centrosDeAtencion,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting attention center",
-          message: `Ha ocurrido un error inesperado el centro de atencion ${attentionCenter.id}, ${attentionCenter.document}`,
+          status: 500,
+          message: 'insetAttentionCenter.error',
           data: error.toString(),
         });
       });
@@ -101,16 +101,16 @@ export class AttentionCenterController {
       .then((centroDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating attention center",
-          message: `Se ha actualizado el centro de atencion ${idCenter}, ${document} correctamente`,
+          status: 200,
+          message: 'updateAttentionCenter.success',
           data: centroDeAtencion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating attention center",
-          message: `Ha ocurrido un error inesperado al actualizar el centro de atencion ${idCenter}, ${document}`,
+          status: 500,
+          message: 'updateAttentionCenter.error',
           data: error.toString(),
         })
       );
@@ -122,16 +122,16 @@ export class AttentionCenterController {
       .then((centroDeAtencion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting attention center",
-          message: `Se ha eliminado el centro de atencion ${id}, ${document} correctamente`,
+          status: 200,
+          message: 'deleteAttentionCenter.success',
           data: centroDeAtencion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting attention center",
-          message: `Ha ocurrido un error inesperado al eliminar el centro de atencion ${id}, ${document}`,
+          status: 500,
+          message: 'deleteAttentionCenter.error',
           data: error.toString(),
         })
       );
