@@ -1,4 +1,4 @@
 export interface ContactPersonModel {
-  userDocument: string;
-  contactDocument: string;
+  user_document: string;
+  contact_document: string;
 }

@@ -2,22 +2,22 @@ import { PersonModel } from "src/models/Person";
 
 const TABLE_NAME = "PEOPLE";
 const COL_DOCUMENT = "document";
-const COL_FIRST_NAME = "firstName";
-const COL_SECOND_NAME = "secondName";
-const COL_LAST_NAME = "lastName";
-const COL_LAST_SECOND_NAME = "lastSecondName";
+const COL_FIRST_NAME = "first_name";
+const COL_SECOND_NAME = "second_name";
+const COL_LAST_NAME = "last_name";
+const COL_LAST_SECOND_NAME = "last_second_name";
 const COL_GENRE = "genre";
-const COL_DATE_BIRTH = "dateBirth";
+const COL_DATE_BIRTH = "date_birth";
 const COL_EMAIL = "email";
-const COL_CIVIL_STATE = "civilState";
+const COL_CIVIL_STATE = "civil_state";
 const COL_PHOTO = "photo";
 const COL_PHONE = "phone";
-const COL_ID_EPS = "idEPS";
-const COL_ID_PROFESSION = "idProfession";
+const COL_ID_EPS = "id_eps";
+const COL_ID_PROFESSION = "id_profession";
 const COL_STRATUM = "stratum";
 const COL_DECEASED = "deceased";
-const COL_DECEASED_DATE = "deceasedDate";
-const COL_IS_HEALTH_CARE_TEAM = "isHealthCareTeam";
+const COL_DECEASED_DATE = "deceased_date";
+const COL_IS_HEALTH_CARE_TEAM = "is_health_care_team";
 
 const FOREIGN_KEY_EPS = "per_fk_ide";
 const FOREIGN_KEY_USERS = "per_fk_idu";
@@ -49,17 +49,17 @@ export default {
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DOCUMENT}, ${COL_FIRST_NAME}, ${COL_SECOND_NAME}, ${COL_LAST_NAME}, ${COL_LAST_SECOND_NAME},
           ${COL_GENRE}, ${COL_DATE_BIRTH}, ${COL_EMAIL}, ${COL_CIVIL_STATE}, ${COL_PHOTO}, ${COL_PHONE}, ${COL_ID_EPS}, ${COL_ID_PROFESSION},
           ${COL_STRATUM}, ${COL_DECEASED}, ${COL_DECEASED_DATE}, ${COL_IS_HEALTH_CARE_TEAM}) 
-          VALUES ('${person.document}', '${person.firstName}','${person.secondName}','${person.Lastname}','${person.lastSecondName}',${person.genre},
-            '${person.dateBirth}','${person.email}',${person.civilState},'${person.photo}','${person.phone}','${person.idEPS}', '${person.idProfesion}',
-            ${person.stratum}, ${person.deceased}, '${person.deceasedDate}', ${person.isHealtCareTeam})`,
+          VALUES ('${person.document}', '${person.first_name}','${person.second_name}','${person.Lastname}','${person.last_second_name}',${person.genre},
+            '${person.date_birth}','${person.email}',${person.civil_state},'${person.photo}','${person.phone}','${person.id_eps}', '${person.id_profesion}',
+            ${person.stratum}, ${person.deceased}, '${person.deceased_date}', ${person.is_healt_care_team})`,
   deletePerson: (document: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_DOCUMENT} = '${document}'`,
   updatePerson: (
     document: string,
     person: PersonModel
-  ) => `UPDATE ${TABLE_NAME} SET ${COL_FIRST_NAME}='${person.firstName}', ${COL_SECOND_NAME}='${person.secondName}',${COL_LAST_NAME}='${person.Lastname}',
-                 ${COL_LAST_SECOND_NAME} = '${person.lastSecondName}',${COL_GENRE}=${person.genre},${COL_DATE_BIRTH}='${person.dateBirth}',${COL_EMAIL}='${person.email}',
-                 ${COL_CIVIL_STATE}=${person.civilState}, ${COL_PHOTO}='${person.photo}',${COL_PHONE}='${person.phone}', ${COL_ID_EPS} = '${person.idEPS}', 
-                 ${COL_ID_PROFESSION} = '${person.idProfesion}', ${COL_STRATUM} = ${person.stratum}, ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
-                 ${COL_DECEASED_DATE} = '${person.deceasedDate}', ${COL_IS_HEALTH_CARE_TEAM} = ${person.isHealtCareTeam}, WHERE ${COL_DOCUMENT} = '${document}'`,
+  ) => `UPDATE ${TABLE_NAME} SET ${COL_FIRST_NAME}='${person.first_name}', ${COL_SECOND_NAME}='${person.second_name}',${COL_LAST_NAME}='${person.Lastname}',
+                 ${COL_LAST_SECOND_NAME} = '${person.last_second_name}',${COL_GENRE}=${person.genre},${COL_DATE_BIRTH}='${person.date_birth}',${COL_EMAIL}='${person.email}',
+                 ${COL_CIVIL_STATE}=${person.civil_state}, ${COL_PHOTO}='${person.photo}',${COL_PHONE}='${person.phone}', ${COL_ID_EPS} = '${person.id_eps}', 
+                 ${COL_ID_PROFESSION} = '${person.id_profesion}', ${COL_STRATUM} = ${person.stratum}, ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
+                 ${COL_DECEASED_DATE} = '${person.deceased_date}', ${COL_IS_HEALTH_CARE_TEAM} = ${person.is_healt_care_team}, WHERE ${COL_DOCUMENT} = '${document}'`,
 };

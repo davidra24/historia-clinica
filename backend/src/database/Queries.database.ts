@@ -4,8 +4,8 @@ const TABLE_NAME = "QUERIES";
 const COL_ID = "id";
 const COL_DATE = "date";
 const COL_USER_DOCUMENT = "document";
-const COL_ID_CENTER = "idCenter";
-const COL_PROFESSIONAL_DOCUMENT = "professionalDocument";
+const COL_ID_CENTER = "id_center";
+const COL_PROFESSIONAL_DOCUMENT = "professional_document";
 const COL_ANNOTATION = "annotation";
 
 const FOREIGN_KEY_PEOPLE = "cons_fk_docper";
@@ -30,12 +30,12 @@ export default {
   insertQuery: (
     query: QueryModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DATE}, ${COL_USER_DOCUMENT}, ${COL_ID_CENTER}, ${COL_PROFESSIONAL_DOCUMENT}, ${COL_ANNOTATION}) 
-    VALUES ('${query.date}','${query.document}','${query.idCenter}','${query.professionalDocument}','${query.annotation}')`,
+    VALUES ('${query.date}','${query.document}','${query.id_center}','${query.professional_document}','${query.annotation}')`,
   deleteQuery: (id: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_ID} = '${id}'`,
   updateQuery: (
     id: string,
     query: QueryModel
-  ) => `UPDATE ${TABLE_NAME} SET ${COL_DATE} = '${query.date}',${COL_USER_DOCUMENT}='${query.document}', ${COL_ID_CENTER}=${query.idCenter},
-           ${COL_PROFESSIONAL_DOCUMENT} = '${query.professionalDocument}', ${COL_ANNOTATION}='${query.annotation}' WHERE ${COL_ID} = '${id}'`,
+  ) => `UPDATE ${TABLE_NAME} SET ${COL_DATE} = '${query.date}',${COL_USER_DOCUMENT}='${query.document}', ${COL_ID_CENTER}=${query.id_center},
+           ${COL_PROFESSIONAL_DOCUMENT} = '${query.professional_document}', ${COL_ANNOTATION}='${query.annotation}' WHERE ${COL_ID} = '${id}'`,
 };

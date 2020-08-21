@@ -1,15 +1,15 @@
 export interface GeneralMedicalFeaturesModel {
   id: string;
-  idQuery: string;
+  id_query: string;
   height: number;
   weight: number;
   drink: boolean;
   smoke: boolean;
   vices: string;
   manias: string;
-  familyBackground: string;
-  medicalHistory: string;
-  surgeryHistory: string;
-  traumaticBackground: string;
-  allergyHistory: string;
+  family_background: string;
+  medical_history: string;
+  surgery_history: string;
+  traumatic_background: string;
+  allergy_history: string;
 }

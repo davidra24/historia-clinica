@@ -3,7 +3,7 @@ import { AttentionCenterModel } from "src/models/AttentionCenter";
 const TABLE_NAME = "ATTENTIONCENTERS";
 const COL_ID_CENTER = "id";
 const COL_DOCUMENT = "document";
-const COL_ID_SPECIALTY = "idSpecialty";
+const COL_ID_SPECIALTY = "id_specialty";
 const COL_ACTIVE = "active";
 
 const FOREIGN_KEY_PEOPLE = "atec_fk_idp";
@@ -30,13 +30,13 @@ export default {
   insertAttentionCenter: (
     attentionCenter: AttentionCenterModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_ID_CENTER}, ${COL_DOCUMENT}, ${COL_ID_SPECIALTY},${COL_ACTIVE}) 
-      VALUES ('${attentionCenter.id}', '${attentionCenter.document}','${attentionCenter.idSpecialty}',${attentionCenter.active})`,
+      VALUES ('${attentionCenter.id}', '${attentionCenter.document}','${attentionCenter.id_specialty}',${attentionCenter.active})`,
   deleteAttentionCenter: (idCenter: string, document: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_ID_CENTER} = '${idCenter}' AND ${COL_DOCUMENT}='${document}'`,
   updateAttentionCenter: (
     id: string,
     document: string,
     attentionCenter: AttentionCenterModel
-  ) => `UPDATE ${TABLE_NAME} SET ${COL_ID_SPECIALTY} = '${attentionCenter.idSpecialty}',
+  ) => `UPDATE ${TABLE_NAME} SET ${COL_ID_SPECIALTY} = '${attentionCenter.id_specialty}',
              ${COL_ACTIVE} = ${attentionCenter.active} WHERE ${COL_ID_CENTER} = '${id}' AND ${COL_DOCUMENT}='${document}'`,
 };

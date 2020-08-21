@@ -1,8 +1,8 @@
 import { ContactPersonModel } from "src/models/ContactPerson";
 
 const TABLE_NAME = "CONTACT_PERSON";
-const COL_USER_DOCUMENT = "userDocument";
-const COL_CONTACT_DOCUMENT = "contactDocument";
+const COL_USER_DOCUMENT = "user_document";
+const COL_CONTACT_DOCUMENT = "contact_document";
 
 const FOREIGN_KEY_PEOPLE = "con_fk_doc";
 const FOREIGN_KEY_CONTACTS = "con_fk_idc";
@@ -27,7 +27,7 @@ export default {
   insertContactPerson: (
     contactPerson: ContactPersonModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_USER_DOCUMENT}, ${COL_CONTACT_DOCUMENT}) 
-    VALUES ('${contactPerson.userDocument}', '${contactPerson.contactDocument}')`,
+    VALUES ('${contactPerson.user_document}', '${contactPerson.contact_document}')`,
   deleteContactPerson: (userDocument: string, contactDocument: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_USER_DOCUMENT} = '${userDocument}' AND ${COL_CONTACT_DOCUMENT}='${contactDocument}'`,
   updateContactPerson: (

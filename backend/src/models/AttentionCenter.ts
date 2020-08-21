@@ -1,6 +1,6 @@
 export interface AttentionCenterModel {
   id: string;
   document: string;
-  idSpecialty: string;
+  id_specialty: string;
   active: boolean;
 }
