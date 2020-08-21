@@ -68,7 +68,7 @@ function App() {
           <Loading />
         ) : (
           <>
-            <Router />
+            <Router className='h-full' />
             <Footer />
           </>
         )}

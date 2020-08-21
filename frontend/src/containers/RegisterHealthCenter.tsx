@@ -4,7 +4,7 @@ import { FormRegisterHealthCenter } from '../components/FormRegister/FormRegiste
 export const RegisterHealthCenter = () => {
   return (
     <>
-      <div className='flex h-full justify-center items-center'>
+      <div className='flex justify-center items-center'>
         <FormRegisterHealthCenter onSubmit={null} />
       </div>
     </>

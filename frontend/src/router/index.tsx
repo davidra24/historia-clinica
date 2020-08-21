@@ -9,7 +9,7 @@ import { PublicRoute } from './PublicRoute';
 import ScrollToTop from '../components/ScrollTop';
 import { RegisterData } from '../pages/RegisterData';
 
-export const Router = () => (
+export const Router = (props: any) => (
   <BrowserRouter>
     <ScrollToTop>
       <Switch>

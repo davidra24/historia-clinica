@@ -1,19 +1,19 @@
 export interface IPerson {
   document: string;
-  firstName: string;
-  secondName: string;
-  Lastname: string;
-  lastSecondName: string;
+  first_name: string;
+  second_name: string;
+  last_name: string;
+  last_second_name: string;
   genre: number;
-  dateBirth: Date;
+  date_birth: Date;
   email: string;
-  civilState: number;
+  civil_state: number;
   photo: string;
   phone: string;
-  idEPS: string;
-  idProfesion: string;
+  id_eps: string;
+  id_profesion: string;
   stratum: number;
   deceased: boolean;
-  deceasedDate: Date;
-  isHealtCareTeam: boolean;
+  deceased_date: Date;
+  is_healt_care_team: boolean;
 }

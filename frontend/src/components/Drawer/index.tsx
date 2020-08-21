@@ -16,8 +16,8 @@ export const Drawer = ({ children }: any) => {
     <div>
       <nav
         onClick={() => openMenu && dispatch(menu(false))}
-        className={`flex fixed w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-300 z-10 ${
-          openMenu ? 'opacity-50' : ''
+        className={`flex fixed w-full items-center justify-between px-6 h-20 bg-white text-gray-700 border-b border-gray-300 z-10 ${
+          openMenu && 'opacity-75'
         }`}
       >
         <div className='flex items-center w-full'>
@@ -37,6 +37,7 @@ export const Drawer = ({ children }: any) => {
           <Link
             className='flex flex-col items-center cursor-pointer justify-center w-full pr-10'
             to='/'
+            aria-disabled={openMenu}
           >
             <img src={logo} alt='Logo' className='w-8 md:w-12' />
             <h1 className='text-xs md:text-base'>
@@ -47,7 +48,7 @@ export const Drawer = ({ children }: any) => {
       </nav>
       <aside
         className={`transform top-0 left-0 w-11/12 md:w-6/12 lg:w-4/12 xl:w-3/12 bg-white 
-          fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
+          fixed overflow-auto h-screen ease-in-out transition-all duration-300 z-30 ${
             openMenu ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
@@ -61,8 +62,8 @@ export const Drawer = ({ children }: any) => {
         </div>
       </aside>
       <main
-        className={`flex py-20 w-full h-screen justify-center ${
-          openMenu ? 'opacity-50' : ''
+        className={`flex py-32 w-full justify-center ${
+          openMenu && 'opacity-25'
         }`}
         onClick={() => dispatch(menu(false))}
       >

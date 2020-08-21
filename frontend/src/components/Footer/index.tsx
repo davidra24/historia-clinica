@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { TextMessage } from '../../lang/TextMessage';
 import { LOCALES } from '../../lang';
-import { changeLang } from '../../redux/actions';
+import { changeLang, menu } from '../../redux/actions';
 import { IStore } from '../../redux/types';
 
-export const Footer = () => {
+export const Footer = (props: any) => {
   const dispatch = useDispatch();
   const openMenu = useSelector((state: IStore) => state.openMenu);
   const [lang, setLang] = useState(localStorage.getItem('language'));
@@ -23,7 +23,12 @@ export const Footer = () => {
   };
 
   return (
-    <footer className='flex w-full justify-between border-t border-gray-300 z-10 bg-white'>
+    <footer
+      className={`flex w-full justify-between border-t border-gray-300 z-10 bg-white ${
+        openMenu && 'opacity-75'
+      }`}
+      onClick={() => dispatch(menu(false))}
+    >
       <div className='flex justify-center py-5 pl-10'></div>
       <div className='flex justify-center py-5'></div>
       <div className='flex justify-center py-5 pr-10'>
