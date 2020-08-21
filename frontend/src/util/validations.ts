@@ -1,4 +1,5 @@
 import { TextMessage } from '../lang/TextMessage';
+import messages from '../lang/messages';
 
 export const validationsDocument = {
   required: TextMessage('document.required'),
@@ -13,14 +14,23 @@ export const validationsFirstName = {
 export const validationsLastName = {
   required: TextMessage('register.form-lastName-required'),
 };
+
 export const validationsGenre = {
   required: TextMessage('register.form-genre-required'),
 };
-export const validationsBirth = {
-  required: TextMessage('register.form-dateBirth-required'),
-};
 export const validationsCivilState = {
   required: TextMessage('register.form-civilState-required'),
+};
+
+export const validationsEmail = {
+  pattern: {
+    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+    message: TextMessage('register.form-email-invalid'),
+  },
+};
+
+export const validationsBirth = {
+  required: TextMessage('register.form-dateBirth-required'),
 };
 export const validationsPhone = {
   required: TextMessage('register.form-phone-required'),

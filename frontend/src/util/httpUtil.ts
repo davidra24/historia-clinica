@@ -1,10 +1,19 @@
 import { HTTP_SERVICE } from './constants';
 import { decrypt, encrypt } from './cryptedUtil';
 
-export const get = async (service: string) => {
+export const get = async (service: string, token?: string) => {
   try {
+    const options = {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: token ? `Bearer ${token}` : '',
+      }),
+    };
     const response = await fetch(
-      `${HTTP_SERVICE}/${service}`
+      `${HTTP_SERVICE}/${service}`,
+      options
     ).then((response) => response.text());
     const data = await decrypt(response);
     return data;
@@ -13,10 +22,19 @@ export const get = async (service: string) => {
   }
 };
 
-export const getOne = async (service: string, id: any) => {
+export const getOne = async (service: string, id: any, token?: string) => {
   try {
+    const options = {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: token ? `Bearer ${token}` : '',
+      }),
+    };
     const response = await fetch(
-      `${HTTP_SERVICE}/${service}/${id}`
+      `${HTTP_SERVICE}/${service}/${id}`,
+      options
     ).then((response) => response.text());
     const data = await decrypt(response);
     return data;

@@ -53,7 +53,7 @@ export const SignUp = () => {
     dispatch(Loading(true));
     const user: IUser = {
       document,
-      documenttype: person,
+      document_type: person,
       password,
       active: true,
     };

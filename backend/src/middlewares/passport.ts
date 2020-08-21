@@ -32,8 +32,8 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
   authenticate('jwt', { session: false }, (err, user, info) => {
     if (err || !user) {
       return cryptedResponse(res, 401, {
-        ok: true,
-        status: 'unsuccess loggining user',
+        ok: false,
+        status: 401,
         message: 'auth.noAuth',
         data: info,
       });
