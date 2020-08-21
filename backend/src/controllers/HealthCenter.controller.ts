@@ -30,18 +30,17 @@ export class HealthCenterController {
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all health centers",
-          message:
-            "Se han obtenido todos los centros de salud de la base de datos",
+          status: 200,
+          message:'getHealthCenters.success',
           data: healthCenter,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all health centers",
-          message: `Ha ocurrido un error inesperado al obtener todos los centros de salud`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getHealthCenters.error',
+          data: error.toString(),
         })
       );
   }
@@ -52,17 +51,17 @@ export class HealthCenterController {
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one health center",
-          message: `Se han obtenido el centro de salud ${idCenter}`,
+          status: 200,
+          message: 'getHealthCenter.success',
           data: healthCenter,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one health center",
-          message: `Ha ocurrido un error inesperado al obtener el centro de salud ${idCenter}`,
-          data: error.message,
+          status: 500,
+          message: 'getHealthCenter.error',
+          data: error.toString(),
         })
       );
   }
@@ -73,16 +72,16 @@ export class HealthCenterController {
       .then((Center) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting health center",
-          message: `Se han creado el centro de salud ${healthCenter.idCenter} correctamente`,
+          status: 200,
+          message: 'insertHealthCenter.success',
           data: Center,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting health center",
-          message: `Ha ocurrido un error inesperado con el centro de salud ${healthCenter.idCenter}`,
+          status: 500,
+          message: 'insertHealthCenter.error',
           data: error.toString(),
         });
       });
@@ -95,16 +94,16 @@ export class HealthCenterController {
       .then((Center) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating health center",
-          message: `Se han actualizado el centro de salud ${healthCenter.idCenter} correctamente`,
+          status: 200,
+          message: 'updateHealthCenter.success',
           data: Center,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating health center",
-          message: `Ha ocurrido un error inesperado al actualizar el centro de salud ${idCenter}`,
+          status: 500,
+          message: 'updateHealthCenter.error',
           data: error.toString(),
         })
       );
@@ -116,16 +115,16 @@ export class HealthCenterController {
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting health center",
-          message: `Se han eliminado el centro de salud ${idCenter} correctamente`,
+          status: 200,
+          message: 'deleteHealthCenter.success',
           data: healthCenter,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting health center",
-          message: `Ha ocurrido un error inesperado al eliminar el centro de salud ${idCenter} correctamente`,
+          status: 500,
+          message: 'deleteHealthCenter.error',
           data: error.toString(),
         })
       );

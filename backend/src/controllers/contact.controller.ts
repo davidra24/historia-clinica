@@ -30,17 +30,17 @@ export class ContactController {
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all contacts",
-          message: "Se han obtenido todos los contactos de la base de datos",
+          status: 200,
+          message: 'getContacts.success',
           data: contacto,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all contact",
-          message: `Ha ocurrido un error inesperado al obtener todos los contactos`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getContacts.error',
+          data: error.toString(),
         })
       );
   }
@@ -51,17 +51,17 @@ export class ContactController {
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one contact",
-          message: `Se ha obtenido el contacto ${document}`,
+          status: 200,
+          message: 'getContact.success',
           data: contacto,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one contact",
-          message: `Ha ocurrido un error inesperado al obtener el contacto ${document}`,
-          data: error.message,
+          status: 500,
+          message: 'getContact.error',
+          data: error.toString(),
         })
       );
   }
@@ -72,16 +72,16 @@ export class ContactController {
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting contact",
-          message: `Se ha creado el contacto ${contact.document} correctamente`,
+          status: 200,
+          message: 'insertContact.success',
           data: contacto,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting contact",
-          message: `Ha ocurrido un error inesperado con el contacto ${contact.document}`,
+          status: 500,
+          message: 'insertContact.error',
           data: error.toString(),
         });
       });
@@ -94,16 +94,16 @@ export class ContactController {
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating contact",
-          message: `Se ha actualizado el contacto ${contact.document} correctamente`,
+          status: 200,
+          message: 'updateContact.success',
           data: contacto,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating contact",
-          message: `Ha ocurrido un error inesperado al actualizar el contacto ${document}`,
+          status: 500,
+          message: 'updateContact.error',
           data: error.toString(),
         })
       );
@@ -115,16 +115,16 @@ export class ContactController {
       .then((contacto) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting contact",
-          message: `Se ha eliminado el contacto ${document} correctamente`,
+          status: 200,
+          message: 'deleteContact.success',
           data: contacto,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting contact",
-          message: `Ha ocurrido un error inesperado al eliminar el contacto ${document} correctamente`,
+          status: 500,
+          message: 'deleteContact.error',
           data: error.toString(),
         })
       );

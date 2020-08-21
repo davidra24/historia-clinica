@@ -30,17 +30,17 @@ export class PeopleController {
       .then((person) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all people",
-          message: "Se han obtenido todas las personas de la base de datos",
+          status: 200,
+          message: 'getPeople.success',
           data: person,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all people",
-          message: `Ha ocurrido un error inesperado al obtener todas las personas`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getPeople.error',
+          data: error.toString(),
         })
       );
   }
@@ -51,17 +51,17 @@ export class PeopleController {
       .then((person) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one person",
-          message: `Se han obtenido la persona ${document}`,
+          status: 200,
+          message: 'getPerson.success',
           data: person,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one person",
-          message: `Ha ocurrido un error inesperado al obtener la persona ${document}`,
-          data: error.message,
+          status: 500,
+          message: 'getPerson.error',
+          data:error.toString(),
         })
       );
   }
@@ -72,16 +72,16 @@ export class PeopleController {
       .then((persona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting person",
-          message: `Se han creado la persona ${person.document} correctamente`,
+          status: 200,
+          message: 'insertPerson.success',
           data: persona,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting person",
-          message: `Ha ocurrido un error inesperado con la persona ${person.document}`,
+          status: 500,
+          message: 'insertPerson.error',
           data: error.toString(),
         });
       });
@@ -94,16 +94,16 @@ export class PeopleController {
       .then((persona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating person",
-          message: `Se han actualizado la persona ${person.document} correctamente`,
+          status: 200,
+          message: 'updatePerson.success',
           data: persona,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating person",
-          message: `Ha ocurrido un error inesperado al actualizar la persona ${document}`,
+          status: 500,
+          message: 'updatePerson.error',
           data: error.toString(),
         })
       );
@@ -115,16 +115,16 @@ export class PeopleController {
       .then((person) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting person",
-          message: `Se han eliminado la persona ${document} correctamente`,
+          status: 200,
+          message: 'deletePerson.success',
           data: person,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting person",
-          message: `Ha ocurrido un error inesperado al eliminar la persona ${document} correctamente`,
+          status: 500,
+          message: 'deletePerson.error',
           data: error.toString(),
         })
       );

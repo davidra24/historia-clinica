@@ -30,18 +30,17 @@ export class ContactPersonController {
       .then((contactoPersonas) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all contact person",
-          message:
-            "Se han obtenido todos los contactos de personas de la base de datos",
+          status: 200,
+          message:'getContactsPerson.success',
           data: contactoPersonas,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all contact person",
-          message: `Ha ocurrido un error inesperado al obtener todos los contactos de personas`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getContactsPerson.error',
+          data: error.toString(),
         })
       );
   }
@@ -54,17 +53,17 @@ export class ContactPersonController {
       .then((contactoPersona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one contact person",
-          message: `Se ha obtenido el contacto ${contactDocument} de la persona ${userDocument}`,
+          status: 200,
+          message: 'getContactPerson.success',
           data: contactoPersona,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one contact person",
-          message: `Ha ocurrido un error inesperado al obtener el contacto ${contactDocument} de la persona ${userDocument}`,
-          data: error.message,
+          status: 500,
+          message: 'getContactPerson.error',
+          data: error.toString(),
         })
       );
   }
@@ -75,16 +74,16 @@ export class ContactPersonController {
       .then((contactoPersona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting contact person",
-          message: `Se ha creado el contacto ${contactPerson.contactDocument} de la persona ${contactPerson.userDocument} correctamente`,
+          status: 200,
+          message: 'insertContactPerson.success',
           data: contactoPersona,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting contact person",
-          message: `Ha ocurrido un error inesperado con el contacto ${contactPerson.contactDocument} y/o la persona ${contactPerson.userDocument}`,
+          status: 500,
+          message: 'insertContactPerson.error',
           data: error.toString(),
         });
       });
@@ -103,16 +102,16 @@ export class ContactPersonController {
       .then((contactoPersona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating contact person",
-          message: `Se ha actualizado el contacto ${contactPerson.contactDocument} de la persona ${contactPerson.userDocument} correctamente`,
+          status: 200,
+          message: 'updateContactPerson.success',
           data: contactoPersona,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating contact person",
-          message: `Ha ocurrido un error inesperado al actualizar el contacto ${contactDocument} de la persona ${userDocument}`,
+          status: 500,
+          message: 'updateContactPerson.error',
           data: error.toString(),
         })
       );
@@ -126,16 +125,17 @@ export class ContactPersonController {
       .then((contactoPersona) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting contact person",
-          message: `Se ha eliminado el contacto ${contactDocument} de la persona ${userDocument} correctamente`,
+          status: 200,
+          message: 'deleteContactPerson.success',
           data: contactoPersona,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting contact person",
-          message: `Ha ocurrido un error inesperado al eliminar el contacto ${contactDocument} de la persona ${userDocument} correctamente`,
+          status: 500,
+          message: 
+          'deleteContactPerson.error',
           data: error.toString(),
         })
       );

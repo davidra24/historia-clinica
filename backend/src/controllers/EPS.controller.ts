@@ -30,17 +30,17 @@ export class EPSController {
       .then((eps) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all EPS",
-          message: "Se han obtenido todas las EPS de la base de datos",
+          status: 200,
+          message: 'getEPS.success',
           data: eps,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all EPS",
-          message: `Ha ocurrido un error inesperado al obtener todas las EPS`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getEPS.error',
+          data: error.toString(),
         })
       );
   }
@@ -51,17 +51,17 @@ export class EPSController {
       .then((eps) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one EPS",
-          message: `Se ha obtenido la eps ${id}`,
+          status: 200,
+          message: 'getOneEPS.success',
           data: eps,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one EPS",
-          message: `Ha ocurrido un error inesperado al obtener la EPS ${id}`,
-          data: error.message,
+          status: 500,
+          message: 'getOneEPS.error',
+          data: error.toString(),
         })
       );
   }
@@ -72,16 +72,16 @@ export class EPSController {
       .then((eps) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting EPS",
-          message: `Se ha creado la EPS correctamente`,
+          status: 200,
+          message: 'insertEPS.success',
           data: eps,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting EPS",
-          message: `Ha ocurrido un error inesperado con la EPS`,
+          status: 500,
+          message: 'insertEPS.error',
           data: error.toString(),
         });
       });
@@ -94,16 +94,16 @@ export class EPSController {
       .then((eps) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating EPS",
-          message: `Se ha actualizado la EPS ${EPS.id} correctamente`,
+          status: 200,
+          message: 'updateEPS.success',
           data: eps,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating EPS",
-          message: `Ha ocurrido un error inesperado al actualizar la EPS ${id}`,
+          status: 500,
+          message: 'updateEPS.error',
           data: error.toString(),
         })
       );
@@ -115,16 +115,16 @@ export class EPSController {
       .then((eps) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting EPS",
-          message: `Se ha eliminado la EPS ${id} correctamente`,
+          status: 200,
+          message: 'deleteEPS.success',
           data: eps,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting EPS",
-          message: `Ha ocurrido un error inesperado al eliminar la EPS ${id} correctamente`,
+          status: 500,
+          message: 'deleteEPS.error',
           data: error.toString(),
         })
       );

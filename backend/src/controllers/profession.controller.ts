@@ -30,17 +30,17 @@ export class ProfessionController {
       .then((profesions) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting all professions",
-          message: "Se han obtenido todas las profesiones de la base de datos",
+          status: 200,
+          message: 'getProfessions.success',
           data: profesions,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting all professions",
-          message: `Ha ocurrido un error inesperado al obtener todas las profesiones`,
-          data: error.message.toString(),
+          status: 500,
+          message: 'getProfessions.error',
+          data: error.toString(),
         })
       );
   }
@@ -51,17 +51,17 @@ export class ProfessionController {
       .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success getting one profession",
-          message: `Se ha obtenido la profesion`,
+          status: 200,
+          message: 'getProfession.success',
           data: profesion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess getting one profession",
-          message: `Ha ocurrido un error inesperado al obtener la profesion`,
-          data: error.message,
+          status: 500,
+          message: 'getProfession.error',
+          data: error.toString,
         })
       );
   }
@@ -72,16 +72,16 @@ export class ProfessionController {
       .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success inserting profession",
-          message: `Se ha creado la profesion correctamente`,
+          status: 200,
+          message: 'insertProfession.success',
           data: profesion,
         })
       )
       .catch((error) => {
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess inserting profession",
-          message: `Ha ocurrido un error inesperado con la profesion`,
+          status: 500,
+          message: 'insertProfession.error',
           data: error.toString(),
         });
       });
@@ -94,16 +94,16 @@ export class ProfessionController {
       .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success updating profession",
-          message: `Se ha actualizado la profesion ${profession.id} correctamente`,
+          status: 200,
+          message: 'updateProfession.success',
           data: profesion,
         })
       )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess updating profession",
-          message: `Ha ocurrido un error inesperado al actualizar la profesion ${id}`,
+          status: 500,
+          message: 'updateProfession.error',
           data: error.toString(),
         })
       );
@@ -115,8 +115,8 @@ export class ProfessionController {
       .then((profesion) =>
         cryptedResponse(res, 200, {
           ok: true,
-          status: "success deleting profession",
-          message: `Se ha eliminado la profesion ${id} correctamente`,
+          status: 200,
+          message: 'deleteProfession.success',
           data: profesion,
         })
       )
@@ -124,7 +124,7 @@ export class ProfessionController {
         cryptedResponse(res, 500, {
           ok: false,
           status: "unsuccess deleting profession",
-          message: `Ha ocurrido un error inesperado al eliminar la profesion ${id} correctamente`,
+          message: 'deleteProfession.error',
           data: error.toString(),
         })
       );
