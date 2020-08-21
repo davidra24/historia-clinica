@@ -257,7 +257,7 @@ export default {
     //Failed to fetch
     'state.failedToFetch':
       'No se ha podido acceder a los datos, revise su conexión a Internet',
-    //Register
+    //Register person
     'register.person': 'Complete el registro',
     'register.form-firstName': 'Primer nombre *',
     'register.form-secondName': 'Segundo nombre',

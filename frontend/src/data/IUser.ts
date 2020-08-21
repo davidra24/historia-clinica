@@ -1,6 +1,6 @@
 export interface IUser {
   document: string;
   password: string;
-  documentType?: boolean;
+  documenttype?: boolean;
   active?: boolean;
 }

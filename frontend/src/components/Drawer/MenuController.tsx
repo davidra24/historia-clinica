@@ -31,7 +31,7 @@ export const MenuController = () => {
         <ItemDrawer title={TextMessage('app.start')} icon={HOME_ICON} />
       </Link>
       {user &&
-        (user.documentType
+        (user.documenttype
           ? person &&
             (person?.isHealtCareTeam ? (
               <MenuListHealthCareTeam />

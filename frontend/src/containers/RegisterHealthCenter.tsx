@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormRegisterPatient } from '../components/FormRegister/FormRegisterPatient';
+import { FormRegisterHealthCenter } from '../components/FormRegister/FormRegisterHealthCenter';
 
 export const RegisterHealthCenter = () => {
   return (
     <>
       <div className='flex h-full justify-center items-center'>
-        <FormRegisterPatient onSubmit={null} />
+        <FormRegisterHealthCenter onSubmit={null} />
       </div>
     </>
   );

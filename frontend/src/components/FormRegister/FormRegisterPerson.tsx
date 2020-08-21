@@ -19,7 +19,7 @@ import {
 } from '../../util/validations';
 import { toBase64 } from '../../util/Util';
 
-export const FormRegisterPatient = ({ onSubmit }: registerPersonTypes) => {
+export const FormRegisterPerson = ({ onSubmit }: registerPersonTypes) => {
   const [image, setImage] = useState<any>(
     require('../../assets/default-profile.png')
   );
