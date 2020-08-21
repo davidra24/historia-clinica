@@ -13,6 +13,18 @@ export const get = async (service: string) => {
   }
 };
 
+export const getOne = async (service: string, id: any) => {
+  try {
+    const response = await fetch(
+      `${HTTP_SERVICE}/${service}/${id}`
+    ).then((response) => response.text());
+    const data = await decrypt(response);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const post = async (service: string, body: any, token?: string) => {
   try {
     const options = {
@@ -28,10 +40,11 @@ export const post = async (service: string, body: any, token?: string) => {
       `${HTTP_SERVICE}/${service}`,
       options
     ).then((response) => response.text());
-    console.log('response', response);
     const data = await decrypt(response);
     return data;
   } catch (error) {
+    console.log('error??', error);
+
     return error;
   }
 };

@@ -4,7 +4,7 @@ import userDB from '../database/users.database';
 import { compareSync } from 'bcrypt';
 import { UserModel } from 'src/models/User';
 import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
-import { signToken } from 'src/token';
+import { signToken, verifyToken } from 'src/token';
 import config from '../config';
 
 export class UserController {
@@ -85,7 +85,7 @@ export class UserController {
         )
         .catch((error) => {
           cryptedResponse(res, 500, {
-            ok: true,
+            ok: false,
             status: 500,
             message: 'signup.error-body',
             data: error.toString(),
@@ -93,7 +93,7 @@ export class UserController {
         });
     } else {
       return cryptedResponse(res, 400, {
-        ok: true,
+        ok: false,
         status: 400,
         message: 'signup.error-existent',
         data: null,
@@ -126,12 +126,12 @@ export class UserController {
     const { document } = req.params;
     await db
       .result(() => userDB.deleteUser(document))
-      .then((usuario) =>
+      .then((user) =>
         cryptedResponse(res, 200, {
           ok: true,
           status: 'success deleting user',
           message: `Se ha eliminado al usuario ${document} correctamente`,
-          data: usuario,
+          data: user,
         })
       )
       .catch((error) =>
@@ -147,23 +147,23 @@ export class UserController {
     const { document, password } = await decryptRequest(req);
     await db
       .one(() => userDB.getOneUser(document))
-      .then((usuario: UserModel) => {
-        const auth = compareSync(password, usuario.password);
+      .then((user: UserModel) => {
+        const auth = compareSync(password, user.password);
         if (auth) {
           //expiresIn => One day
-          const token = signToken({ id: usuario.document }, config.jwtSecret, {
+          const token = signToken({ id: user.document }, config.jwtSecret, {
             expiresIn: 86400,
           });
           cryptedResponse(res, 200, {
             ok: true,
-            status: 'success loggining user',
+            status: 200,
             message: 'Se ha autenticado correctamente',
-            data: { token },
+            data: { token, user },
           });
         } else {
           cryptedResponse(res, 401, {
-            ok: true,
-            status: 'unsuccess loggining user',
+            ok: false,
+            status: 401,
             message: 'login.authError-noauth',
             data: null,
           });
@@ -172,10 +172,54 @@ export class UserController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: 'error getting one user',
+          status: 500,
           message: 'login.authError-body',
           data: error.toString(),
         })
       );
+  }
+  async validateUser(req: Request, res: Response) {
+    const { token } = await decryptRequest(req);
+    //const token = req.body;
+    if (token) {
+      try {
+        const verify: any = verifyToken(token, config.jwtSecret);
+        const { id } = verify;
+        await db
+          .one(() => userDB.getOneUser(id))
+          .then((newuser: UserModel) => {
+            const user = Object.assign({}, newuser);
+            delete user.password;
+            return cryptedResponse(res, 200, {
+              ok: true,
+              status: 200,
+              message: 'login.authOk',
+              data: { user },
+            });
+          })
+          .catch((error) =>
+            cryptedResponse(res, 500, {
+              ok: false,
+              status: 500,
+              message: 'login.authError-body',
+              data: error.message,
+            })
+          );
+      } catch (error) {
+        cryptedResponse(res, 401, {
+          ok: false,
+          status: 401,
+          message: 'login.authError-body',
+          data: error.message,
+        });
+      }
+    } else {
+      cryptedResponse(res, 500, {
+        ok: false,
+        status: 500,
+        message: 'verify.not-found',
+        data: null,
+      });
+    }
   }
 }

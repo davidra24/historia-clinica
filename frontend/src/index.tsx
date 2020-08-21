@@ -18,7 +18,7 @@ const theme = createMuiTheme({
 });
 
 //'#33ab9f',
-ReactDOM.render(
+/*ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
@@ -26,6 +26,14 @@ ReactDOM.render(
       </MuiThemeProvider>
     </Provider>
   </StrictMode>,
+  document.getElementById('root')
+);*/
+ReactDOM.render(
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <App></App>
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById('root')
 );
 

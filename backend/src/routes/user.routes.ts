@@ -11,5 +11,6 @@ api.put('/users/:document', usercontroller.updateUser);
 api.delete('/users/:document', usercontroller.deleteUser);
 
 api.post('/login', usercontroller.login);
+api.post('/verify', usercontroller.validateUser);
 
 export const userRoutes = api;

@@ -4,7 +4,7 @@ import { IStore } from '../../redux/types';
 import { menu } from '../../redux/actions';
 import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
-import { MenuListPatient } from './MenuListPatient';
+import { MenuController } from './MenuController';
 import { SvgIcon } from '@material-ui/core';
 import { MENU_ICON, CLOSE_MENU_ICON } from '../../util/svgIcons';
 import { TextMessage } from '../../lang/TextMessage';
@@ -12,12 +12,11 @@ import { TextMessage } from '../../lang/TextMessage';
 export const Drawer = ({ children }: any) => {
   const openMenu = useSelector((state: IStore) => state.openMenu);
   const dispatch = useDispatch();
-
   return (
     <div>
       <nav
         onClick={() => openMenu && dispatch(menu(false))}
-        className={`flex fixed w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-200 z-10 ${
+        className={`flex fixed w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-300 z-10 ${
           openMenu ? 'opacity-50' : ''
         }`}
       >
@@ -39,7 +38,7 @@ export const Drawer = ({ children }: any) => {
             className='flex flex-col items-center cursor-pointer justify-center w-full pr-10'
             to='/'
           >
-            <img src={logo} alt='Logo' className={`w-8 md:w-12`} />
+            <img src={logo} alt='Logo' className='w-8 md:w-12' />
             <h1 className='text-xs md:text-base'>
               <strong>{TextMessage('app.title')}</strong>
             </h1>
@@ -58,13 +57,11 @@ export const Drawer = ({ children }: any) => {
               <path d={CLOSE_MENU_ICON}></path>
             </SvgIcon>
           </div>
-          <div className='flex flex-col'>
-            <MenuListPatient />
-          </div>
+          <MenuController />
         </div>
       </aside>
       <main
-        className={`flex py-20 w-12/12 h-screen justify-center ${
+        className={`flex py-20 w-full h-screen justify-center ${
           openMenu ? 'opacity-50' : ''
         }`}
         onClick={() => dispatch(menu(false))}

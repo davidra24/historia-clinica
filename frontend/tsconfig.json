@@ -5,7 +5,10 @@
     "module": "esnext",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
@@ -19,5 +22,7 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

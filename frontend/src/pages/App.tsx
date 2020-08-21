@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loading } from '../components/Loading';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../redux/types';
 import { Router } from '../router';
 import { Footer } from '../components/Footer';
 import { LOCALES, LangProvider } from '../lang';
-import { changeLang } from '../redux/actions';
+import {
+  changeLang,
+  Loading as setLoading,
+  setUser,
+  auth,
+} from '../redux/actions';
+import { useCookies } from 'react-cookie';
+import { post } from '../util/httpUtil';
+import { HTTP_VERIFY } from '../util/constants';
+
 function App() {
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
   const dispatch = useDispatch();
+  const [load, setLoad] = useState(false);
 
   const lang = localStorage.getItem('language');
 
@@ -24,12 +35,43 @@ function App() {
 
   dispatch(changeLang(localStorage.getItem('language')));
 
+  useEffect(() => {
+    const { token } = cookie;
+    async function comprobeSession() {
+      setLoad(true);
+      const response = await post(HTTP_VERIFY, { token });
+      if (response) {
+        const {
+          status,
+          data: { user },
+        } = response;
+        if (status === 200) {
+          dispatch(auth(true));
+          dispatch(setUser(user));
+        } else {
+          removeCookie('token');
+        }
+      } else {
+        removeCookie('token');
+      }
+      setLoad(false);
+    }
+    if (token) {
+      comprobeSession();
+    }
+  }, []);
+
   return (
     <>
       <LangProvider locale={language}>
-        {loading && <Loading />}
-        <Router />
-        <Footer />
+        {load ? (
+          <Loading />
+        ) : (
+          <>
+            <Router />
+            <Footer />
+          </>
+        )}
       </LangProvider>
     </>
   );

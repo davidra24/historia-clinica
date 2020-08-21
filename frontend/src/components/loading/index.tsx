@@ -1,8 +1,9 @@
 import React from 'react';
+import { TextMessage } from '../../lang/TextMessage';
 
 export const Loading = () => (
-  <div className='loader__container flex justify-center items-center'>
-    <div className='loader__content'>
+  <>
+    <div className='loader__container flex flex-col justify-center items-center'>
       <div className='loadingio-spinner-heart-cq15qnahe7'>
         <div className='ldio-8f0cckgxshs'>
           <div>
@@ -10,6 +11,7 @@ export const Loading = () => (
           </div>
         </div>
       </div>
+      <h1 className='text-5xl'>{TextMessage('app.loading')}</h1>
     </div>
-  </div>
+  </>
 );

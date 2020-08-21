@@ -1,54 +1,80 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { Loading } from '../redux/actions';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Loading,
+  setMsgErrorVisbility,
+  setMsgSuccessVisbility,
+  SnackTitleMsg,
+  SnackMsg,
+} from '../redux/actions';
 import { FormSign } from '../components/FormSign';
 import { TextMessage } from '../lang/TextMessage';
 import { useHistory } from 'react-router';
 import { useInputValue } from '../hooks/useInput';
-import { HTTP_USERS } from '../util/constants';
+import { HTTP_USERS, PATTERN_PASSWORD } from '../util/constants';
 import { post } from '../util/httpUtil';
 import { IUser } from '../data/IUser';
 import { SnackBarAlert } from '../util/Alert';
+import { IStore } from '../redux/types';
 
 export const SignUp = () => {
+  const openMsgError = useSelector((state: IStore) => state.openMsgError);
+  const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
+  const snackTitle = useSelector((state: IStore) => state.snackTitle);
+  const snackMsg = useSelector((state: IStore) => state.snackMsg);
+
+  const dispatch = useDispatch();
+
   const [person, setPerson] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [document, setDocument] = useState('');
+
   const inputDocument = useInputValue('');
   const inputPassword = useInputValue('');
 
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const signup = async () => {
     const document = inputDocument.value;
     const password = inputPassword.value;
-    console.log('document', document);
-    console.log('password', password);
+
+    if (document.length < 6 || document.length > 15) {
+      dispatch(SnackTitleMsg('signup.authError-title'));
+      dispatch(SnackMsg('document.invalid'));
+      dispatch(setMsgErrorVisbility(true));
+      return;
+    }
+
+    if (!PATTERN_PASSWORD.test(password)) {
+      dispatch(SnackTitleMsg('signup.authError-title'));
+      dispatch(SnackMsg('password.invalid'));
+      dispatch(setMsgErrorVisbility(true));
+      return;
+    }
 
     dispatch(Loading(true));
-    setDocument(document);
     const user: IUser = {
       document,
       documentType: person,
       password,
       active: true,
     };
-    const data = await post(HTTP_USERS, { user });
-    if (data.ok) {
-      if (data.status === 500 || data.status === 400) {
-        setAlertTitle('signup.authError-title');
-        setErrorMessage(data.message);
-        setOpen(true);
-      }
-      if (data.status === 200) {
-        setAlertTitle('signup.success-title');
-        setErrorMessage(data.message);
-        setOpen(true);
+    const response = await post(HTTP_USERS, { user });
+    console.log('response', response);
+    if (response) {
+      const { message } = response;
+      if (response.ok) {
+        dispatch(SnackTitleMsg('signup.success-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgSuccessVisbility(true));
         history.push('/login');
+      } else {
+        dispatch(SnackTitleMsg('signup.authError-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgErrorVisbility(true));
       }
+    } else {
+      dispatch(SnackTitleMsg('signup.authError-title'));
+      dispatch(SnackMsg('app.not-server'));
+      dispatch(setMsgErrorVisbility(true));
     }
     dispatch(Loading(false));
   };
@@ -61,19 +87,30 @@ export const SignUp = () => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    dispatch(setMsgSuccessVisbility(false));
+    dispatch(setMsgErrorVisbility(false));
   };
 
   return (
     <>
       <SnackBarAlert
-        open={open}
+        open={openMsgError}
         autoHideDuration={6000}
         onClose={handleClose}
         severity='error'
-        title={TextMessage(alertTitle)}
+        title={TextMessage(snackTitle)}
         message={{
-          children: TextMessage(errorMessage, { document }),
+          children: TextMessage(snackMsg),
+        }}
+      />
+      <SnackBarAlert
+        open={openMsgSuccess}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        severity='success'
+        title={TextMessage(snackTitle)}
+        message={{
+          children: TextMessage(snackMsg),
         }}
       />
       <div className='flex justify-center pt-10 w-12/12 h-screen'>

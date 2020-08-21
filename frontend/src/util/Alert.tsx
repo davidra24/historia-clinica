@@ -17,11 +17,11 @@ export const SnackBarAlert = (props: propsAlert) => (
     autoHideDuration={props.autoHideDuration}
     onClose={props.onClose}
   >
-    <Alert
-      variant='filled'
-      onClose={props.onClose}
-      severity={props.severity}
-      {...props.message}
-    ></Alert>
+    <Alert variant='filled' onClose={props.onClose} severity={props.severity}>
+      <div className='flex flex-col items-center'>
+        <AlertTitle>{props.title}</AlertTitle>
+        {props.message.children}
+      </div>
+    </Alert>
   </Snackbar>
 );
