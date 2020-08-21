@@ -186,6 +186,34 @@ export const FormRegisterPerson = ({
                   </FormControl>
                 </div>
                 <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
+                  <FormControl className='w-12/12 md:w-5/12'>
+                    <TextField
+                      id='float-email'
+                      name='email'
+                      variant='outlined'
+                      inputRef={register(validationsEmail)}
+                      label={TextMessage('register.form-email')}
+                      {...email}
+                    />
+                    <span className='text-red-600'>
+                      {errors.email && errors.email.message}
+                    </span>
+                  </FormControl>
+                  <FormControl className='w-12/12 md:w-5/12'>
+                    <TextField
+                      id='float-phone'
+                      name='phone'
+                      variant='outlined'
+                      inputRef={register(validationsPhone)}
+                      label={TextMessage('register.form-phone')}
+                      {...phone}
+                    />
+                    <span className='text-red-600'>
+                      {errors.phone && errors.phone.message}
+                    </span>
+                  </FormControl>
+                </div>
+                <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
                   <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
                     <InputLabel id='form-select-genre'>
                       {TextMessage('register.form-genre')}
@@ -246,31 +274,41 @@ export const FormRegisterPerson = ({
                   </FormControl>
                 </div>
                 <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
-                  <FormControl className='w-12/12 md:w-5/12'>
-                    <TextField
-                      id='float-email'
-                      name='email'
-                      variant='outlined'
-                      inputRef={register(validationsEmail)}
-                      label={TextMessage('register.form-email')}
-                      {...email}
-                    />
-                    <span className='text-red-600'>
-                      {errors.email && errors.email.message}
-                    </span>
+                  <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
+                    <InputLabel id='form-select-eps'>
+                      {TextMessage('register.form-idEPS')}
+                    </InputLabel>
+                    <Select
+                      id='float-eps'
+                      labelId='float-eps'
+                      name='eps'
+                      label='eps'
+                      {...idEPS}
+                    >
+                      {epsList.map((eps) => (
+                        <MenuItem value={eps.id} key={eps.id}>
+                          {eps.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </FormControl>
-                  <FormControl className='w-12/12 md:w-5/12'>
-                    <TextField
-                      id='float-phone'
-                      name='phone'
-                      variant='outlined'
-                      inputRef={register(validationsPhone)}
-                      label={TextMessage('register.form-phone')}
-                      {...phone}
-                    />
-                    <span className='text-red-600'>
-                      {errors.phone && errors.phone.message}
-                    </span>
+                  <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
+                    <InputLabel id='form-select-profession'>
+                      {TextMessage('register.form-profession')}
+                    </InputLabel>
+                    <Select
+                      id='float-profession'
+                      labelId='float-profession'
+                      name='profession'
+                      label='profession'
+                      {...idProfession}
+                    >
+                      {professionList.map((profession) => (
+                        <MenuItem value={profession.id} key={profession.id}>
+                          {profession.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </FormControl>
                 </div>
                 <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
@@ -312,44 +350,6 @@ export const FormRegisterPerson = ({
                     <span className='text-red-600'>
                       {errors.datePicker && errors.datePicker.message}
                     </span>
-                  </FormControl>
-                </div>
-                <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
-                  <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
-                    <InputLabel id='form-select-eps'>
-                      {TextMessage('register.form-idEPS')}
-                    </InputLabel>
-                    <Select
-                      id='float-eps'
-                      labelId='float-eps'
-                      name='eps'
-                      label='eps'
-                      {...idEPS}
-                    >
-                      {epsList.map((eps) => (
-                        <MenuItem value={eps.id} key={eps.id}>
-                          {eps.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
-                    <InputLabel id='form-select-profession'>
-                      {TextMessage('register.form-profession')}
-                    </InputLabel>
-                    <Select
-                      id='float-profession'
-                      labelId='float-profession'
-                      name='profession'
-                      label='profession'
-                      {...idProfession}
-                    >
-                      {professionList.map((profession) => (
-                        <MenuItem value={profession.id} key={profession.id}>
-                          {profession.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
                   </FormControl>
                 </div>
                 <div className='flex justify-center'>
