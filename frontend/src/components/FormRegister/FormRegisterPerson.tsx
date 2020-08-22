@@ -35,8 +35,7 @@ import {
   setMsgErrorVisbility,
 } from '../../redux/actions';
 import { IStore } from '../../redux/types';
-import { Loading } from '../Loading';
-import { Loading as setLoading } from '../../redux/actions';
+import { Loading } from '../loading';
 import { IEPS } from '../../data/IEPS';
 import { IProfessions } from '../../data/IProfessions';
 

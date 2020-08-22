@@ -67,24 +67,34 @@ export class ContactController {
   }
   async insertContact(req: Request, res: Response) {
     const { contact } = await decryptRequest(req);
-    await db
-      .none(() => contactDB.insertContact(contact))
-      .then((contacto) =>
-        cryptedResponse(res, 200, {
-          ok: true,
-          status: 200,
-          message: 'insertContact.success',
-          data: contacto,
-        })
-      )
-      .catch((error) => {
-        cryptedResponse(res, 500, {
-          ok: false,
-          status: 500,
-          message: 'insertContact.error',
-          data: error.toString(),
+    const contactExist = await db.oneOrNone(contactDB.getOneContact(contact.document));
+    if (!contactExist) {
+      await db
+        .none(() => contactDB.insertContact(contact))
+        .then((usuarios) =>
+          cryptedResponse(res, 200, {
+            ok: true,
+            status: 200,
+            message: 'insertContact.success',
+            data: usuarios,
+          })
+        )
+        .catch((error) => {
+          cryptedResponse(res, 500, {
+            ok: false,
+            status: 500,
+            message: 'insertContact.error',
+            data: error.toString(),
+          });
         });
+    } else {
+      return cryptedResponse(res, 400, {
+        ok: true,
+        status: 200,
+        message: 'insertContact.success',
+        data: null,
       });
+    }
   }
   async updateContact(req: Request, res: Response) {
     const { document } = req.params;
