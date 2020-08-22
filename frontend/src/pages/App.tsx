@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Loading } from '../components/loading';
+import { Loading } from '../components/Loading';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../redux/types';
 import { Router } from '../router';

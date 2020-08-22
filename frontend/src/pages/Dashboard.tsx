@@ -3,7 +3,7 @@ import { IStore } from '../redux/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOne } from '../util/httpUtil';
 import { HTTP_HEALTH_CENTER, HTTP_PEOPLE } from '../util/constants';
-import { Loading } from '../components/loading';
+import { Loading } from '../components/Loading';
 import { Redirect } from 'react-router';
 import { menu } from '../redux/actions';
 import { useCookies } from 'react-cookie';

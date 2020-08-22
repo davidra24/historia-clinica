@@ -17,7 +17,7 @@ import {
 } from '../../util/validations';
 import { IStore } from '../../redux/types';
 import { useSelector } from 'react-redux';
-import { Loading } from '../loading';
+import { Loading } from '../Loading';
 
 export const FormSign = ({
   title,
