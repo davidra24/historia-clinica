@@ -24,7 +24,7 @@ export const RegisterPerson = () => {
   const loading = useSelector((state: IStore) => state.loading);
   const dispatch = useDispatch();
 
-  //Presonal data
+  //Personal data
   const firstName = useInputValue('');
   const secondName = useInputValue('');
   const lastName = useInputValue('');

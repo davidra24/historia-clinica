@@ -1,10 +1,11 @@
 export interface IHealthCareCenter {
-  id: string;
-  name: string;
-  website: string;
-  phone: string;
-  direction: string;
-  email: string;
-  schedule: Date;
-  description: string;
+  onSubmit:any;
+  name: any;
+  website: any;
+  phone: any;
+  direction: any;
+  email: any;
+  description: any;
+  token: any;
+  disabled?: boolean;
 }
