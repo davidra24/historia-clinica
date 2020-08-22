@@ -5,7 +5,8 @@ export const useInputValue = (initialValue: any) => {
   const onChange = (e: any) => {
     setValue(e.target.value);
   };
-  return { value, onChange };
+  const clean = () => setValue(initialValue);
+  return { value, onChange, clean };
 };
 
 export const useCheckValue = (initialValue: any) => {

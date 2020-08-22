@@ -1,4 +1,6 @@
-export interface registerPersonTypes {
+import { IContact } from './IContact';
+
+export interface RegisterPersonTypes {
   onSubmit: any;
   firstName: any;
   secondName: any;
@@ -15,4 +17,20 @@ export interface registerPersonTypes {
   idProfession: any;
   idEPS: any;
   token: string;
+  Stepper: any;
+  disabled?: boolean;
+}
+
+export interface RegisterContactTypes {
+  onSubmit: any;
+  onPrevStep: any;
+  Stepper: any;
+  document: any;
+  name: any;
+  phone: any;
+  email: any;
+  direction: any;
+  contacts: Array<IContact>;
+  pushContact: any;
+  disabled?: boolean;
 }

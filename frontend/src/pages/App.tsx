@@ -68,8 +68,11 @@ function App() {
           <Loading />
         ) : (
           <>
-            <Router className='h-full' />
-            <Footer />
+            {loading && <Loading />}
+            <div className={`${loading && 'opacity-0'}`}>
+              <Router />
+              <Footer />
+            </div>
           </>
         )}
       </LangProvider>
