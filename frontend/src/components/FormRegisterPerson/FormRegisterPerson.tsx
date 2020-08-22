@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Card,
   FormControl,
   TextField,
   Button,
@@ -15,10 +14,8 @@ import {
   validationsFirstName,
   validationsLastName,
   validationsGenre,
-  validationsCivilState,
   validationsEmail,
   validationsPhone,
-  validationsBirth,
 } from '../../util/validations';
 import {
   MuiPickersUtilsProvider,
@@ -32,11 +29,13 @@ import {
   SnackTitleMsg,
   SnackMsg,
   setMsgErrorVisbility,
+  selectEPS,
+  selectProfessions,
 } from '../../redux/actions';
-import { IStore } from '../../redux/types';
 import { Loading } from '../Loading';
 import { IEPS } from '../../data/IEPS';
 import { IProfessions } from '../../data/IProfessions';
+import { IStore } from '../../redux/types';
 
 export const FormRegisterPerson = ({
   onSubmit,
@@ -58,26 +57,56 @@ export const FormRegisterPerson = ({
   Stepper,
   disabled,
 }: RegisterPersonTypes) => {
-  const { handleSubmit, register, errors } = useForm();
-  const [epsList, setEpsList] = useState<Array<IEPS>>([]);
-  const [professionList, setProfessionList] = useState<Array<IProfessions>>([]);
+  const { handleSubmit, register, errors, control } = useForm();
+
+  const listEps = useSelector((state: IStore) => state.listEPS);
+  const listProfessions = useSelector((state: IStore) => state.listProfessions);
+
+  const arrayGenres: Array<any> = [
+    { id: 1, name: 'register.form-GenreM' },
+    { id: 2, name: 'register.form-GenreF' },
+    { id: 3, name: 'register.form-GenreO' },
+  ];
+
+  const arrayCivilState = [
+    { id: 'C', name: 'register.form-CivilStateC' },
+    { id: 'D', name: 'register.form-CivilStateD' },
+    { id: 'S', name: 'register.form-CivilStateS' },
+    { id: 'U', name: 'register.form-CivilStateU' },
+    { id: 'V', name: 'register.form-CivilStateV' },
+  ];
+
+  const arrayStrates = [
+    { id: 1, name: 1 },
+    { id: 2, name: 2 },
+    { id: 3, name: 3 },
+    { id: 4, name: 4 },
+    { id: 5, name: 5 },
+    { id: 6, name: 6 },
+  ];
+
+  /*const [epsList, setEpsList] = useState<Array<IEPS>>([]);
+  const [professionList, setProfessionList] = useState<Array<IProfessions>>([]);*/
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    fetchEPS();
-    fetchProfessions();
-    setLoading(false);
+    if (listEps.length === 0) {
+      fetchEPS();
+    }
+    if (listProfessions.length === 0) {
+      fetchProfessions();
+    }
   }, []);
 
   const fetchEPS = async () => {
+    setLoading(true);
     const response = await get(HTTP_EPS, token);
     if (response) {
       const { message } = response;
       if (response.ok) {
         const { data } = response;
-        setEpsList(data);
+        dispatch(selectEPS(data));
       } else {
         dispatch(SnackTitleMsg('register.form-errFetchEPS'));
         dispatch(SnackMsg(message));
@@ -88,15 +117,17 @@ export const FormRegisterPerson = ({
       dispatch(SnackMsg('app.err-connect'));
       dispatch(setMsgErrorVisbility(true));
     }
+    setLoading(false);
   };
 
   const fetchProfessions = async () => {
+    setLoading(true);
     const response = await get(HTTP_PROFESSION, token);
     if (response) {
       const { message } = response;
       if (response.ok) {
         const { data } = response;
-        setProfessionList(data);
+        dispatch(selectProfessions(data));
       } else {
         dispatch(SnackTitleMsg('register.form-errFetchProfession'));
         dispatch(SnackMsg(message));
@@ -107,14 +138,17 @@ export const FormRegisterPerson = ({
       dispatch(SnackMsg('app.err-connect'));
       dispatch(setMsgErrorVisbility(true));
     }
+    setLoading(false);
   };
 
   return (
     <>
       {loading ? (
-        <Loading />
+        <div className='h-screen flex opacity-100'>
+          <Loading />
+        </div>
       ) : (
-        <div className='flex flex-col w-full'>
+        <div className={`flex flex-col w-full ${loading && 'opacity-0'}`}>
           <div className='flex flex-col justify-center space-y-5'>
             <h2 className='text-lg text-center'>
               <strong>{TextMessage('register.person')}</strong>
@@ -210,8 +244,8 @@ export const FormRegisterPerson = ({
                       variant='outlined'
                       inputRef={register(validationsPhone)}
                       label={TextMessage('register.form-phone')}
-                      {...phone}
                       disabled={disabled}
+                      {...phone}
                     />
                     <span className='text-red-600'>
                       {errors.phone && errors.phone.message}
@@ -223,60 +257,51 @@ export const FormRegisterPerson = ({
                     <InputLabel id='form-select-genre'>
                       {TextMessage('register.form-genre')}
                     </InputLabel>
+
                     <Select
                       id='float-genre'
                       labelId='float-genre'
+                      label='Genre'
+                      disabled={disabled}
                       name='genre'
                       innerRef={register(validationsGenre)}
-                      label='Genre'
                       {...genre}
-                      disabled={disabled}
                     >
-                      <MenuItem value={1}>
-                        {TextMessage('register.form-GenreM')}
-                      </MenuItem>
-                      <MenuItem value={2}>
-                        {TextMessage('register.form-GenreF')}
-                      </MenuItem>
-                      <MenuItem value={3}>
-                        {TextMessage('register.form-GenreO')}
-                      </MenuItem>
+                      {arrayGenres.map((genre: any) => (
+                        <MenuItem key={genre.id} value={genre.id}>
+                          {TextMessage(genre.name)}
+                        </MenuItem>
+                      ))}
                     </Select>
+
                     <span className='text-red-600'>
-                      {errors.genre && errors.genre.message}
+                      {genre.validator === false &&
+                        TextMessage('register.form-genre-required')}
                     </span>
                   </FormControl>
                   <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
                     <InputLabel id='form-select-civilstate'>
                       {TextMessage('register.form-civilState')}
                     </InputLabel>
+
                     <Select
                       id='float-civilstate'
                       labelId='float-civilstate'
-                      name='civilstate'
-                      innerRef={register(validationsCivilState)}
                       label='CivilState'
-                      {...civilState}
                       disabled={disabled}
+                      value={civilState.value}
+                      onChange={civilState.onChange}
                     >
-                      <MenuItem value={1}>
-                        {TextMessage('register.form-CivilStateC')}
-                      </MenuItem>
-                      <MenuItem value={2}>
-                        {TextMessage('register.form-CivilStateD')}
-                      </MenuItem>
-                      <MenuItem value={3}>
-                        {TextMessage('register.form-CivilStateS')}
-                      </MenuItem>
-                      <MenuItem value={4}>
-                        {TextMessage('register.form-CivilStateU')}
-                      </MenuItem>
-                      <MenuItem value={5}>
-                        {TextMessage('register.form-CivilStateV')}
-                      </MenuItem>
+                      {arrayCivilState.map((civilState: any) => (
+                        <MenuItem key={civilState.id} value={civilState.id}>
+                          {TextMessage(civilState.name)}
+                        </MenuItem>
+                      ))}
                     </Select>
+
                     <span className='text-red-600'>
-                      {errors.civilstate && errors.civilstate.message}
+                      {!civilState.validator &&
+                        TextMessage('register.form-civilState-required')}
                     </span>
                   </FormControl>
                 </div>
@@ -285,15 +310,16 @@ export const FormRegisterPerson = ({
                     <InputLabel id='form-select-eps'>
                       {TextMessage('register.form-idEPS')}
                     </InputLabel>
+
                     <Select
                       id='float-eps'
                       labelId='float-eps'
-                      name='eps'
                       label='eps'
-                      {...idEPS}
                       disabled={disabled}
+                      value={idEPS.value}
+                      onChange={idEPS.onChange}
                     >
-                      {epsList
+                      {listEps
                         .sort((a, b) =>
                           a.name > b.name ? 1 : a.name < b.name ? -1 : 0
                         )
@@ -303,6 +329,10 @@ export const FormRegisterPerson = ({
                           </MenuItem>
                         ))}
                     </Select>
+                    <span className='text-red-600'>
+                      {!idEPS.validator &&
+                        TextMessage('register.form-idEPS-required')}
+                    </span>
                   </FormControl>
                   <FormControl variant='outlined' className='w-12/12 md:w-5/12'>
                     <InputLabel id='form-select-profession'>
@@ -316,7 +346,7 @@ export const FormRegisterPerson = ({
                       {...idProfession}
                       disabled={disabled}
                     >
-                      {professionList
+                      {listProfessions
                         .sort((a, b) =>
                           a.name > b.name ? 1 : a.name < b.name ? -1 : 0
                         )
@@ -338,15 +368,15 @@ export const FormRegisterPerson = ({
                       labelId='float-stratum'
                       name='stratum'
                       label='stratum'
-                      {...stratum}
                       disabled={disabled}
+                      value={stratum.value}
+                      onChange={stratum.onChange}
                     >
-                      <MenuItem value={1}>1</MenuItem>
-                      <MenuItem value={2}>2</MenuItem>
-                      <MenuItem value={3}>3</MenuItem>
-                      <MenuItem value={4}>4</MenuItem>
-                      <MenuItem value={5}>5</MenuItem>
-                      <MenuItem value={5}>6</MenuItem>
+                      {arrayStrates.map((strate: any) => (
+                        <MenuItem key={strate.id} value={strate.id}>
+                          {TextMessage(strate.name)}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
@@ -354,20 +384,22 @@ export const FormRegisterPerson = ({
                       <KeyboardDatePicker
                         inputVariant='outlined'
                         margin='normal'
-                        name='datePicker'
-                        inputRef={register(validationsBirth)}
                         id='date-picker-dialog'
                         label={TextMessage('register.form-dateBirth')}
                         format='dd/MM/yyyy'
-                        {...dateBirth}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
                         }}
+                        helperText={''}
                         disabled={disabled}
+                        value={dateBirth.value}
+                        onChange={dateBirth.onChange}
                       />
                     </MuiPickersUtilsProvider>
+
                     <span className='text-red-600'>
-                      {errors.datePicker && errors.datePicker.message}
+                      {!dateBirth.validator &&
+                        TextMessage('register.form-dateBirth-required')}
                     </span>
                   </FormControl>
                 </div>

@@ -10,6 +10,10 @@ import {
   SNACK_TITLE,
   SNACK_MSG,
   SET_USER,
+  SELECT_EPS,
+  SELECT_PROFESSION,
+  SET_PERSON,
+  SET_HEALTH_CENTER,
 } from './constants.redux';
 
 const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
@@ -32,6 +36,14 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, snackMsg: action.payload };
     case SET_USER:
       return { ...state, user: action.payload };
+    case SET_PERSON:
+      return { ...state, person: action.payload };
+    case SET_HEALTH_CENTER:
+      return { ...state, healthCenter: action.payload };
+    case SELECT_EPS:
+      return { ...state, listEPS: action.payload };
+    case SELECT_PROFESSION:
+      return { ...state, listProfessions: action.payload };
     default:
       return state;
   }

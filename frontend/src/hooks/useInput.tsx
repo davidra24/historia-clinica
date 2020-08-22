@@ -9,6 +9,17 @@ export const useInputValue = (initialValue: any) => {
   return { value, onChange, clean };
 };
 
+export const useSelectValue = (initialValue: any) => {
+  const [value, setValue] = useState(initialValue);
+  const [validator, setValidator] = useState<boolean>(true);
+  const onChange = (e: any) => {
+    setValue(e.target.value);
+    setValidator(!!e.target.value);
+  };
+  const clean = () => setValue(initialValue);
+  return { value, onChange, clean, validator, setValidator };
+};
+
 export const useCheckValue = (initialValue: any) => {
   const [value, setValue] = useState(initialValue);
   const onChange = (e: any) => {
@@ -17,10 +28,12 @@ export const useCheckValue = (initialValue: any) => {
   return { value, onChange, checked: value };
 };
 
-export const useDatePicker = (initialValue: Date) => {
-  const [value, setValue] = useState<Date | null>(new Date());
+export const useDatePicker = (initialValue: Date | any) => {
+  const [value, setValue] = useState<Date | null>(initialValue);
+  const [validator, setValidator] = useState<boolean>(true);
   const onChange = (date: Date | null) => {
     setValue(date);
+    setValidator(!!date);
   };
-  return { value, onChange };
+  return { value, onChange, validator, setValidator };
 };

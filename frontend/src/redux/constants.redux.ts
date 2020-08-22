@@ -7,3 +7,7 @@ export const SHOW_SUCCESS_MSG = 'SUCCESS_MSG';
 export const SNACK_TITLE = 'SNACK_TITLE';
 export const SNACK_MSG = 'SNACK_MSG';
 export const SET_USER = 'SET_USER';
+export const SET_PERSON = 'SET_PERSON';
+export const SET_HEALTH_CENTER = 'SET_HEALTH_CENTER';
+export const SELECT_EPS = 'SELECT_EPS';
+export const SELECT_PROFESSION = 'SELECT_PROFESSION';
