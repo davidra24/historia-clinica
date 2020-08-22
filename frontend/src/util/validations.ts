@@ -4,6 +4,9 @@ import messages from '../lang/messages';
 export const validationsDocument = {
   required: TextMessage('document.required'),
 };
+export const validationsNameContact = {
+  required: TextMessage('register.form-nameContact-required'),
+};
 export const validationsPasswordUser = {
   required: TextMessage('password.required'),
 };
@@ -11,6 +14,7 @@ export const validationsPasswordUser = {
 export const validationsFirstName = {
   required: TextMessage('register.form-firstName-required'),
 };
+
 export const validationsLastName = {
   required: TextMessage('register.form-lastName-required'),
 };

@@ -259,7 +259,9 @@ export default {
     'state.failedToFetch':
       'No se ha podido acceder a los datos, revise su conexión a Internet',
     //Register person
-    'register.person': 'Complete el registro',
+    'register.person': 'Información Personal',
+    'register.contact': 'Información de Contacto',
+    'register.finalize': 'Previsualización de información',
     'register.form-firstName': 'Primer nombre *',
     'register.form-secondName': 'Segundo nombre',
     'register.form-lastName': 'Primer apellido *',
@@ -285,7 +287,19 @@ export default {
     'register.form-phone-required': 'El teléfono es requerido',
     'register.form-email-invalid': 'El formato de e-mail es inválido',
     'register.form-idEPS-required': 'La EPS es requerida',
+    'register.form-nameContact-required': 'El nombre de contacto es requerido',
+    'register.form-documentContact-table': 'Cédula',
+    'register.form-nameContact-table': 'Nombre',
+    'register.form-phonneContact-table': 'Teléfono',
+    'register.form-documentContact': 'Cédula *',
+    'register.form-nameContact': 'Nombre *',
+    'register.form-phonneContact': 'Teléfono *',
+    'register.form-emailContact': 'Correo electrónico',
+    'register.form-directionContact': 'Dirección',
+    'register.form-add': 'Agregar Contacto',
     'register.form-save': 'Guardar',
+    'register.form-next': 'Siguiente',
+    'register.form-previous': 'Anterior',
     'register.form-Select': 'Seleccione',
     'register.form-GenreM': 'Masculino',
     'register.form-GenreF': 'Femenino',
@@ -297,6 +311,9 @@ export default {
     'register.form-CivilStateU': 'Unión Libre',
     'register.form-errFetchEPS': 'Error al traer EPSs',
     'register.form-errFetchProfession': 'Error al traer Profesiones',
+    'register.form-errTitle-noContact': 'Ingrese contactos',
+    'register.form-errMsg-noContact':
+      'No ha ingresado contactos, mínimo debe tener uno',
   },
 };
 
