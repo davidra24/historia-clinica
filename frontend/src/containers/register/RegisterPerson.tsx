@@ -43,8 +43,8 @@ export const RegisterPerson = () => {
   const user = useSelector((state: IStore) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
-  const [valide, setValide] = useState(false);
-  //Presonal data
+
+  //Personal data
   const firstName = useInputValue('');
   const secondName = useInputValue('');
   const lastName = useInputValue('');
@@ -69,6 +69,7 @@ export const RegisterPerson = () => {
   const [listContact, setListContact] = useState<Array<IContact>>([]);
 
   const [image, setImage] = useState<any>(DEFAULT_PROFILE_PIC);
+  const [valide, setValide] = useState(false)
   const [token, setToken] = useState(cookie.token);
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -120,7 +121,6 @@ export const RegisterPerson = () => {
     setValide(finalValidator);
     return finalValidator;
   };
-
   useEffect(() => {}, [valide]);
 
   const pushContactData = async (): Promise<boolean> => {

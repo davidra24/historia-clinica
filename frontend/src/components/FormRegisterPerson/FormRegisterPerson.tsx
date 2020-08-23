@@ -36,6 +36,11 @@ import { Loading } from '../Loading';
 import { IEPS } from '../../data/IEPS';
 import { IProfessions } from '../../data/IProfessions';
 import { IStore } from '../../redux/types';
+import {
+  ARRAY_GENRES,
+  ARRAY_STRATES,
+  ARRAY_CIVIL_STATE,
+} from '../../util/ConstantsData';
 
 export const FormRegisterPerson = ({
   onSubmit,
@@ -61,29 +66,6 @@ export const FormRegisterPerson = ({
 
   const listEps = useSelector((state: IStore) => state.listEPS);
   const listProfessions = useSelector((state: IStore) => state.listProfessions);
-
-  const arrayGenres: Array<any> = [
-    { id: 1, name: 'register.form-GenreM' },
-    { id: 2, name: 'register.form-GenreF' },
-    { id: 3, name: 'register.form-GenreO' },
-  ];
-
-  const arrayCivilState = [
-    { id: 'C', name: 'register.form-CivilStateC' },
-    { id: 'D', name: 'register.form-CivilStateD' },
-    { id: 'S', name: 'register.form-CivilStateS' },
-    { id: 'U', name: 'register.form-CivilStateU' },
-    { id: 'V', name: 'register.form-CivilStateV' },
-  ];
-
-  const arrayStrates = [
-    { id: 1, name: 1 },
-    { id: 2, name: 2 },
-    { id: 3, name: 3 },
-    { id: 4, name: 4 },
-    { id: 5, name: 5 },
-    { id: 6, name: 6 },
-  ];
 
   /*const [epsList, setEpsList] = useState<Array<IEPS>>([]);
   const [professionList, setProfessionList] = useState<Array<IProfessions>>([]);*/
@@ -267,7 +249,7 @@ export const FormRegisterPerson = ({
                       innerRef={register(validationsGenre)}
                       {...genre}
                     >
-                      {arrayGenres.map((genre: any) => (
+                      {ARRAY_GENRES.map((genre: any) => (
                         <MenuItem key={genre.id} value={genre.id}>
                           {TextMessage(genre.name)}
                         </MenuItem>
@@ -292,7 +274,7 @@ export const FormRegisterPerson = ({
                       value={civilState.value}
                       onChange={civilState.onChange}
                     >
-                      {arrayCivilState.map((civilState: any) => (
+                      {ARRAY_CIVIL_STATE.map((civilState: any) => (
                         <MenuItem key={civilState.id} value={civilState.id}>
                           {TextMessage(civilState.name)}
                         </MenuItem>
@@ -372,7 +354,7 @@ export const FormRegisterPerson = ({
                       value={stratum.value}
                       onChange={stratum.onChange}
                     >
-                      {arrayStrates.map((strate: any) => (
+                      {ARRAY_STRATES.map((strate: any) => (
                         <MenuItem key={strate.id} value={strate.id}>
                           {TextMessage(strate.name)}
                         </MenuItem>

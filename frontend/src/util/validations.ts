@@ -42,3 +42,10 @@ export const validationsPhone = {
 export const validationsEPS = {
   required: TextMessage('register.form-idEPS-required'),
 };
+
+export const validationsCenterName={
+  required: TextMessage('register.form-name-center-required')
+}
+export const validationsDirection={
+  required: TextMessage('register.form-direction-required')
+}

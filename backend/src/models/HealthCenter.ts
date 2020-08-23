@@ -5,6 +5,5 @@ export interface HealthCenterModel {
   phone: string;
   direction: string;
   email: string;
-  schedule: Date;
   description: string;
 }

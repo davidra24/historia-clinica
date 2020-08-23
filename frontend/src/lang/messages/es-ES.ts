@@ -318,6 +318,16 @@ export default {
     'register.form-errFetchEPS': 'Error al traer EPSs',
     'register.form-errFetchProfession': 'Error al traer Profesiones',
     'register.form-errTitle-noContact': 'Ingrese contactos',
+    //Register Health Center
+    'register-healthCenter':'Registro centro de salud',
+    'register-form-nameCenter': 'Nombre *',
+    'register-form-website': 'Sitio web',
+    'register-form-phoneCenter': 'Telefono *',
+    'register-form-directionCenter': 'Dirección *',
+    'register-form-emailCenter': 'Email',
+    'register-form-descriptionCenter': 'Descripción',
+    'register.form-name-center-required':'Ingrese el nombre del centro medico',
+    'register.form-direction-required':'Ingrese la direccion del centro medico',
     'register.form-errMsg-noContact':
       'No ha ingresado contactos, mínimo debe tener uno',
     'register.success-title': '¡Registro existoso!',
