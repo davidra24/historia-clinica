@@ -19,6 +19,7 @@ import { SnackBarAlert } from '../util/Alert';
 import { useInputValue } from '../hooks/useInput';
 import { useCookies } from 'react-cookie';
 import { IStore } from '../redux/types';
+import { ILogin } from '../data/ILoginResponse';
 
 export const Login = () => {
   const openMsgError = useSelector((state: IStore) => state.openMsgError);
@@ -34,32 +35,42 @@ export const Login = () => {
   const history = useHistory();
 
   const login = async () => {
-    const document = inputDocument.value;
-    const password = inputPassword.value;
-    const user: IUser = { document, password };
-    dispatch(Loading(true));
-    const response = await post(HTTP_LOGIN, user);
-    if (response) {
-      const { message } = response;
-      if (response.ok) {
-        const { token, user } = response.data;
-        setCookie('token', token, { path: '/' });
-        dispatch(Loading(false));
-        dispatch(auth(true));
-        dispatch(setUser(user));
-        history.push('/');
+    const logged = await loginPromise();
+    if (logged) {
+      history.push('/');
+    }
+  };
+
+  const loginPromise = async () =>
+    new Promise(async (resolve, reject) => {
+      const document = inputDocument.value;
+      const password = inputPassword.value;
+      const user: IUser = { document, password };
+      dispatch(Loading(true));
+      const response = await post<ILogin>(HTTP_LOGIN, user);
+      if (response) {
+        const { message } = response;
+        if (response.ok) {
+          const { token, user } = response.data;
+          setCookie('token', token, { path: '/' });
+          dispatch(setUser(user));
+          dispatch(auth(true));
+          dispatch(Loading(false));
+          resolve(true);
+        } else {
+          dispatch(SnackTitleMsg('login.authError-title'));
+          dispatch(SnackMsg(message));
+          dispatch(setMsgErrorVisbility(true));
+          resolve(false);
+        }
       } else {
         dispatch(SnackTitleMsg('login.authError-title'));
-        dispatch(SnackMsg(message));
+        dispatch(SnackMsg('app.not-server'));
         dispatch(setMsgErrorVisbility(true));
+        resolve(false);
       }
-    } else {
-      dispatch(SnackTitleMsg('login.authError-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
-    }
-    dispatch(Loading(false));
-  };
+      dispatch(Loading(false));
+    });
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {

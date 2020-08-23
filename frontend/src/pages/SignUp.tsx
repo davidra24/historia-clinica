@@ -57,7 +57,7 @@ export const SignUp = () => {
       password,
       active: true,
     };
-    const response = await post(HTTP_USERS, { user });
+    const response = await post<any>(HTTP_USERS, { user });
     console.log('response', response);
     if (response) {
       const { message } = response;

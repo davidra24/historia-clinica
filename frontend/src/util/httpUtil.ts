@@ -1,7 +1,11 @@
 import { HTTP_SERVICE } from './constants';
 import { decrypt, encrypt } from './cryptedUtil';
+import { IResponse } from '../data/IResponse';
 
-export const get = async (service: string, token?: string) => {
+export const get = async <T>(
+  service: string,
+  token?: string
+): Promise<IResponse<T>> => {
   try {
     const options = {
       method: 'GET',
@@ -22,7 +26,11 @@ export const get = async (service: string, token?: string) => {
   }
 };
 
-export const getOne = async (service: string, id: any, token?: string) => {
+export const getOne = async <T>(
+  service: string,
+  id: any,
+  token?: string
+): Promise<IResponse<T>> => {
   try {
     const options = {
       method: 'GET',
@@ -43,7 +51,11 @@ export const getOne = async (service: string, id: any, token?: string) => {
   }
 };
 
-export const post = async (service: string, body: any, token?: string) => {
+export const post = async <T>(
+  service: string,
+  body: any,
+  token?: string
+): Promise<IResponse<T>> => {
   try {
     const options = {
       method: 'POST',

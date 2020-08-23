@@ -5,7 +5,7 @@ import error404 from '../assets/error-404.png';
 
 export const NotFound = () => (
   <>
-    <div className='flex flex-col items-center space-y-3'>
+    <div className='flex flex-col items-center space-y-3 h-screen'>
       <div className='sea'>
         <div className='circle-wrapper'>
           <div className='bubble' />
@@ -30,10 +30,8 @@ export const NotFound = () => (
         alt='err-404'
         className='w-8/12 md:w-4/12 lg:w-3/12 xl:w-2/12'
       />
-      <h1 className='text__404 text-2xl'>
-        <strong className='flex justify-center items-center'>
-          {TextMessage('state.404')}
-        </strong>
+      <h1 className='text__404 text-2xl text-center'>
+        <strong>{TextMessage('state.404')}</strong>
       </h1>
     </div>
   </>

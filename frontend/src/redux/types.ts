@@ -3,6 +3,7 @@ import { IPerson } from '../data/IPerson';
 import { IHealthCareCenter } from '../data/IHealthCareCenter';
 import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
+import { ISpecialty } from '../data/ISpecialty';
 
 export interface IStore {
   loading: boolean;
@@ -13,9 +14,10 @@ export interface IStore {
   openMsgSuccess: boolean;
   snackTitle: string;
   snackMsg: string;
-  user?: IUser;
-  person?: IPerson;
-  healthCenter?: IHealthCareCenter;
+  user: IUser | any;
+  person: IPerson | any;
+  healthCenter: IHealthCareCenter | any;
+  specialties: Array<ISpecialty>;
   listEPS: Array<IEPS>;
   listProfessions: Array<IProfessions>;
 }
@@ -29,9 +31,10 @@ export const defaultStore: IStore = {
   openMsgSuccess: false,
   snackTitle: '',
   snackMsg: '',
-  user: undefined,
-  person: undefined,
-  healthCenter: undefined,
+  user: null,
+  person: null,
+  healthCenter: null,
+  specialties: [],
   listEPS: [],
   listProfessions: [],
 };

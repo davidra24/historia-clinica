@@ -5,7 +5,13 @@ import { MenuListHealthCenter } from './MenuListHealthCenter';
 import { IStore } from '../../redux/types';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, setUser, menu } from '../../redux/actions';
+import {
+  auth,
+  setUser,
+  menu,
+  setPerson,
+  setHealthCenter,
+} from '../../redux/actions';
 import { TextMessage } from '../../lang/TextMessage';
 import { Link } from 'react-router-dom';
 import { ItemDrawer } from './ItemDrawer';
@@ -19,10 +25,12 @@ export const MenuController = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch(menu(false));
     removeCookie('token');
     dispatch(setUser(null));
+    dispatch(setPerson(null));
+    dispatch(setHealthCenter(null));
     dispatch(auth(false));
+    dispatch(menu(false));
   };
 
   return (
