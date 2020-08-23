@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import contactDB from "../database/Contacts.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import contactDB from '../database/Contacts.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class ContactController {
   app = express();
@@ -13,13 +13,13 @@ export class ContactController {
       .none(contactDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "Contact table created",
+        status: 'success creating table',
+        message: 'Contact table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -67,7 +67,9 @@ export class ContactController {
   }
   async insertContact(req: Request, res: Response) {
     const { contact } = await decryptRequest(req);
-    const contactExist = await db.oneOrNone(contactDB.getOneContact(contact.document));
+    const contactExist = await db.oneOrNone(
+      contactDB.getOneContact(contact.document)
+    );
     if (!contactExist) {
       await db
         .none(() => contactDB.insertContact(contact))
@@ -88,7 +90,7 @@ export class ContactController {
           });
         });
     } else {
-      return cryptedResponse(res, 400, {
+      return cryptedResponse(res, 200, {
         ok: true,
         status: 200,
         message: 'insertContact.success',

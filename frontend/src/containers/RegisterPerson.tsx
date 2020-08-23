@@ -1,13 +1,20 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormRegisterPerson } from '../components/FormRegisterPerson/FormRegisterPerson';
-import { useInputValue, useDatePicker } from '../hooks/useInput';
+import {
+  useInputValue,
+  useDatePicker,
+  useSelectValue,
+} from '../hooks/useInput';
 import { toBase64 } from '../util/Util';
-import defaultImage from '../assets/default-profile.png';
 import { useCookies } from 'react-cookie';
 import { SnackBarAlert } from '../util/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../redux/types';
-import { Loading as setLoading } from '../redux/actions';
+import {
+  Loading as setLoading,
+  SnackTitleMsg,
+  SnackMsg,
+} from '../redux/actions';
 import { setMsgSuccessVisbility, setMsgErrorVisbility } from '../redux/actions';
 import { TextMessage } from '../lang/TextMessage';
 import { Stepper, StepLabel, Step, Card } from '@material-ui/core';
@@ -15,13 +22,26 @@ import { FormRegisterContact } from '../components/FormRegisterPerson/FormRegist
 import { IContact } from '../data/IContact';
 import { ContainerLastStep } from '../components/FormRegisterPerson/ContainerLastStep';
 import { Loading } from '../components/Loading';
+import { post } from '../util/httpUtil';
+import {
+  HTTP_CONTACTS,
+  HTTP_PEOPLE,
+  HTTP_CONTACTS_PERSON,
+  DEFAULT_PROFILE_PIC,
+} from '../util/constants';
+import { IResponse } from '../data/IResponse';
+import { IPerson } from '../data/IPerson';
+import { IContactPerson } from '../data/IContactPerson';
+import { useHistory } from 'react-router';
+import { isValid } from 'date-fns';
 
 export const RegisterPerson = () => {
   const openMsgError = useSelector((state: IStore) => state.openMsgError);
   const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
   const snackTitle = useSelector((state: IStore) => state.snackTitle);
   const snackMsg = useSelector((state: IStore) => state.snackMsg);
-  const loading = useSelector((state: IStore) => state.loading);
+  const user = useSelector((state: IStore) => state.user);
+  const history = useHistory();
   const dispatch = useDispatch();
 
   //Personal data
@@ -29,17 +49,17 @@ export const RegisterPerson = () => {
   const secondName = useInputValue('');
   const lastName = useInputValue('');
   const lastSecondName = useInputValue('');
-  const genre = useInputValue('');
-  const civilState = useInputValue('');
   const email = useInputValue('');
-  const dateBirth = useDatePicker(new Date());
   const phone = useInputValue('');
-  const stratum = useInputValue('');
   const idProfession = useInputValue('');
-  const idEPS = useInputValue('');
-  const [cookie] = useCookies(['token']);
-  const isHealtCareTeam = false;
+  const stratum = useInputValue('');
 
+  const genre = useSelectValue('');
+  const civilState = useSelectValue('');
+  const idEPS = useSelectValue('');
+  const dateBirth = useDatePicker(null);
+
+  const [cookie] = useCookies(['token']);
   //Contact
   const documentContact = useInputValue('');
   const nameContact = useInputValue('');
@@ -48,9 +68,10 @@ export const RegisterPerson = () => {
   const directionContact = useInputValue('');
   const [listContact, setListContact] = useState<Array<IContact>>([]);
 
-  const [image, setImage] = useState<any>(defaultImage);
+  const [image, setImage] = useState<any>(DEFAULT_PROFILE_PIC);
+  const [valide, setValide] = useState(false)
   const [token, setToken] = useState(cookie.token);
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = [
     'Información Personal',
     'Información de contacto',
@@ -61,13 +82,157 @@ export const RegisterPerson = () => {
     const ph = event.target.files[0];
     toBase64(ph).then((res) => setImage(res));
   };
-  const handleSubmit = () => {
-    //TODO -> ALMACENAR DATOS EN SERVIDOR
+
+  const handleSubmit = async () => {
+    const okContact = await pushContactData();
+    console.log('okContact', okContact);
+    if (okContact) {
+      pushPersonData().then(async () => {
+        const okContactPerson = await pushContactPersonData();
+        if (okContactPerson) {
+          dispatch(SnackTitleMsg('register.success-title'));
+          dispatch(SnackMsg('insertContact.success'));
+          dispatch(setMsgSuccessVisbility(true));
+          history.push('/');
+        } else {
+          dispatch(SnackTitleMsg('register.error-title'));
+          dispatch(SnackMsg('insertContact.error'));
+          dispatch(setMsgErrorVisbility(true));
+        }
+      });
+    }
   };
 
-  const handleNextStep = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setActiveStep(activeStep + 1);
+  const validate = (): boolean => {
+    const genreValidator = genre.value !== null && genre.value !== '';
+    const civilStateValidator =
+      civilState.value !== null && civilState.value !== '';
+    const ipsValidator = idEPS.value !== null && idEPS.value !== '';
+    const dateValidator = dateBirth.value !== null && isValid(dateBirth.value);
+    genre.setValidator(genre.value !== null && genre.value !== '');
+    civilState.setValidator(
+      civilState.value !== null && civilState.value !== ''
+    );
+    idEPS.setValidator(idEPS.value !== null && idEPS.value !== '');
+    dateBirth.setValidator(dateBirth.value !== null);
+    const finalValidator =
+      genreValidator && civilStateValidator && ipsValidator && dateValidator;
+    setValide(finalValidator);
+    return finalValidator;
+  };
+  useEffect(() => {}, [valide]);
+
+  const pushContactData = async (): Promise<boolean> => {
+    dispatch(setLoading(true));
+    const promises: Array<Promise<IResponse<IContact>>> = [];
+    let inserted = true;
+    listContact.forEach((contact) => {
+      promises.push(post(HTTP_CONTACTS, { contact }, token));
+    });
+
+    return Promise.all(promises)
+      .then(async (responses) => {
+        responses.forEach((response) => {
+          if (response) {
+            if (!response.ok) inserted = false;
+          } else {
+            inserted = false;
+          }
+        });
+        dispatch(setLoading(false));
+        return Promise.resolve(inserted);
+      })
+      .catch((ex: any) => {
+        console.log('exception', ex);
+        dispatch(setLoading(false));
+        return Promise.resolve(false);
+      });
+  };
+
+  const pushPersonData = async () => {
+    dispatch(setLoading(true));
+    console.log(dateBirth.value);
+    const person: IPerson = {
+      document: user?.document,
+      first_name: firstName.value,
+      second_name: secondName.value,
+      last_name: lastName.value,
+      last_second_name: lastSecondName.value,
+      genre: genre.value,
+      date_birth: dateBirth.value,
+      email: email.value,
+      civil_state: civilState.value,
+      photo: image,
+      phone: phone.value,
+      id_profesion: idProfession.value,
+      id_eps: idEPS.value,
+      stratum: stratum.value || 0,
+      is_healt_care_team: false,
+      deceased: false,
+    };
+    console.log('person', person);
+    const response = await post(HTTP_PEOPLE, { person }, token);
+    if (response) {
+      const { message } = response;
+      if (response.ok) {
+        dispatch(SnackTitleMsg('register.success-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgSuccessVisbility(true));
+      } else {
+        dispatch(SnackTitleMsg('register.error-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgErrorVisbility(true));
+      }
+    } else {
+      dispatch(SnackTitleMsg('register.error-title'));
+      dispatch(SnackMsg('app.not-server'));
+      dispatch(setMsgErrorVisbility(true));
+    }
+    dispatch(setLoading(false));
+  };
+
+  const pushContactPersonData = async (): Promise<boolean> => {
+    dispatch(setLoading(true));
+
+    const listContactsPerson: Array<IContactPerson> = [];
+
+    listContact.forEach((contact) => {
+      listContactsPerson.push({
+        user_document: user?.document,
+        contact_document: contact.document,
+      });
+    });
+
+    const promises: Array<Promise<IResponse<IContactPerson>>> = [];
+    let inserted = true;
+    listContactsPerson.forEach((contactPerson) => {
+      promises.push(post(HTTP_CONTACTS_PERSON, { contactPerson }, token));
+    });
+
+    return Promise.all(promises)
+      .then(async (responses) => {
+        responses.forEach((response) => {
+          if (response) {
+            if (!response.ok) inserted = false;
+          } else {
+            inserted = false;
+          }
+        });
+        dispatch(setLoading(false));
+        return Promise.resolve(inserted);
+      })
+      .catch((ex: any) => {
+        console.log('exception', ex);
+        dispatch(setLoading(false));
+        return Promise.resolve(false);
+      });
+  };
+
+  const handleNextStep = () => {
+    const finalValidator = validate();
+    if (finalValidator) {
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const handlePreviousStep = () => {
@@ -90,9 +255,15 @@ export const RegisterPerson = () => {
       email: emailContact.value,
       direction: directionContact.value,
     };
-    const auxContact = [...listContact];
-    auxContact.push(contact);
-    setListContact(auxContact);
+    if (listContact.length < 3) {
+      const auxContact = [...listContact];
+      auxContact.push(contact);
+      setListContact(auxContact);
+    } else {
+      dispatch(SnackTitleMsg('register.error-titleContact'));
+      dispatch(SnackMsg('register.error-msgContact'));
+      dispatch(setMsgErrorVisbility(true));
+    }
     cleanFields();
   };
 

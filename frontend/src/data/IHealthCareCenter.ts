@@ -1,4 +1,4 @@
-export interface IHealthCareCenter {
+export interface IHealthCareCenterTypes {
   onSubmit:any;
   name: any;
   website: any;
@@ -8,4 +8,14 @@ export interface IHealthCareCenter {
   description: any;
   token: any;
   disabled?: boolean;
+}
+
+export interface IHealthCareCenter {
+  document:string | any;
+  name: string;
+  website: string;
+  phone: string;
+  direction: string;
+  email: string;
+  description: string;
 }

@@ -9,7 +9,7 @@ import {
   MenuItem,
   InputLabel,
 } from '@material-ui/core';
-import { IHealthCareCenter } from '../../data/IHealthCareCenter';
+import { IHealthCareCenterTypes } from '../../data/IHealthCareCenter';
 import { useForm } from 'react-hook-form';
 import {validationsCenterName, validationsPhone, validationsDirection} from '../../util/validations';
 import {
@@ -38,7 +38,7 @@ export const FormRegisterHealthCenter = ({
   description,
   token,
   disabled,
-}: IHealthCareCenter) => {
+}: IHealthCareCenterTypes) => {
   const { handleSubmit, register, errors } = useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ export const FormRegisterHealthCenter = ({
         <div className='flex flex-col w-full'>
           <div className='flex flex-col justify-center space-y-5'>
             <h1 className='text-2xl text-lg text-center'>
-            <strong>{TextMessage('register.healthCenter')}</strong>
+            <strong>{TextMessage('register-healthCenter')}</strong>
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='flex flex-col justify-center space-y-3'>
@@ -69,7 +69,7 @@ export const FormRegisterHealthCenter = ({
                       name='centerName'
                       inputRef={register(validationsCenterName)}
                       variant='outlined'
-                      label={TextMessage('register.form-nameCenter')}
+                      label={TextMessage('register-form-nameCenter')}
                       {...name}
                       disabled={disabled}
                     />
@@ -82,7 +82,7 @@ export const FormRegisterHealthCenter = ({
                       id='float-website'
                       name='website'
                       variant='outlined'
-                      label={TextMessage('register.form-website')}
+                      label={TextMessage('register-form-website')}
                       {...website}
                       disabled={disabled}
                     />
@@ -95,7 +95,7 @@ export const FormRegisterHealthCenter = ({
                       name='phone'
                       inputRef={register(validationsPhone)}
                       variant='outlined'
-                      label={TextMessage('register.form-phoneCenter')}
+                      label={TextMessage('register-form-phoneCenter')}
                       {...phone}
                       disabled={disabled}
                     />
@@ -109,7 +109,7 @@ export const FormRegisterHealthCenter = ({
                       name='direction'
                       variant='outlined'
                       inputRef={register(validationsDirection)}
-                      label={TextMessage('register.form-directionCenter')}
+                      label={TextMessage('register-form-directionCenter')}
                       {...direction}
                       disabled={disabled}
                     />
@@ -124,7 +124,7 @@ export const FormRegisterHealthCenter = ({
                       id='float-email'
                       name='email'
                       variant='outlined'
-                      label={TextMessage('register.form-emailCenter')}
+                      label={TextMessage('register-form-emailCenter')}
                       {...email}
                       disabled={disabled}
                     />
@@ -134,13 +134,21 @@ export const FormRegisterHealthCenter = ({
                       id='float-description'
                       name='description'
                       variant='outlined'
-                      label={TextMessage('register.form-descriptionCenter')}
+                      label={TextMessage('register-form-descriptionCenter')}
                       {...description}
                       disabled={disabled}
                     />
                   </FormControl>
                 </div>
               </div>
+              <Button
+            variant='outlined'
+            color='primary'
+            type='submit'
+            onClick={onSubmit}
+          >
+            {TextMessage('register.form-save')}
+          </Button>
             </form>
           </div>
         </div>

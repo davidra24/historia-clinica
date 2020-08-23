@@ -3,12 +3,14 @@ import { LOCALES } from '../locales';
 export default {
   [LOCALES.SPANISH]: {
     //APP
+    '': '',
     'app.title': 'HISTORIA CLÍNICA DIGITAL',
     'app.not-server': 'No se ha encontrado el servidor',
     'app.start': 'Inicio',
     'app.loading': 'Cargando...',
     'app.logout': 'Cerrar Sesión',
     'app.err-connect': 'Error al conectar con el servidor',
+    'app.welcome': 'Bienvenido(a)',
     //LANGUAGE
     'lang.selectedLang': 'Idioma',
     'lang.spanish': 'Español',
@@ -89,10 +91,9 @@ export default {
     'getContact.success': 'Se ha obtenido el contacto {document}',
     'getContact.error':
       'Ha ocurrido un error inesperado al obtener el contacto {document}',
-    'insertContact.success':
-      'Se ha creado el contacto {contact.document} correctamente',
+    'insertContact.success': 'Se han creado los contactos correctamente',
     'insertContact.error':
-      'Ha ocurrido un error inesperado creando el contacto {contact.document}',
+      'Ha ocurrido un error inesperado creando el contacto',
     'updateContact.success':
       'Se ha actualizado el contacto {contact.document} correctamente',
     'updateContact.error':
@@ -282,7 +283,8 @@ export default {
     'register.form-firstName-required': 'El primer nombre es requerido',
     'register.form-lastName-required': 'El primer apellido es requerido',
     'register.form-genre-required': 'El género es requerido',
-    'register.form-dateBirth-required': 'La Fecha de nacimiento es requerida',
+    'register.form-dateBirth-required':
+      'El formato de fecha es inválido, debe ser dd/MM/yyyy',
     'register.form-civilState-required': 'El estado civil es requerido',
     'register.form-phone-required': 'El teléfono es requerido',
     'register.form-email-invalid': 'El formato de e-mail es inválido',
@@ -324,6 +326,10 @@ export default {
     'register.form-direction-required':'Ingrese la direccion del centro medico',
     'register.form-errMsg-noContact':
       'No ha ingresado contactos, mínimo debe tener uno',
+    'register.success-title': '¡Registro existoso!',
+    'register.error-title': '¡Ups, Error de registro!',
+    'register.error-titleContact': '¡Ups, Error de contacto!',
+    'register.error-msgContact': 'Sólo se permiten 3 contactos por persona',
   },
 };
 

@@ -67,7 +67,7 @@ export const ContainerLastStep = ({
         pushContact={null}
         disabled={true}
       />
-      <div className='flex flex-col w-full'>
+      <div className='flex flex-col w-full mt-8'>
         <div className='flex justify-center w-full'>{Stepper}</div>
         <div className='flex justify-between'>
           <Button variant='outlined' color='secondary' onClick={onPrevStep}>

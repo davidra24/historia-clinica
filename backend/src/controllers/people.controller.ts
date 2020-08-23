@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import peopleDB from "../database/People.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import peopleDB from '../database/People.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class PeopleController {
   app = express();
@@ -13,13 +13,13 @@ export class PeopleController {
       .none(peopleDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "people table created",
+        status: 'success creating table',
+        message: 'people table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -61,7 +61,7 @@ export class PeopleController {
           ok: false,
           status: 500,
           message: 'getPerson.error',
-          data:error.toString(),
+          data: error.toString(),
         })
       );
   }
@@ -78,7 +78,8 @@ export class PeopleController {
         })
       )
       .catch((error) => {
-        cryptedResponse(res, 500, {
+        console.log('error', error);
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'insertPerson.error',

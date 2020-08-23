@@ -1,6 +1,8 @@
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
 import { IHealthCareCenter } from '../data/IHealthCareCenter';
+import { IEPS } from '../data/IEPS';
+import { IProfessions } from '../data/IProfessions';
 
 export interface IStore {
   loading: boolean;
@@ -14,6 +16,8 @@ export interface IStore {
   user?: IUser;
   person?: IPerson;
   healthCenter?: IHealthCareCenter;
+  listEPS: Array<IEPS>;
+  listProfessions: Array<IProfessions>;
 }
 
 export const defaultStore: IStore = {
@@ -28,6 +32,8 @@ export const defaultStore: IStore = {
   user: undefined,
   person: undefined,
   healthCenter: undefined,
+  listEPS: [],
+  listProfessions: [],
 };
 
 export interface IAction {
