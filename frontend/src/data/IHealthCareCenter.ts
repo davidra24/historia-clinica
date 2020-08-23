@@ -1,5 +1,5 @@
 export interface IHealthCareCenterTypes {
-  onSubmit:any;
+  onSubmit: any;
   name: any;
   website: any;
   phone: any;
@@ -11,7 +11,7 @@ export interface IHealthCareCenterTypes {
 }
 
 export interface IHealthCareCenter {
-  document:string | any;
+  id: string;
   name: string;
   website: string;
   phone: string;

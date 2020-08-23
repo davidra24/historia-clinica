@@ -1,7 +1,9 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import healthCenterDB from "../database/HealthCenters.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import healthCenterDB from '../database/HealthCenters.database';
+import peopleDB from '../database/People.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import { PersonModel } from 'src/models/Person';
 
 export class HealthCenterController {
   app = express();
@@ -13,13 +15,13 @@ export class HealthCenterController {
       .none(healthCenterDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "health center table created",
+        status: 'success creating table',
+        message: 'health center table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -31,7 +33,7 @@ export class HealthCenterController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
-          message:'getHealthCenters.success',
+          message: 'getHealthCenters.success',
           data: healthCenter,
         })
       )
@@ -45,9 +47,9 @@ export class HealthCenterController {
       );
   }
   async getOneHealthCenter(req: Request, res: Response) {
-    const { idCenter } = req.params;
+    const { id } = req.params;
     await db
-      .one(() => healthCenterDB.getOneHealthCenter(idCenter))
+      .one(() => healthCenterDB.getOneHealthCenter(id))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,
@@ -67,24 +69,39 @@ export class HealthCenterController {
   }
   async insertHealthCenter(req: Request, res: Response) {
     const { healthCenter } = await decryptRequest(req);
+    const { document } = healthCenter;
     await db
       .none(() => healthCenterDB.insertHealthCenter(healthCenter))
-      .then((Center) =>
-        cryptedResponse(res, 200, {
-          ok: true,
-          status: 200,
-          message: 'insertHealthCenter.success',
-          data: Center,
-        })
-      )
-      .catch((error) => {
+      .then(async (Center) => {
+        await db
+          .one(() => peopleDB.getOnePerson(document))
+          .then(async (person: PersonModel) => {
+            const auxPerson: PersonModel = {
+              ...person,
+              is_healt_care_team: true,
+            };
+            await db
+              .none(() => peopleDB.updatePerson(document, auxPerson))
+              .then(() => {
+                cryptedResponse(res, 200, {
+                  ok: true,
+                  status: 200,
+                  message: 'insertHealthCenter.success',
+                  data: Center,
+                });
+              })
+              .catch((err) => {});
+          })
+          .catch((err) => {});
+      })
+      .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'insertHealthCenter.error',
           data: error.toString(),
-        });
-      });
+        })
+      );
   }
   async updateHealthCenter(req: Request, res: Response) {
     const { idCenter } = req.params;

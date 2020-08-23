@@ -4,6 +4,7 @@ import { IHealthCareCenter } from '../data/IHealthCareCenter';
 import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
 import { ISpecialty } from '../data/ISpecialty';
+import { IAttentionCenter } from '../data/IAttentionCenter';
 
 export interface IStore {
   loading: boolean;
@@ -14,12 +15,14 @@ export interface IStore {
   openMsgSuccess: boolean;
   snackTitle: string;
   snackMsg: string;
+  reloadRoute: string;
   user: IUser | any;
   person: IPerson | any;
   healthCenter: IHealthCareCenter | any;
   specialties: Array<ISpecialty>;
   listEPS: Array<IEPS>;
   listProfessions: Array<IProfessions>;
+  listAttentionsCenter: Array<IAttentionCenter>;
 }
 
 export const defaultStore: IStore = {
@@ -31,12 +34,14 @@ export const defaultStore: IStore = {
   openMsgSuccess: false,
   snackTitle: '',
   snackMsg: '',
+  reloadRoute: '',
   user: null,
   person: null,
   healthCenter: null,
   specialties: [],
   listEPS: [],
   listProfessions: [],
+  listAttentionsCenter: [],
 };
 
 export interface IAction {

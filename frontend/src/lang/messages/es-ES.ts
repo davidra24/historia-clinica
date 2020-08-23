@@ -170,9 +170,9 @@ export default {
     'getHealthCenter.error':
       'Ha ocurrido un error inesperado al obtener el centro de salud {idCenter}',
     'insertHealthCenter.success':
-      'Se han creado el centro de salud {healthCenter.idCenter} correctamente',
+      'Se han creado el centro de salud correctamente',
     'insertHealthCenter.error':
-      'Ha ocurrido un error inesperado creando el centro de salud ${healthCenter.idCenter}',
+      'Ha ocurrido un error inesperado creando el centro de salud',
     'updateHealthCenter.success':
       'Se han actualizado el centro de salud {healthCenter.idCenter} correctamente',
     'updateHealthCenter.error':
@@ -319,25 +319,44 @@ export default {
     'register.form-errFetchProfession': 'Error al traer Profesiones',
     'register.form-errTitle-noContact': 'Ingrese contactos',
     //Register Health Center
-    'register-healthCenter':'Registro centro de salud',
+    'register-healthCenter': 'Registro del centro de salud',
     'register-form-nameCenter': 'Nombre *',
     'register-form-website': 'Sitio web',
     'register-form-phoneCenter': 'Telefono *',
     'register-form-directionCenter': 'Dirección *',
     'register-form-emailCenter': 'Email',
-    'register-form-descriptionCenter': 'Descripción',
-    'register.form-name-center-required':'Ingrese el nombre del centro medico',
-    'register.form-direction-required':'Ingrese la direccion del centro medico',
+    'register-form-descriptionCenter': 'Información adicional',
+    'register.form-name-center-required': 'Ingrese el nombre del centro medico',
+    'register.form-direction-required':
+      'Ingrese la direccion del centro medico',
     'register.form-errMsg-noContact':
       'No ha ingresado contactos, mínimo debe tener uno',
     'register.success-title': '¡Registro existoso!',
     'register.error-title': '¡Ups, Error de registro!',
     'register.error-titleContact': '¡Ups, Error de contacto!',
     'register.error-msgContact': 'Sólo se permiten 3 contactos por persona',
-    //DASHBOARD
-    'dashboard-patient.description':
-      'A continuación encontrará todas las especialidades disponibles en la plataforma, de tal forma que podrá consultar su evolución, hallazgos y procedimientos médicos en cada una de estas tarjetas, haga click en alguna para conocer su estado de salud. \n Y recuerde su estado de salud es nuestra prioridad',
+    //DASHBOARD - PATIENT
     'dashboard-patient.specialties': 'Especialidades',
+    'dashboard-patient.specialties-description':
+      'A continuación encontrará todas las especialidades disponibles en la plataforma, de tal forma que podrá consultar su evolución, hallazgos y procedimientos médicos en cada una de estas tarjetas, haga click en alguna para conocer su historia clínica.',
+    'dashboard-patient.specialties-description-end':
+      'Y recuerde su estado de salud es nuestra prioridad.',
+    //DASHBOARD - PROFESSIONAL
+    //DASHBOARD - HEALTHCENTER
+    'dashboard-health.professional': 'Los profesionales de la salud',
+    'dashboard-health.professional-description':
+      'A continuación encontrará un breve formulario, que le ayudará a asignar los profesionales de la salud a la especialidad en la que se desempeñan en su unidad, de tal forma que puedan atender a sus pacientes de forma rápida y efectiva.',
+    'dashboard-health.professional-description-end':
+      'Y recuerde facilitar su labor es nuestra prioridad.',
+    'dashboard-health.add-professional': 'Agregar profesional',
+    'dashboard-health.professional-document': 'Documento de profesional',
+    'dashboard-health.specialties-array': 'Especialidad de profesional',
+    'dashboard-health.professional-required':
+      'El documento del profesional a agregar es requerido',
+    'dashboard-health.specialties-required':
+      'La especialidad para asignar al profesional es requerida',
+    'dashboard-patient.no-specialties':
+      'En el momento no existen registros de especialidades',
   },
 };
 

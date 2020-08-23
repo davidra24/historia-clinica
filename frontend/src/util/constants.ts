@@ -15,6 +15,7 @@ export const HTTP_PROFESSION = 'professions';
 export const HTTP_CONTACTS = 'contacts';
 export const HTTP_CONTACTS_PERSON = 'contactsperson';
 export const HTTP_SPECIALTIES = 'specialties';
+export const HTTP_ATTENTIONS_CENTER = 'attentioncenters';
 
 export const PATTERN_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*+-])(?=.*[^\da-zA-ZÀ-ÿ\u00f1\u00d1]).{8,}$/;
 

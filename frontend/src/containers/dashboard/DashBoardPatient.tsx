@@ -69,7 +69,11 @@ export const DashBoardPatient = () => {
             <strong>{TextMessage('dashboard-patient.specialties')}</strong>
           </h3>
           <p className='mt-4 mb-8 mr-8 ml-8 md:mr-20 md:ml-20 lg:mr-40 lg:ml-40 text-center text-gray-700 text-base'>
-            {TextMessage('dashboard-patient.description')}
+            {TextMessage('dashboard-patient.specialties-description')}
+            <br />
+            <strong>
+              {TextMessage('dashboard-patient.specialties-description-end')}
+            </strong>
           </p>
           <div className='flex justify-center'>
             <Divider className='w-10/12' />
@@ -83,7 +87,7 @@ export const DashBoardPatient = () => {
                 .map((specialty: ISpecialty) => (
                   <Card
                     key={specialty.id}
-                    className='flex flex-col w-full md:w-5/12 lg:w-3/12 min-h-40 max-h-full rounded-full m-4 p-2 bg-black'
+                    className='flex flex-col w-full md:w-5/12 lg:w-3/12 min-h-40 max-h-full rounded-full m-4 p-2'
                   >
                     <Link to={`specialty/${specialty.id}`}>
                       <div className='flex flex-col p-4'>
@@ -101,7 +105,13 @@ export const DashBoardPatient = () => {
                   </Card>
                 ))
             ) : (
-              <></>
+              <>
+                <h3 className='text-xl text-center mt-4'>
+                  <strong>
+                    {TextMessage('dashboard-patient.no-specialties')}
+                  </strong>
+                </h3>
+              </>
             )}
           </div>
         </div>

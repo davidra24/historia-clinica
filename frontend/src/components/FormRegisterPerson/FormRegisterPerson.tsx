@@ -257,7 +257,7 @@ export const FormRegisterPerson = ({
                     </Select>
 
                     <span className='text-red-600'>
-                      {genre.validator === false &&
+                      {!genre.validator &&
                         TextMessage('register.form-genre-required')}
                     </span>
                   </FormControl>

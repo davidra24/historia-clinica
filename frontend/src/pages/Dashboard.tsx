@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { IStore } from '../redux/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPerson, setHealthCenter } from '../redux/actions';
+import { setPerson, setHealthCenter, setReloadPath } from '../redux/actions';
 import { getOne } from '../util/httpUtil';
 import { HTTP_HEALTH_CENTER, HTTP_PEOPLE } from '../util/constants';
 import { Loading } from '../components/Loading';
-import { Redirect } from 'react-router';
 import { menu } from '../redux/actions';
 import { useCookies } from 'react-cookie';
-import { TextMessage } from '../lang/TextMessage';
 import { useHistory } from 'react-router';
 import { DashBoardHealthCenter } from '../containers/dashboard/DashBoardHealthCenter';
 import { DashBoardProfessional } from '../containers/dashboard/DashBoardProfessional';
@@ -20,6 +18,7 @@ export const Dashboard = () => {
   const user = useSelector((state: IStore) => state.user);
   const person = useSelector((state: IStore) => state.person);
   const healthCenter = useSelector((state: IStore) => state.healthCenter);
+  const reloadRoute = useSelector((state: IStore) => state.reloadRoute);
   const history = useHistory();
 
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
@@ -45,7 +44,7 @@ export const Dashboard = () => {
     setLoading(true);
     const response = await getOne<IPerson>(HTTP_PEOPLE, user.document, token);
     if (response) {
-      const { ok, data } = await response;
+      const { ok, data } = response;
       if (ok) {
         dispatch(setPerson(data));
       } else {
@@ -63,7 +62,9 @@ export const Dashboard = () => {
       token
     );
     if (response) {
-      const { ok, data } = await response;
+      console.log('response health', response);
+
+      const { ok, data } = response;
       if (ok) {
         dispatch(setHealthCenter(data));
       } else {

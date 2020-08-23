@@ -69,7 +69,7 @@ export const RegisterPerson = () => {
   const [listContact, setListContact] = useState<Array<IContact>>([]);
 
   const [image, setImage] = useState<any>(DEFAULT_PROFILE_PIC);
-  const [valide, setValide] = useState(false)
+  const [valide, setValide] = useState(false);
   const [token, setToken] = useState(cookie.token);
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -199,7 +199,7 @@ export const RegisterPerson = () => {
 
     listContact.forEach((contact) => {
       listContactsPerson.push({
-        user_document: user?.document,
+        user_document: user.document,
         contact_document: contact.document,
       });
     });

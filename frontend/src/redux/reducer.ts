@@ -15,6 +15,8 @@ import {
   SET_PERSON,
   SET_HEALTH_CENTER,
   SET_SPECIALTIES,
+  SET_ATTENTION_CENTER,
+  SET_PATH_RELOAD,
 } from './constants.redux';
 
 const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
@@ -35,6 +37,8 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, snackTitle: action.payload };
     case SNACK_MSG:
       return { ...state, snackMsg: action.payload };
+    case SET_PATH_RELOAD:
+      return { ...state, reloadRoute: action.payload };
     case SET_USER:
       return { ...state, user: action.payload };
     case SET_PERSON:
@@ -47,6 +51,8 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, listEPS: action.payload };
     case SELECT_PROFESSION:
       return { ...state, listProfessions: action.payload };
+    case SET_ATTENTION_CENTER:
+      return { ...state, listAttentionsCenter: action.payload };
     default:
       return state;
   }

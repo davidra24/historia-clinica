@@ -5,18 +5,14 @@ import { IStore } from '../redux/types';
 import { Router } from '../router';
 import { Footer } from '../components/Footer';
 import { LOCALES, LangProvider } from '../lang';
-import {
-  changeLang,
-  Loading as setLoading,
-  setUser,
-  auth,
-} from '../redux/actions';
+import { changeLang, setUser, auth, setReloadPath } from '../redux/actions';
 import { useCookies } from 'react-cookie';
 import { post } from '../util/httpUtil';
 import { HTTP_VERIFY } from '../util/constants';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  //const reloadRoute = useSelector((state: IStore) => state.reloadRoute);
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
 

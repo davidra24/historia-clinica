@@ -161,9 +161,9 @@ export class UserController {
             data: { token, user },
           });
         } else {
-          cryptedResponse(res, 401, {
+          cryptedResponse(res, 400, {
             ok: false,
-            status: 401,
+            status: 400,
             message: 'login.authError-noauth',
             data: null,
           });

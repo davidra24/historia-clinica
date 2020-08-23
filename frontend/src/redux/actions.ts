@@ -13,6 +13,8 @@ import {
   SET_PERSON,
   SET_HEALTH_CENTER,
   SET_SPECIALTIES,
+  SET_ATTENTION_CENTER,
+  SET_PATH_RELOAD,
 } from './constants.redux';
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
@@ -20,6 +22,7 @@ import { IHealthCareCenter } from '../data/IHealthCareCenter';
 import { ISpecialty } from '../data/ISpecialty';
 import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
+import { IAttentionCenter } from '../data/IAttentionCenter';
 
 export const Loading = (payload: boolean) => ({ type: LOADING, payload });
 
@@ -58,6 +61,11 @@ export const setMsgSuccessVisbility = (payload: boolean) => ({
   payload,
 });
 
+export const setReloadPath = (payload: string) => ({
+  type: SET_PATH_RELOAD,
+  payload,
+});
+
 export const SnackTitleMsg = (payload: any) => ({ type: SNACK_TITLE, payload });
 
 export const SnackMsg = (payload: any) => ({ type: SNACK_MSG, payload });
@@ -69,5 +77,10 @@ export const selectEPS = (payload: Array<IEPS>) => ({
 
 export const selectProfessions = (payload: Array<IProfessions>) => ({
   type: SELECT_PROFESSION,
+  payload,
+});
+
+export const setCenterAttenttion = (payload: Array<IAttentionCenter>) => ({
+  type: SET_ATTENTION_CENTER,
   payload,
 });
