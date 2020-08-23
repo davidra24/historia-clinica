@@ -10,6 +10,11 @@ import { menu } from '../redux/actions';
 import { useCookies } from 'react-cookie';
 import { TextMessage } from '../lang/TextMessage';
 import { useHistory } from 'react-router';
+import { DashBoardHealthCenter } from '../containers/dashboard/DashBoardHealthCenter';
+import { DashBoardProfessional } from '../containers/dashboard/DashBoardProfessional';
+import { DashBoardPatient } from '../containers/dashboard/DashBoardPatient';
+import { IPerson } from '../data/IPerson';
+import { IHealthCareCenter } from '../data/IHealthCareCenter';
 
 export const Dashboard = () => {
   const user = useSelector((state: IStore) => state.user);
@@ -19,52 +24,53 @@ export const Dashboard = () => {
 
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
-  const [name, setName] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const { token } = cookie;
-    console.log(token);
-
     dispatch(menu(false));
-    console.log('user', user);
-
-    if (user?.document_type) {
+    if (user.document_type) {
       if (!person) {
         getPerson(token);
       }
-      setLoading(false);
     } else {
       if (!healthCenter) {
         getHealthCareCenter(token);
       }
-      setLoading(false);
     }
   }, []);
 
   const getPerson = async (token: string) => {
-    const response = await getOne(HTTP_PEOPLE, user?.document, token);
+    setLoading(true);
+    const response = await getOne<IPerson>(HTTP_PEOPLE, user.document, token);
     if (response) {
-      const { ok, data } = response;
+      const { ok, data } = await response;
       if (ok) {
         dispatch(setPerson(data));
       } else {
         history.push('/completeRegister');
       }
     }
+    setLoading(false);
   };
 
   const getHealthCareCenter = async (token: string) => {
-    const response = await getOne(HTTP_HEALTH_CENTER, user?.document, token);
+    setLoading(true);
+    const response = await getOne<IHealthCareCenter>(
+      HTTP_HEALTH_CENTER,
+      user.document,
+      token
+    );
     if (response) {
-      const { ok, data } = response;
+      const { ok, data } = await response;
       if (ok) {
         dispatch(setHealthCenter(data));
       } else {
         history.push('/completeRegister');
       }
     }
+    setLoading(false);
   };
 
   return (
@@ -72,13 +78,17 @@ export const Dashboard = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className='h-full'>
-          <h1>
-            {TextMessage('app.welcome')}
-            {(person && ` ${person.first_name} ${person.last_name}`) ||
-              (healthCenter && `${healthCenter.name}`)}
-          </h1>
-        </div>
+        <>
+          {person ? (
+            !person.is_healt_care_team ? (
+              <DashBoardPatient />
+            ) : (
+              <DashBoardProfessional />
+            )
+          ) : (
+            <DashBoardHealthCenter />
+          )}
+        </>
       )}
     </>
   );

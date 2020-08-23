@@ -16,7 +16,7 @@ export const Drawer = ({ children }: any) => {
     <div>
       <nav
         onClick={() => openMenu && dispatch(menu(false))}
-        className={`flex fixed w-full items-center justify-between px-6 h-20 bg-white text-gray-700 border-b border-gray-300 z-10 ${
+        className={`flex fixed w-full items-center justify-between px-6 h-20 bg-blue-700 text-gray-700 border-b border-gray-300 z-10  ${
           openMenu && 'opacity-75'
         }`}
       >
@@ -29,7 +29,7 @@ export const Drawer = ({ children }: any) => {
                 dispatch(menu(true));
               }}
             >
-              <SvgIcon>
+              <SvgIcon className='text-white'>
                 <path d={MENU_ICON}></path>
               </SvgIcon>
             </button>
@@ -40,7 +40,7 @@ export const Drawer = ({ children }: any) => {
             aria-disabled={openMenu}
           >
             <img src={logo} alt='Logo' className='w-8 md:w-12' />
-            <h1 className='text-xs md:text-base'>
+            <h1 className='text-xs md:text-base text-white'>
               <strong>{TextMessage('app.title')}</strong>
             </h1>
           </Link>
@@ -62,7 +62,7 @@ export const Drawer = ({ children }: any) => {
         </div>
       </aside>
       <main
-        className={`flex py-32 w-full justify-center ${
+        className={`flex py-24 w-full justify-center ${
           openMenu && 'opacity-25'
         }`}
         onClick={() => dispatch(menu(false))}

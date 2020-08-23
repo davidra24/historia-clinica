@@ -39,7 +39,7 @@ function App() {
     const { token } = cookie;
     async function comprobeSession() {
       setLoad(true);
-      const response = await post(HTTP_VERIFY, { token });
+      const response = await post<any>(HTTP_VERIFY, { token });
       if (response) {
         const {
           status,
@@ -69,8 +69,12 @@ function App() {
         ) : (
           <>
             {loading && <Loading />}
-            <div className={`${loading && 'opacity-0'}`}>
-              <Router />
+            <div
+              className={`flex flex-col min-w-screen min-h-screen ${
+                loading && 'opacity-0'
+              }`}
+            >
+              <Router className='flex' />
               <Footer />
             </div>
           </>

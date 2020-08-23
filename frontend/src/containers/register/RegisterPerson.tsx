@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { FormRegisterPerson } from '../components/FormRegisterPerson/FormRegisterPerson';
+import { FormRegisterPerson } from '../../components/FormRegisterPerson/FormRegisterPerson';
 import {
   useInputValue,
   useDatePicker,
   useSelectValue,
-} from '../hooks/useInput';
-import { toBase64 } from '../util/Util';
+} from '../../hooks/useInput';
+import { toBase64 } from '../../util/Util';
 import { useCookies } from 'react-cookie';
-import { SnackBarAlert } from '../util/Alert';
+import { SnackBarAlert } from '../../util/Alert';
 import { useSelector, useDispatch } from 'react-redux';
-import { IStore } from '../redux/types';
+import { IStore } from '../../redux/types';
+import { SnackTitleMsg, SnackMsg } from '../../redux/actions';
 import {
-  Loading as setLoading,
-  SnackTitleMsg,
-  SnackMsg,
-} from '../redux/actions';
-import { setMsgSuccessVisbility, setMsgErrorVisbility } from '../redux/actions';
-import { TextMessage } from '../lang/TextMessage';
+  setMsgSuccessVisbility,
+  setMsgErrorVisbility,
+} from '../../redux/actions';
+import { TextMessage } from '../../lang/TextMessage';
 import { Stepper, StepLabel, Step, Card } from '@material-ui/core';
-import { FormRegisterContact } from '../components/FormRegisterPerson/FormRegisterContact';
-import { IContact } from '../data/IContact';
-import { ContainerLastStep } from '../components/FormRegisterPerson/ContainerLastStep';
-import { Loading } from '../components/Loading';
-import { post } from '../util/httpUtil';
+import { FormRegisterContact } from '../../components/FormRegisterPerson/FormRegisterContact';
+import { IContact } from '../../data/IContact';
+import { ContainerLastStep } from '../../components/FormRegisterPerson/ContainerLastStep';
+
+import { post } from '../../util/httpUtil';
 import {
   HTTP_CONTACTS,
   HTTP_PEOPLE,
   HTTP_CONTACTS_PERSON,
   DEFAULT_PROFILE_PIC,
-} from '../util/constants';
-import { IResponse } from '../data/IResponse';
-import { IPerson } from '../data/IPerson';
-import { IContactPerson } from '../data/IContactPerson';
+} from '../../util/constants';
+import { IResponse } from '../../data/IResponse';
+import { IPerson } from '../../data/IPerson';
+import { IContactPerson } from '../../data/IContactPerson';
 import { useHistory } from 'react-router';
 import { isValid } from 'date-fns';
+import { Loading } from '../../components/Loading';
 
 export const RegisterPerson = () => {
   const openMsgError = useSelector((state: IStore) => state.openMsgError);
@@ -70,7 +70,9 @@ export const RegisterPerson = () => {
 
   const [image, setImage] = useState<any>(DEFAULT_PROFILE_PIC);
   const [token, setToken] = useState(cookie.token);
+  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+
   const steps = [
     'Información Personal',
     'Información de contacto',
@@ -84,7 +86,6 @@ export const RegisterPerson = () => {
 
   const handleSubmit = async () => {
     const okContact = await pushContactData();
-    console.log('okContact', okContact);
     if (okContact) {
       pushPersonData().then(async () => {
         const okContactPerson = await pushContactPersonData();
@@ -123,7 +124,7 @@ export const RegisterPerson = () => {
   useEffect(() => {}, [valide]);
 
   const pushContactData = async (): Promise<boolean> => {
-    dispatch(setLoading(true));
+    setLoading(true);
     const promises: Array<Promise<IResponse<IContact>>> = [];
     let inserted = true;
     listContact.forEach((contact) => {
@@ -139,18 +140,18 @@ export const RegisterPerson = () => {
             inserted = false;
           }
         });
-        dispatch(setLoading(false));
+        setLoading(false);
         return Promise.resolve(inserted);
       })
       .catch((ex: any) => {
         console.log('exception', ex);
-        dispatch(setLoading(false));
+        setLoading(false);
         return Promise.resolve(false);
       });
   };
 
   const pushPersonData = async () => {
-    dispatch(setLoading(true));
+    setLoading(true);
     console.log(dateBirth.value);
     const person: IPerson = {
       document: user?.document,
@@ -171,7 +172,7 @@ export const RegisterPerson = () => {
       deceased: false,
     };
     console.log('person', person);
-    const response = await post(HTTP_PEOPLE, { person }, token);
+    const response = await post<IPerson>(HTTP_PEOPLE, { person }, token);
     if (response) {
       const { message } = response;
       if (response.ok) {
@@ -188,11 +189,11 @@ export const RegisterPerson = () => {
       dispatch(SnackMsg('app.not-server'));
       dispatch(setMsgErrorVisbility(true));
     }
-    dispatch(setLoading(false));
+    setLoading(false);
   };
 
   const pushContactPersonData = async (): Promise<boolean> => {
-    dispatch(setLoading(true));
+    setLoading(true);
 
     const listContactsPerson: Array<IContactPerson> = [];
 
@@ -218,12 +219,12 @@ export const RegisterPerson = () => {
             inserted = false;
           }
         });
-        dispatch(setLoading(false));
+        setLoading(false);
         return Promise.resolve(inserted);
       })
       .catch((ex: any) => {
         console.log('exception', ex);
-        dispatch(setLoading(false));
+        setLoading(false);
         return Promise.resolve(false);
       });
   };
@@ -308,75 +309,79 @@ export const RegisterPerson = () => {
         }}
       />
       <>
-        <div className='flex flex-col justify-center items-center'>
-          {activeStep === 0 ? (
-            <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
-              <FormRegisterPerson
-                onSubmit={handleNextStep}
-                firstName={firstName}
-                secondName={secondName}
-                lastName={lastName}
-                lastSecondName={lastSecondName}
-                genre={genre}
-                civilState={civilState}
-                email={email}
-                dateBirth={dateBirth}
-                phone={phone}
-                stratum={stratum}
-                onChangePhoto={onChangePhoto}
-                image={image}
-                idProfession={idProfession}
-                idEPS={idEPS}
-                token={token}
-                Stepper={stepper}
-              />
-            </Card>
-          ) : activeStep === 1 ? (
-            <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
-              <FormRegisterContact
-                onSubmit={handleNextStep}
-                onPrevStep={handlePreviousStep}
-                Stepper={stepper}
-                document={documentContact}
-                name={nameContact}
-                phone={phoneContact}
-                email={emailContact}
-                direction={directionContact}
-                contacts={listContact}
-                pushContact={pushContact}
-              />
-            </Card>
-          ) : (
-            <>
-              <ContainerLastStep
-                firstName={firstName}
-                secondName={secondName}
-                lastName={lastName}
-                lastSecondName={lastSecondName}
-                genre={genre}
-                civilState={civilState}
-                email={email}
-                dateBirth={dateBirth}
-                phone={phone}
-                stratum={stratum}
-                image={image}
-                idProfession={idProfession}
-                idEPS={idEPS}
-                token={token}
-                documentContact={documentContact}
-                nameContact={nameContact}
-                phoneContact={phoneContact}
-                emailContact={emailContact}
-                directionContact={directionContact}
-                listContact={listContact}
-                pushContact={pushContact}
-                onPrevStep={handlePreviousStep}
-                onSubmit={handleSubmit}
-                Stepper={stepper}
-              />
-            </>
-          )}
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className='flex flex-col justify-center items-center'>
+            {activeStep === 0 ? (
+              <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
+                <FormRegisterPerson
+                  onSubmit={handleNextStep}
+                  firstName={firstName}
+                  secondName={secondName}
+                  lastName={lastName}
+                  lastSecondName={lastSecondName}
+                  genre={genre}
+                  civilState={civilState}
+                  email={email}
+                  dateBirth={dateBirth}
+                  phone={phone}
+                  stratum={stratum}
+                  onChangePhoto={onChangePhoto}
+                  image={image}
+                  idProfession={idProfession}
+                  idEPS={idEPS}
+                  token={token}
+                  Stepper={stepper}
+                />
+              </Card>
+            ) : activeStep === 1 ? (
+              <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
+                <FormRegisterContact
+                  onSubmit={handleNextStep}
+                  onPrevStep={handlePreviousStep}
+                  Stepper={stepper}
+                  document={documentContact}
+                  name={nameContact}
+                  phone={phoneContact}
+                  email={emailContact}
+                  direction={directionContact}
+                  contacts={listContact}
+                  pushContact={pushContact}
+                />
+              </Card>
+            ) : (
+              <>
+                <ContainerLastStep
+                  firstName={firstName}
+                  secondName={secondName}
+                  lastName={lastName}
+                  lastSecondName={lastSecondName}
+                  genre={genre}
+                  civilState={civilState}
+                  email={email}
+                  dateBirth={dateBirth}
+                  phone={phone}
+                  stratum={stratum}
+                  image={image}
+                  idProfession={idProfession}
+                  idEPS={idEPS}
+                  token={token}
+                  documentContact={documentContact}
+                  nameContact={nameContact}
+                  phoneContact={phoneContact}
+                  emailContact={emailContact}
+                  directionContact={directionContact}
+                  listContact={listContact}
+                  pushContact={pushContact}
+                  onPrevStep={handlePreviousStep}
+                  onSubmit={handleSubmit}
+                  Stepper={stepper}
+                />
+              </>
+            )}
+          </div>
+        )}
       </>
     </>
   );

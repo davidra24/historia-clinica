@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormRegisterHealthCenter } from '../components/FormRegisterHealthCenter/FormRegisterHealthCenter';
+import { FormRegisterHealthCenter } from '../../components/FormRegisterHealthCenter/FormRegisterHealthCenter';
 
 export const RegisterHealthCenter = () => {
   return (

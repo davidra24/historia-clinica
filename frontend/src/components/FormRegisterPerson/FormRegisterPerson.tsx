@@ -101,7 +101,7 @@ export const FormRegisterPerson = ({
 
   const fetchEPS = async () => {
     setLoading(true);
-    const response = await get(HTTP_EPS, token);
+    const response = await get<Array<IEPS>>(HTTP_EPS, token);
     if (response) {
       const { message } = response;
       if (response.ok) {
@@ -122,7 +122,7 @@ export const FormRegisterPerson = ({
 
   const fetchProfessions = async () => {
     setLoading(true);
-    const response = await get(HTTP_PROFESSION, token);
+    const response = await get<Array<IProfessions>>(HTTP_PROFESSION, token);
     if (response) {
       const { message } = response;
       if (response.ok) {

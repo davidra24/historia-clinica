@@ -6,11 +6,15 @@ export default {
     '': '',
     'app.title': 'HISTORIA CLÍNICA DIGITAL',
     'app.not-server': 'No se ha encontrado el servidor',
-    'app.start': 'Inicio',
     'app.loading': 'Cargando...',
+    'app.start': 'Inicio',
+    'app.profile': 'Perfil',
     'app.logout': 'Cerrar Sesión',
     'app.err-connect': 'Error al conectar con el servidor',
     'app.welcome': 'Bienvenido(a)',
+    'app.welcomeM': 'Bienvenido',
+    'app.welcomeF': 'Bienvenida',
+    'app.welcomeO': 'Bienvenide',
     //LANGUAGE
     'lang.selectedLang': 'Idioma',
     'lang.spanish': 'Español',
@@ -320,6 +324,10 @@ export default {
     'register.error-title': '¡Ups, Error de registro!',
     'register.error-titleContact': '¡Ups, Error de contacto!',
     'register.error-msgContact': 'Sólo se permiten 3 contactos por persona',
+    //DASHBOARD
+    'dashboard-patient.description':
+      'A continuación encontrará todas las especialidades disponibles en la plataforma, de tal forma que podrá consultar su evolución, hallazgos y procedimientos médicos en cada una de estas tarjetas, haga click en alguna para conocer su estado de salud. \n Y recuerde su estado de salud es nuestra prioridad',
+    'dashboard-patient.specialties': 'Especialidades',
   },
 };
 

@@ -24,7 +24,7 @@ export const Footer = (props: any) => {
 
   return (
     <footer
-      className={`flex w-full justify-between border-t border-gray-300 z-10 bg-white ${
+      className={`flex w-full justify-between border-t border-gray-300 z-10 bg-white mt-auto ${
         openMenu && 'opacity-75'
       }`}
       onClick={() => dispatch(menu(false))}

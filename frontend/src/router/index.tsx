@@ -6,16 +6,20 @@ import { NotFound } from '../pages/NotFound';
 import { Dashboard } from '../pages/Dashboard';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import ScrollToTop from '../components/ScrollTop';
 import { RegisterData } from '../pages/RegisterData';
+import { Specialties } from '../pages/Specialties';
+import ScrollToTop from '../components/ScrollTop';
+import { Profile } from '../pages/Profile';
 
-export const Router = () => (
+export const Router = (props: any) => (
   <BrowserRouter>
     <ScrollToTop>
       <Switch>
         <PublicRoute path='/login' component={Login} exact />
         <PublicRoute path='/signup' component={SignUp} exact />
         <PrivateRoute path='/' component={Dashboard} exact />
+        <PrivateRoute path='/profile' component={Profile} exact />
+        <PrivateRoute path='/specialty/:id' component={Specialties} exact />
         <PrivateRoute path='/completeRegister' component={RegisterData} exact />
         <Route path='/404' component={NotFound} />
         <Redirect to='/404' />

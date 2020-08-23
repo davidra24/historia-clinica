@@ -12,10 +12,14 @@ import {
   SELECT_PROFESSION,
   SET_PERSON,
   SET_HEALTH_CENTER,
+  SET_SPECIALTIES,
 } from './constants.redux';
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
 import { IHealthCareCenter } from '../data/IHealthCareCenter';
+import { ISpecialty } from '../data/ISpecialty';
+import { IEPS } from '../data/IEPS';
+import { IProfessions } from '../data/IProfessions';
 
 export const Loading = (payload: boolean) => ({ type: LOADING, payload });
 
@@ -26,12 +30,17 @@ export const setUser = (payload: IUser | any) => ({
   payload,
 });
 
-export const setPerson = (payload: IPerson) => ({
+export const setPerson = (payload: IPerson | any) => ({
   type: SET_PERSON,
   payload,
 });
-export const setHealthCenter = (payload: IHealthCareCenter) => ({
+export const setHealthCenter = (payload: IHealthCareCenter | any) => ({
   type: SET_HEALTH_CENTER,
+  payload,
+});
+
+export const setSpecialties = (payload: Array<ISpecialty>) => ({
+  type: SET_SPECIALTIES,
   payload,
 });
 
@@ -53,9 +62,12 @@ export const SnackTitleMsg = (payload: any) => ({ type: SNACK_TITLE, payload });
 
 export const SnackMsg = (payload: any) => ({ type: SNACK_MSG, payload });
 
-export const selectEPS = (payload: any) => ({ type: SELECT_EPS, payload });
+export const selectEPS = (payload: Array<IEPS>) => ({
+  type: SELECT_EPS,
+  payload,
+});
 
-export const selectProfessions = (payload: any) => ({
+export const selectProfessions = (payload: Array<IProfessions>) => ({
   type: SELECT_PROFESSION,
   payload,
 });
