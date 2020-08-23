@@ -88,7 +88,7 @@ export const RegisterHealthCenter = () => {
       */
 
   };
-  
+
   return (
     <>
       <div className='flex justify-center items-center'>
