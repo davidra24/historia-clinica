@@ -7,7 +7,8 @@ const api = express.Router();
 
 api.get("/attentionCenters", auth, attentionCentercontroller.getAttentionCenters);
 api.get("/attentionCenters/:id/:document", auth, attentionCentercontroller.getOneAttentionCenter);
-api.get('/attentionCentersView/:id', auth, attentionCentercontroller.getViewData);
+api.get('/attentionCentersViewByHealthCenter/:id', auth, attentionCentercontroller.getViewDataByHealthCenter);
+api.get('/attentionCentersViewByProfessionalDocument/:id', auth, attentionCentercontroller.getViewDataByProfessionalDocument);
 api.post("/attentionCenters", auth, attentionCentercontroller.insertAttentionCenter);
 api.put("/attentionCenters/:id/:document", auth, attentionCentercontroller.updateAttentionCenter);
 api.delete("/attentionCenters/:id/:document", auth, attentionCentercontroller.deleteAttentionCenter);
