@@ -7,6 +7,7 @@ export class AttentionCenterController {
   app = express();
   constructor() {
     this.createTable();
+    this.createView();
   }
   async createTable() {
     await db
@@ -23,6 +24,45 @@ export class AttentionCenterController {
         message: error,
         data: null,
       }));
+  }
+  async createView() {
+    await db
+      .none(attentionCenterDB.createViewAttentionCenter)
+      .then(() => ({
+        ok: true,
+        status: 'success creating view',
+        message: 'attention center view created',
+        data: null,
+      }))
+      .catch((error) => ({
+        ok: false,
+        status: 'unsuccess creating view',
+        message: error,
+        data: null,
+      }));
+  }
+  async getViewData(req: Request, res: Response) {
+    const { id } = req.params;
+    await db
+      .any(() => attentionCenterDB.selectFormView(id))
+      .then((attentionCenters) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getAttentionCenters.success',
+          data: attentionCenters,
+        })
+      )
+      .catch((error) =>{
+        console.log(error);
+        
+        return cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getAttentionCenters.error',
+          data: error.toString(),
+        })
+      });
   }
   async getAttentionCenters(req: Request, res: Response) {
     await db
