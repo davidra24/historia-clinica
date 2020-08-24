@@ -32,11 +32,8 @@ export default {
     contactPerson: ContactPersonModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_USER_DOCUMENT}, ${COL_CONTACT_DOCUMENT}) 
     VALUES ('${contactPerson.user_document}', '${contactPerson.contact_document}')`,
-  deleteContactPerson: (
-    userDocument: string,
-    contactDocument: string
-  ): string =>
-    `DELETE FROM ${TABLE_NAME} where ${COL_USER_DOCUMENT} = '${userDocument}' AND ${COL_CONTACT_DOCUMENT}='${contactDocument}'`,
+  deleteContactPerson: (userDocument: string): string =>
+    `DELETE FROM ${TABLE_NAME} where ${COL_USER_DOCUMENT} = '${userDocument}'`,
   updateContactPerson: (
     userDocument: string,
     contactDocument: string,

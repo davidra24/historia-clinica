@@ -24,11 +24,11 @@ export default {
     'signup.signup': 'Sign up',
     'signup.authError-title': 'Register: ',
     'signup.authError-body':
-      'An unexpected error occurred while getting the user {document}',
+      'An unexpected error occurred while getting the user',
     'signup.success-title': 'User created',
-    'signup.success-body': 'User {document} created successfully',
+    'signup.success-body': 'User created successfully',
     'signup.error-body':
-      'An unexpected error occurred while inserting the user {document}',
+      'An unexpected error occurred while inserting the user',
     'signup.error-existent': 'The user already exists in the database, login',
     //SIGNFORM
     'signForm.document': 'Document',
@@ -42,144 +42,130 @@ export default {
     //USERS
     'getUsers.success': 'All users of the database have been obtained',
     'getUsers.error': 'An unexpected error occurred while getting all users',
-    'getUser.success': 'User {document} has been obtained',
-    'updateUser.success': 'User {user.document} has been updated successfully',
-    'updateUser.error':
-      'An unexpected error occurred while updating the user {document}',
-    'deleteUser.success': 'User {document} has been deleted successfully',
-    'deleteUser.error':
-      'An unexpected error occurred while deleting the user {document}',
+    'getUser.success': 'User has been obtained',
+    'updateUser.success': 'User has been updated successfully',
+    'updateUser.error': 'An unexpected error occurred while updating the user',
+    'deleteUser.success': 'User has been deleted successfully',
+    'deleteUser.error': 'An unexpected error occurred while deleting the user',
     //ATTENTION CENTERS
     'getAttentionCenters.success':
       'All attention centers of the database have been obtained',
     'getAttentionCenters.error':
       'An unexpected error occurred while getting all attention centers',
-    'getAttentionCenter.success':
-      'Attention center {id}, {document} has been obtained',
+    'getAttentionCenter.success': 'Attention center, has been obtained',
     'getAttentionCenter.error':
-      'An unexpected error occurred while getting the attention center {id}, {document}',
+      'An unexpected error occurred while getting the attention center,',
     'insertAttentionCenter.success':
-      'Attention center {attentionCenter.id}, {attentionCenter.document} has been created successfully',
+      'Attention center has been created successfully',
     'insertAttentionCenter.error':
-      'An unexpected error occurred while creating the attention center {attentionCenter.id}, {attentionCenter.document}',
+      'An unexpected error occurred while creating the attention center',
     'updateAttentionCenter.success':
-      'Attention center {idCenter}, {document} has been updated successfully',
+      'Attention center, has been updated successfully',
     'updateAttentionCenter.error':
-      'An unexpected error occurred while updating the attention center {idCenter}, {document}',
+      'An unexpected error occurred while updating the attention center,',
     'deleteAttentionCenter.success':
-      'Attention center {id}, {document} has been deleted successfully',
+      'Attention center, has been deleted successfully',
     'deleteAttentionCenter.error':
-      'An unexpected error occurred while deleting the attention center {id}, {document}',
+      'An unexpected error occurred while deleting the attention center,',
     //CONTACTS
     'getContacts.success': 'All contacts of the database have been obtained',
     'getContacts.error':
       'An unexpected error occurred while getting all contacts',
-    'getContact.success': 'Contact {document} has been obtained',
+    'getContact.success': 'Contact has been obtained',
     'getContact.error':
-      'An unexpected error occurred while getting the contact {document}',
-    'insertContact.success':
-      'Contact {contact.document} has been created successfully',
+      'An unexpected error occurred while getting the contact',
+    'insertContact.success': 'Contact has been created successfully',
     'insertContact.error':
-      'An unexpected error occurred while creating the contact {contact.document}',
-    'updateContact.success':
-      'Contact {contact.document} has been updated successfully',
+      'An unexpected error occurred while creating the contact',
+    'updateContact.success': 'Contact has been updated successfully',
     'updateContact.error':
-      'An unexpected error occurred while updating the contact {document}',
-    'deleteContact.success': 'Contact {document} has been deleted successfully',
+      'An unexpected error occurred while updating the contact',
+    'deleteContact.success': 'Contact has been deleted successfully',
     'deleteContact.error':
-      'An unexpected error occurred while deleting the contact {document} ',
+      'An unexpected error occurred while deleting the contact ',
     //CONTACTS PERSON
     'getContactsPerson.success':
       'All contacts of the people of the database have been obtained',
     'getContactsPerson.error':
       'An unexpected error occurred while getting all contacts of the people',
-    'getContactPerson.success':
-      'Contact {contactDocument} of the person {userDocument} has been obtained',
+    'getContactPerson.success': 'of the person has been obtained',
     'getContactPerson.error':
-      'An unexpected error occurred while getting the contact {contactDocument} of the person {userDocument}',
+      'An unexpected error occurred while getting the of the person',
     'insertContactPerson.success':
-      'Contact {contactPerson.contactDocument} of the person {contactPerson.userDocument} has been created successfully',
+      'Contact of the person has been created successfully',
     'insertContactPerson.error':
-      'An unexpected error occurred while creating the contact {contactPerson.contactDocument} and/or the person {contactPerson.userDocument}',
+      'An unexpected error occurred while creating the contact and/or the person',
     'updateContactPerson.success':
-      'Contact {contactPerson.contactDocument} of the person {contactPerson.userDocument} has been updated successfully',
+      'Contact of the person has been updated successfully',
     'updateContactPerson.error':
-      'An unexpected error occurred while updating the contact {contactDocument} of the person {userDocument}',
+      'An unexpected error occurred while updating the of the person',
     'deleteContactPerson.success':
-      'Contact {contactDocument} of the person {userDocument} has been deleted successfully',
+      'of the person has been deleted successfully',
     'deleteContactPerson.error':
-      'An unexpected error occurred while deleting the contact {contactDocument} of the person {userDocument} ',
+      'An unexpected error occurred while deleting the of the person ',
     //EPS
     'getEPS.success': 'All EPS of the database have been obtained',
     'getEPS.error': 'An unexpected error occurred while getting all EPS',
-    'getOneEPS.success': 'EPS {id} has been obtained',
-    'getOneEPS.error':
-      'An unexpected error occurred while getting the EPS {id}',
+    'getOneEPS.success': 'EPS has been obtained',
+    'getOneEPS.error': 'An unexpected error occurred while getting the EPS',
     'insertEPStEPS.success': 'EPS has been created successfully',
     'insertEPS.error': 'An unexpected error occurred while creating the EPS',
-    'updateEPS.success': 'EPS {EPS.id} has been updated successfully',
-    'updateEPS.error':
-      'An unexpected error occurred while updating the EPS {id}',
-    'deleteEPSEPS.success': 'EPS {id} has been deleted successfully',
-    'deleteEPS.error':
-      'An unexpected error occurred while deleting the EPS {id}',
+    'updateEPS.success': 'EPS has been updated successfully',
+    'updateEPS.error': 'An unexpected error occurred while updating the EPS',
+    'deleteEPSEPS.success': 'EPS has been deleted successfully',
+    'deleteEPS.error': 'An unexpected error occurred while deleting the EPS',
     //GENERAL MEDICAL FEATURES
     'getGeneralMedicalFeatures.success':
       'All general medical features of the database have been obtaineds',
     'getGeneralMedicalFeatures.error':
       'An unexpected error occurred while getting all general medical features',
     'getOneGeneralMedicalFeatures.success':
-      'General medical features {id} has been obtained',
+      'General medical features has been obtained',
     'getOneGeneralMedicalFeatures.error':
-      'An unexpected error occurred while getting the general medical features {id}',
+      'An unexpected error occurred while getting the general medical features',
     'insertGeneralMedicalFeatures.success':
-      'General medical features {generalMedicalFeatures.id} has been created successfully',
+      'General medical features has been created successfully',
     'insertGeneralMedicalFeatures.error':
-      'An unexpected error occurred while creating the general medical features {generalMedicalFeatures.id}',
+      'An unexpected error occurred while creating the general medical features',
     'updateGeneralMedicalFeatures.success':
-      'General medical features {generalMedicalFeatures.id} has been updated successfully',
+      'General medical features has been updated successfully',
     'updateGeneralMedicalFeatures.error':
-      'An unexpected error occurred while updating the general medical features ${id}',
+      'An unexpected error occurred while updating the general medical features',
     'deleteGeneralMedicalFeatures.success':
-      'General medical features {id} has been deleted successfully',
+      'General medical features has been deleted successfully',
     'deleteGeneralMedicalFeatures.error':
-      'An unexpected error occurred while deleting the general medical features {id}',
+      'An unexpected error occurred while deleting the general medical features',
     //HEALTH CENTERS
     'getHealthCenters.success':
       'All health centers of the database have been obtained',
     'getHealthCenters.error':
       'An unexpected error occurred while getting all health centers',
-    'getHealthCenter.success': 'Health center {idCenter} has been obtained',
+    'getHealthCenter.success': 'Health center has been obtained',
     'getHealthCenter.error':
-      'An unexpected error occurred while getting the health center {idCenter}',
+      'An unexpected error occurred while getting the health center',
     'insertHealthCenter.success': 'Health center has been created successfully',
     'insertHealthCenter.error':
       'An unexpected error occurred while creating the health center',
-    'updateHealthCenter.success':
-      'Health center {healthCenter.idCenter} has been updated successfully',
+    'updateHealthCenter.success': 'Health center has been updated successfully',
     'updateHealthCenter.error':
-      'An unexpected error occurred while updating the health center {idCenter}',
-    'deleteHealthCenter.success':
-      'Health center {idCenter} has been deleted successfully',
+      'An unexpected error occurred while updating the health center',
+    'deleteHealthCenter.success': 'Health center has been deleted successfully',
     'deleteHealthCenter.error':
-      'An unexpected error occurred while deleting the health center {idCenter}',
+      'An unexpected error occurred while deleting the health center',
     //PEOPLE
     'getPeople.success': 'All people of the database have been obtained',
     'getPeople.error': 'An unexpected error occurred while getting all people',
-    'getPerson.success': 'Person {document} has been obtained',
-    'getPerson.error':
-      'An unexpected error occurred while getting the person {document}',
-    'insertPerson.success':
-      'Person {person.document} has been created successfully',
+    'getPerson.success': 'Person has been obtained',
+    'getPerson.error': 'An unexpected error occurred while getting the person',
+    'insertPerson.success': 'Person has been created successfully',
     'insertPerson.error':
-      'An unexpected error occurred while creating the person {person.document}',
-    'updatePerson.success':
-      'Person {person.document} has been updated successfully',
+      'An unexpected error occurred while creating the person',
+    'updatePerson.success': 'Person has been updated successfully',
     'updatePerson.error':
-      'An unexpected error occurred while updating the person {document}',
-    'deletePerson.success': 'Person {document} has been deleted successfully',
+      'An unexpected error occurred while updating the person',
+    'deletePerson.success': 'Person has been deleted successfully',
     'deletePerson.error':
-      'An unexpected error occurred while deleting the person {document}',
+      'An unexpected error occurred while deleting the person',
     //PROFESSIONS
     'getProfessions.success':
       'All professions of the database have been obtained',
@@ -191,47 +177,44 @@ export default {
     'insertProfession.success': 'Profession has been created successfully',
     'insertProfession.error':
       'An unexpected error occurred while creating the profession',
-    'updateProfession.success':
-      'Profession {profession.id} has been updated successfully',
+    'updateProfession.success': 'Profession has been updated successfully',
     'updateProfession.error':
-      'An unexpected error occurred while updating the profession {id}',
-    'deleteProfession.success': 'Profession {id} has been deleted successfully',
+      'An unexpected error occurred while updating the profession',
+    'deleteProfession.success': 'Profession has been deleted successfully',
     'deleteProfession.error':
-      'An unexpected error occurred while deleting the profession {id}',
+      'An unexpected error occurred while deleting the profession',
     //QUERIES
     'getQueries.success': 'All queries of the database have been obtained',
     'getQueries.error':
       'An unexpected error occurred while getting all queries',
-    'getQuery.success': 'Query {id} has been obtained',
-    'getQuery.error':
-      'An unexpected error occurred while getting the query {id}',
+    'getQuery.success': 'Query has been obtained',
+    'getQuery.error': 'An unexpected error occurred while getting the query',
     'insertQuery.success': 'Query has been created successfully',
     'insertQuery.error':
       'An unexpected error occurred while creating the query',
-    'updateQuery.success': 'Query {query.id} has been updated successfully',
+    'updateQuery.success': 'Query has been updated successfully',
     'updateQuery.error':
-      'An unexpected error occurred while updating the query {id}',
-    'deleteQuery.success': 'Query {id} has been deleted successfully',
+      'An unexpected error occurred while updating the query',
+    'deleteQuery.success': 'Query has been deleted successfully',
     'deleteQuery.error':
-      'An unexpected error occurred while deleting the query {id}',
+      'An unexpected error occurred while deleting the query',
     //SPECIALTIES
     'getSpecialties.success':
       'All specialties of the database have been obtained',
     'getSpecialties.error':
       'An unexpected error occurred while getting all specialties',
-    'getSpecialty.success': 'Specialty {id} has been obtained',
+    'getSpecialty.success': 'Specialty has been obtained',
     'getSpecialty.error':
-      'An unexpected error occurred while getting the specialty {id}',
+      'An unexpected error occurred while getting the specialty',
     'insertSpecialty.success': 'Specialty has been created successfully',
     'insertSpecialty.error':
       'An unexpected error occurred while creating the specialty',
-    'updateSpecialty.success':
-      'Specialty {specialty.id} has been updated successfully',
+    'updateSpecialty.success': 'Specialty has been updated successfully',
     'updateSpecialty.error':
-      'An unexpected error occurred while updating the specialty {id}',
-    'deleteSpecialty.success': 'Specialty {id} has been deleted successfully',
+      'An unexpected error occurred while updating the specialty',
+    'deleteSpecialty.success': 'Specialty has been deleted successfully',
     'deleteSpecialty.error':
-      'An unexpected error occurred while deleting the specialty {id}',
+      'An unexpected error occurred while deleting the specialty',
     //Authotization
     'auth.noAuth': 'You are not authorized to perform this action',
     //404

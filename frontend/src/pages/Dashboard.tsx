@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IStore } from '../redux/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPerson, setHealthCenter, setReloadPath } from '../redux/actions';
-import { getOne } from '../util/httpUtil';
+import { getOneOrMany } from '../util/httpUtil';
 import { HTTP_HEALTH_CENTER, HTTP_PEOPLE } from '../util/constants';
 import { Loading } from '../components/Loading';
 import { menu } from '../redux/actions';
@@ -45,7 +45,11 @@ export const Dashboard = () => {
 
   const getPerson = async (token: string) => {
     setLoading(true);
-    const response = await getOne<IPerson>(HTTP_PEOPLE, user.document, token);
+    const response = await getOneOrMany<IPerson>(
+      HTTP_PEOPLE,
+      user.document,
+      token
+    );
     if (response) {
       const { ok, data } = response;
       if (ok) {
@@ -59,7 +63,7 @@ export const Dashboard = () => {
 
   const getHealthCareCenter = async (token: string) => {
     setLoading(true);
-    const response = await getOne<IHealthCareCenter>(
+    const response = await getOneOrMany<IHealthCareCenter>(
       HTTP_HEALTH_CENTER,
       user.document,
       token

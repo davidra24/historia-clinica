@@ -155,11 +155,9 @@ export class ContactPersonController {
       );
   }
   async deleteContactPerson(req: Request, res: Response) {
-    const { userDocument, contactDocument } = req.params;
+    const { userDocument } = req.params;
     await db
-      .result(() =>
-        contactPersonDB.deleteContactPerson(userDocument, contactDocument)
-      )
+      .result(() => contactPersonDB.deleteContactPerson(userDocument))
       .then((contactoPersona) =>
         cryptedResponse(res, 200, {
           ok: true,

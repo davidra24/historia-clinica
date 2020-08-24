@@ -63,9 +63,25 @@ export default {
   updatePerson: (
     document: string,
     person: PersonModel
-  ) => `UPDATE ${TABLE_NAME} SET ${COL_FIRST_NAME}='${person.first_name}', ${COL_SECOND_NAME}='${person.second_name}',${COL_LAST_NAME}='${person.last_name}',
-                 ${COL_LAST_SECOND_NAME} = '${person.last_second_name}',${COL_GENRE}=${person.genre},${COL_DATE_BIRTH}='${person.date_birth}',${COL_EMAIL}='${person.email}',
-                 ${COL_CIVIL_STATE}='${person.civil_state}', ${COL_PHOTO}='${person.photo}',${COL_PHONE}='${person.phone}', ${COL_ID_EPS} = '${person.id_eps}', 
-                 ${COL_ID_PROFESSION} = '${person.id_profesion}', ${COL_STRATUM} = ${person.stratum}, ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
-                 ${COL_DECEASED_DATE} = '${person.deceased_date}', ${COL_IS_HEALTH_CARE_TEAM} = ${person.is_healt_care_team}, WHERE ${COL_DOCUMENT} = '${document}'`,
+  ) => `UPDATE ${TABLE_NAME} SET ${COL_FIRST_NAME}='${
+    person.first_name
+  }', ${COL_SECOND_NAME}='${person.second_name}',${COL_LAST_NAME}='${
+    person.last_name
+  }',
+                 ${COL_LAST_SECOND_NAME} = '${
+    person.last_second_name
+  }',${COL_GENRE}=${person.genre},${COL_DATE_BIRTH}='${
+    person.date_birth
+  }',${COL_EMAIL}='${person.email}',
+                 ${COL_CIVIL_STATE}='${person.civil_state}', ${COL_PHOTO}='${
+    person.photo
+  }',${COL_PHONE}='${person.phone}', ${COL_ID_EPS} = '${person.id_eps}', 
+                 ${COL_ID_PROFESSION} = '${
+    person.id_profesion
+  }', ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
+                 ${COL_DECEASED_DATE} = ${
+    person.deceased_date ? `'${person.deceased_date}'` : null
+  }, ${COL_IS_HEALTH_CARE_TEAM} = ${
+    person.is_healt_care_team
+  } WHERE ${COL_DOCUMENT} = '${document}'`,
 };

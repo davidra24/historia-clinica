@@ -19,6 +19,7 @@ export interface RegisterPersonTypes {
   token: string;
   Stepper: any;
   disabled?: boolean;
+  update?: boolean;
 }
 
 export interface RegisterContactTypes {
@@ -33,4 +34,5 @@ export interface RegisterContactTypes {
   contacts: Array<IContact>;
   pushContact: any;
   disabled?: boolean;
+  removeContact: any;
 }

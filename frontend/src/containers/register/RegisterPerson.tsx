@@ -20,8 +20,7 @@ import { Stepper, StepLabel, Step, Card } from '@material-ui/core';
 import { FormRegisterContact } from '../../components/FormRegisterPerson/FormRegisterContact';
 import { IContact } from '../../data/IContact';
 import { ContainerLastStep } from '../../components/FormRegisterPerson/ContainerLastStep';
-
-import { post } from '../../util/httpUtil';
+import { post, put, deleteRecord } from '../../util/httpUtil';
 import {
   HTTP_CONTACTS,
   HTTP_PEOPLE,
@@ -106,10 +105,28 @@ export const RegisterPerson = ({
   };
 
   const handleSubmit = async () => {
+    const person: IPerson = {
+      document: user?.document,
+      first_name: firstName.value,
+      second_name: secondName.value,
+      last_name: lastName.value,
+      last_second_name: lastSecondName.value,
+      genre: genre.value,
+      date_birth: dateBirth.value,
+      email: email.value,
+      civil_state: civilState.value,
+      photo: image,
+      phone: phone.value,
+      id_profesion: idProfession.value,
+      id_eps: idEPS.value,
+      stratum: stratum.value || 0,
+      is_healt_care_team: false,
+      deceased: false,
+    };
     if (!isEdit) {
       const okContact = await pushContactData();
       if (okContact) {
-        pushPersonData().then(async () => {
+        pushPersonData(person).then(async () => {
           const okContactPerson = await pushContactPersonData();
           if (okContactPerson) {
             dispatch(SnackTitleMsg('register.success-title'));
@@ -124,6 +141,22 @@ export const RegisterPerson = ({
         });
       }
     } else {
+      pullPersonData(person).then(async () => {
+        const okDeleteContactPerson = await deleteContactPerson();
+        if (okDeleteContactPerson) {
+          const okContactPerson = await pushContactPersonData();
+          if (okContactPerson) {
+            dispatch(SnackTitleMsg('register.success-title'));
+            dispatch(SnackMsg('insertContact.success'));
+            dispatch(setMsgSuccessVisbility(true));
+            history.push('/');
+          } else {
+            dispatch(SnackTitleMsg('register.error-title'));
+            dispatch(SnackMsg('insertContact.error'));
+            dispatch(setMsgErrorVisbility(true));
+          }
+        }
+      });
     }
   };
 
@@ -139,7 +172,7 @@ export const RegisterPerson = ({
     const civilStateValidator =
       civilState.value !== null && civilState.value !== '';
     const ipsValidator = idEPS.value !== null && idEPS.value !== '';
-    const dateValidator = dateBirth.value !== null && isValid(dateBirth.value);
+    const dateValidator = isValid(dateBirth.value);
 
     firstName.setValidator(firstNameValidator);
     lastName.setValidator(lastNameValidator);
@@ -217,28 +250,8 @@ export const RegisterPerson = ({
       });
   };
 
-  const pushPersonData = async () => {
+  const pushPersonData = async (person: IPerson) => {
     setLoading(true);
-    console.log(dateBirth.value);
-    const person: IPerson = {
-      document: user?.document,
-      first_name: firstName.value,
-      second_name: secondName.value,
-      last_name: lastName.value,
-      last_second_name: lastSecondName.value,
-      genre: genre.value,
-      date_birth: dateBirth.value,
-      email: email.value,
-      civil_state: civilState.value,
-      photo: image,
-      phone: phone.value,
-      id_profesion: idProfession.value,
-      id_eps: idEPS.value,
-      stratum: stratum.value || 0,
-      is_healt_care_team: false,
-      deceased: false,
-    };
-    console.log('person', person);
     const response = await post<IPerson>(HTTP_PEOPLE, { person }, token);
     if (response) {
       const { message } = response;
@@ -257,6 +270,53 @@ export const RegisterPerson = ({
       dispatch(setMsgErrorVisbility(true));
     }
     setLoading(false);
+  };
+
+  const pullPersonData = async (person: IPerson) => {
+    setLoading(true);
+    const response = await put<IPerson>(
+      HTTP_PEOPLE,
+      person.document,
+      { person },
+      token
+    );
+    if (response) {
+      const { message } = response;
+      if (response.ok) {
+        dispatch(SnackTitleMsg('register.success-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgSuccessVisbility(true));
+      } else {
+        dispatch(SnackTitleMsg('register.error-title'));
+        dispatch(SnackMsg(message));
+        dispatch(setMsgErrorVisbility(true));
+      }
+    } else {
+      dispatch(SnackTitleMsg('register.error-title'));
+      dispatch(SnackMsg('app.not-server'));
+      dispatch(setMsgErrorVisbility(true));
+    }
+    setLoading(false);
+  };
+
+  const deleteContactPerson = async (): Promise<boolean> => {
+    setLoading(true);
+    const { document } = user;
+    const response = await deleteRecord<IContactPerson>(
+      HTTP_CONTACTS_PERSON,
+      document,
+      token
+    );
+    if (response) {
+      const { ok } = response;
+      if (ok) {
+        return Promise.resolve(true);
+      } else {
+        return Promise.resolve(false);
+      }
+    } else {
+      return Promise.resolve(false);
+    }
   };
 
   const pushContactPersonData = async (): Promise<boolean> => {
@@ -304,6 +364,10 @@ export const RegisterPerson = ({
     }
   };
 
+  const handleNestStepContacts = () => {
+    setActiveStep(activeStep + 1);
+  };
+
   const handlePreviousStep = () => {
     setActiveStep(activeStep - 1);
   };
@@ -346,6 +410,15 @@ export const RegisterPerson = ({
     phoneContact.clean();
     emailContact.clean();
     directionContact.clean();
+  };
+
+  const removeContact = (idContact: string) => {
+    const auxContact: Array<IContact> = [...listContact];
+    const index = auxContact.findIndex(
+      (contact: IContact) => contact.document === idContact
+    );
+    auxContact.splice(index, 1);
+    setListContact(auxContact);
   };
 
   const stepper = (
@@ -405,12 +478,13 @@ export const RegisterPerson = ({
                   idEPS={idEPS}
                   token={token}
                   Stepper={stepper}
+                  update={isEdit}
                 />
               </Card>
             ) : activeStep === 1 ? (
               <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
                 <FormRegisterContact
-                  onSubmit={handleNextStep}
+                  onSubmit={handleNestStepContacts}
                   onPrevStep={handlePreviousStep}
                   Stepper={stepper}
                   document={documentContact}
@@ -420,6 +494,7 @@ export const RegisterPerson = ({
                   direction={directionContact}
                   contacts={listContact}
                   pushContact={pushContact}
+                  removeContact={removeContact}
                 />
               </Card>
             ) : (
@@ -449,6 +524,7 @@ export const RegisterPerson = ({
                   onPrevStep={handlePreviousStep}
                   onSubmit={handleSubmit}
                   Stepper={stepper}
+                  update={isEdit}
                 />
               </>
             )}

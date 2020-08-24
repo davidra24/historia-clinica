@@ -17,6 +17,7 @@ export const EditProfilePerson = ({
   profession,
   stratum,
   dateBirth,
+  arrayContacts,
 }: profilePersonEditTypes) => {
   return (
     <>
@@ -36,6 +37,7 @@ export const EditProfilePerson = ({
           professionInfo={profession}
           stratumInfo={stratum}
           dateBirthInfo={dateBirth}
+          arrayContacts={arrayContacts}
         />
       </div>
     </>

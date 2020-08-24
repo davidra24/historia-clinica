@@ -9,14 +9,6 @@ import {
 } from '@material-ui/core';
 import { TextMessage } from '../../lang/TextMessage';
 import { RegisterPersonTypes } from '../../data/registerPersonTypes';
-import { useForm } from 'react-hook-form';
-import {
-  validationsFirstName,
-  validationsLastName,
-  validationsGenre,
-  validationsEmail,
-  validationsPhone,
-} from '../../util/validations';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -41,6 +33,7 @@ import {
   ARRAY_STRATES,
   ARRAY_CIVIL_STATE,
 } from '../../util/ConstantsData';
+import { useHistory } from 'react-router';
 
 export const FormRegisterPerson = ({
   onSubmit,
@@ -61,14 +54,14 @@ export const FormRegisterPerson = ({
   token,
   Stepper,
   disabled,
+  update,
 }: RegisterPersonTypes) => {
   //const { handleSubmit, register, errors, control } = useForm();
 
   const listEps = useSelector((state: IStore) => state.listEPS);
   const listProfessions = useSelector((state: IStore) => state.listProfessions);
+  const history = useHistory();
 
-  /*const [epsList, setEpsList] = useState<Array<IEPS>>([]);
-  const [professionList, setProfessionList] = useState<Array<IProfessions>>([]);*/
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -377,7 +370,6 @@ export const FormRegisterPerson = ({
                         onChange={dateBirth.onChange}
                       />
                     </MuiPickersUtilsProvider>
-
                     <span className='text-red-600'>
                       {!dateBirth.validator &&
                         TextMessage('register.form-dateBirth-required')}
@@ -387,7 +379,20 @@ export const FormRegisterPerson = ({
                 {!disabled && (
                   <div className='flex flex-col w-full'>
                     <div className='flex justify-center w-full'>{Stepper}</div>
-                    <div className='flex justify-end'>
+                    <div
+                      className={`flex ${
+                        update ? 'justify-around' : 'justify-end'
+                      }`}
+                    >
+                      {update && (
+                        <Button
+                          variant='outlined'
+                          color='secondary'
+                          onClick={() => history.goBack()}
+                        >
+                          {TextMessage('register.form-back')}
+                        </Button>
+                      )}
                       <Button variant='outlined' color='primary' type='submit'>
                         {TextMessage('register.form-next')}
                       </Button>

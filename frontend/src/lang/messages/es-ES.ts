@@ -58,149 +58,138 @@ export default {
       'Se han obtenido todos los usuarios de la base de datos',
     'getUsers.error':
       'Ha ocurrido un error inesperado al obtener todos los usuarios',
-    'getUser.success': 'Se ha obtenido el usuario {document}',
-    'updateUser.success':
-      'Se ha actualizado el usuario {user.document} correctamente',
+    'getUser.success': 'Se ha obtenido el usuario',
+    'updateUser.success': 'Se ha actualizado el usuario correctamente',
     'updateUser.error':
-      'Ha ocurrido un error inesperado al actualizar al usuario {document}',
-    'deleteUser.success': 'Se ha eliminado al usuario {document} correctamente',
+      'Ha ocurrido un error inesperado al actualizar al usuario',
+    'deleteUser.success': 'Se ha eliminado al usuario correctamente',
     'deleteUser.error':
-      'Ha ocurrido un error inesperado al eliminar al usuario {document}',
+      'Ha ocurrido un error inesperado al eliminar al usuario',
     //ATTENTION CENTERS
     'getAttentionCenters.success':
       'Se han obtenido todos los centros de atencion de la base de datos',
     'getAttentionCenters.error':
       'Ha ocurrido un error inesperado al obtener todos los centros de atencion',
-    'getAttentionCenter.success':
-      'Se ha obtenido el centro de atencion {id}, {document}',
+    'getAttentionCenter.success': 'Se ha obtenido el centro de atencion,',
     'getAttentionCenter.error':
-      'Ha ocurrido un error inesperado al obtener el centro de atencion {id}, {document}',
+      'Ha ocurrido un error inesperado al obtener el centro de atencion,',
     'insertAttentionCenter.success':
-      'Se ha creado el centro de atencion {attentionCenter.id}, {attentionCenter.document} correctamente',
+      'Se ha creado el centro de atencion correctamente',
     'insertAttentionCenter.error':
-      'Ha ocurrido un error inesperado creando el centro de atencion {attentionCenter.id}, {attentionCenter.document}',
+      'Ha ocurrido un error inesperado creando el centro de atencion',
     'updateAttentionCenter.success':
-      'Se ha actualizado el centro de atencion {idCenter}, {document} correctamente',
+      'Se ha actualizado el centro de atencion, correctamente',
     'updateAttentionCenter.error':
-      'Ha ocurrido un error inesperado al actualizar el centro de atencion {idCenter}, {document}',
+      'Ha ocurrido un error inesperado al actualizar el centro de atencion,',
     'deleteAttentionCenter.success':
-      'Se ha eliminado el centro de atencion {id}, {document} correctamente',
+      'Se ha eliminado el centro de atencion, correctamente',
     'deleteAttentionCenter.error':
-      'Ha ocurrido un error inesperado al eliminar el centro de atencion {id}, {document}',
+      'Ha ocurrido un error inesperado al eliminar el centro de atencion,',
     //CONTACTS
     'getContacts.success':
       'Se han obtenido todos los contactos de la base de datos',
     'getContacts.error':
       'Ha ocurrido un error inesperado al obtener todos los contactos',
-    'getContact.success': 'Se ha obtenido el contacto {document}',
+    'getContact.success': 'Se ha obtenido el contacto',
     'getContact.error':
-      'Ha ocurrido un error inesperado al obtener el contacto {document}',
+      'Ha ocurrido un error inesperado al obtener el contacto',
     'insertContact.success': 'Se han creado los contactos correctamente',
     'insertContact.error':
       'Ha ocurrido un error inesperado creando el contacto',
-    'updateContact.success':
-      'Se ha actualizado el contacto {contact.document} correctamente',
+    'updateContact.success': 'Se ha actualizado el contacto correctamente',
     'updateContact.error':
-      'Ha ocurrido un error inesperado al actualizar el contacto {document}',
-    'deleteContact.success':
-      'Se ha eliminado el contacto {document} correctamente',
+      'Ha ocurrido un error inesperado al actualizar el contacto',
+    'deleteContact.success': 'Se ha eliminado el contacto correctamente',
     'deleteContact.error':
-      'Ha ocurrido un error inesperado al eliminar el contacto {document} correctamente',
+      'Ha ocurrido un error inesperado al eliminar el contacto correctamente',
     //CONTACTS PERSON
     'getContactsPerson.success':
       'Se han obtenido todos los contactos de personas de la base de datos',
     'getContactsPerson.error':
       'Ha ocurrido un error inesperado al obtener todos los contactos de personas',
-    'getContactPerson.success':
-      'Se ha obtenido el contacto {contactDocument} de la persona {userDocument}',
+    'getContactPerson.success': 'Se ha obtenido el contacto de la persona',
     'getContactPerson.error':
-      'Ha ocurrido un error inesperado al obtener el contacto {contactDocument} de la persona {userDocument}',
+      'Ha ocurrido un error inesperado al obtener el contacto de la persona',
     'insertContactPerson.success':
-      'Se ha creado el contacto {contactPerson.contactDocument} de la persona {contactPerson.userDocument} correctamente',
+      'Se ha creado el contacto de la persona correctamente',
     'insertContactPerson.error':
-      'Ha ocurrido un error inesperado creando el contacto {contactPerson.contactDocument} y/o la persona {contactPerson.userDocument}',
+      'Ha ocurrido un error inesperado creando el contacto y/o la persona',
     'updateContactPerson.success':
-      'Se ha actualizado el contacto {contactPerson.contactDocument} de la persona {contactPerson.userDocument} correctamente',
+      'Se ha actualizado el contacto de la persona correctamente',
     'updateContactPerson.error':
-      'Ha ocurrido un error inesperado al actualizar el contacto {contactDocument} de la persona {userDocument}',
+      'Ha ocurrido un error inesperado al actualizar el contacto de la persona',
     'deleteContactPerson.success':
-      'Se ha eliminado el contacto {contactDocument} de la persona {userDocument} correctamente',
+      'Se ha eliminado el contacto de la persona correctamente',
     'deleteContactPerson.error':
-      'Ha ocurrido un error inesperado al eliminar el contacto {contactDocument} de la persona {userDocument} correctamente',
+      'Ha ocurrido un error inesperado al eliminar el contacto de la persona correctamente',
     //EPS
     'getEPS.success': 'Se han obtenido todas las EPS de la base de datos',
     'getEPS.error': 'Ha ocurrido un error inesperado al obtener todas las EPS',
-    'getOneEPS.success': 'Se ha obtenido la eps {id}',
-    'getOneEPS.error': 'Ha ocurrido un error inesperado al obtener la EPS {id}',
+    'getOneEPS.success': 'Se ha obtenido la eps',
+    'getOneEPS.error': 'Ha ocurrido un error inesperado al obtener la EPS',
     'insertEPStEPS.success': 'Se ha creado la EPS correctamente',
     'insertEPS.error': 'Ha ocurrido un error inesperado creando la EPS',
-    'updateEPS.success': 'Se ha actualizado la EPS {EPS.id} correctamente',
-    'updateEPS.error':
-      'Ha ocurrido un error inesperado al actualizar la EPS {id}',
-    'deleteEPSEPS.success': 'Se ha eliminado la EPS {id} correctamente',
+    'updateEPS.success': 'Se ha actualizado la EPS correctamente',
+    'updateEPS.error': 'Ha ocurrido un error inesperado al actualizar la EPS',
+    'deleteEPSEPS.success': 'Se ha eliminado la EPS correctamente',
     'deleteEPS.error':
-      'Ha ocurrido un error inesperado al eliminar la EPS {id} correctamente',
+      'Ha ocurrido un error inesperado al eliminar la EPS correctamente',
     //GENERAL MEDICAL FEATURES
     'getGeneralMedicalFeatures.success':
       'Se han obtenido todas las caracteristicas medicas generales de la base de datos',
     'getGeneralMedicalFeatures.error':
       'Ha ocurrido un error inesperado al obtener todas las caracteristicas medicas generales',
     'getOneGeneralMedicalFeatures.success':
-      'Se han obtenido las caracteristicas medicas generales {id}',
+      'Se han obtenido las caracteristicas medicas generales',
     'getOneGeneralMedicalFeatures.error':
-      'Ha ocurrido un error inesperado al obtener las caracteristicas medicas generales {id}',
+      'Ha ocurrido un error inesperado al obtener las caracteristicas medicas generales',
     'insertGeneralMedicalFeatures.success':
-      'Se han creado las caracteristicas medicas generales {generalMedicalFeatures.id} correctamente',
+      'Se han creado las caracteristicas medicas generales correctamente',
     'insertGeneralMedicalFeatures.error':
-      'Ha ocurrido un error inesperado creando las caracteristicas medicas generales {generalMedicalFeatures.id}',
+      'Ha ocurrido un error inesperado creando las caracteristicas medicas generales',
     'updateGeneralMedicalFeatures.success':
-      'Se han actualizado las caracteristicas medicas generales {generalMedicalFeatures.id} correctamente',
+      'Se han actualizado las caracteristicas medicas generales correctamente',
     'updateGeneralMedicalFeatures.error':
-      'Ha ocurrido un error inesperado al actualizar las caracteristicas medicas generales ${id}',
+      'Ha ocurrido un error inesperado al actualizar las caracteristicas medicas generales ',
     'deleteGeneralMedicalFeatures.success':
-      'Se han eliminado las caracteristicas medicas generales {id} correctamente',
+      'Se han eliminado las caracteristicas medicas generales correctamente',
     'deleteGeneralMedicalFeatures.error':
-      'Ha ocurrido un error inesperado al eliminar las caracteristicas medicas generales {id} correctamente',
+      'Ha ocurrido un error inesperado al eliminar las caracteristicas medicas generales correctamente',
     //HEALTH CENTERS
     'getHealthCenters.success':
       'Se han obtenido todos los centros de salud de la base de datos',
     'getHealthCenters.error':
       'Ha ocurrido un error inesperado al obtener todos los centros de salud',
-    'getHealthCenter.success': 'Se han obtenido el centro de salud {idCenter}',
+    'getHealthCenter.success': 'Se han obtenido el centro de salud',
     'getHealthCenter.error':
-      'Ha ocurrido un error inesperado al obtener el centro de salud {idCenter}',
+      'Ha ocurrido un error inesperado al obtener el centro de salud',
     'insertHealthCenter.success':
       'Se han creado el centro de salud correctamente',
     'insertHealthCenter.error':
       'Ha ocurrido un error inesperado creando el centro de salud',
     'updateHealthCenter.success':
-      'Se han actualizado el centro de salud {healthCenter.idCenter} correctamente',
+      'Se han actualizado el centro de salud correctamente',
     'updateHealthCenter.error':
-      'Ha ocurrido un error inesperado al actualizar el centro de salud {idCenter}',
+      'Ha ocurrido un error inesperado al actualizar el centro de salud',
     'deleteHealthCenter.success':
-      'Se han eliminado el centro de salud {idCenter} correctamente',
+      'Se han eliminado el centro de salud correctamente',
     'deleteHealthCenter.error':
-      'Ha ocurrido un error inesperado al eliminar el centro de salud {idCenter} correctamente',
+      'Ha ocurrido un error inesperado al eliminar el centro de salud correctamente',
     //PEOPLE
     'getPeople.success':
       'Se han obtenido todas las personas de la base de datos',
     'getPeople.error':
       'Ha ocurrido un error inesperado al obtener todas las personas',
-    'getPerson.success': 'Se han obtenido la persona {document}',
-    'getPerson.error':
-      'Ha ocurrido un error inesperado al obtener la persona {document}',
-    'insertPerson.success':
-      'Se han creado la persona {person.document} correctamente',
-    'insertPerson.error':
-      'Ha ocurrido un error inesperado creando la persona {person.document}',
-    'updatePerson.success':
-      'Se han actualizado la persona {person.document} correctamente',
+    'getPerson.success': 'Se han obtenido la persona',
+    'getPerson.error': 'Ha ocurrido un error inesperado al obtener la persona',
+    'insertPerson.success': 'Se han creado la persona correctamente',
+    'insertPerson.error': 'Ha ocurrido un error inesperado creando la persona',
+    'updatePerson.success': 'Se han actualizado la persona correctamente',
     'updatePerson.error':
-      'Ha ocurrido un error inesperado al actualizar la persona {document}',
-    'deletePerson.success':
-      'Se han eliminado la persona {document} correctamente',
+      'Ha ocurrido un error inesperado al actualizar la persona',
+    'deletePerson.success': 'Se han eliminado la persona correctamente',
     'deletePerson.error':
-      'Ha ocurrido un error inesperado al eliminar la persona {document} correctamente',
+      'Ha ocurrido un error inesperado al eliminar la persona correctamente',
     //PROFESSIONS
     'getProfessions.success':
       'Se han obtenido todas las profesiones de la base de datos',
@@ -212,50 +201,45 @@ export default {
     'insertProfession.success': 'Se ha creado la profesion correctamente',
     'insertProfession.error':
       'Ha ocurrido un error inesperado creando la profesion',
-    'updateProfession.success':
-      'Se ha actualizado la profesion {profession.id} correctamente',
+    'updateProfession.success': 'Se ha actualizado la profesion correctamente',
     'updateProfession.error':
-      'Ha ocurrido un error inesperado al actualizar la profesion {id}',
-    'deleteProfession.success':
-      'Se ha eliminado la profesion {id} correctamente',
+      'Ha ocurrido un error inesperado al actualizar la profesion',
+    'deleteProfession.success': 'Se ha eliminado la profesion correctamente',
     'deleteProfession.error':
-      'Ha ocurrido un error inesperado al eliminar la profesion {id} correctamente',
+      'Ha ocurrido un error inesperado al eliminar la profesion correctamente',
     //QUERIES
     'getQueries.success':
       'Se han obtenido todas las consultas de la base de datos',
     'getQueries.error':
       'Ha ocurrido un error inesperado al obtener todas las consultas',
-    'getQuery.success': 'Se ha obtenido la consulta {id}',
-    'getQuery.error':
-      'Ha ocurrido un error inesperado al obtener la consulta {id}',
+    'getQuery.success': 'Se ha obtenido la consulta',
+    'getQuery.error': 'Ha ocurrido un error inesperado al obtener la consulta',
     'insertQuery.success': 'Se ha creado la consulta correctamente',
     'insertQuery.error': 'Ha ocurrido un error inesperado creando la consulta',
-    'updateQuery.success':
-      'Se ha actualizado la consulta {query.id} correctamente',
+    'updateQuery.success': 'Se ha actualizado la consulta correctamente',
     'updateQuery.error':
-      'Ha ocurrido un error inesperado al actualizar la consulta {id}',
-    'deleteQuery.success': 'Se ha eliminado la consulta {id} correctamente',
+      'Ha ocurrido un error inesperado al actualizar la consulta',
+    'deleteQuery.success': 'Se ha eliminado la consulta correctamente',
     'deleteQuery.error':
-      'Ha ocurrido un error inesperado al eliminar la consulta {id} correctamente',
+      'Ha ocurrido un error inesperado al eliminar la consulta correctamente',
     //SPECIALTIES
     'getSpecialties.success':
       'Se han obtenido todas las especialidades de la base de datos',
     'getSpecialties.error':
       'Ha ocurrido un error inesperado al obtener todas las especialidades',
-    'getSpecialty.success': 'Se ha obtenido la especialidad {id}',
+    'getSpecialty.success': 'Se ha obtenido la especialidad',
     'getSpecialty.error':
-      'Ha ocurrido un error inesperado al obtener la especialidad {id}',
+      'Ha ocurrido un error inesperado al obtener la especialidad',
     'insertSpecialty.success': 'Se ha creado la especialidad correctamente',
     'insertSpecialty.error':
       'Ha ocurrido un error inesperado creando la especialidad',
     'updateSpecialty.success':
-      'Se ha actualizado la especialidad {specialty.id} correctamente',
+      'Se ha actualizado la especialidad correctamente',
     'updateSpecialty.error':
-      'Ha ocurrido un error inesperado al actualizar la especialidad {id}',
-    'deleteSpecialty.success':
-      'Se ha eliminado la especialidad {id} correctamente',
+      'Ha ocurrido un error inesperado al actualizar la especialidad',
+    'deleteSpecialty.success': 'Se ha eliminado la especialidad correctamente',
     'deleteSpecialty.error':
-      'Ha ocurrido un error inesperado al eliminar la especialidad {id} correctamente',
+      'Ha ocurrido un error inesperado al eliminar la especialidad correctamente',
     //Authotization
     'auth.noAuth': 'No está auorizado para realizar esta acción',
     //404
@@ -302,10 +286,13 @@ export default {
     'register.form-phonneContact': 'Teléfono *',
     'register.form-emailContact': 'Correo electrónico',
     'register.form-directionContact': 'Dirección',
+    'register.form-deleteContact': 'Quitar',
     'register.form-add': 'Agregar Contacto',
     'register.form-save': 'Guardar',
+    'register.form-update': 'Actualizar',
     'register.form-next': 'Siguiente',
     'register.form-previous': 'Anterior',
+    'register.form-back': 'Volver',
     'register.form-Select': 'Seleccione',
     'register.form-GenreM': 'Masculino',
     'register.form-GenreF': 'Femenino',

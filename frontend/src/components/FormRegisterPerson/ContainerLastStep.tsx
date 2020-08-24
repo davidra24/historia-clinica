@@ -28,6 +28,7 @@ export const ContainerLastStep = ({
   Stepper,
   onPrevStep,
   onSubmit,
+  update,
 }: any) => (
   <>
     <Card className='flex justify-center flex-col w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
@@ -66,6 +67,7 @@ export const ContainerLastStep = ({
         contacts={listContact}
         pushContact={null}
         disabled={true}
+        removeContact={null}
       />
       <div className='flex flex-col w-full mt-8'>
         <div className='flex justify-center w-full'>{Stepper}</div>
@@ -79,7 +81,9 @@ export const ContainerLastStep = ({
             type='submit'
             onClick={onSubmit}
           >
-            {TextMessage('register.form-save')}
+            {update
+              ? TextMessage('register.form-update')
+              : TextMessage('register.form-save')}
           </Button>
         </div>
       </div>

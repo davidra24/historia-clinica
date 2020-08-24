@@ -100,14 +100,16 @@ export class PeopleController {
           data: persona,
         })
       )
-      .catch((error) =>
-        cryptedResponse(res, 500, {
+      .catch((error) => {
+        console.log('udpate error', error);
+
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'updatePerson.error',
           data: error.toString(),
-        })
-      );
+        });
+      });
   }
   async deletePerson(req: Request, res: Response) {
     const { document } = req.params;

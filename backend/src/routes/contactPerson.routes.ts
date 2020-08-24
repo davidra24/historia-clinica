@@ -23,7 +23,7 @@ api.put(
   contactPersoncontroller.updateContactPerson
 );
 api.delete(
-  '/contactsPerson/:document',
+  '/contactsPerson/:userDocument',
   auth,
   contactPersoncontroller.deleteContactPerson
 );
