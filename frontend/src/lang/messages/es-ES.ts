@@ -331,9 +331,11 @@ export default {
     //DASHBOARD - PROFESSIONAL
     'dashboard-professional.specialties': 'Especialidades',
     'dashboard-professional.specialties-description':
-      'A continuación encontrará las diferentes especialidades del(los) centro(s) de salud donde se encuentra habilitado para desempeñarse en este gran mundo de la atención y el cuidado de la salud.',
+      'A continuación encontrará las diferentes especialidades del(los) centro(s) de salud donde se encuentra habilitado para desempeñarse, de tal forma que pueda atender a un paciente ahora mismo y ayudarnos a mejorar este gran mundo de la atención y el cuidado de la salud.',
     'dashboard-professional.specialties-description-end':
       'Y recuerde su ética profesional es nuestra prioridad.',
+    'dashboard-professional.no-specialties':
+      'En el momento no existen registros de especialidades que requieran de su atención.',
     //DASHBOARD - HEALTHCENTER
     'dashboard-health.professional': 'Los profesionales de la salud',
     'dashboard-health.professional-description':
@@ -348,7 +350,7 @@ export default {
     'dashboard-health.specialties-required':
       'La especialidad para asignar al profesional es requerida',
     'dashboard-patient.no-specialties':
-      'En el momento no existen registros de especialidades',
+      'En el momento no existen registros de especialidades para ser atendido.',
   },
 };
 

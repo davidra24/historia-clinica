@@ -15,6 +15,8 @@ import {
   SET_SPECIALTIES,
   SET_ATTENTION_CENTER,
   SET_PATH_RELOAD,
+  SET_VIEW_ATTENTION_CENTER,
+  SET_ONE_ATTENTION_CENTER,
 } from './constants.redux';
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
@@ -23,6 +25,7 @@ import { ISpecialty } from '../data/ISpecialty';
 import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
 import { IAttentionCenter } from '../data/IAttentionCenter';
+import { IViewAttentionCenter } from '../data/IViewAttentionCenter';
 
 export const Loading = (payload: boolean) => ({ type: LOADING, payload });
 
@@ -82,5 +85,17 @@ export const selectProfessions = (payload: Array<IProfessions>) => ({
 
 export const setCenterAttenttion = (payload: Array<IAttentionCenter>) => ({
   type: SET_ATTENTION_CENTER,
+  payload,
+});
+
+export const setOneCenterAttention = (payload: IViewAttentionCenter) => ({
+  type: SET_ONE_ATTENTION_CENTER,
+  payload,
+});
+
+export const setViewAttenttionCenter = (
+  payload: Array<IViewAttentionCenter>
+) => ({
+  type: SET_VIEW_ATTENTION_CENTER,
   payload,
 });

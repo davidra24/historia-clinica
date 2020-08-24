@@ -17,6 +17,8 @@ import {
   SET_SPECIALTIES,
   SET_ATTENTION_CENTER,
   SET_PATH_RELOAD,
+  SET_VIEW_ATTENTION_CENTER,
+  SET_ONE_ATTENTION_CENTER,
 } from './constants.redux';
 
 const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
@@ -53,6 +55,10 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, listProfessions: action.payload };
     case SET_ATTENTION_CENTER:
       return { ...state, listAttentionsCenter: action.payload };
+    case SET_VIEW_ATTENTION_CENTER:
+      return { ...state, viewAttentionCenter: action.payload };
+    case SET_ONE_ATTENTION_CENTER:
+      return { ...state, selectedAttentionCenter: action.payload };
     default:
       return state;
   }

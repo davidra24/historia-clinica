@@ -12,6 +12,8 @@ import { Card, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { IPerson } from '../../data/IPerson';
 import { HeaderWelcomePerson } from '../../components/Dashboard/HeaderWelcomePerson';
+import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
+import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
 
 export const DashBoardPatient = () => {
   const person: IPerson = useSelector((state: IStore) => state.person);
@@ -56,39 +58,21 @@ export const DashBoardPatient = () => {
             ourPriority='dashboard-patient.specialties-description-end'
           />
           <div className='flex flex-wrap mt-4 justify-center'>
-            {specialties.length > 0 ? (
+            {specialties.length !== 0 ? (
               specialties
                 .sort((a: ISpecialty, b: ISpecialty) =>
                   a.name > b.name ? 1 : a.name < b.name ? -1 : 0
                 )
                 .map((specialty: ISpecialty) => (
-                  <Card
-                    key={specialty.id}
-                    className='flex flex-col w-full md:w-5/12 lg:w-3/12 min-h-40 max-h-full rounded-full m-4 p-2'
-                  >
-                    <Link to={`specialty/${specialty.id}`}>
-                      <div className='flex flex-col p-4'>
-                        <h2 className='text-lg text-center mb-2'>
-                          <strong>{specialty.name}</strong>
-                        </h2>
-                        <div className='flex justify-center'>
-                          <Divider className='w-10/12' />
-                        </div>
-                        <p className='flex text-sm text-justify m-2 items-center text-gray-600'>
-                          {specialty.description}
-                        </p>
-                      </div>
-                    </Link>
-                  </Card>
+                  <CardSpecialty
+                    id={specialty.id}
+                    name={specialty.name}
+                    description={specialty.description}
+                    linkTo={'specialty'}
+                  />
                 ))
             ) : (
-              <>
-                <h3 className='text-xl text-center mt-4'>
-                  <strong>
-                    {TextMessage('dashboard-patient.no-specialties')}
-                  </strong>
-                </h3>
-              </>
+              <NoSpecialties />
             )}
           </div>
         </div>

@@ -3,7 +3,6 @@ import { db } from '../database';
 import healthCenterDB from '../database/HealthCenters.database';
 import peopleDB from '../database/People.database';
 import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
-import { PersonModel } from 'src/models/Person';
 
 export class HealthCenterController {
   app = express();
@@ -69,31 +68,16 @@ export class HealthCenterController {
   }
   async insertHealthCenter(req: Request, res: Response) {
     const { healthCenter } = await decryptRequest(req);
-    const { document } = healthCenter;
     await db
       .none(() => healthCenterDB.insertHealthCenter(healthCenter))
-      .then(async (Center) => {
-        await db
-          .one(() => peopleDB.getOnePerson(document))
-          .then(async (person: PersonModel) => {
-            const auxPerson: PersonModel = {
-              ...person,
-              is_healt_care_team: true,
-            };
-            await db
-              .none(() => peopleDB.updatePerson(document, auxPerson))
-              .then(() => {
-                cryptedResponse(res, 200, {
-                  ok: true,
-                  status: 200,
-                  message: 'insertHealthCenter.success',
-                  data: Center,
-                });
-              })
-              .catch((err) => {});
-          })
-          .catch((err) => {});
-      })
+      .then(async (Center) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'insertHealthCenter.success',
+          data: Center,
+        })
+      )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
