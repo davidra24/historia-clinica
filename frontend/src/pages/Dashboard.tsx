@@ -24,7 +24,7 @@ export const Dashboard = () => {
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
   //TODO -> Eliminar en producción
-  history.push(reloadRoute);
+  //history.push(reloadRoute);
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
