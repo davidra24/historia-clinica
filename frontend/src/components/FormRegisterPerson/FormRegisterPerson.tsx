@@ -348,7 +348,7 @@ export const FormRegisterPerson = ({
                     >
                       {ARRAY_STRATES.map((strate: any) => (
                         <MenuItem key={strate.id} value={strate.id}>
-                          {TextMessage(strate.name)}
+                          {strate.name}
                         </MenuItem>
                       ))}
                     </Select>

@@ -329,6 +329,11 @@ export default {
     'dashboard-patient.specialties-description-end':
       'Y recuerde su estado de salud es nuestra prioridad.',
     //DASHBOARD - PROFESSIONAL
+    'dashboard-professional.specialties': 'Especialidades',
+    'dashboard-professional.specialties-description':
+      'A continuación encontrará las diferentes especialidades del(los) centro(s) de salud donde se encuentra habilitado para desempeñarse en este gran mundo de la atención y el cuidado de la salud.',
+    'dashboard-professional.specialties-description-end':
+      'Y recuerde su ética profesional es nuestra prioridad.',
     //DASHBOARD - HEALTHCENTER
     'dashboard-health.professional': 'Los profesionales de la salud',
     'dashboard-health.professional-description':

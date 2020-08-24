@@ -10,7 +10,7 @@ import { useCookies } from 'react-cookie';
 import { SnackBarAlert } from '../../util/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../../redux/types';
-import { SnackTitleMsg, SnackMsg } from '../../redux/actions';
+import { SnackTitleMsg, SnackMsg, setPerson } from '../../redux/actions';
 import {
   setMsgSuccessVisbility,
   setMsgErrorVisbility,
@@ -254,11 +254,12 @@ export const RegisterPerson = ({
     setLoading(true);
     const response = await post<IPerson>(HTTP_PEOPLE, { person }, token);
     if (response) {
-      const { message } = response;
+      const { message, data } = response;
       if (response.ok) {
         dispatch(SnackTitleMsg('register.success-title'));
         dispatch(SnackMsg(message));
         dispatch(setMsgSuccessVisbility(true));
+        dispatch(setPerson(data));
       } else {
         dispatch(SnackTitleMsg('register.error-title'));
         dispatch(SnackMsg(message));
@@ -281,11 +282,12 @@ export const RegisterPerson = ({
       token
     );
     if (response) {
-      const { message } = response;
+      const { message, data } = response;
       if (response.ok) {
         dispatch(SnackTitleMsg('register.success-title'));
         dispatch(SnackMsg(message));
         dispatch(setMsgSuccessVisbility(true));
+        dispatch(setPerson(data));
       } else {
         dispatch(SnackTitleMsg('register.error-title'));
         dispatch(SnackMsg(message));

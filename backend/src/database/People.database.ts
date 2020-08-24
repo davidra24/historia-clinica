@@ -76,9 +76,9 @@ export default {
                  ${COL_CIVIL_STATE}='${person.civil_state}', ${COL_PHOTO}='${
     person.photo
   }',${COL_PHONE}='${person.phone}', ${COL_ID_EPS} = '${person.id_eps}', 
-                 ${COL_ID_PROFESSION} = '${
-    person.id_profesion
-  }', ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
+                 ${COL_ID_PROFESSION} = ${
+    person.id_profesion ? `'${person.id_profesion}'` : null
+  }, ${COL_STRATUM} = ${person.stratum}, ${COL_DECEASED} = ${person.deceased},
                  ${COL_DECEASED_DATE} = ${
     person.deceased_date ? `'${person.deceased_date}'` : null
   }, ${COL_IS_HEALTH_CARE_TEAM} = ${

@@ -54,6 +54,7 @@ export const Dashboard = () => {
       const { ok, data } = response;
       if (ok) {
         dispatch(setPerson(data));
+        console.log('person', data);
       } else {
         history.push('/completeRegister');
       }
@@ -88,7 +89,7 @@ export const Dashboard = () => {
       ) : (
         <>
           {person ? (
-            !person.is_healt_care_team ? (
+            !person.is_health_care_team ? (
               <DashBoardPatient />
             ) : (
               <DashBoardProfessional />

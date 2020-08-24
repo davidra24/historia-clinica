@@ -48,7 +48,6 @@ export const ProfilePerson = () => {
       const { ok, data } = response;
       if (ok) {
         setContacts(data);
-        console.log('datacontacts', data);
       }
     }
     setLoading(false);
