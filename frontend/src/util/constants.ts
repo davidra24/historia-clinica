@@ -17,6 +17,7 @@ export const HTTP_CONTACTS_PERSON = 'contactsperson';
 export const HTTP_SPECIALTIES = 'specialties';
 export const HTTP_ATTENTIONS_CENTER = 'attentioncenters';
 
+export const PATTERN_EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PATTERN_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*+-])(?=.*[^\da-zA-ZÀ-ÿ\u00f1\u00d1]).{8,}$/;
 
 export const DEFAULT_PROFILE_PIC =

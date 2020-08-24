@@ -3,7 +3,7 @@ import { FormRegisterPerson } from '../../components/FormRegisterPerson/FormRegi
 import {
   useInputValue,
   useDatePicker,
-  useSelectValue,
+  useInputValidator,
 } from '../../hooks/useInput';
 import { toBase64 } from '../../util/Util';
 import { useCookies } from 'react-cookie';
@@ -27,6 +27,7 @@ import {
   HTTP_PEOPLE,
   HTTP_CONTACTS_PERSON,
   DEFAULT_PROFILE_PIC,
+  PATTERN_EMAIL,
 } from '../../util/constants';
 import { IResponse } from '../../data/IResponse';
 import { IPerson } from '../../data/IPerson';
@@ -34,8 +35,25 @@ import { IContactPerson } from '../../data/IContactPerson';
 import { useHistory } from 'react-router';
 import { isValid } from 'date-fns';
 import { Loading } from '../../components/Loading';
+import { IRegisterPerson } from '../../data/IRegisterPerson';
 
-export const RegisterPerson = () => {
+export const RegisterPerson = ({
+  isEdit,
+  firstNameInfo,
+  secondNameInfo,
+  lastNameInfo,
+  lastSecondNameInfo,
+  emailInfo,
+  phoneInfo,
+  photoInfo,
+  genreInfo,
+  civilStateInfo,
+  epsInfo,
+  professionInfo,
+  stratumInfo,
+  dateBirthInfo,
+  arrayContacts,
+}: IRegisterPerson) => {
   const openMsgError = useSelector((state: IStore) => state.openMsgError);
   const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
   const snackTitle = useSelector((state: IStore) => state.snackTitle);
@@ -45,31 +63,33 @@ export const RegisterPerson = () => {
   const dispatch = useDispatch();
 
   //Personal data
-  const firstName = useInputValue('');
-  const secondName = useInputValue('');
-  const lastName = useInputValue('');
-  const lastSecondName = useInputValue('');
-  const email = useInputValue('');
-  const phone = useInputValue('');
-  const idProfession = useInputValue('');
-  const stratum = useInputValue('');
-
-  const genre = useSelectValue('');
-  const civilState = useSelectValue('');
-  const idEPS = useSelectValue('');
-  const dateBirth = useDatePicker(null);
+  const firstName = useInputValidator(firstNameInfo || '');
+  const secondName = useInputValue(secondNameInfo || '');
+  const lastName = useInputValidator(lastNameInfo || '');
+  const lastSecondName = useInputValue(lastSecondNameInfo || '');
+  const email = useInputValidator(emailInfo || '');
+  const phone = useInputValidator(phoneInfo || '');
+  const [image, setImage] = useState<any>(photoInfo || DEFAULT_PROFILE_PIC);
+  const genre = useInputValidator(genreInfo || '');
+  const civilState = useInputValidator(civilStateInfo || '');
+  const idEPS = useInputValidator(epsInfo || '');
+  const idProfession = useInputValue(professionInfo || '');
+  const stratum = useInputValue(stratumInfo || '');
+  const dateBirth = useDatePicker(dateBirthInfo || null);
 
   const [cookie] = useCookies(['token']);
   //Contact
-  const documentContact = useInputValue('');
-  const nameContact = useInputValue('');
-  const phoneContact = useInputValue('');
-  const emailContact = useInputValue('');
+  const documentContact = useInputValidator('');
+  const nameContact = useInputValidator('');
+  const phoneContact = useInputValidator('');
+  const emailContact = useInputValidator('');
   const directionContact = useInputValue('');
-  const [listContact, setListContact] = useState<Array<IContact>>([]);
+  const [listContact, setListContact] = useState<Array<IContact>>(
+    arrayContacts || []
+  );
 
-  const [image, setImage] = useState<any>(DEFAULT_PROFILE_PIC);
   const [valide, setValide] = useState(false);
+  const [valideContact, setValideContact] = useState(false);
   const [token, setToken] = useState(cookie.token);
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -86,42 +106,89 @@ export const RegisterPerson = () => {
   };
 
   const handleSubmit = async () => {
-    const okContact = await pushContactData();
-    if (okContact) {
-      pushPersonData().then(async () => {
-        const okContactPerson = await pushContactPersonData();
-        if (okContactPerson) {
-          dispatch(SnackTitleMsg('register.success-title'));
-          dispatch(SnackMsg('insertContact.success'));
-          dispatch(setMsgSuccessVisbility(true));
-          history.push('/');
-        } else {
-          dispatch(SnackTitleMsg('register.error-title'));
-          dispatch(SnackMsg('insertContact.error'));
-          dispatch(setMsgErrorVisbility(true));
-        }
-      });
+    if (!isEdit) {
+      const okContact = await pushContactData();
+      if (okContact) {
+        pushPersonData().then(async () => {
+          const okContactPerson = await pushContactPersonData();
+          if (okContactPerson) {
+            dispatch(SnackTitleMsg('register.success-title'));
+            dispatch(SnackMsg('insertContact.success'));
+            dispatch(setMsgSuccessVisbility(true));
+            history.push('/');
+          } else {
+            dispatch(SnackTitleMsg('register.error-title'));
+            dispatch(SnackMsg('insertContact.error'));
+            dispatch(setMsgErrorVisbility(true));
+          }
+        });
+      }
+    } else {
     }
   };
 
   const validate = (): boolean => {
+    const firstNameValidator =
+      firstName.value !== null && firstName.value !== '';
+    const lastNameValidator = lastName.value !== null && lastName.value !== '';
+    const emailValidator =
+      email.value === '' || PATTERN_EMAIL.test(email.value);
+    const phoneValidator = phone.value !== null && phone.value !== '';
+
     const genreValidator = genre.value !== null && genre.value !== '';
     const civilStateValidator =
       civilState.value !== null && civilState.value !== '';
     const ipsValidator = idEPS.value !== null && idEPS.value !== '';
     const dateValidator = dateBirth.value !== null && isValid(dateBirth.value);
-    genre.setValidator(genre.value !== null && genre.value !== '');
-    civilState.setValidator(
-      civilState.value !== null && civilState.value !== ''
-    );
-    idEPS.setValidator(idEPS.value !== null && idEPS.value !== '');
-    dateBirth.setValidator(dateBirth.value !== null);
+
+    firstName.setValidator(firstNameValidator);
+    lastName.setValidator(lastNameValidator);
+    email.setValidator(emailValidator);
+    phone.setValidator(phoneValidator);
+    genre.setValidator(genreValidator);
+    civilState.setValidator(civilStateValidator);
+    idEPS.setValidator(ipsValidator);
+    dateBirth.setValidator(dateValidator);
+
     const finalValidator =
-      genreValidator && civilStateValidator && ipsValidator && dateValidator;
+      firstNameValidator &&
+      lastNameValidator &&
+      emailValidator &&
+      phoneValidator &&
+      genreValidator &&
+      civilStateValidator &&
+      ipsValidator &&
+      dateValidator;
     setValide(finalValidator);
     return finalValidator;
   };
   useEffect(() => {}, [valide]);
+
+  const validateContact = (): boolean => {
+    const documentContactValidator =
+      documentContact.value !== '' && documentContact.value !== null;
+    const nameContactValidator =
+      nameContact.value !== '' && nameContact.value !== null;
+    const phoneContactValidator =
+      phoneContact.value !== '' && phoneContact.value !== null;
+    const emailContactValidator =
+      emailContact.value === '' || PATTERN_EMAIL.test(emailContact.value);
+
+    documentContact.setValidator(documentContactValidator);
+    nameContact.setValidator(nameContactValidator);
+    phoneContact.setValidator(phoneContactValidator);
+    emailContact.setValidator(emailContactValidator);
+
+    const finalValidator =
+      documentContactValidator &&
+      nameContactValidator &&
+      phoneContactValidator &&
+      emailContactValidator;
+
+    setValideContact(finalValidator);
+    return finalValidator;
+  };
+  useEffect(() => {}, [valideContact]);
 
   const pushContactData = async (): Promise<boolean> => {
     setLoading(true);
@@ -229,7 +296,8 @@ export const RegisterPerson = () => {
       });
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (event: React.SyntheticEvent) => {
+    event.preventDefault();
     const finalValidator = validate();
     if (finalValidator) {
       setActiveStep(activeStep + 1);
@@ -248,24 +316,28 @@ export const RegisterPerson = () => {
     dispatch(setMsgErrorVisbility(false));
   };
 
-  const pushContact = () => {
-    const contact: IContact = {
-      document: documentContact.value,
-      name: nameContact.value,
-      phone: phoneContact.value,
-      email: emailContact.value,
-      direction: directionContact.value,
-    };
-    if (listContact.length < 3) {
-      const auxContact = [...listContact];
-      auxContact.push(contact);
-      setListContact(auxContact);
-    } else {
-      dispatch(SnackTitleMsg('register.error-titleContact'));
-      dispatch(SnackMsg('register.error-msgContact'));
-      dispatch(setMsgErrorVisbility(true));
+  const pushContact = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const finalValidator = validateContact();
+    if (finalValidator) {
+      const contact: IContact = {
+        document: documentContact.value,
+        name: nameContact.value,
+        phone: phoneContact.value,
+        email: emailContact.value,
+        direction: directionContact.value,
+      };
+      if (listContact.length < 3) {
+        const auxContact = [...listContact];
+        auxContact.push(contact);
+        setListContact(auxContact);
+      } else {
+        dispatch(SnackTitleMsg('register.error-titleContact'));
+        dispatch(SnackMsg('register.error-msgContact'));
+        dispatch(setMsgErrorVisbility(true));
+      }
+      cleanFields();
     }
-    cleanFields();
   };
 
   const cleanFields = () => {

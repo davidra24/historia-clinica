@@ -44,7 +44,6 @@ export const FormRegisterContact = ({
   disabled,
 }: RegisterContactTypes) => {
   const [loading, setLoading] = useState(false);
-  const { handleSubmit, register, errors } = useForm();
   const dispatch = useDispatch();
 
   const newHandleSubmit = () => {
@@ -69,32 +68,31 @@ export const FormRegisterContact = ({
             </h2>
 
             {!disabled && (
-              <form onSubmit={handleSubmit(pushContact)} className='space-y-4'>
+              <form onSubmit={pushContact} className='space-y-4'>
                 <div className='flex flex-col md:flex-row space-y-1 justify-around md:items-baseline'>
                   <FormControl className='w-12/12 md:w-5/12'>
                     <TextField
                       id='float-document'
                       name='document'
-                      inputRef={register(validationsDocument)}
                       variant='outlined'
                       label={TextMessage('register.form-documentContact')}
                       {...document}
                     />
                     <span className='text-red-600'>
-                      {errors.document && errors.document.message}
+                      {!document.validator && TextMessage('document.required')}
                     </span>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
                     <TextField
                       id='float-name'
                       name='name'
-                      inputRef={register(validationsNameContact)}
                       variant='outlined'
                       label={TextMessage('register.form-nameContact')}
                       {...name}
                     />
                     <span className='text-red-600'>
-                      {errors.name && errors.name.message}
+                      {!name.validator &&
+                        TextMessage('register.form-nameContact-required')}
                     </span>
                   </FormControl>
                 </div>
@@ -103,26 +101,27 @@ export const FormRegisterContact = ({
                     <TextField
                       id='float-phone'
                       name='phone'
-                      inputRef={register(validationsPhone)}
                       variant='outlined'
                       label={TextMessage('register.form-phonneContact')}
                       {...phone}
                     />
                     <span className='text-red-600'>
-                      {errors.phone && errors.phone.message}
+                      {!phone.validator &&
+                        TextMessage('register.form-phone-required')}
                     </span>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
                     <TextField
                       id='float-email'
                       name='email'
-                      inputRef={register(validationsEmail)}
                       variant='outlined'
                       label={TextMessage('register.form-emailContact')}
-                      {...email}
+                      value={email.value}
+                      onChange={email.onChange}
                     />
                     <span className='text-red-600'>
-                      {errors.email && errors.email.message}
+                      {!email.validator &&
+                        TextMessage('register.form-email-invalid')}
                     </span>
                   </FormControl>
                 </div>

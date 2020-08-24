@@ -13,7 +13,7 @@ import {
   Select,
   MenuItem,
 } from '@material-ui/core';
-import { useSelectValue } from '../../hooks/useInput';
+import { useInputValidator } from '../../hooks/useInput';
 import { ISpecialty } from '../../data/ISpecialty';
 import { useCookies } from 'react-cookie';
 import { HTTP_SPECIALTIES, HTTP_ATTENTIONS_CENTER } from '../../util/constants';
@@ -32,8 +32,8 @@ export const DashBoardHealthCenter = () => {
   const specialties: Array<ISpecialty> = useSelector(
     (state: IStore) => state.specialties
   );
-  const professionalValue = useSelectValue('');
-  const specialtyValue = useSelectValue('');
+  const professionalValue = useInputValidator('');
+  const specialtyValue = useInputValidator('');
 
   const healthCenter: IHealthCareCenter = useSelector(
     (state: IStore) => state.healthCenter

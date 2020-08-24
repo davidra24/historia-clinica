@@ -12,11 +12,16 @@ import { HTTP_VERIFY } from '../util/constants';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
-  //const reloadRoute = useSelector((state: IStore) => state.reloadRoute);
+  const reloadRoute = useSelector((state: IStore) => state.reloadRoute);
   const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
 
   const lang = localStorage.getItem('language');
+
+  if (!reloadRoute) {
+    const { pathname } = window.location;
+    dispatch(setReloadPath(pathname));
+  }
 
   if (!lang) {
     localStorage.setItem('language', LOCALES.SPANISH);

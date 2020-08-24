@@ -10,7 +10,11 @@ export const RegisterData = () => {
   return (
     <>
       <div className='w-full'>
-        {user?.document_type ? <RegisterPerson /> : <RegisterHealthCenter />}
+        {user.document_type ? (
+          <RegisterPerson isEdit={false} />
+        ) : (
+          <RegisterHealthCenter />
+        )}
       </div>
     </>
   );

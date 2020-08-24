@@ -9,7 +9,7 @@ export const useInputValue = (initialValue: any) => {
   return { value, onChange, clean };
 };
 
-export const useSelectValue = (initialValue: any) => {
+export const useInputValidator = (initialValue: any) => {
   const [value, setValue] = useState(initialValue);
   const [validator, setValidator] = useState<boolean>(true);
   const onChange = (e: any) => {

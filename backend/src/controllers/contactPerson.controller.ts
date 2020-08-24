@@ -1,28 +1,66 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import contactPersonDB from "../database/ContactPerson.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import contactPersonDB from '../database/ContactPerson.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class ContactPersonController {
   app = express();
   constructor() {
     this.createTable();
+    this.createView();
   }
   async createTable() {
     await db
       .none(contactPersonDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "contact person table created",
+        status: 'success creating table',
+        message: 'contact person table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
+  }
+  async createView() {
+    await db
+      .none(contactPersonDB.createViewContactPerson)
+      .then(() => ({
+        ok: true,
+        status: 'success creating view',
+        message: 'contact person view created',
+        data: null,
+      }))
+      .catch((error) => ({
+        ok: false,
+        status: 'unsuccess creating view',
+        message: error,
+        data: null,
+      }));
+  }
+  async getViewData(req: Request, res: Response) {
+    const { idPerson } = req.params;
+    await db
+      .any(() => contactPersonDB.selectFormView(idPerson))
+      .then((contactoPersonas) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getContactsPerson.success',
+          data: contactoPersonas,
+        })
+      )
+      .catch((error) =>
+        cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getContactsPerson.error',
+          data: error.toString(),
+        })
+      );
   }
   async getContactPerson(req: Request, res: Response) {
     await db
@@ -31,7 +69,7 @@ export class ContactPersonController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
-          message:'getContactsPerson.success',
+          message: 'getContactsPerson.success',
           data: contactoPersonas,
         })
       )
@@ -134,8 +172,7 @@ export class ContactPersonController {
         cryptedResponse(res, 500, {
           ok: false,
           status: 500,
-          message: 
-          'deleteContactPerson.error',
+          message: 'deleteContactPerson.error',
           data: error.toString(),
         })
       );

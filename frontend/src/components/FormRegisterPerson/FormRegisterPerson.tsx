@@ -62,7 +62,7 @@ export const FormRegisterPerson = ({
   Stepper,
   disabled,
 }: RegisterPersonTypes) => {
-  const { handleSubmit, register, errors, control } = useForm();
+  //const { handleSubmit, register, errors, control } = useForm();
 
   const listEps = useSelector((state: IStore) => state.listEPS);
   const listProfessions = useSelector((state: IStore) => state.listProfessions);
@@ -135,7 +135,7 @@ export const FormRegisterPerson = ({
             <h2 className='text-lg text-center'>
               <strong>{TextMessage('register.person')}</strong>
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
               <div className='flex flex-col justify-center space-y-3'>
                 <div className='flex justify-center'>
                   <Button component='label' disabled={disabled}>
@@ -157,14 +157,14 @@ export const FormRegisterPerson = ({
                     <TextField
                       id='float-firstName'
                       name='firstName'
-                      inputRef={register(validationsFirstName)}
                       variant='outlined'
                       label={TextMessage('register.form-firstName')}
                       {...firstName}
                       disabled={disabled}
                     />
                     <span className='text-red-600'>
-                      {errors.firstName && errors.firstName.message}
+                      {!firstName.validator &&
+                        TextMessage('register.form-firstName-required')}
                     </span>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
@@ -183,14 +183,14 @@ export const FormRegisterPerson = ({
                     <TextField
                       id='float-lastName'
                       name='lastName'
-                      inputRef={register(validationsLastName)}
                       variant='outlined'
                       label={TextMessage('register.form-lastName')}
                       {...lastName}
                       disabled={disabled}
                     />
                     <span className='text-red-600'>
-                      {errors.lastName && errors.lastName.message}
+                      {!lastName.validator &&
+                        TextMessage('register.form-lastName-required')}
                     </span>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
@@ -210,13 +210,13 @@ export const FormRegisterPerson = ({
                       id='float-email'
                       name='email'
                       variant='outlined'
-                      inputRef={register(validationsEmail)}
                       label={TextMessage('register.form-email')}
                       {...email}
                       disabled={disabled}
                     />
                     <span className='text-red-600'>
-                      {errors.email && errors.email.message}
+                      {!email.validator &&
+                        TextMessage('register.form-email-invalid')}
                     </span>
                   </FormControl>
                   <FormControl className='w-12/12 md:w-5/12'>
@@ -224,13 +224,13 @@ export const FormRegisterPerson = ({
                       id='float-phone'
                       name='phone'
                       variant='outlined'
-                      inputRef={register(validationsPhone)}
                       label={TextMessage('register.form-phone')}
                       disabled={disabled}
                       {...phone}
                     />
                     <span className='text-red-600'>
-                      {errors.phone && errors.phone.message}
+                      {!phone.validator &&
+                        TextMessage('register.form-phone-required')}
                     </span>
                   </FormControl>
                 </div>
@@ -246,7 +246,6 @@ export const FormRegisterPerson = ({
                       label='Genre'
                       disabled={disabled}
                       name='genre'
-                      innerRef={register(validationsGenre)}
                       {...genre}
                     >
                       {ARRAY_GENRES.map((genre: any) => (
