@@ -41,10 +41,10 @@ export class AttentionCenterController {
         data: null,
       }));
   }
-  async getViewData(req: Request, res: Response) {
+  async getViewDataByHealthCenter(req: Request, res: Response) {
     const { id } = req.params;
     await db
-      .any(() => attentionCenterDB.selectFormView(id))
+      .any(() => attentionCenterDB.selectFormViewByHealthCenter(id))
       .then((attentionCenters) =>
         cryptedResponse(res, 200, {
           ok: true,
@@ -53,16 +53,35 @@ export class AttentionCenterController {
           data: attentionCenters,
         })
       )
-      .catch((error) =>{
-        console.log(error);
-        
-        return cryptedResponse(res, 500, {
+      .catch((error) =>
+      cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'getAttentionCenters.error',
           data: error.toString(),
         })
-      });
+      );
+  }
+  async getViewDataByProfessionalDocument(req: Request, res: Response) {
+    const { id } = req.params;
+    await db
+      .any(() => attentionCenterDB.selectFormViewByProfessionalDocument(id))
+      .then((attentionCenters) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getAttentionCenters.success',
+          data: attentionCenters,
+        })
+      )
+      .catch((error) =>
+      cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getAttentionCenters.error',
+          data: error.toString(),
+        })
+      );
   }
   async getAttentionCenters(req: Request, res: Response) {
     await db
