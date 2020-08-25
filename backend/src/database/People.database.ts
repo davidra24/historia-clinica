@@ -54,7 +54,9 @@ export default {
   }','${person.last_name}','${person.last_second_name}',${person.genre}, 
           '${person.date_birth}','${person.email}','${person.civil_state}','${
     person.photo
-  }','${person.phone}','${person.id_eps}', '${person.id_profesion}',
+  }','${person.phone}','${person.id_eps}', ${
+    person.id_profesion ? `'${person.id_profesion}'` : null
+  },
           ${person.stratum}, ${person.deceased}, ${
     person.deceased_date ? `'${person.deceased_date}'` : null
   }, ${person.is_healt_care_team})`,

@@ -31,7 +31,7 @@ export const FormRegisterHealthCenter = ({
   const dispatch = useDispatch();
   return (
     <>
-      <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 pt-3 pr-10 pl-10 pb-10'>
+      <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
         <div className='flex justify-center mb-2 w-full'>
           <div className='flex flex-col w-full'>
             <div className='flex flex-col justify-center space-y-5'>

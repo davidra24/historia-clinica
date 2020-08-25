@@ -40,8 +40,19 @@ export const setPerson = (payload: IPerson | any) => ({
   type: SET_PERSON,
   payload,
 });
+
 export const setHealthCenter = (payload: IHealthCareCenter | any) => ({
   type: SET_HEALTH_CENTER,
+  payload,
+});
+
+export const setProfession = (payload: IProfessions | any) => ({
+  type: SELECT_PROFESSION,
+  payload,
+});
+
+export const setEps = (payload: IEPS | any) => ({
+  type: SELECT_EPS,
   payload,
 });
 

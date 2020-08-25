@@ -7,7 +7,7 @@ export interface IPerson {
   genre: number;
   date_birth: Date | any;
   email: string;
-  civil_state: number;
+  civil_state: string;
   photo: string;
   phone: string;
   id_eps: string;

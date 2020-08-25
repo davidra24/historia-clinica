@@ -248,6 +248,18 @@ export default {
     //Failed to fetch
     'state.failedToFetch':
       'No se ha podido acceder a los datos, revise su conexión a Internet',
+    //Profile
+    'profile.email': 'Correo electrónico',
+    'profile.phone': 'Teléfono',
+    'profile.genre': 'Género',
+    'profile.civil-state': 'Estado civil',
+    'profile.eps': 'EPS',
+    'profile.stratum': 'Estrato',
+    'profile.dateBirth': 'Fecha de nacimiento',
+    'profile.profession': 'Profesión',
+    'profile.website': 'Sitio web',
+    'profile.direction': 'Dirección',
+    'profile.description': 'Descripción',
     //Register person
     'register.person': 'Información Personal',
     'register.contact': 'Información de Contacto',
