@@ -33,6 +33,7 @@ export default {
     //SIGNFORM
     'signForm.document': 'Document',
     'signForm.password': 'Password',
+    'signForm.verify-password': 'Repeat your password',
     'signForm.people': 'Person',
     'signForm.healtCarecenter': 'IPS',
     'document.required': 'The document is required',

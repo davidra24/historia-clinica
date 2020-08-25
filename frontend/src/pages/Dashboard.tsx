@@ -71,7 +71,6 @@ export const Dashboard = () => {
     );
     if (response) {
       console.log('response health', response);
-
       const { ok, data } = response;
       if (ok) {
         dispatch(setHealthCenter(data));

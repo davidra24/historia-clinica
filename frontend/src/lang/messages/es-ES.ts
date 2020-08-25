@@ -45,6 +45,7 @@ export default {
     //SIGNFORM
     'signForm.document': 'Documento',
     'signForm.password': 'Contraseña',
+    'signForm.verify-password': 'Repita su contraseña',
     'signForm.people': 'Persona',
     'signForm.healtCarecenter': 'IPS',
     'document.required': 'El documento es requerido',
@@ -336,6 +337,20 @@ export default {
       'Y recuerde su ética profesional es nuestra prioridad.',
     'dashboard-professional.no-specialties':
       'En el momento no existen registros de especialidades que requieran de su atención.',
+    'dashboard-professional.title-consult': 'Consulta de paciente',
+    'dashboard-professional.title-info': 'Información de paciente',
+    'dashboard-professional.patient-document': 'Documento de paciente',
+    'dashboard-professional.patient-consult': 'Consultar paciente',
+    'dashboard-professional.patient-consult-document': 'Documento de paciente:',
+    'dashboard-professional.patient-consult-name': 'Nombre de paciente:',
+    'dashboard-professional.patient-consult-genre': 'Genero de paciente:',
+    'dashboard-professional.patient-consult-birth': 'Edad de paciente: ',
+    'dashboard-professional.patient-consult-birth-age': 'años',
+    'dashboard-professional.patient-general-consultation':
+      'INFORMACIÓN MÉDICA GENERAL',
+    'dashboard-professional.patient-specialty-history':
+      'HISTORIAL DE EVOLUCIÓN',
+    'dashboard-professional.patient-specialty-consultation': 'AÑADIR EVOLUCIÓN',
     //DASHBOARD - HEALTHCENTER
     'dashboard-health.professional': 'Los profesionales de la salud',
     'dashboard-health.professional-description':
@@ -351,6 +366,22 @@ export default {
       'La especialidad para asignar al profesional es requerida',
     'dashboard-patient.no-specialties':
       'En el momento no existen registros de especialidades para ser atendido.',
+    'dashboard-health.name-professional': 'Nombre de profesional',
+    'dashboard-health.specialty-professional': 'Especialidad de profesional',
+    'dashboard-health.phone-professional': 'Teléfono de profesional',
+    'dashboard-health.enabled-professional': 'Profesional habilitado en centro',
+    //Evolution
+    'evolution.generalfeature-height': 'Altura',
+    'evolution.generalfeature-weight': 'Peso',
+    'evolution.generalfeature-drink': 'Bebe',
+    'evolution.generalfeature-smokes': 'Fuma',
+    'evolution.generalfeature-vices': 'Vicios',
+    'evolution.generalfeature-manias': 'Manías',
+    'evolution.generalfeature-family-background': 'Antecedentes familiares',
+    'evolution.generalfeature-medical-and surgery-history':
+      'Antecedentes médicos y quirurgicos',
+    'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
+    'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
   },
 };
 

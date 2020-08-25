@@ -13,6 +13,8 @@ import {
 import { Loading } from '../../components/Loading';
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
 import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
+import { AttentionPatient } from '../../pages/AttentionPatient';
+import { MedicalConsultation } from '../../components/Dashboard/MedicalConsultation';
 
 export const DashBoardProfessional = () => {
   const person = useSelector((state: IStore) => state.person);
@@ -24,7 +26,9 @@ export const DashBoardProfessional = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getViewAttentionCenter();
+    if (viewAttentionCenter.length === 0) {
+      getViewAttentionCenter();
+    }
   }, []);
 
   const getViewAttentionCenter = async () => {
@@ -58,25 +62,30 @@ export const DashBoardProfessional = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className='flex flex-wrap mt-4 justify-center'>
-            {viewAttentionCenter.length !== 0 ? (
-              viewAttentionCenter.map((attentionCenter) => (
-                <CardSpecialty
-                  key={`${attentionCenter.id_health_center}-${attentionCenter.document_health_professional}`}
-                  id={attentionCenter.specialty_id}
-                  name={attentionCenter.specialty_name}
-                  description={attentionCenter.specialty_description}
-                  linkTo={'attention'}
-                  healtCenter={attentionCenter.health_center_name}
-                  onClick={() =>
-                    dispatch(setOneCenterAttention(attentionCenter))
-                  }
-                />
-              ))
-            ) : (
-              <NoSpecialties isHealthProfessional />
-            )}
-          </div>
+          <>
+            <div className='flex flex-wrap mt-4 justify-center'>
+              {viewAttentionCenter.length !== 0 ? (
+                viewAttentionCenter.map((attentionCenter) => (
+                  <CardSpecialty
+                    key={`${attentionCenter.id_health_center}-${attentionCenter.document_health_professional}`}
+                    id={attentionCenter.specialty_id}
+                    name={attentionCenter.specialty_name}
+                    description={attentionCenter.specialty_description}
+                    linkTo={'attention'}
+                    healtCenter={attentionCenter.health_center_name}
+                    onClick={() =>
+                      dispatch(setOneCenterAttention(attentionCenter))
+                    }
+                  />
+                ))
+              ) : (
+                <NoSpecialties isHealthProfessional />
+              )}
+            </div>
+            {/* <div className='mt-16 mr-auto ml-auto w-screen md:w-11/12'>
+              <MedicalConsultation />
+              </div>*/}
+          </>
         )}
       </div>
     </>

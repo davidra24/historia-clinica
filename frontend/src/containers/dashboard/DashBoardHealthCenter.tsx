@@ -16,12 +16,18 @@ import {
 import { useInputValidator } from '../../hooks/useInput';
 import { ISpecialty } from '../../data/ISpecialty';
 import { useCookies } from 'react-cookie';
-import { HTTP_SPECIALTIES, HTTP_ATTENTIONS_CENTER } from '../../util/constants';
-import { get, post } from '../../util/httpUtil';
-import { setSpecialties } from '../../redux/actions';
+import {
+  HTTP_SPECIALTIES,
+  HTTP_ATTENTIONS_CENTER,
+  HTTP_VIEW_AC_BY_HC,
+} from '../../util/constants';
+import { get, post, getOneOrMany } from '../../util/httpUtil';
+import { setSpecialties, setViewAttenttionCenter } from '../../redux/actions';
 import { Loading } from '../../components/Loading';
 import { TableHealthCenter } from '../../components/Dashboard/TableHealthCenter';
 import { IAttentionCenter } from '../../data/IAttentionCenter';
+import { IViewAttentionCenter } from '../../data/IViewAttentionCenter';
+import { IUser } from '../../data/IUser';
 
 export const DashBoardHealthCenter = () => {
   const [loading, setLoading] = useState(false);
@@ -32,12 +38,16 @@ export const DashBoardHealthCenter = () => {
   const specialties: Array<ISpecialty> = useSelector(
     (state: IStore) => state.specialties
   );
+  const viewAttentionCenter: Array<IViewAttentionCenter> = useSelector(
+    (state: IStore) => state.viewAttentionCenter
+  );
   const professionalValue = useInputValidator('');
   const specialtyValue = useInputValidator('');
 
   const healthCenter: IHealthCareCenter = useSelector(
     (state: IStore) => state.healthCenter
   );
+  const user: IUser = useSelector((state: IStore) => state.user);
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -76,6 +86,9 @@ export const DashBoardHealthCenter = () => {
     if (specialties.length === 0) {
       getSpecialties();
     }
+    if (viewAttentionCenter.length === 0) {
+      getViewAttentionCenter();
+    }
   }, []);
 
   const getSpecialties = async () => {
@@ -86,9 +99,24 @@ export const DashBoardHealthCenter = () => {
       const { ok, data } = response;
       if (ok) {
         dispatch(setSpecialties(data));
-      } else {
       }
-    } else {
+    }
+    setLoading(false);
+  };
+
+  const getViewAttentionCenter = async () => {
+    setLoading(true);
+    const { token } = cookie;
+    const response = await getOneOrMany<Array<IViewAttentionCenter>>(
+      HTTP_VIEW_AC_BY_HC,
+      user.document,
+      token
+    );
+    if (response) {
+      const { ok, data } = response;
+      if (ok) {
+        dispatch(setViewAttenttionCenter(data));
+      }
     }
     setLoading(false);
   };
@@ -125,11 +153,11 @@ export const DashBoardHealthCenter = () => {
             <Divider className='w-10/12' />
           </div>
           <div className='flex justify-center'>
-            <Card className='flex flex-col w-11/12 h-full rounded-full m-4 p-10'>
+            <Card className='flex flex-col w-8/12 h-full rounded-full m-4 p-10'>
               <form onSubmit={handleSubmit}>
                 <div className='flex flex-col justify-center space-y-3'>
                   <div className='flex flex-col md:flex-row space-y-1 justify-around sm:items-center lg:items-baseline'>
-                    <FormControl className='w-12/12 md:w-4/12'>
+                    <FormControl className='w-12/12 md:w-5/12'>
                       <TextField
                         id='float-document'
                         name='document'
@@ -147,7 +175,7 @@ export const DashBoardHealthCenter = () => {
 
                     <FormControl
                       variant='outlined'
-                      className='w-12/12 md:w-4/12'
+                      className='w-12/12 md:w-5/12'
                     >
                       <InputLabel id='form-select-eps'>
                         {TextMessage('dashboard-health.specialties-array')}
@@ -173,8 +201,10 @@ export const DashBoardHealthCenter = () => {
                           TextMessage('dashboard-health.specialties-required')}
                       </span>
                     </FormControl>
+                  </div>
+                  <div className='flex flex-col md:flex-row space-y-1 justify-center md:justify-end md:pr-8 items-center'>
                     <Button
-                      className='w-12/12 md:w-3/12'
+                      className='w-12/12'
                       variant='outlined'
                       color='primary'
                       type='submit'
@@ -187,7 +217,7 @@ export const DashBoardHealthCenter = () => {
             </Card>
           </div>
           <div className='flex justify-center'>
-            <TableHealthCenter />
+            <TableHealthCenter arrayAttentionCenter={viewAttentionCenter} />
           </div>
         </div>
       )}

@@ -79,6 +79,25 @@ export const FormSign = ({
                 <span className='text-red-600'>
                   {errors.password && errors.password.message}
                 </span>
+                {person !== undefined && setPerson && (
+                  <>
+                    <FormControl className='login__input'>
+                      <TextField
+                        id='float-password'
+                        name='password'
+                        inputRef={register(validationsPasswordUser)}
+                        variant='outlined'
+                        type='password'
+                        label={TextMessage('signForm.verify-password')}
+                        disabled={loading}
+                        {...inputPassword}
+                      />
+                    </FormControl>
+                    <span className='text-red-600'>
+                      {errors.password && errors.password.message}
+                    </span>
+                  </>
+                )}
               </div>
               {person !== undefined && setPerson && (
                 <div className='p-col-10 p-offset-2 login__input'>
@@ -90,7 +109,7 @@ export const FormSign = ({
                       <div className='p-col-7'>
                         <Switch
                           name='person'
-                          color='secondary'
+                          color='primary'
                           checked={person}
                           onChange={() => {
                             setPerson(!person);
@@ -106,7 +125,7 @@ export const FormSign = ({
                       <div className='p-col-6 p-md-9'>
                         <Switch
                           name='healtcarecenter'
-                          color='secondary'
+                          color='primary'
                           checked={!person}
                           onChange={() => {
                             setPerson(!person);

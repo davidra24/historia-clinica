@@ -23,11 +23,11 @@ export const CardSpecialty = ({
         <div className='flex justify-center'>
           <Divider className='w-10/12' />
         </div>
-        <p className='flex text-sm text-justify m-2 items-center text-gray-600'>
+        <p className='flex text-sm text-justify m-2 items-center text-gray-700'>
           {description}
         </p>
         {healtCenter && (
-          <p className='text-center text-xs text-gray-500'>{healtCenter}</p>
+          <p className='text-center text-xs text-gray-600'>{healtCenter}</p>
         )}
       </div>
     </Link>
