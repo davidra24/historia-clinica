@@ -16,9 +16,18 @@ import { Loading } from '../../components/Loading';
 import { useHistory } from 'react-router';
 import { IHealthCareCenter } from '../../data/IHealthCareCenter';
 import { HTTP_HEALTH_CENTER } from '../../util/constants';
-import { post } from '../../util/httpUtil';
+import { IRegisterHealthCenter } from '../../data/IRegisterHealthCenter';
+import { post, put, deleteRecord } from '../../util/httpUtil';
 
-export const RegisterHealthCenter = () => {
+export const RegisterHealthCenter = ({
+  isEdit,
+  nameInfo,
+  websiteInfo,
+  phoneInfo,
+  directionInfo,
+  emailInfo,
+  descriptionInfo,
+}: IRegisterHealthCenter) => {
   const openMsgError = useSelector((state: IStore) => state.openMsgError);
   const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
   const snackTitle = useSelector((state: IStore) => state.snackTitle);
@@ -29,12 +38,12 @@ export const RegisterHealthCenter = () => {
   const dispatch = useDispatch();
 
   //Health center data
-  const name = useInputValue('');
-  const website = useInputValue('');
-  const phone = useInputValue('');
-  const direction = useInputValue('');
-  const email = useInputValue('');
-  const description = useInputValue('');
+  const name = useInputValue(nameInfo || '');
+  const website = useInputValue(websiteInfo || '');
+  const phone = useInputValue(phoneInfo || '');
+  const direction = useInputValue(directionInfo || '');
+  const email = useInputValue(emailInfo || '');
+  const description = useInputValue(descriptionInfo || '');
 
   const [cookie] = useCookies(['token']);
 
@@ -52,16 +61,48 @@ export const RegisterHealthCenter = () => {
       email: email.value,
       description: description.value,
     };
+    if (!isEdit) {
+      const response = await post(HTTP_HEALTH_CENTER, { healthCenter }, token);
+      if (response) {
+        console.log(response);
+        const { ok, message } = response;
+        if (ok) {
+          dispatch(SnackTitleMsg('register.success-title'));
+          dispatch(SnackMsg(message));
+          dispatch(setMsgSuccessVisbility(true));
+          history.push('/');
+        } else {
+          dispatch(SnackTitleMsg('register.error-title'));
+          dispatch(SnackMsg(message));
+          dispatch(setMsgErrorVisbility(true));
+        }
+      } else {
+        dispatch(SnackTitleMsg('register.error-title'));
+        dispatch(SnackMsg('app.not-server'));
+        dispatch(setMsgErrorVisbility(true));
+      }
+    } else {
+      pullHealthCareCenterData(healthCenter).then(async () => {});
+    }
+    setLoading(false);
+  };
 
-    const response = await post(HTTP_HEALTH_CENTER, { healthCenter }, token);
+  const pullHealthCareCenterData = async (
+    healthCareCenter: IHealthCareCenter
+  ) => {
+    setLoading(true);
+    const response = await put<IHealthCareCenter>(
+      HTTP_HEALTH_CENTER,
+      healthCareCenter.id,
+      { healthCareCenter },
+      token
+    );
     if (response) {
-      console.log(response);
-      const { ok, message } = response;
-      if (ok) {
+      const { message } = response;
+      if (response.ok) {
         dispatch(SnackTitleMsg('register.success-title'));
         dispatch(SnackMsg(message));
         dispatch(setMsgSuccessVisbility(true));
-        history.push('/');
       } else {
         dispatch(SnackTitleMsg('register.error-title'));
         dispatch(SnackMsg(message));

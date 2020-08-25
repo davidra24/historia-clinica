@@ -59,7 +59,7 @@ export const ProfilePerson = () => {
       {loading ? (
         <Loading />
       ) : show ? (
-        <ShowProfilePerson setShow={setShow} />
+        <ShowProfilePerson setShow={setShow} arrayContacts={contacts}/>
       ) : (
         <EditProfilePerson
           setShow={setShow}

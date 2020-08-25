@@ -1,7 +1,7 @@
 export const SECRET_PASS = process.env.SECRET_PASS || 'SECRET';
 
 export const HOST = 'http://localhost';
-export const PORT = '9000';
+export const PORT = '9001';
 
 export const HTTP_SERVICE = `${HOST}:${PORT}/api`;
 

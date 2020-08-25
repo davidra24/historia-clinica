@@ -57,7 +57,7 @@ export default {
   ) => `UPDATE ${TABLE_NAME} SET ${COL_ID_SPECIALTY} = '${attentionCenter.id_specialty}',
              ${COL_ACTIVE} = ${attentionCenter.active} WHERE ${COL_ID_CENTER} = '${id}' AND ${COL_DOCUMENT}='${document}'`,
   createViewAttentionCenter: (): string => `CREATE OR REPLACE VIEW ${VIEW_ATTENTION_CENTER} AS SELECT 
-  ${TABLE_NAME}.${COL_ID_CENTER} as id_health_center, ${TABLE_HEALTH_CENTERS}.${COL_HEALTHCENTERS_NAME} as name 
+  ${TABLE_NAME}.${COL_ID_CENTER} as id_health_center, ${TABLE_HEALTH_CENTERS}.${COL_HEALTHCENTERS_NAME} as name_health_center, 
   ${TABLE_NAME}.${COL_DOCUMENT} as health_professional_document, ${TABLE_NAME}.${COL_ID_SPECIALTY}, ${TABLE_NAME}.${COL_ACTIVE} as active_attention_center, 
   ${TABLE_SPECIALTIES}.${COL_SPECIALTIES_PARAMETER} as specialty_id, ${TABLE_SPECIALTIES}.${COL_SPECIALTIES_NAME} as specialty_name, 
   ${TABLE_SPECIALTIES}.${COL_SPECIALTIES_DESCRIPTION} as specialty_description, ${TABLE_PEOPLE}.${COL_PEOPLE_PARAMETER} as document_health_professional, 
@@ -69,5 +69,5 @@ export default {
   selectFormViewByHealthCenter: (id: string): string =>
     `SELECT * FROM ${VIEW_ATTENTION_CENTER} WHERE id_health_center = '${id}'`,
   selectFormViewByProfessionalDocument:(document: string): string =>
-  `SELECT * FROM ${VIEW_ATTENTION_CENTER} WHERE health_professional_document=${document}`,
+  `SELECT * FROM ${VIEW_ATTENTION_CENTER} WHERE health_professional_document='${document}'`,
 };

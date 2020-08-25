@@ -3,6 +3,7 @@ import { IContact } from './IContact';
 
 export interface profilePersonShowTypes {
   setShow: Function;
+  arrayContacts: Array<IContact>;
 }
 
 export interface profilePersonEditTypes {

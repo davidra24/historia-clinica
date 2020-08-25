@@ -13,7 +13,7 @@ export const RegisterData = () => {
         {user.document_type ? (
           <RegisterPerson isEdit={false} />
         ) : (
-          <RegisterHealthCenter />
+          <RegisterHealthCenter isEdit={false} />
         )}
       </div>
     </>
