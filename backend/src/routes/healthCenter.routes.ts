@@ -1,5 +1,5 @@
 import express from 'express';
-import { HealthCenterController } from 'src/controllers/healthCenter.controller';
+import { HealthCenterController } from 'src/controllers/HealthCenter.controller';
 import { auth } from 'src/middlewares/passport';
 
 const healthCentercontroller = new HealthCenterController();

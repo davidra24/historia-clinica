@@ -7,6 +7,8 @@ export class PeopleController {
   app = express();
   constructor() {
     this.createTable();
+    this.createViewPerson();
+    this.createViewQueries();
   }
   async createTable() {
     await db
@@ -23,6 +25,85 @@ export class PeopleController {
         message: error,
         data: null,
       }));
+  }
+  async createViewPerson() {
+    await db
+      .none(peopleDB.createViewPerson)
+      .then(() => ({
+        ok: true,
+        status: 'success creating view',
+        message: 'people view created',
+        data: null,
+      }))
+      .catch((error) => ({
+        ok: false,
+        status: 'unsuccess creating view',
+        message: error,
+        data: null,
+      }));
+  }
+  async createViewQueries() {
+    await db
+      .none(peopleDB.createViewQueries)
+      .then(() => ({
+        ok: true,
+        status: 'success creating view',
+        message: 'people-queries view created',
+        data: null,
+      }))
+      .catch(
+        (error) => (
+          console.log(error),
+          {
+            ok: false,
+            status: 'unsuccess creating view',
+            message: error,
+            data: null,
+          }
+        )
+      );
+  }
+  async getViewDataPerson(req: Request, res: Response) {
+    const { document } = req.params;
+    await db
+      .any(() => peopleDB.selectFormViewPerson(document))
+      .then((people) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getPeople.success',
+          data: people,
+        })
+      )
+      .catch((error) =>
+        cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getPeople.error',
+          data: error.toString(),
+        })
+      );
+  }
+  async getViewDataQueries(req: Request, res: Response) {
+    const { document } = req.params;
+    await db
+      .any(() => peopleDB.selectFormViewQueries(document))
+      .then((people) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getPeople.success',
+          data: people,
+        })
+      )
+      .catch((error) =>
+        cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getPeople.error',
+          data: error.toString(),
+        })
+      );
   }
   async getPeople(req: Request, res: Response) {
     await db
