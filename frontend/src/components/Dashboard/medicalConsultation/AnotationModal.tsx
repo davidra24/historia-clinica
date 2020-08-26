@@ -86,14 +86,16 @@ export const AnotationModal = ({
                 />
               </div>
               <div className='mt-16 mb-4 md:my-4 flex justify-center w-full'>
-                <Button
-                  variant='outlined'
-                  color='primary'
-                  onClick={saveAnnotation}
-                  className='w-8/12 md:w-6/12 lg:w-4/12'
-                >
-                  {saveText}
-                </Button>
+                {!readOnly && (
+                  <Button
+                    variant='outlined'
+                    color='primary'
+                    onClick={saveAnnotation}
+                    className='w-8/12 md:w-6/12 lg:w-4/12'
+                  >
+                    {saveText}
+                  </Button>
+                )}
               </div>
             </div>
           </Card>

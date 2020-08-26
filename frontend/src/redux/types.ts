@@ -19,6 +19,7 @@ export interface IStore {
   reloadRoute: string;
   user: IUser | any;
   person: IPerson | any;
+  selectedDashProfessional: number;
   healthCenter: IHealthCareCenter | any;
   selectedAttentionCenter: IViewAttentionCenter | any;
   viewAttentionCenter: Array<IViewAttentionCenter>;
@@ -42,6 +43,7 @@ export const defaultStore: IStore = {
   person: null,
   healthCenter: null,
   selectedAttentionCenter: null,
+  selectedDashProfessional: 0,
   viewAttentionCenter: [],
   specialties: [],
   listEPS: [],

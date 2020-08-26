@@ -19,6 +19,8 @@ export const HTTP_ATTENTIONS_CENTER = 'attentioncenters';
 export const HTTP_CONTACTS_BY_PERSON = 'contactsPersonView';
 export const HTTP_VIEW_AC_BY_HC = 'attentionCentersViewByHealthCenter';
 export const HTTP_VIEW_AC_BY_PS = 'attentionCentersViewByProfessionalDocument';
+export const HTTP_VIEW_CONSULT_GENERAL = 'peopleViewPerson';
+export const HTTP_VIEW_CONSULT_PERSON = 'peopleViewQueries';
 
 export const PATTERN_EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PATTERN_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*+-])(?=.*[^\da-zA-ZÀ-ÿ\u00f1\u00d1]).{8,}$/;

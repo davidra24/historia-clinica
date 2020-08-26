@@ -3,8 +3,23 @@ import { TextField, FormControl, Switch, Divider } from '@material-ui/core';
 import { TextMessage } from '../../../lang/TextMessage';
 import 'react-quill/dist/quill.snow.css';
 import { AnotationModal } from './AnotationModal';
+import { IViewGeneralFeatures } from '../../../data/IViewGeneralFeatures';
+import { useInputValue, useCheckValue } from '../../../hooks/useInput';
 
-export const GeneralMedicalFeatures = () => {
+interface propsFeatures {
+  infoGeneral: IViewGeneralFeatures;
+  readOnly: boolean;
+}
+
+export const GeneralMedicalFeatures = ({
+  infoGeneral,
+  readOnly,
+}: propsFeatures) => {
+  const height = useInputValue(infoGeneral?.pacient_height || '');
+  const weight = useInputValue(infoGeneral?.pacient_weight || '');
+  const drink = useCheckValue(infoGeneral?.pacient_drink || false);
+  const smokes = useCheckValue(infoGeneral?.pacient_smoke || false);
+
   return (
     <>
       <div className='flex flex-col w-full justify-center'>
@@ -16,6 +31,8 @@ export const GeneralMedicalFeatures = () => {
                 name='document'
                 variant='outlined'
                 label={TextMessage('evolution.generalfeature-height')}
+                {...height}
+                disabled={readOnly}
               />
             </FormControl>
             <FormControl className='w-full md:w-3/12'>
@@ -24,6 +41,8 @@ export const GeneralMedicalFeatures = () => {
                 name='document'
                 variant='outlined'
                 label={TextMessage('evolution.generalfeature-weight')}
+                {...weight}
+                disabled={readOnly}
               />
             </FormControl>
             <FormControl className='w-full md:w-2/12 lg:w-1/12'>
@@ -32,7 +51,12 @@ export const GeneralMedicalFeatures = () => {
                   {TextMessage('evolution.generalfeature-drink')}
                 </label>
                 <div className='p-col-7'>
-                  <Switch name='person' color='primary' />
+                  <Switch
+                    name='person'
+                    color='primary'
+                    {...drink}
+                    disabled={readOnly}
+                  />
                 </div>
               </div>
             </FormControl>
@@ -42,17 +66,22 @@ export const GeneralMedicalFeatures = () => {
                   {TextMessage('evolution.generalfeature-smokes')}
                 </label>
                 <div className='p-col-7'>
-                  <Switch name='person' color='primary' />
+                  <Switch
+                    name='person'
+                    color='primary'
+                    {...smokes}
+                    disabled={readOnly}
+                  />
                 </div>
               </div>
             </FormControl>
           </div>
         </div>
-        <div></div>
         <div className='flex flex-wrap w-full h-full justify-around'>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage('evolution.generalfeature-vices')}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_vices}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -60,8 +89,9 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage('evolution.generalfeature-manias')}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_manias}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -69,10 +99,11 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage(
               'evolution.generalfeature-family-background'
             )}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_family_background}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -80,8 +111,9 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage('evolution.generalfeature-medical')}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_medical_history}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -89,8 +121,9 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage('evolution.generalfeature-quirurjical')}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_surgery_history}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -98,10 +131,11 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage(
               'evolution.generalfeature-traimatic_background'
             )}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_traumatic_background}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}
@@ -109,8 +143,9 @@ export const GeneralMedicalFeatures = () => {
             saveText={TextMessage('evolution.generalfeature-save-or-update')}
           ></AnotationModal>
           <AnotationModal
+            readOnly={readOnly}
             titleCard={TextMessage('evolution.generalfeature-allergy-history')}
-            valueAnnotation={''}
+            valueAnnotation={infoGeneral?.pacient_allergy_history}
             buttonText={TextMessage(
               'dashboard-health.professional-openAnotation'
             )}

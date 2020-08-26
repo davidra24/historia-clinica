@@ -365,6 +365,10 @@ export default {
     'dashboard-professional.patient-specialty-history':
       'HISTORIAL DE EVOLUCIÓN',
     'dashboard-professional.patient-specialty-consultation': 'AÑADIR EVOLUCIÓN',
+    'dashboard-professional.selection':
+      'Sabemos que así como eres un profesional de la salud, también eres paciente en ocasiones, ¡tranquilo! nosotros te dejamos ver tu evolución y estado de salud, cuéntanos, ¿qué rol quieres cumplir hoy?',
+    'dashboard-professional.select-patient': 'Paciente consultando',
+    'dashboard-professional.select-prof': 'Profesional de la salud',
     //DASHBOARD - HEALTHCENTER
     'dashboard-health.professional': 'Los profesionales de la salud',
     'dashboard-health.professional-description':
@@ -385,6 +389,8 @@ export default {
     'dashboard-health.phone-professional': 'Teléfono de profesional',
     'dashboard-health.enabled-professional': 'Profesional habilitado en centro',
     'dashboard-health.professional-openAnotation': 'Abrir anotación',
+    'dashboard-health.professional-history':
+      'A continuación encontrará el historial completo de anotaciones de paciente, para conocer, de esta forma podrá conocer la evolución que ha tenido el proceso del paciente',
     //Evolution
     'evolution.generalfeature-height': 'Altura',
     'evolution.generalfeature-weight': 'Peso',

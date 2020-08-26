@@ -17,6 +17,7 @@ import {
   SET_PATH_RELOAD,
   SET_VIEW_ATTENTION_CENTER,
   SET_ONE_ATTENTION_CENTER,
+  SET_SELECTION_HEALTH_PROFESSIONAL,
 } from './constants.redux';
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
@@ -108,5 +109,10 @@ export const setViewAttenttionCenter = (
   payload: Array<IViewAttentionCenter>
 ) => ({
   type: SET_VIEW_ATTENTION_CENTER,
+  payload,
+});
+
+export const selectDashboardProfessional = (payload: number) => ({
+  type: SET_SELECTION_HEALTH_PROFESSIONAL,
   payload,
 });

@@ -13,6 +13,7 @@ import { DashBoardProfessional } from '../containers/dashboard/DashBoardProfessi
 import { DashBoardPatient } from '../containers/dashboard/DashBoardPatient';
 import { IPerson } from '../data/IPerson';
 import { IHealthCareCenter } from '../data/IHealthCareCenter';
+import { DashboardSelection } from '../containers/dashboard/DashboardSelection';
 
 export const Dashboard = () => {
   const user = useSelector((state: IStore) => state.user);
@@ -91,7 +92,7 @@ export const Dashboard = () => {
             !person.is_health_care_team ? (
               <DashBoardPatient />
             ) : (
-              <DashBoardProfessional />
+              <DashboardSelection />
             )
           ) : (
             <DashBoardHealthCenter />
