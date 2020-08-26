@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 
 export const useInputValue = (initialValue: any) => {
   const [value, setValue] = useState(initialValue);
@@ -7,6 +7,17 @@ export const useInputValue = (initialValue: any) => {
   };
   const clean = () => setValue(initialValue);
   return { value, onChange, clean };
+};
+
+export const useQuillValue = (initialValue: any) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (e: any) => {
+    console.log('event', e);
+    setValue(e);
+  };
+  const clean = () => setValue('');
+  const defaultValue = () => setValue(initialValue);
+  return { value, onChange, clean, defaultValue };
 };
 
 export const useInputValidator = (initialValue: any) => {

@@ -97,7 +97,7 @@ export const AttentionPatient = () => {
               <div className='flex flex-col w-full pb-10'>
                 <div className='flex justify-center mb-4'>
                   <img
-                    className='rounded-full w-16 h-16'
+                    className='rounded-full w-24 h-24'
                     src={patient?.photo ? patient?.photo : DEFAULT_PROFILE_PIC}
                     alt={patient?.document}
                   />

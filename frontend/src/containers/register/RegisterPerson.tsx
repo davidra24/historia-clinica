@@ -52,11 +52,8 @@ export const RegisterPerson = ({
   stratumInfo,
   dateBirthInfo,
   arrayContacts,
+  setShow,
 }: IRegisterPerson) => {
-  const openMsgError = useSelector((state: IStore) => state.openMsgError);
-  const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
-  const snackTitle = useSelector((state: IStore) => state.snackTitle);
-  const snackMsg = useSelector((state: IStore) => state.snackMsg);
   const user = useSelector((state: IStore) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -374,14 +371,6 @@ export const RegisterPerson = ({
     setActiveStep(activeStep - 1);
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    dispatch(setMsgSuccessVisbility(false));
-    dispatch(setMsgErrorVisbility(false));
-  };
-
   const pushContact = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const finalValidator = validateContact();
@@ -435,104 +424,83 @@ export const RegisterPerson = ({
 
   return (
     <>
-      <SnackBarAlert
-        open={openMsgError}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='error'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <SnackBarAlert
-        open={openMsgSuccess}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='success'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <>
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className='flex flex-col justify-center items-center'>
-            {activeStep === 0 ? (
-              <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
-                <FormRegisterPerson
-                  onSubmit={handleNextStep}
-                  firstName={firstName}
-                  secondName={secondName}
-                  lastName={lastName}
-                  lastSecondName={lastSecondName}
-                  genre={genre}
-                  civilState={civilState}
-                  email={email}
-                  dateBirth={dateBirth}
-                  phone={phone}
-                  stratum={stratum}
-                  onChangePhoto={onChangePhoto}
-                  image={image}
-                  idProfession={idProfession}
-                  idEPS={idEPS}
-                  token={token}
-                  Stepper={stepper}
-                  update={isEdit}
-                />
-              </Card>
-            ) : activeStep === 1 ? (
-              <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
-                <FormRegisterContact
-                  onSubmit={handleNestStepContacts}
-                  onPrevStep={handlePreviousStep}
-                  Stepper={stepper}
-                  document={documentContact}
-                  name={nameContact}
-                  phone={phoneContact}
-                  email={emailContact}
-                  direction={directionContact}
-                  contacts={listContact}
-                  pushContact={pushContact}
-                  removeContact={removeContact}
-                />
-              </Card>
-            ) : (
-              <>
-                <ContainerLastStep
-                  firstName={firstName}
-                  secondName={secondName}
-                  lastName={lastName}
-                  lastSecondName={lastSecondName}
-                  genre={genre}
-                  civilState={civilState}
-                  email={email}
-                  dateBirth={dateBirth}
-                  phone={phone}
-                  stratum={stratum}
-                  image={image}
-                  idProfession={idProfession}
-                  idEPS={idEPS}
-                  token={token}
-                  documentContact={documentContact}
-                  nameContact={nameContact}
-                  phoneContact={phoneContact}
-                  emailContact={emailContact}
-                  directionContact={directionContact}
-                  listContact={listContact}
-                  pushContact={pushContact}
-                  onPrevStep={handlePreviousStep}
-                  onSubmit={handleSubmit}
-                  Stepper={stepper}
-                  update={isEdit}
-                />
-              </>
-            )}
-          </div>
-        )}
-      </>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className='flex flex-col justify-center items-center'>
+          {activeStep === 0 ? (
+            <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
+              <FormRegisterPerson
+                onSubmit={handleNextStep}
+                firstName={firstName}
+                secondName={secondName}
+                lastName={lastName}
+                lastSecondName={lastSecondName}
+                genre={genre}
+                civilState={civilState}
+                email={email}
+                dateBirth={dateBirth}
+                phone={phone}
+                stratum={stratum}
+                onChangePhoto={onChangePhoto}
+                image={image}
+                idProfession={idProfession}
+                idEPS={idEPS}
+                token={token}
+                Stepper={stepper}
+                update={isEdit}
+                setShow={setShow}
+              />
+            </Card>
+          ) : activeStep === 1 ? (
+            <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
+              <FormRegisterContact
+                onSubmit={handleNestStepContacts}
+                onPrevStep={handlePreviousStep}
+                Stepper={stepper}
+                document={documentContact}
+                name={nameContact}
+                phone={phoneContact}
+                email={emailContact}
+                direction={directionContact}
+                contacts={listContact}
+                pushContact={pushContact}
+                removeContact={removeContact}
+              />
+            </Card>
+          ) : (
+            <>
+              <ContainerLastStep
+                firstName={firstName}
+                secondName={secondName}
+                lastName={lastName}
+                lastSecondName={lastSecondName}
+                genre={genre}
+                civilState={civilState}
+                email={email}
+                dateBirth={dateBirth}
+                phone={phone}
+                stratum={stratum}
+                image={image}
+                idProfession={idProfession}
+                idEPS={idEPS}
+                token={token}
+                documentContact={documentContact}
+                nameContact={nameContact}
+                phoneContact={phoneContact}
+                emailContact={emailContact}
+                directionContact={directionContact}
+                listContact={listContact}
+                pushContact={pushContact}
+                onPrevStep={handlePreviousStep}
+                onSubmit={handleSubmit}
+                Stepper={stepper}
+                update={isEdit}
+              />
+            </>
+          )}
+        </div>
+      )}
     </>
   );
 };

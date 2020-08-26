@@ -7,4 +7,5 @@ export interface IRegisterHealthCenter {
   emailInfo?: any;
   descriptionInfo?: any;
   photoInfo?: any;
+  setShow?: any;
 }

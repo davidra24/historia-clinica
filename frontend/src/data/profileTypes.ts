@@ -4,6 +4,9 @@ import { IContact } from './IContact';
 export interface profilePersonShowTypes {
   setShow: Function;
   arrayContacts: Array<IContact>;
+  person: IPerson;
+  EPSName: string;
+  ProfessionName: string;
 }
 
 export interface profilePersonEditTypes {

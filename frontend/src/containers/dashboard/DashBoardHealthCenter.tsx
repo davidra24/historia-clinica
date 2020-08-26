@@ -132,22 +132,24 @@ export const DashBoardHealthCenter = () => {
         <Loading />
       ) : (
         <div className='flex flex-col h-full'>
-          <h2 className='text-2xl text-center mb-4'>
+          <h2 className='text-4xl font-semibold text-center mb-4'>
             {TextMessage('app.welcomeM')}
-            <strong>{healthCenter && ` ${healthCenter.name}`}</strong>
+            <p className='font-bold'>
+              {healthCenter && ` ${healthCenter.name}`}
+            </p>
           </h2>
           <div className='flex justify-center'>
             <Divider className='w-12/12 md:w-6/12' />
           </div>
-          <h3 className='text-xl text-center mt-4'>
+          <h3 className='text-2xl text-center mt-4'>
             <strong>{TextMessage('dashboard-health.professional')}</strong>
           </h3>
-          <p className='mt-4 mb-8 mr-8 ml-8 md:mr-20 md:ml-20 lg:mr-40 lg:ml-40 text-center text-gray-700 text-base'>
+          <p className='flex w-10/12 md:w-8/12 lg:w-6/12 justify-center font-semibold mt-4 mr-auto ml-auto text-center text-gray-800 text-lg'>
             {TextMessage('dashboard-health.professional-description')}
             <br />
-            <strong>
-              {TextMessage('dashboard-health.professional-description-end')}
-            </strong>
+          </p>
+          <p className='font-bold text-base text-center mx-auto my-4'>
+            {TextMessage('dashboard-health.professional-description-end')}
           </p>
           <div className='flex justify-center'>
             <Divider className='w-10/12' />

@@ -22,11 +22,6 @@ import { IStore } from '../redux/types';
 import { ILogin } from '../data/ILoginResponse';
 
 export const Login = () => {
-  const openMsgError = useSelector((state: IStore) => state.openMsgError);
-  const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
-  const snackTitle = useSelector((state: IStore) => state.snackTitle);
-  const snackMsg = useSelector((state: IStore) => state.snackMsg);
-
   const inputDocument = useInputValue('');
   const inputPassword = useInputValue('');
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
@@ -72,40 +67,12 @@ export const Login = () => {
       dispatch(Loading(false));
     });
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    dispatch(setMsgSuccessVisbility(false));
-    dispatch(setMsgErrorVisbility(false));
-  };
-
   const volver = () => {
     history.push('/signup');
   };
 
   return (
     <>
-      <SnackBarAlert
-        open={openMsgError}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='error'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <SnackBarAlert
-        open={openMsgSuccess}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='success'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
       <div className='flex justify-center pt-10 w-12/12 h-screen'>
         <FormSign
           title={TextMessage('login.title')}

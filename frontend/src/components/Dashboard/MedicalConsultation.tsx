@@ -13,7 +13,9 @@ import { AddEvolution } from './medicalConsultation/AddEvolution';
 import { EvolutionHistory } from './medicalConsultation/EvolutionHistory';
 
 export const MedicalConsultation = (props: any) => {
-  const [expanded, setExpanded] = React.useState<string | false>('panel1');
+  const [expanded, setExpanded] = React.useState<string | false>(
+    'panelGeneral'
+  );
 
   const handleChange = (panel: string) => (
     event: React.ChangeEvent<{}>,
@@ -25,20 +27,20 @@ export const MedicalConsultation = (props: any) => {
   return (
     <>
       <Accordion
-        expanded={expanded === 'panel1'}
-        onChange={handleChange('panel1')}
+        expanded={expanded === 'panelGeneral'}
+        onChange={handleChange('panelGeneral')}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel1bh-content'
-          id='panel1bh-header'
+          aria-controls='panelGeneralbh-content'
+          id='panelGeneralbh-header'
         >
-          <h3>
-            <strong>
+          <h3 className='font-bold text-xl'>
+            <>
               {TextMessage(
                 'dashboard-professional.patient-general-consultation'
               )}
-            </strong>
+            </>
           </h3>
         </AccordionSummary>
         <Divider></Divider>
@@ -47,20 +49,20 @@ export const MedicalConsultation = (props: any) => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        expanded={expanded === 'panel2'}
-        onChange={handleChange('panel2')}
+        expanded={expanded === 'panelConsultation'}
+        onChange={handleChange('panelConsultation')}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel2bh-content'
-          id='panel2bh-header'
+          aria-controls='panelConsultationbh-content'
+          id='panelConsultationbh-header'
         >
-          <h3>
-            <strong>
+          <h3 className='font-bold text-xl'>
+            <>
               {TextMessage(
                 'dashboard-professional.patient-specialty-consultation'
               )}
-            </strong>
+            </>
           </h3>
         </AccordionSummary>
         <Divider></Divider>
@@ -69,18 +71,18 @@ export const MedicalConsultation = (props: any) => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        expanded={expanded === 'panel3'}
-        onChange={handleChange('panel3')}
+        expanded={expanded === 'PanelHistory'}
+        onChange={handleChange('PanelHistory')}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel3bh-content'
-          id='panel3bh-header'
+          aria-controls='PanelHistorybh-content'
+          id='PanelHistorybh-header'
         >
-          <h3>
-            <strong>
+          <h3 className='font-bold text-xl'>
+            <>
               {TextMessage('dashboard-professional.patient-specialty-history')}
-            </strong>
+            </>
           </h3>
         </AccordionSummary>
         <Divider></Divider>

@@ -30,13 +30,13 @@ export const ShowProfileHealthCenter = ({
           <Loading />
         </div>
       ) : (
-        <div className='flex justify-center items-center w-10/12'>
+        <div className='flex justify-center items-center w-10/12 md:w-8/12'>
           <div className='container mx-auto px-4'>
             <div className='flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-20'>
               <div className='px-6'>
                 <div className='text-center mt-12'>
                   <h3 className='text-4xl font-semibold leading-normal mb-2 text-gray-800'>
-                    {healthCareCenter.name}
+                    {healthCareCenter?.name}
                   </h3>
                 </div>
                 <div className='mt-10 py-10 border-t border-gray-300 text-center'>
@@ -46,7 +46,7 @@ export const ShowProfileHealthCenter = ({
                         <strong>{TextMessage('profile.website')}</strong>
                       </p>
                       <p className='mb-4 text-sm leading-relaxed text-gray-600'>
-                        {healthCareCenter.website}
+                        {healthCareCenter?.website}
                       </p>
                     </div>
                     <div className='w-full lg:w-9/12 px-4'>
@@ -54,7 +54,7 @@ export const ShowProfileHealthCenter = ({
                         <strong>{TextMessage('profile.email')}</strong>
                       </p>
                       <p className='mb-4 text-sm leading-relaxed text-gray-600'>
-                        {healthCareCenter.email}
+                        {healthCareCenter?.email}
                       </p>
                     </div>
                   </div>
@@ -64,7 +64,7 @@ export const ShowProfileHealthCenter = ({
                         <strong>{TextMessage('profile.phone')}</strong>
                       </p>
                       <p className='mb-4 text-sm leading-relaxed text-gray-600'>
-                        {healthCareCenter.phone}
+                        {healthCareCenter?.phone}
                       </p>
                     </div>
                     <div className='w-full lg:w-9/12 px-4'>
@@ -72,7 +72,7 @@ export const ShowProfileHealthCenter = ({
                         <strong>{TextMessage('profile.direction')}</strong>
                       </p>
                       <p className='mb-4 text-sm leading-relaxed text-gray-600'>
-                        {healthCareCenter.direction}
+                        {healthCareCenter?.direction}
                       </p>
                     </div>
                   </div>
@@ -82,14 +82,19 @@ export const ShowProfileHealthCenter = ({
                         <strong>{TextMessage('profile.description')}</strong>
                       </p>
                       <p className='mb-4 text-sm leading-relaxed text-gray-600'>
-                        {healthCareCenter.description}
+                        {healthCareCenter?.description}
                       </p>
                     </div>
                   </div>
-                  <div className='flex flex-col md:flex-row space-y-1 justify-center md:items-baseline'>
-                    <div className='w-full lg:w-9/12 px-4'>
-                      <Button>EDITAR</Button>
-                    </div>
+                  <div className='flex justify-center mb-8'>
+                    <Button
+                      className='w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12'
+                      variant='outlined'
+                      color='primary'
+                      onClick={() => setShow(false)}
+                    >
+                      {TextMessage('profile.edit-button')}
+                    </Button>
                   </div>
                 </div>
               </div>

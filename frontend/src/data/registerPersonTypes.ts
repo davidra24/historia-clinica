@@ -20,6 +20,7 @@ export interface RegisterPersonTypes {
   Stepper: any;
   disabled?: boolean;
   update?: boolean;
+  setShow?: any;
 }
 
 export interface RegisterContactTypes {

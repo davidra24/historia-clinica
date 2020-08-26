@@ -88,18 +88,21 @@ export class HealthCenterController {
       );
   }
   async updateHealthCenter(req: Request, res: Response) {
-    const { idCenter } = req.params;
+    const { id } = req.params;
     const { healthCenter } = await decryptRequest(req);
     await db
-      .none(() => healthCenterDB.updateHealthCenter(idCenter, healthCenter))
-      .then((Center) =>
+      .none(() => healthCenterDB.updateHealthCenter(id, healthCenter))
+      .then(async () => {
+        const center = await db.one(() =>
+          healthCenterDB.getOneHealthCenter(id)
+        );
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
           message: 'updateHealthCenter.success',
-          data: Center,
-        })
-      )
+          data: center,
+        });
+      })
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
@@ -110,9 +113,9 @@ export class HealthCenterController {
       );
   }
   async deleteHealthCenter(req: Request, res: Response) {
-    const { idCenter } = req.params;
+    const { id } = req.params;
     await db
-      .result(() => healthCenterDB.deleteHealthCenter(idCenter))
+      .result(() => healthCenterDB.deleteHealthCenter(id))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,

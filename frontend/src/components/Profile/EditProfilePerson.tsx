@@ -38,6 +38,7 @@ export const EditProfilePerson = ({
           stratumInfo={stratum}
           dateBirthInfo={dateBirth}
           arrayContacts={arrayContacts}
+          setShow={setShow}
         />
       </div>
     </>

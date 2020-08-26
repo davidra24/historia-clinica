@@ -5,10 +5,20 @@ import { IStore } from '../redux/types';
 import { Router } from '../router';
 import { Footer } from '../components/Footer';
 import { LOCALES, LangProvider } from '../lang';
-import { changeLang, setUser, auth, setReloadPath } from '../redux/actions';
+import {
+  changeLang,
+  setUser,
+  auth,
+  setReloadPath,
+  setMsgSuccessVisbility,
+  setMsgErrorVisbility,
+} from '../redux/actions';
 import { useCookies } from 'react-cookie';
 import { post } from '../util/httpUtil';
 import { HTTP_VERIFY } from '../util/constants';
+import { SnackBarAlert } from '../util/Alert';
+import { TextMessage } from '../lang/TextMessage';
+import { SnackAlert } from '../components/App/SnackAlert';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
@@ -75,6 +85,7 @@ function App() {
                 loading && 'opacity-0'
               }`}
             >
+              <SnackAlert />
               <Router className='flex' />
               <Footer />
             </div>

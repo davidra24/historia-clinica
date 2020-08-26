@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { TextField, FormControl, Switch, Divider } from '@material-ui/core';
 import { TextMessage } from '../../../lang/TextMessage';
 import 'react-quill/dist/quill.snow.css';
+import { AnotationModal } from './AnotationModal';
 
 export const GeneralMedicalFeatures = () => {
-  const ReactQuill = require('react-quill');
-  const [value, setValue] = useState('');
-
   return (
     <>
       <div className='flex flex-col w-full justify-center'>
@@ -51,89 +49,74 @@ export const GeneralMedicalFeatures = () => {
           </div>
         </div>
         <div></div>
-        <div className='flex flex-col justify-center md:justify-around'>
-          <div className='flex flex-col md:flex-row w-full h-full justify-around mt-6 md:mb-6 md:pb-10'>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>{TextMessage('evolution.generalfeature-vices')}</strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>
-                  {TextMessage('evolution.generalfeature-manias')}
-                </strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>
-                  {TextMessage('evolution.generalfeature-family-background')}
-                </strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-          </div>
-          <div className='flex flex-col md:flex-row w-full h-full justify-around mt-6 mb-6 pb-10'>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>
-                  {TextMessage(
-                    'evolution.generalfeature-medical-and surgery-history'
-                  )}
-                </strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>
-                  {TextMessage('evolution.generalfeature-traimatic_background')}
-                </strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-            <div className='w-full h-40 pb-16 md:pb-3'>
-              <h4 className='text-center'>
-                <strong>
-                  {TextMessage('evolution.generalfeature-allergy-history')}
-                </strong>
-              </h4>
-              <ReactQuill
-                className='w-10/12 mr-auto ml-auto mt-auto mb-auto h-full pb-10'
-                theme='snow'
-                value={value}
-                onChange={setValue}
-              />
-            </div>
-          </div>
+        <div className='flex flex-wrap w-full h-full justify-around'>
+          <AnotationModal
+            titleCard={TextMessage('evolution.generalfeature-vices')}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage('evolution.generalfeature-manias')}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage(
+              'evolution.generalfeature-family-background'
+            )}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage('evolution.generalfeature-medical')}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage('evolution.generalfeature-quirurjical')}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage(
+              'evolution.generalfeature-traimatic_background'
+            )}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
+          <AnotationModal
+            titleCard={TextMessage('evolution.generalfeature-allergy-history')}
+            valueAnnotation={''}
+            buttonText={TextMessage(
+              'dashboard-health.professional-openAnotation'
+            )}
+            onSaveAnnotation={() => {}}
+            saveText={TextMessage('evolution.generalfeature-save-or-update')}
+          ></AnotationModal>
         </div>
       </div>
     </>

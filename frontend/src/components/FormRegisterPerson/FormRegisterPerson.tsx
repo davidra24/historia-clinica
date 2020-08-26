@@ -55,6 +55,7 @@ export const FormRegisterPerson = ({
   Stepper,
   disabled,
   update,
+  setShow,
 }: RegisterPersonTypes) => {
   //const { handleSubmit, register, errors, control } = useForm();
 
@@ -66,6 +67,8 @@ export const FormRegisterPerson = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('listeps', listEps);
+
     if (listEps.length === 0) {
       fetchEPS();
     }
@@ -78,6 +81,7 @@ export const FormRegisterPerson = ({
     setLoading(true);
     const response = await get<Array<IEPS>>(HTTP_EPS, token);
     if (response) {
+      console.log('res eps', response);
       const { message } = response;
       if (response.ok) {
         const { data } = response;
@@ -125,8 +129,8 @@ export const FormRegisterPerson = ({
       ) : (
         <div className={`flex flex-col w-full ${loading && 'opacity-0'}`}>
           <div className='flex flex-col justify-center space-y-5'>
-            <h2 className='text-lg text-center'>
-              <strong>{TextMessage('register.person')}</strong>
+            <h2 className='text-2xl font-semibold text-center'>
+              <>{TextMessage('register.person')}</>
             </h2>
             <form onSubmit={onSubmit}>
               <div className='flex flex-col justify-center space-y-3'>
@@ -388,7 +392,7 @@ export const FormRegisterPerson = ({
                         <Button
                           variant='outlined'
                           color='secondary'
-                          onClick={() => history.goBack()}
+                          onClick={() => setShow(true)}
                         >
                           {TextMessage('register.form-back')}
                         </Button>

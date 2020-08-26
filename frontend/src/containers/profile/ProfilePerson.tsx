@@ -5,15 +5,22 @@ import { useSelector } from 'react-redux';
 import { IPerson } from '../../data/IPerson';
 import { IStore } from '../../redux/types';
 import { IContact } from '../../data/IContact';
+import { IEPS } from '../../data/IEPS';
+import { IProfessions } from '../../data/IProfessions';
 import { getOneOrMany } from '../../util/httpUtil';
 import { HTTP_CONTACTS_BY_PERSON } from '../../util/constants';
 import { useCookies } from 'react-cookie';
 import { Loading } from '../../components/Loading';
+import { HTTP_EPS, HTTP_PROFESSION } from '../../util/constants';
+import { resolve } from 'url';
 
 export const ProfilePerson = () => {
   const [show, setShow] = useState(true);
   const person: IPerson = useSelector((state: IStore) => state.person);
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
+
+  const [nameEPS, setNameEPS] = useState('');
+  const [nameProfession, setNameProfession] = useState('');
 
   const [contacts, setContacts] = useState<Array<IContact>>([]);
   const [loading, setLoading] = useState(false);
@@ -33,24 +40,39 @@ export const ProfilePerson = () => {
   const dateBirth = person.date_birth;
 
   useEffect(() => {
-    getContacts();
+    setLoading(true);
+    if (getAllInfo()) {
+      setLoading(false);
+    }
   }, []);
 
-  const getContacts = async () => {
+  const getAllInfo = async (): Promise<boolean> => {
     setLoading(true);
     const { token } = cookie;
-    const response = await getOneOrMany<Array<IContact>>(
-      HTTP_CONTACTS_BY_PERSON,
-      person.document,
-      token
-    );
-    if (response) {
-      const { ok, data } = response;
-      if (ok) {
-        setContacts(data);
-      }
+    const [ContactInfo, EPSInfo, ProfessionInfo] = await Promise.all([
+      await getOneOrMany<Array<IContact>>(
+        HTTP_CONTACTS_BY_PERSON,
+        person.document,
+        token
+      ),
+      await getOneOrMany<IEPS>(HTTP_EPS, person.id_eps, token),
+      await getOneOrMany<IProfessions>(
+        HTTP_PROFESSION,
+        person.id_profesion,
+        token
+      ),
+    ]);
+    if (EPSInfo.ok) {
+      setNameEPS(EPSInfo.data.name);
+    }
+    if (ProfessionInfo.ok) {
+      setNameProfession(ProfessionInfo.data.name);
+    }
+    if (ContactInfo.ok) {
+      setContacts(ContactInfo.data);
     }
     setLoading(false);
+    return await Promise.resolve(true);
   };
 
   return (
@@ -58,7 +80,13 @@ export const ProfilePerson = () => {
       {loading ? (
         <Loading />
       ) : show ? (
-        <ShowProfilePerson setShow={setShow} arrayContacts={contacts} />
+        <ShowProfilePerson
+          setShow={setShow}
+          arrayContacts={contacts}
+          EPSName={nameEPS}
+          ProfessionName={nameProfession}
+          person={person}
+        />
       ) : (
         <EditProfilePerson
           setShow={setShow}

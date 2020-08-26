@@ -260,6 +260,7 @@ export default {
     'profile.website': 'Sitio web',
     'profile.direction': 'Dirección',
     'profile.description': 'Descripción',
+    'profile.edit-button': 'Editar información',
     //Register person
     'register.person': 'Información Personal',
     'register.contact': 'Información de Contacto',
@@ -320,6 +321,7 @@ export default {
     'register.form-errTitle-noContact': 'Ingrese contactos',
     //Register Health Center
     'register-healthCenter': 'Registro del centro de salud',
+    'update-healthCenter': 'Actualización del centro de salud',
     'register-form-nameCenter': 'Nombre *',
     'register-form-website': 'Sitio web',
     'register-form-phoneCenter': 'Telefono *',
@@ -382,6 +384,7 @@ export default {
     'dashboard-health.specialty-professional': 'Especialidad de profesional',
     'dashboard-health.phone-professional': 'Teléfono de profesional',
     'dashboard-health.enabled-professional': 'Profesional habilitado en centro',
+    'dashboard-health.professional-openAnotation': 'Abrir anotación',
     //Evolution
     'evolution.generalfeature-height': 'Altura',
     'evolution.generalfeature-weight': 'Peso',
@@ -389,11 +392,13 @@ export default {
     'evolution.generalfeature-smokes': 'Fuma',
     'evolution.generalfeature-vices': 'Vicios',
     'evolution.generalfeature-manias': 'Manías',
+    'evolution.anotation-add': 'Agregar anotación',
     'evolution.generalfeature-family-background': 'Antecedentes familiares',
-    'evolution.generalfeature-medical-and surgery-history':
-      'Antecedentes médicos y quirurgicos',
+    'evolution.generalfeature-medical': 'Antecedentes médicos',
+    'evolution.generalfeature-quirurjical': 'Antecedentes médicos',
     'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
     'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
+    'evolution.generalfeature-save-or-update': 'Guardar o Actualizar',
   },
 };
 

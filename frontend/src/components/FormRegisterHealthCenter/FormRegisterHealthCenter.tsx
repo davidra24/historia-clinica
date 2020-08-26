@@ -26,17 +26,23 @@ export const FormRegisterHealthCenter = ({
   description,
   token,
   disabled,
+  update,
+  setShow,
 }: IHealthCareCenterTypes) => {
   const { handleSubmit, register, errors } = useForm();
   const dispatch = useDispatch();
   return (
     <>
-      <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
+      <Card className='flex justify-center w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10 mt-12'>
         <div className='flex justify-center mb-2 w-full'>
           <div className='flex flex-col w-full'>
             <div className='flex flex-col justify-center space-y-5'>
-              <h2 className='text-lg text-center'>
-                <strong>{TextMessage('register-healthCenter')}</strong>
+              <h2 className='text-3xl font-semibold text-center pt-8'>
+                {update ? (
+                  <>{TextMessage('update-healthCenter')}</>
+                ) : (
+                  <>{TextMessage('register-healthCenter')}</>
+                )}
               </h2>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col space-y-3'>
@@ -122,10 +128,27 @@ export const FormRegisterHealthCenter = ({
                       />
                     </FormControl>
                   </div>
-                  <div className='flex justify-end mt-8'>
-                    <Button variant='outlined' color='primary' type='submit'>
-                      {TextMessage('register.form-save')}
-                    </Button>
+                  <div className='flex flex-col w-full'>
+                    <div
+                      className={`flex ${
+                        update ? 'justify-around' : 'justify-end'
+                      }`}
+                    >
+                      {update && (
+                        <Button
+                          variant='outlined'
+                          color='secondary'
+                          onClick={() => setShow(true)}
+                        >
+                          {TextMessage('register.form-back')}
+                        </Button>
+                      )}
+                      <Button variant='outlined' color='primary' type='submit'>
+                        {update
+                          ? TextMessage('register.form-update')
+                          : TextMessage('register.form-save')}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </form>
