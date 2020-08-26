@@ -1,28 +1,66 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import queryDB from "../database/Queries.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import queryDB from '../database/Queries.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class QueryController {
   app = express();
   constructor() {
     this.createTable();
+    this.createView();
   }
   async createTable() {
     await db
       .none(queryDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "query table created",
+        status: 'success creating table',
+        message: 'query table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
+  }
+  async createView() {
+    await db
+      .none(queryDB.createView)
+      .then(() => ({
+        ok: true,
+        status: 'success creating view',
+        message: 'query view created',
+        data: null,
+      }))
+      .catch((error) => ({
+        ok: false,
+        status: 'unsuccess creating view',
+        message: error,
+        data: null,
+      }));
+  }
+  async getViewData(req: Request, res: Response) {
+    const { id } = req.params;
+    await db
+      .any(() => queryDB.selectFormView(id))
+      .then((people) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getQueries.success',
+          data: people,
+        })
+      )
+      .catch((error) =>
+        cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getQueries.error',
+          data: error.toString(),
+        })
+      );
   }
   async getQueries(req: Request, res: Response) {
     await db

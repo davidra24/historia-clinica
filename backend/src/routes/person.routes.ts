@@ -7,6 +7,16 @@ const api = express.Router();
 
 api.get('/people', auth, personcontroller.getPeople);
 api.get('/people/:document', auth, personcontroller.getOnePerson);
+api.get(
+  '/peopleViewPerson/:document',
+  auth,
+  personcontroller.getViewDataPerson
+);
+api.get(
+  '/peopleViewQueries/:document',
+  auth,
+  personcontroller.getViewDataQueries
+);
 api.post('/people', auth, personcontroller.insertPerson);
 api.put('/people/:document', auth, personcontroller.updatePerson);
 api.delete('/people/:document', auth, personcontroller.deletePerson);

@@ -31,6 +31,44 @@ const COL_FK_EPS = 'id';
 const COL_FK_USERS = 'document';
 const COL_FK_PROFESSIONS = 'id';
 
+const VIEW_PERSON = 'PERSON_VIEW';
+const TABLE_QUERIES = 'QUERIES';
+const TABLE_GENERAL_MEDICAL_FEATURES = 'GENERALMEDICALFEATURES';
+const TABLE_PROFESSIONAL = 'medicalProfessional';
+const COL_QUERIES_PARAMETER = 'id';
+const COL_QUERIES_ID_CENTER = 'id_center';
+const COL_QUERIES_PERSON_PARAMETER = 'document';
+const COL_QUERIES_PROFESSIONAL_PARAMETER = 'professional_document';
+const COL_GENERAL_MEDICAL_FEATURES_PARAMETER = 'id_query';
+
+const COL_QUERY_DATE = 'date';
+const COL_QUERY_ANNOTATION = 'annotation';
+const COL_GMF_HEIGHT = 'height';
+const COL_GMF_WEIGHT = 'weight';
+const COL_GMF_DRINK = 'drink';
+const COL_GMF_SMOKE = 'smoke';
+const COL_GMF_VICES = 'vices';
+const COL_GMF_MANIAS = 'manias';
+const COL_GMF_FAMILY_BACKGROUND = 'family_background';
+const COL_GMF_MEDICAL_HISTORY = 'medical_history';
+const COL_GMF_SURGERY_HISTORY = 'surgery_history';
+const COL_GMF_TRAUMATIC_BACKGROUND = 'traumatic_background';
+const COL_GMF_ALLERGY_HISTORY = 'allergy_history';
+
+const VIEW_QUERIES = 'QUERIES_VIEW';
+const TABLE_SPECIALTIES = 'SPECIALTIES';
+const TABLE_ATTENTIONCENTERS = 'ATTENTIONCENTERS';
+const TABLE_HEALTHCENTERS = 'HEALTHCENTERS';
+const COL_HEALTHCENTER_PARAMETER = 'id';
+const COL_ATTENTIONCENTER_PARAMETER_SPECIALTY = 'id_specialty';
+const COL_ATTENTIONCENTER_PARAMETER_ID_CENTER = 'id';
+const COL_ATTENTIONCENTER_PARAMETER_DOCUMENT = 'document';
+const COL_SPECIALTY_PARAMETER = 'id';
+const COL_PERSON_PARAMETER = 'document';
+
+const COL_HEALTHCENTER_NAME = 'name';
+const COL_SPECIALTY_NAME = 'name';
+
 export default {
   createTable: (): string => `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COL_DOCUMENT} TEXT PRIMARY KEY NOT NULL,
         ${COL_FIRST_NAME} TEXT NOT NULL, ${COL_SECOND_NAME} TEXT, ${COL_LAST_NAME} TEXT NOT NULL,
@@ -84,4 +122,62 @@ export default {
   }, ${COL_IS_HEALTH_CARE_TEAM} = ${
     person.is_healt_care_team
   } WHERE ${COL_DOCUMENT} = '${document}'`,
+  createViewPerson: (): string => `CREATE OR REPLACE VIEW ${VIEW_PERSON} AS SELECT 
+  ${TABLE_NAME}.${COL_DOCUMENT} as pacient_document, ${TABLE_NAME}.${COL_FIRST_NAME} as pacient_first_name, 
+  ${TABLE_NAME}.${COL_SECOND_NAME} as pacient_second_name,${TABLE_NAME}.${COL_LAST_NAME} as pacient_lastname, 
+  ${TABLE_NAME}.${COL_LAST_SECOND_NAME} as pacient_last_second_name, ${TABLE_NAME}.${COL_GENRE} as pacient_genre,
+  ${TABLE_QUERIES}.${COL_QUERIES_ID_CENTER} as id_center, ${TABLE_QUERIES}.${COL_QUERY_DATE} as query_date,
+  ${TABLE_QUERIES}.${COL_QUERY_ANNOTATION} as query_annotation,
+  ${TABLE_QUERIES}.${COL_QUERIES_PROFESSIONAL_PARAMETER} as professional_document, 
+  ${TABLE_PROFESSIONAL}.${COL_FIRST_NAME} as professional_first_name, 
+  ${TABLE_PROFESSIONAL}.${COL_SECOND_NAME} as professional_second_name, 
+  ${TABLE_PROFESSIONAL}.${COL_LAST_NAME} as professional_lastname, 
+  ${TABLE_PROFESSIONAL}.${COL_LAST_SECOND_NAME} as professional_last_second_name, 
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_HEIGHT} as pacient_height,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_WEIGHT} as pacient_weight,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_DRINK} as pacient_drink, 
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_SMOKE} as pacient_smoke,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_VICES} as pacient_vices,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_MANIAS} as pacient_manias,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_FAMILY_BACKGROUND} as pacient_family_background,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_MEDICAL_HISTORY} as pacient_medical_history,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_SURGERY_HISTORY} as pacient_surgery_history,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_TRAUMATIC_BACKGROUND} as pacient_traumatic_background,
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_ALLERGY_HISTORY} as pacient_allergy_history
+  FROM ${TABLE_NAME}
+  JOIN ${TABLE_QUERIES} ON 
+  (${TABLE_NAME}.${COL_DOCUMENT}=${TABLE_QUERIES}.${COL_QUERIES_PERSON_PARAMETER})
+  JOIN ${TABLE_NAME} as ${TABLE_PROFESSIONAL} ON
+  (${TABLE_QUERIES}.${COL_QUERIES_PROFESSIONAL_PARAMETER}=${TABLE_PROFESSIONAL}.${COL_DOCUMENT})
+  JOIN ${TABLE_GENERAL_MEDICAL_FEATURES} ON 
+  (${TABLE_QUERIES}.${COL_QUERIES_PARAMETER}=${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GENERAL_MEDICAL_FEATURES_PARAMETER})`,
+  selectFormViewPerson: (document: string): string =>
+    `SELECT * FROM ${VIEW_PERSON} WHERE pacient_document = '${document}'`,
+  createViewQueries: (): string => `CREATE OR REPLACE VIEW ${VIEW_QUERIES} AS SELECT 
+    ${TABLE_NAME}.${COL_DOCUMENT} as pacient_document,
+    ${TABLE_QUERIES}.${COL_QUERY_DATE} as query_date, 
+    ${TABLE_NAME}.${COL_FIRST_NAME} as pacient_first_name, 
+    ${TABLE_NAME}.${COL_SECOND_NAME} as pacient_second_name,
+    ${TABLE_NAME}.${COL_LAST_NAME} as pacient_lastname, 
+    ${TABLE_NAME}.${COL_LAST_SECOND_NAME} as pacient_last_second_name, 
+    ${TABLE_NAME}.${COL_PHONE} as pacient_phone,
+    ${TABLE_HEALTHCENTERS}.${COL_HEALTHCENTER_NAME} as name_center, 
+    ${TABLE_PROFESSIONAL}.${COL_FIRST_NAME} as professional_first_name, 
+    ${TABLE_PROFESSIONAL}.${COL_SECOND_NAME} as professional_second_name, 
+    ${TABLE_PROFESSIONAL}.${COL_LAST_NAME} as professional_lastname, 
+    ${TABLE_PROFESSIONAL}.${COL_LAST_SECOND_NAME} as professional_last_second_name, 
+    ${TABLE_SPECIALTIES}.${COL_SPECIALTY_NAME} as specialty_name, 
+    ${TABLE_QUERIES}.${COL_QUERY_ANNOTATION} as query_annotation
+     FROM ${TABLE_NAME} JOIN ${TABLE_QUERIES} ON 
+     (${TABLE_NAME}.${COL_DOCUMENT}=${TABLE_QUERIES}.${COL_QUERIES_PERSON_PARAMETER})
+     JOIN ${TABLE_NAME} as ${TABLE_PROFESSIONAL} ON
+     (${TABLE_QUERIES}.${COL_QUERIES_PROFESSIONAL_PARAMETER}=${TABLE_PROFESSIONAL}.${COL_DOCUMENT})
+     JOIN ${TABLE_HEALTHCENTERS} ON 
+     (${TABLE_QUERIES}.${COL_QUERIES_ID_CENTER}=${TABLE_HEALTHCENTERS}.${COL_HEALTHCENTER_PARAMETER})
+     JOIN ${TABLE_ATTENTIONCENTERS} ON 
+     (${TABLE_QUERIES}.${COL_QUERIES_ID_CENTER}=${TABLE_ATTENTIONCENTERS}.${COL_ATTENTIONCENTER_PARAMETER_ID_CENTER} AND ${TABLE_QUERIES}.${COL_QUERIES_PROFESSIONAL_PARAMETER}=${TABLE_ATTENTIONCENTERS}.${COL_ATTENTIONCENTER_PARAMETER_DOCUMENT})
+     JOIN ${TABLE_SPECIALTIES} ON
+     (${TABLE_ATTENTIONCENTERS}.${COL_ATTENTIONCENTER_PARAMETER_SPECIALTY}=${TABLE_SPECIALTIES}.${COL_SPECIALTY_PARAMETER})`,
+  selectFormViewQueries: (document: string): string =>
+    `SELECT * FROM ${VIEW_QUERIES} WHERE pacient_document = '${document}'`,
 };

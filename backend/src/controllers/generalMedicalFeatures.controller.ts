@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import generalMedicalFeaturesDB from "../database/GeneralMedicalFeatures.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import generalMedicalFeaturesDB from '../database/GeneralMedicalFeatures.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class GeneralMedicalFeaturesController {
   app = express();
@@ -13,13 +13,13 @@ export class GeneralMedicalFeaturesController {
       .none(generalMedicalFeaturesDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "general medical features table created",
+        status: 'success creating table',
+        message: 'general medical features table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -31,8 +31,7 @@ export class GeneralMedicalFeaturesController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
-          message:
-            'getGeneralMedicalFeatures.success',
+          message: 'getGeneralMedicalFeatures.success',
           data: generalMedicalFeatures,
         })
       )
