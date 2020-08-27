@@ -22,6 +22,7 @@ import {
   setMsgErrorVisbility,
 } from '../../redux/actions';
 import { REMOVE_ICON } from '../../util/svgIcons';
+import { useAlert } from '../../hooks/useAlert';
 
 export const FormRegisterContact = ({
   onSubmit,
@@ -38,12 +39,15 @@ export const FormRegisterContact = ({
   removeContact,
 }: RegisterContactTypes) => {
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   const newHandleSubmit = () => {
     if (contacts.length <= 0) {
-      dispatch(SnackTitleMsg('register.form-errTitle-noContact'));
-      dispatch(SnackMsg('register.form-errMsg-noContact'));
-      dispatch(setMsgErrorVisbility(true));
+      alert(
+        'register.form-errTitle-noContact',
+        'register.form-errMsg-noContact',
+        'error'
+      );
     } else {
       onSubmit();
     }
