@@ -417,7 +417,7 @@ export default {
     'evolution.generalfeature-quirurjical': 'Antecedentes médicos',
     'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
     'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
-    'evolution.generalfeature-save-or-update': 'Guardar o Actualizar',
+    'evolution.generalfeature-save-or-update': 'Guardar',
   },
 };
 

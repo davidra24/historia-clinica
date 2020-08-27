@@ -90,7 +90,7 @@ export default {
           ${COL_STRATUM}, ${COL_DECEASED}, ${COL_DECEASED_DATE}, ${COL_IS_HEALTH_CARE_TEAM}) 
           VALUES ('${person.document}', '${person.first_name}','${
     person.second_name
-  }','${person.last_name}','${person.last_second_name}',${person.genre}, 
+  } ','${person.last_name}','${person.last_second_name}',${person.genre}, 
           '${person.date_birth}','${person.email}','${person.civil_state}','${
     person.photo
   }','${person.phone}','${person.id_eps}', ${
