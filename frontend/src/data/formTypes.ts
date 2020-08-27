@@ -7,4 +7,5 @@ export interface signTypes {
   setPerson?: Function;
   inputDocument: any;
   inputPassword: any;
+  inputSecondPassword?: any;
 }

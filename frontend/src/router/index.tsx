@@ -10,6 +10,7 @@ import { RegisterData } from '../pages/RegisterData';
 import { Specialties } from '../pages/Specialties';
 import ScrollToTop from '../components/ScrollTop';
 import { Profile } from '../pages/Profile';
+import { AttentionPatient } from '../pages/AttentionPatient';
 
 export const Router = (props: any) => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ export const Router = (props: any) => (
         <PrivateRoute path='/' component={Dashboard} exact />
         <PrivateRoute path='/profile' component={Profile} exact />
         <PrivateRoute path='/specialty/:id' component={Specialties} exact />
+        <PrivateRoute path='/attention' component={AttentionPatient} exact />
         <PrivateRoute path='/completeRegister' component={RegisterData} exact />
         <Route path='/404' component={NotFound} />
         <Redirect to='/404' />

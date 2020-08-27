@@ -13,6 +13,7 @@ import { DashBoardProfessional } from '../containers/dashboard/DashBoardProfessi
 import { DashBoardPatient } from '../containers/dashboard/DashBoardPatient';
 import { IPerson } from '../data/IPerson';
 import { IHealthCareCenter } from '../data/IHealthCareCenter';
+import { DashboardSelection } from '../containers/dashboard/DashboardSelection';
 
 export const Dashboard = () => {
   const user = useSelector((state: IStore) => state.user);
@@ -54,6 +55,7 @@ export const Dashboard = () => {
       const { ok, data } = response;
       if (ok) {
         dispatch(setPerson(data));
+        console.log('person', data);
       } else {
         history.push('/completeRegister');
       }
@@ -70,7 +72,6 @@ export const Dashboard = () => {
     );
     if (response) {
       console.log('response health', response);
-
       const { ok, data } = response;
       if (ok) {
         dispatch(setHealthCenter(data));
@@ -88,10 +89,10 @@ export const Dashboard = () => {
       ) : (
         <>
           {person ? (
-            !person.is_healt_care_team ? (
+            !person.is_health_care_team ? (
               <DashBoardPatient />
             ) : (
-              <DashBoardProfessional />
+              <DashboardSelection />
             )
           ) : (
             <DashBoardHealthCenter />

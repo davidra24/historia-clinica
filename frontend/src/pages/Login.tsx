@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { TextMessage } from '../lang/TextMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Loading,
   setMsgErrorVisbility,
-  setMsgSuccessVisbility,
   SnackTitleMsg,
   SnackMsg,
   auth,
@@ -15,34 +14,48 @@ import { useHistory } from 'react-router';
 import { IUser } from '../data/IUser';
 import { post } from '../util/httpUtil';
 import { HTTP_LOGIN } from '../util/constants';
-import { SnackBarAlert } from '../util/Alert';
-import { useInputValue } from '../hooks/useInput';
+import { useInputValidator } from '../hooks/useInput';
 import { useCookies } from 'react-cookie';
-import { IStore } from '../redux/types';
 import { ILogin } from '../data/ILoginResponse';
+import { useAlert } from '../hooks/useAlert';
 
 export const Login = () => {
-  const openMsgError = useSelector((state: IStore) => state.openMsgError);
-  const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
-  const snackTitle = useSelector((state: IStore) => state.snackTitle);
-  const snackMsg = useSelector((state: IStore) => state.snackMsg);
-
-  const inputDocument = useInputValue('');
-  const inputPassword = useInputValue('');
+  const inputDocument = useInputValidator('');
+  const inputPassword = useInputValidator('');
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const [valide, setValide] = useState(false);
 
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
   const history = useHistory();
 
-  const login = async () => {
+  const login = async (event: SyntheticEvent) => {
+    event.preventDefault();
     const logged = await loginPromise();
-    if (logged) {
-      history.push('/');
+    if (validate()) {
+      if (logged) {
+        history.push('/');
+      }
     }
   };
+  const validate = (): boolean => {
+    const inputDocumentValidator =
+      inputDocument.value !== null && inputDocument.value !== '';
+    const inputPasswordValidator =
+      inputPassword.value !== null && inputPassword.value !== '';
 
-  const loginPromise = async () =>
-    new Promise(async (resolve, reject) => {
+    inputDocument.setValidator(inputDocumentValidator);
+    inputPassword.setValidator(inputPasswordValidator);
+
+    const finalValidator = inputDocumentValidator && inputPasswordValidator;
+
+    setValide(finalValidator);
+    return finalValidator;
+  };
+  useEffect(() => {}, [valide]);
+
+  const loginPromise = async (): Promise<boolean> =>
+    new Promise(async (resolve) => {
       const document = inputDocument.value;
       const password = inputPassword.value;
       const user: IUser = { document, password };
@@ -58,9 +71,7 @@ export const Login = () => {
           dispatch(Loading(false));
           resolve(true);
         } else {
-          dispatch(SnackTitleMsg('login.authError-title'));
-          dispatch(SnackMsg(message));
-          dispatch(setMsgErrorVisbility(true));
+          alert('login.authError-title', message, 'error');
           resolve(false);
         }
       } else {
@@ -72,40 +83,12 @@ export const Login = () => {
       dispatch(Loading(false));
     });
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    dispatch(setMsgSuccessVisbility(false));
-    dispatch(setMsgErrorVisbility(false));
-  };
-
   const volver = () => {
     history.push('/signup');
   };
 
   return (
     <>
-      <SnackBarAlert
-        open={openMsgError}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='error'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <SnackBarAlert
-        open={openMsgSuccess}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='success'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
       <div className='flex justify-center pt-10 w-12/12 h-screen'>
         <FormSign
           title={TextMessage('login.title')}

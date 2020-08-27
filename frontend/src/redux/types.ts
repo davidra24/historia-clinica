@@ -5,6 +5,7 @@ import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
 import { ISpecialty } from '../data/ISpecialty';
 import { IAttentionCenter } from '../data/IAttentionCenter';
+import { IViewAttentionCenter } from '../data/IViewAttentionCenter';
 
 export interface IStore {
   loading: boolean;
@@ -18,7 +19,10 @@ export interface IStore {
   reloadRoute: string;
   user: IUser | any;
   person: IPerson | any;
+  selectedDashProfessional: number;
   healthCenter: IHealthCareCenter | any;
+  selectedAttentionCenter: IViewAttentionCenter | any;
+  viewAttentionCenter: Array<IViewAttentionCenter>;
   specialties: Array<ISpecialty>;
   listEPS: Array<IEPS>;
   listProfessions: Array<IProfessions>;
@@ -38,6 +42,9 @@ export const defaultStore: IStore = {
   user: null,
   person: null,
   healthCenter: null,
+  selectedAttentionCenter: null,
+  selectedDashProfessional: 0,
+  viewAttentionCenter: [],
   specialties: [],
   listEPS: [],
   listProfessions: [],

@@ -106,6 +106,35 @@ export const put = async <T>(
   }
 };
 
+export const putMultiPK = async <T>(
+  service: string,
+  id_1: any,
+  id_2: any,
+  body: any,
+  token?: string
+): Promise<IResponse<T>> => {
+  try {
+    const options = {
+      method: 'PUT',
+      body: encrypt(body),
+      headers: new Headers({
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: token ? `Bearer ${token}` : '',
+      }),
+    };
+    const response = await fetch(
+      `${HTTP_SERVICE}/${service}/${id_1}/${id_2}`,
+      options
+    ).then((response) => response.text());
+    const data = await decrypt(response);
+    return data;
+  } catch (error) {
+    console.log('error??', error);
+    return error;
+  }
+};
+
 export const deleteRecord = async <T>(
   service: string,
   id: any,

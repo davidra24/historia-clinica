@@ -45,12 +45,16 @@ export default {
     //SIGNFORM
     'signForm.document': 'Documento',
     'signForm.password': 'Contraseña',
+    'signForm.verify-password': 'Repita su contraseña',
     'signForm.people': 'Persona',
     'signForm.healtCarecenter': 'IPS',
     'document.required': 'El documento es requerido',
     'document.invalid':
       'La longitud mínima del documento es de 6 dígitos y la máxima de 15 dígitos.',
-    'password.required': 'La contraseña es requerida es requerida',
+    'password.required': 'La contraseña es requerida',
+    'password.second-required': 'La confirmación de la contraseña es requerida',
+    'password.no-match':
+      'La contraseña no requiere con su verificación, por favor corrija',
     'password.invalid':
       'Se debe diligenciar el dato de la contraseña, con las siguientes recomendaciones: \n 1.Debe contener al menos 8 caracteres. \n 2. Contener mayúsculas y minúsculas. \n 3. Contener números. \n 4.Contener caracteres especiales.',
     //USERS
@@ -259,6 +263,7 @@ export default {
     'profile.website': 'Sitio web',
     'profile.direction': 'Dirección',
     'profile.description': 'Descripción',
+    'profile.edit-button': 'Editar información',
     //Register person
     'register.person': 'Información Personal',
     'register.contact': 'Información de Contacto',
@@ -319,6 +324,7 @@ export default {
     'register.form-errTitle-noContact': 'Ingrese contactos',
     //Register Health Center
     'register-healthCenter': 'Registro del centro de salud',
+    'update-healthCenter': 'Actualización del centro de salud',
     'register-form-nameCenter': 'Nombre *',
     'register-form-website': 'Sitio web',
     'register-form-phoneCenter': 'Telefono *',
@@ -341,6 +347,31 @@ export default {
     'dashboard-patient.specialties-description-end':
       'Y recuerde su estado de salud es nuestra prioridad.',
     //DASHBOARD - PROFESSIONAL
+    'dashboard-professional.specialties': 'Especialidades',
+    'dashboard-professional.specialties-description':
+      'A continuación encontrará las diferentes especialidades del(los) centro(s) de salud donde se encuentra habilitado para desempeñarse, de tal forma que pueda atender a un paciente ahora mismo y ayudarnos a mejorar este gran mundo de la atención y el cuidado de la salud.',
+    'dashboard-professional.specialties-description-end':
+      'Y recuerde su ética profesional es nuestra prioridad.',
+    'dashboard-professional.no-specialties':
+      'En el momento no existen registros de especialidades que requieran de su atención.',
+    'dashboard-professional.title-consult': 'Consulta de paciente',
+    'dashboard-professional.title-info': 'Información de paciente',
+    'dashboard-professional.patient-document': 'Documento de paciente',
+    'dashboard-professional.patient-consult': 'Consultar paciente',
+    'dashboard-professional.patient-consult-document': 'Documento de paciente:',
+    'dashboard-professional.patient-consult-name': 'Nombre de paciente:',
+    'dashboard-professional.patient-consult-genre': 'Genero de paciente:',
+    'dashboard-professional.patient-consult-birth': 'Edad de paciente: ',
+    'dashboard-professional.patient-consult-birth-age': 'años',
+    'dashboard-professional.patient-general-consultation':
+      'INFORMACIÓN MÉDICA GENERAL',
+    'dashboard-professional.patient-specialty-history':
+      'HISTORIAL DE EVOLUCIÓN',
+    'dashboard-professional.patient-specialty-consultation': 'AÑADIR EVOLUCIÓN',
+    'dashboard-professional.selection':
+      'Sabemos que así como eres un profesional de la salud, también eres paciente en ocasiones, ¡tranquilo! nosotros te dejamos ver tu evolución y estado de salud, cuéntanos, ¿qué rol quieres cumplir hoy?',
+    'dashboard-professional.select-patient': 'Paciente consultando',
+    'dashboard-professional.select-prof': 'Profesional de la salud',
     //DASHBOARD - HEALTHCENTER
     'dashboard-health.professional': 'Los profesionales de la salud',
     'dashboard-health.professional-description':
@@ -355,7 +386,28 @@ export default {
     'dashboard-health.specialties-required':
       'La especialidad para asignar al profesional es requerida',
     'dashboard-patient.no-specialties':
-      'En el momento no existen registros de especialidades',
+      'En el momento no existen registros de especialidades para ser atendido.',
+    'dashboard-health.name-professional': 'Nombre de profesional',
+    'dashboard-health.specialty-professional': 'Especialidad de profesional',
+    'dashboard-health.phone-professional': 'Teléfono de profesional',
+    'dashboard-health.enabled-professional': 'Profesional habilitado en centro',
+    'dashboard-health.professional-openAnotation': 'Abrir anotación',
+    'dashboard-health.professional-history':
+      'A continuación encontrará el historial completo de anotaciones de paciente, para conocer, de esta forma podrá conocer la evolución que ha tenido el proceso del paciente',
+    //Evolution
+    'evolution.generalfeature-height': 'Altura',
+    'evolution.generalfeature-weight': 'Peso',
+    'evolution.generalfeature-drink': 'Bebe',
+    'evolution.generalfeature-smokes': 'Fuma',
+    'evolution.generalfeature-vices': 'Vicios',
+    'evolution.generalfeature-manias': 'Manías',
+    'evolution.anotation-add': 'Agregar anotación',
+    'evolution.generalfeature-family-background': 'Antecedentes familiares',
+    'evolution.generalfeature-medical': 'Antecedentes médicos',
+    'evolution.generalfeature-quirurjical': 'Antecedentes médicos',
+    'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
+    'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
+    'evolution.generalfeature-save-or-update': 'Guardar o Actualizar',
   },
 };
 

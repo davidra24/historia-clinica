@@ -11,12 +11,12 @@ api.get(
   '/peopleViewPerson/:document',
   auth,
   personcontroller.getViewDataPerson
-);
+); //la de caracteriscas generales
 api.get(
   '/peopleViewQueries/:document',
   auth,
   personcontroller.getViewDataQueries
-);
+); //consulta completa por persona
 api.post('/people', auth, personcontroller.insertPerson);
 api.put('/people/:document', auth, personcontroller.updatePerson);
 api.delete('/people/:document', auth, personcontroller.deletePerson);

@@ -19,13 +19,6 @@ export const ProfileHealthCenter = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const name = healthCareCenter.name;
-  const website = healthCareCenter.website;
-  const phone = healthCareCenter.phone;
-  const direction = healthCareCenter.direction;
-  const email = healthCareCenter.email;
-  const description = healthCareCenter.description;
-
   return (
     <>
       {loading ? (
@@ -35,12 +28,12 @@ export const ProfileHealthCenter = () => {
       ) : (
         <EditProfileHealthCenter
           setShow={setShow}
-          name={name}
-          website={website}
-          phone={phone}
-          direction={direction}
-          email={email}
-          description={description}
+          name={healthCareCenter?.name}
+          website={healthCareCenter?.website}
+          phone={healthCareCenter?.phone}
+          direction={healthCareCenter?.direction}
+          email={healthCareCenter?.email}
+          description={healthCareCenter?.description}
         />
       )}
     </>

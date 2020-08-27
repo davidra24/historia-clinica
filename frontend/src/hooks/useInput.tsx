@@ -9,6 +9,17 @@ export const useInputValue = (initialValue: any) => {
   return { value, onChange, clean };
 };
 
+export const useQuillValue = (initialValue: any) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (e: any) => {
+    console.log('event', e);
+    setValue(e);
+  };
+  const clean = () => setValue('');
+  const defaultValue = () => setValue(initialValue);
+  return { value, onChange, clean, defaultValue };
+};
+
 export const useInputValidator = (initialValue: any) => {
   const [value, setValue] = useState(initialValue);
   const [validator, setValidator] = useState<boolean>(true);

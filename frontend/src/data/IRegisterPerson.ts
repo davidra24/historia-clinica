@@ -16,4 +16,5 @@ export interface IRegisterPerson {
   stratumInfo?: any;
   dateBirthInfo?: any;
   arrayContacts?: Array<IContact>;
+  setShow?: any;
 }

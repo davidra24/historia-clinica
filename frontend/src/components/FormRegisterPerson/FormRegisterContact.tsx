@@ -53,8 +53,8 @@ export const FormRegisterContact = ({
     <>
       <div className='flex flex-col w-full'>
         <div className='flex flex-col justify-center space-y-5'>
-          <h2 className='text-lg text-center'>
-            <strong>{TextMessage('register.contact')}</strong>
+          <h2 className='text-2xl font-semibold  text-center'>
+            <>{TextMessage('register.contact')}</>
           </h2>
 
           {!disabled && (

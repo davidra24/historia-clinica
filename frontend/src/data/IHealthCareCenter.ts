@@ -8,6 +8,8 @@ export interface IHealthCareCenterTypes {
   description: any;
   token: any;
   disabled?: boolean;
+  update: boolean;
+  setShow: any;
 }
 
 export interface IHealthCareCenter {

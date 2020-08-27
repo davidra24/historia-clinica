@@ -22,6 +22,7 @@ export const EditProfileHealthCenter = ({
           directionInfo={direction}
           emailInfo={email}
           descriptionInfo={description}
+          setShow={setShow}
         />
       </div>
     </>

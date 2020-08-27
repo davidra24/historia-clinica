@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, SyntheticEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Loading,
@@ -10,110 +10,112 @@ import {
 import { FormSign } from '../components/FormSign';
 import { TextMessage } from '../lang/TextMessage';
 import { useHistory } from 'react-router';
-import { useInputValue } from '../hooks/useInput';
+import { useInputValidator } from '../hooks/useInput';
 import { HTTP_USERS, PATTERN_PASSWORD } from '../util/constants';
 import { post } from '../util/httpUtil';
 import { IUser } from '../data/IUser';
-import { SnackBarAlert } from '../util/Alert';
-import { IStore } from '../redux/types';
+import { useAlert } from '../hooks/useAlert';
 
 export const SignUp = () => {
-  const openMsgError = useSelector((state: IStore) => state.openMsgError);
-  const openMsgSuccess = useSelector((state: IStore) => state.openMsgSuccess);
-  const snackTitle = useSelector((state: IStore) => state.snackTitle);
-  const snackMsg = useSelector((state: IStore) => state.snackMsg);
-
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   const [person, setPerson] = useState(true);
 
-  const inputDocument = useInputValue('');
-  const inputPassword = useInputValue('');
+  const inputDocument = useInputValidator('');
+  const inputPassword = useInputValidator('');
+  const inputSecondPassword = useInputValidator('');
+  const [valide, setValide] = useState(false);
 
   const history = useHistory();
 
-  const signup = async () => {
-    const document = inputDocument.value;
-    const password = inputPassword.value;
+  const validate = (): boolean => {
+    const inputDocumentValidator =
+      inputDocument.value !== null && inputDocument.value !== '';
+    const inputPasswordValidator =
+      inputPassword.value !== null && inputPassword.value !== '';
+    const inputSecondPasswordValidator =
+      inputSecondPassword.value !== null && inputSecondPassword.value !== 0;
 
-    if (document.length < 6 || document.length > 15) {
-      dispatch(SnackTitleMsg('signup.authError-title'));
-      dispatch(SnackMsg('document.invalid'));
-      dispatch(setMsgErrorVisbility(true));
-      return;
-    }
+    inputDocument.setValidator(inputDocumentValidator);
+    inputPassword.setValidator(inputPasswordValidator);
+    inputSecondPassword.setValidator(inputSecondPasswordValidator);
 
-    if (!PATTERN_PASSWORD.test(password)) {
-      dispatch(SnackTitleMsg('signup.authError-title'));
-      dispatch(SnackMsg('password.invalid'));
-      dispatch(setMsgErrorVisbility(true));
-      return;
-    }
+    const finalValidator =
+      inputDocumentValidator &&
+      inputPasswordValidator &&
+      inputSecondPasswordValidator;
 
-    dispatch(Loading(true));
-    const user: IUser = {
-      document,
-      document_type: person,
-      password,
-      active: true,
-    };
-    const response = await post<any>(HTTP_USERS, { user });
-    console.log('response', response);
-    if (response) {
-      const { message } = response;
-      if (response.ok) {
-        dispatch(SnackTitleMsg('signup.success-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgSuccessVisbility(true));
-        history.push('/login');
-      } else {
-        dispatch(SnackTitleMsg('signup.authError-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+    setValide(finalValidator);
+    return finalValidator;
+  };
+  useEffect(() => {}, [valide]);
+
+  const signupPromise = async (): Promise<boolean> => {
+    return new Promise(async (resolve) => {
+      const document = inputDocument.value;
+      const password = inputPassword.value;
+      const secondPassword = inputSecondPassword.value;
+
+      if (document.length < 6 || document.length > 15) {
+        alert('signup.authError-title', 'document.invalid', 'error');
+        return resolve(false);
       }
-    } else {
-      dispatch(SnackTitleMsg('signup.authError-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
+
+      if (!PATTERN_PASSWORD.test(password)) {
+        alert('signup.authError-title', 'password.invalid', 'error');
+        return resolve(false);
+      }
+
+      if (password !== secondPassword) {
+        alert('signup.authError-title', 'password.invalid', 'error');
+        return resolve(false);
+      }
+
+      dispatch(Loading(true));
+      const user: IUser = {
+        document,
+        document_type: person,
+        password,
+        active: true,
+      };
+      const response = await post<any>(HTTP_USERS, { user });
+      console.log('response', response);
+      if (response) {
+        const { message } = response;
+        if (response.ok) {
+          alert('signup.success-title', message, 'success');
+          resolve(true);
+          history.push('/login');
+        } else {
+          alert('signup.authError-title', message, 'error');
+          resolve(false);
+        }
+      } else {
+        alert('signup.authError-title', 'app.not-server', 'error');
+        resolve(false);
+      }
+      dispatch(Loading(false));
+    });
+  };
+
+  const signup = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    const register = await signupPromise();
+    if (validate()) {
+      if (register) {
+        history.push('/');
+      }
     }
-    dispatch(Loading(false));
   };
 
   const volver = () => {
     history.push('/login');
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    dispatch(setMsgSuccessVisbility(false));
-    dispatch(setMsgErrorVisbility(false));
-  };
-
   return (
     <>
-      <SnackBarAlert
-        open={openMsgError}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='error'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <SnackBarAlert
-        open={openMsgSuccess}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        severity='success'
-        title={TextMessage(snackTitle)}
-        message={{
-          children: TextMessage(snackMsg),
-        }}
-      />
-      <div className='flex justify-center pt-10 w-12/12 h-screen'>
+      <div className='flex justify-center pt-10 w-12/12 h-full mb-4'>
         <FormSign
           title={TextMessage('signup.title')}
           leftButton={{
@@ -129,6 +131,7 @@ export const SignUp = () => {
           setPerson={setPerson}
           inputDocument={inputDocument}
           inputPassword={inputPassword}
+          inputSecondPassword={inputSecondPassword}
         />
       </div>
     </>

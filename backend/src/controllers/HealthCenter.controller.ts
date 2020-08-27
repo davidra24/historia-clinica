@@ -3,7 +3,6 @@ import { db } from '../database';
 import healthCenterDB from '../database/HealthCenters.database';
 import peopleDB from '../database/People.database';
 import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
-import { PersonModel } from 'src/models/Person';
 
 export class HealthCenterController {
   app = express();
@@ -69,31 +68,16 @@ export class HealthCenterController {
   }
   async insertHealthCenter(req: Request, res: Response) {
     const { healthCenter } = await decryptRequest(req);
-    const { document } = healthCenter;
     await db
       .none(() => healthCenterDB.insertHealthCenter(healthCenter))
-      .then(async (Center) => {
-        await db
-          .one(() => peopleDB.getOnePerson(document))
-          .then(async (person: PersonModel) => {
-            const auxPerson: PersonModel = {
-              ...person,
-              is_healt_care_team: true,
-            };
-            await db
-              .none(() => peopleDB.updatePerson(document, auxPerson))
-              .then(() => {
-                cryptedResponse(res, 200, {
-                  ok: true,
-                  status: 200,
-                  message: 'insertHealthCenter.success',
-                  data: Center,
-                });
-              })
-              .catch((err) => {});
-          })
-          .catch((err) => {});
-      })
+      .then(async (Center) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'insertHealthCenter.success',
+          data: Center,
+        })
+      )
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
@@ -104,18 +88,21 @@ export class HealthCenterController {
       );
   }
   async updateHealthCenter(req: Request, res: Response) {
-    const { idCenter } = req.params;
+    const { id } = req.params;
     const { healthCenter } = await decryptRequest(req);
     await db
-      .none(() => healthCenterDB.updateHealthCenter(idCenter, healthCenter))
-      .then((Center) =>
+      .none(() => healthCenterDB.updateHealthCenter(id, healthCenter))
+      .then(async () => {
+        const center = await db.one(() =>
+          healthCenterDB.getOneHealthCenter(id)
+        );
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
           message: 'updateHealthCenter.success',
-          data: Center,
-        })
-      )
+          data: center,
+        });
+      })
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
@@ -126,9 +113,9 @@ export class HealthCenterController {
       );
   }
   async deleteHealthCenter(req: Request, res: Response) {
-    const { idCenter } = req.params;
+    const { id } = req.params;
     await db
-      .result(() => healthCenterDB.deleteHealthCenter(idCenter))
+      .result(() => healthCenterDB.deleteHealthCenter(id))
       .then((healthCenter) =>
         cryptedResponse(res, 200, {
           ok: true,

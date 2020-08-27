@@ -66,7 +66,7 @@ export class PeopleController {
   async getViewDataPerson(req: Request, res: Response) {
     const { document } = req.params;
     await db
-      .any(() => peopleDB.selectFormViewPerson(document))
+      .one(() => peopleDB.selectFormViewPerson(document))
       .then((people) =>
         cryptedResponse(res, 200, {
           ok: true,

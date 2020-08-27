@@ -32,8 +32,8 @@ export const ContainerLastStep = ({
 }: any) => (
   <>
     <Card className='flex justify-center flex-col w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 pt-3 pr-10 pl-10 pb-10'>
-      <h2 className='text-xl text-center py-4'>
-        <strong>{TextMessage('register.finalize')}</strong>
+      <h2 className='text-2xl font-semibold text-center py-4'>
+        <>{TextMessage('register.finalize')}</>
       </h2>
       <FormRegisterPerson
         onSubmit={null}
