@@ -75,9 +75,7 @@ export const Login = () => {
           resolve(false);
         }
       } else {
-        dispatch(SnackTitleMsg('login.authError-title'));
-        dispatch(SnackMsg('app.not-server'));
-        dispatch(setMsgErrorVisbility(true));
+        alert('login.authError-title', 'app.not-server', 'error');
         resolve(false);
       }
       dispatch(Loading(false));

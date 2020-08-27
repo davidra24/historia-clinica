@@ -19,6 +19,7 @@ import { IHealthCareCenter } from '../../data/IHealthCareCenter';
 import { HTTP_HEALTH_CENTER } from '../../util/constants';
 import { IRegisterHealthCenter } from '../../data/IRegisterHealthCenter';
 import { post, put, deleteRecord } from '../../util/httpUtil';
+import { useAlert } from '../../hooks/useAlert';
 
 export const RegisterHealthCenter = ({
   isEdit,
@@ -34,6 +35,7 @@ export const RegisterHealthCenter = ({
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   //Health center data
   const name = useInputValue(nameInfo || '');
@@ -72,19 +74,13 @@ export const RegisterHealthCenter = ({
       console.log(response);
       const { ok, message } = response;
       if (ok) {
-        dispatch(SnackTitleMsg('register.success-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgSuccessVisbility(true));
+        alert('register.success-title', message, 'success');
         history.push('/');
       } else {
-        dispatch(SnackTitleMsg('register.error-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.error-title', message, 'error');
       }
     } else {
-      dispatch(SnackTitleMsg('register.error-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.error-title', 'app.not-server', 'error');
     }
     setLoading(false);
   };
@@ -101,21 +97,15 @@ export const RegisterHealthCenter = ({
       const { message, data } = response;
       if (response.ok) {
         dispatch(setHealthCenter(data));
-        dispatch(SnackTitleMsg('register.success-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgSuccessVisbility(true));
+        alert('register.success-title', message, 'success');
         setShow(true);
         setLoading(false);
       } else {
-        dispatch(SnackTitleMsg('register.error-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.error-title', message, 'error');
         setLoading(false);
       }
     } else {
-      dispatch(SnackTitleMsg('register.error-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.error-title', 'app.not-server', 'error');
       setLoading(false);
     }
   };

@@ -35,6 +35,7 @@ import { useHistory } from 'react-router';
 import { isValid } from 'date-fns';
 import { Loading } from '../../components/Loading';
 import { IRegisterPerson } from '../../data/IRegisterPerson';
+import { useAlert } from '../../hooks/useAlert';
 
 export const RegisterPerson = ({
   isEdit,
@@ -57,6 +58,7 @@ export const RegisterPerson = ({
   const user = useSelector((state: IStore) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   //Personal data
   const firstName = useInputValidator(firstNameInfo || '');
@@ -126,14 +128,10 @@ export const RegisterPerson = ({
         pushPersonData(person).then(async () => {
           const okContactPerson = await pushContactPersonData();
           if (okContactPerson) {
-            dispatch(SnackTitleMsg('register.success-title'));
-            dispatch(SnackMsg('insertContact.success'));
-            dispatch(setMsgSuccessVisbility(true));
+            alert('register.success-title', 'insertContact.success', 'success');
             history.push('/');
           } else {
-            dispatch(SnackTitleMsg('register.error-title'));
-            dispatch(SnackMsg('insertContact.error'));
-            dispatch(setMsgErrorVisbility(true));
+            alert('register.error-title', 'insertContact.error', 'error');
           }
         });
       }
@@ -143,14 +141,10 @@ export const RegisterPerson = ({
         if (okDeleteContactPerson) {
           const okContactPerson = await pushContactPersonData();
           if (okContactPerson) {
-            dispatch(SnackTitleMsg('register.success-title'));
-            dispatch(SnackMsg('insertContact.success'));
-            dispatch(setMsgSuccessVisbility(true));
+            alert('register.success-title', 'insertContact.success', 'success');
             history.push('/');
           } else {
-            dispatch(SnackTitleMsg('register.error-title'));
-            dispatch(SnackMsg('insertContact.error'));
-            dispatch(setMsgErrorVisbility(true));
+            alert('register.error-title', 'insertContact.error', 'error');
           }
         }
       });
@@ -253,19 +247,13 @@ export const RegisterPerson = ({
     if (response) {
       const { message, data } = response;
       if (response.ok) {
-        dispatch(SnackTitleMsg('register.success-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgSuccessVisbility(true));
+        alert('register.success-title', message, 'success');
         dispatch(setPerson(data));
       } else {
-        dispatch(SnackTitleMsg('register.error-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.error-title', message, 'error');
       }
     } else {
-      dispatch(SnackTitleMsg('register.error-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.error-title', 'app.not-server', 'error');
     }
     setLoading(false);
   };
@@ -281,19 +269,13 @@ export const RegisterPerson = ({
     if (response) {
       const { message, data } = response;
       if (response.ok) {
-        dispatch(SnackTitleMsg('register.success-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgSuccessVisbility(true));
+        alert('register.success-title', message, 'success');
         dispatch(setPerson(data));
       } else {
-        dispatch(SnackTitleMsg('register.error-title'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.error-title', message, 'error');
       }
     } else {
-      dispatch(SnackTitleMsg('register.error-title'));
-      dispatch(SnackMsg('app.not-server'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.error-title', 'app.not-server', 'error');
     }
     setLoading(false);
   };
@@ -387,9 +369,11 @@ export const RegisterPerson = ({
         auxContact.push(contact);
         setListContact(auxContact);
       } else {
-        dispatch(SnackTitleMsg('register.error-titleContact'));
-        dispatch(SnackMsg('register.error-msgContact'));
-        dispatch(setMsgErrorVisbility(true));
+        alert(
+          'register.error-titleContact',
+          'register.error-msgContact',
+          'error'
+        );
       }
       cleanFields();
     }

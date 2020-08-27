@@ -34,6 +34,7 @@ import {
   ARRAY_CIVIL_STATE,
 } from '../../util/ConstantsData';
 import { useHistory } from 'react-router';
+import { useAlert } from '../../hooks/useAlert';
 
 export const FormRegisterPerson = ({
   onSubmit,
@@ -65,6 +66,7 @@ export const FormRegisterPerson = ({
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   useEffect(() => {
     console.log('listeps', listEps);
@@ -87,14 +89,10 @@ export const FormRegisterPerson = ({
         const { data } = response;
         dispatch(selectEPS(data));
       } else {
-        dispatch(SnackTitleMsg('register.form-errFetchEPS'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.form-errFetchEPS', message, 'error');
       }
     } else {
-      dispatch(SnackTitleMsg('register.form-errFetchEPS'));
-      dispatch(SnackMsg('app.err-connect'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.form-errFetchEPS', 'app.err-connect', 'error');
     }
     setLoading(false);
   };
@@ -108,14 +106,10 @@ export const FormRegisterPerson = ({
         const { data } = response;
         dispatch(selectProfessions(data));
       } else {
-        dispatch(SnackTitleMsg('register.form-errFetchProfession'));
-        dispatch(SnackMsg(message));
-        dispatch(setMsgErrorVisbility(true));
+        alert('register.form-errFetchProfession', message, 'error');
       }
     } else {
-      dispatch(SnackTitleMsg('register.form-errFetchProfession'));
-      dispatch(SnackMsg('app.err-connect'));
-      dispatch(setMsgErrorVisbility(true));
+      alert('register.form-errFetchProfession', 'app.err-connect', 'error');
     }
     setLoading(false);
   };
