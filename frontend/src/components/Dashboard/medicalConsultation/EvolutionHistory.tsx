@@ -24,22 +24,27 @@ export const EvolutionHistory = ({ infoQueries }: propsHistory) => {
                     new Date(b.query_date).getTime() -
                     new Date(a.query_date).getTime()
                 )
-                .map((consult: IViewQueries) => (
-                  <AnotationModal
-                    key={consult.query_annotation}
-                    readOnly
-                    disableButton
-                    titleCard={toRedableDate(consult.query_date)}
-                    valueAnnotation={consult.query_annotation}
-                    buttonText={TextMessage(
-                      'dashboard-health.professional-openAnotation'
-                    )}
-                    onSaveAnnotation={() => {}}
-                    saveText={TextMessage(
-                      'evolution.generalfeature-save-or-update'
-                    )}
-                  ></AnotationModal>
-                ))}
+                .map(
+                  (consult: IViewQueries) =>
+                    consult.query_annotation !== 'CMG' && (
+                      <AnotationModal
+                        key={consult.query_annotation}
+                        readOnly
+                        disableButton
+                        isCallback
+                        titleCard={toRedableDate(consult.query_date)}
+                        annotation={consult.query_annotation}
+                        buttonText={TextMessage(
+                          'dashboard-health.professional-openAnotation'
+                        )}
+                        onSaveAnnotation={() => {}}
+                        saveText={TextMessage(
+                          'evolution.generalfeature-save-or-update'
+                        )}
+                        subTitleCard={consult.name_center}
+                      ></AnotationModal>
+                    )
+                )}
             </div>
           ) : (
             <h4 className='text-lg text-center font-semibold text-gray-700 mt-12'>

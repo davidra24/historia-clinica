@@ -1,4 +1,5 @@
 export interface IViewGeneralFeatures {
+  id_features: string;
   pacient_document: string;
   pacient_first_name: string;
   pacient_second_name: string;
@@ -24,4 +25,5 @@ export interface IViewGeneralFeatures {
   pacient_surgery_history: string;
   pacient_traumatic_background: string;
   pacient_allergy_history: string;
+  query_id: string;
 }

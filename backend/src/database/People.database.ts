@@ -65,6 +65,7 @@ const COL_ATTENTIONCENTER_PARAMETER_ID_CENTER = 'id';
 const COL_ATTENTIONCENTER_PARAMETER_DOCUMENT = 'document';
 const COL_SPECIALTY_PARAMETER = 'id';
 const COL_PERSON_PARAMETER = 'document';
+const COL_FEATURE_ID = 'id';
 
 const COL_HEALTHCENTER_NAME = 'name';
 const COL_SPECIALTY_NAME = 'name';
@@ -130,11 +131,13 @@ export default {
   ${TABLE_NAME}.${COL_LAST_SECOND_NAME} as pacient_last_second_name, ${TABLE_NAME}.${COL_GENRE} as pacient_genre,
   ${TABLE_QUERIES}.${COL_QUERIES_ID_CENTER} as id_center, ${TABLE_QUERIES}.${COL_QUERY_DATE} as query_date,
   ${TABLE_QUERIES}.${COL_QUERY_ANNOTATION} as query_annotation,
+  ${TABLE_QUERIES}.${COL_QUERIES_PARAMETER} as query_id,
   ${TABLE_QUERIES}.${COL_QUERIES_PROFESSIONAL_PARAMETER} as professional_document, 
   ${TABLE_PROFESSIONAL}.${COL_FIRST_NAME} as professional_first_name, 
   ${TABLE_PROFESSIONAL}.${COL_SECOND_NAME} as professional_second_name, 
   ${TABLE_PROFESSIONAL}.${COL_LAST_NAME} as professional_lastname, 
   ${TABLE_PROFESSIONAL}.${COL_LAST_SECOND_NAME} as professional_last_second_name, 
+  ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_FEATURE_ID} as id_features,
   ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_HEIGHT} as pacient_height,
   ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_WEIGHT} as pacient_weight,
   ${TABLE_GENERAL_MEDICAL_FEATURES}.${COL_GMF_DRINK} as pacient_drink, 

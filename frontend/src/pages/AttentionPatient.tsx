@@ -104,6 +104,7 @@ export const AttentionPatient = () => {
               <MedicalConsultation
                 patient={patient}
                 readOnly={false}
+                selectedAttentionCenter={selectedAttentionCenter}
                 specialtyId={selectedAttentionCenter.specialty_id}
               />
             </div>

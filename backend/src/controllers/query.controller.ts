@@ -106,17 +106,18 @@ export class QueryController {
   async insertQuery(req: Request, res: Response) {
     const { query } = await decryptRequest(req);
     await db
-      .none(() => queryDB.insertQuery(query))
-      .then((consulta) =>
+      .one(() => queryDB.insertQuery(query))
+      .then(async (result) => {
+        const { id } = result;
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
           message: 'insertQuery.success',
-          data: consulta,
-        })
-      )
+          data: id,
+        });
+      })
       .catch((error) => {
-        cryptedResponse(res, 500, {
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'insertQuery.error',

@@ -21,16 +21,20 @@ import {
 } from '../../util/constants';
 import { getOneOrMany } from '../../util/httpUtil';
 import { Loading } from '../Loading';
+import { IPerson } from '../../data/IPerson';
+import { IQueries } from '../../data/IQueries';
 
 export const MedicalConsultation = ({
   readOnly,
   patient,
+  selectedAttentionCenter,
   specialtyId,
 }: propsMedicalConsultation) => {
   const [expanded, setExpanded] = React.useState<string | false>(
     'panelGeneral'
   );
   const token: string = useSelector((state: IStore) => state.token);
+  const person: IPerson = useSelector((state: IStore) => state.person);
   const [loading, setLoading] = useState(false);
   const [infoGeneral, setInfoGeneral] = useState<IViewGeneralFeatures | any>(
     null
@@ -80,6 +84,15 @@ export const MedicalConsultation = ({
     setExpanded(isExpanded ? panel : false);
   };
 
+  const makeQuery = (annotation: string): IQueries => ({
+    id: '',
+    date: new Date(),
+    document: patient.document,
+    id_center: selectedAttentionCenter?.id_health_center,
+    professional_document: person.document,
+    annotation,
+  });
+
   return (
     <>
       {loading ? (
@@ -108,6 +121,10 @@ export const MedicalConsultation = ({
               <GeneralMedicalFeatures
                 infoGeneral={infoGeneral}
                 readOnly={readOnly}
+                setInfoGeneral={setInfoGeneral}
+                makeQuery={makeQuery}
+                patient={patient}
+                setLoading={setLoading}
               />
             </AccordionDetails>
           </Accordion>
@@ -131,7 +148,7 @@ export const MedicalConsultation = ({
               </AccordionSummary>
               <Divider></Divider>
               <AccordionDetails>
-                <AddEvolution />
+                <AddEvolution makeQuery={makeQuery} />
               </AccordionDetails>
             </Accordion>
           )}

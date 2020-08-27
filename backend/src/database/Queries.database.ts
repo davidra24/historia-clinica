@@ -51,7 +51,7 @@ export default {
   insertQuery: (
     query: QueryModel
   ): string => `INSERT INTO ${TABLE_NAME} (${COL_DATE}, ${COL_USER_DOCUMENT}, ${COL_ID_CENTER}, ${COL_PROFESSIONAL_DOCUMENT}, ${COL_ANNOTATION}) 
-    VALUES ('${query.date}','${query.document}','${query.id_center}','${query.professional_document}','${query.annotation}')`,
+    VALUES ('${query.date}','${query.document}','${query.id_center}','${query.professional_document}','${query.annotation}') RETURNING ${COL_ID}`,
   deleteQuery: (id: string) =>
     `DELETE FROM ${TABLE_NAME} where ${COL_ID} = '${id}'`,
   updateQuery: (

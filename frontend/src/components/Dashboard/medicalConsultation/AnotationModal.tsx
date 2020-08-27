@@ -6,29 +6,28 @@ import { CLOSE_ICON } from '../../../util/svgIcons';
 import { TextMessage } from '../../../lang/TextMessage';
 
 export const AnotationModal = ({
-  valueAnnotation,
   titleCard,
   buttonText,
   onSaveAnnotation,
   saveText,
   readOnly,
   disableButton,
+  subTitleCard,
+  annotation,
+  isCallback,
 }: propsAnnotationModal) => {
   const [open, setOpen] = React.useState(false);
 
-  const anotation = useQuillValue(valueAnnotation || '');
   const ReactQuill = require('react-quill');
+
+  const auxAnnotation = useQuillValue(annotation);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    if (anotation.value !== valueAnnotation) {
-      setOpen(false);
-    } else {
-      setOpen(false);
-    }
+    setOpen(false);
   };
 
   const saveAnnotation = () => {
@@ -40,6 +39,11 @@ export const AnotationModal = ({
     <>
       <div className='flex flex-col justify-center w-6/12 md:w-4/12 lg:w-3/12 my-4'>
         <h4 className='text-center font-semibold text-lg'>{titleCard}</h4>
+        {subTitleCard && (
+          <p className='font-normal text-gray-700 text-center text-base my-2'>
+            {subTitleCard}
+          </p>
+        )}
         <div className='mt-2 flex justify-center w-full'>
           <Button
             variant='outlined'
@@ -76,15 +80,27 @@ export const AnotationModal = ({
                 {titleCard}
               </h3>
               <div className='flex h-64 w-full justify-center items-center mb-12'>
-                <ReactQuill
-                  className='w-10/12 h-full'
-                  readOnly={readOnly}
-                  theme='snow'
-                  modules={ReactQuill.modules}
-                  formats={ReactQuill.formats}
-                  {...anotation}
-                  disabled={true}
-                />
+                {!isCallback ? (
+                  <ReactQuill
+                    className='w-10/12 h-full'
+                    readOnly={readOnly}
+                    theme='snow'
+                    modules={ReactQuill.modules}
+                    formats={ReactQuill.formats}
+                    {...annotation}
+                    disabled={true}
+                  />
+                ) : (
+                  <ReactQuill
+                    className='w-10/12 h-full'
+                    readOnly={readOnly}
+                    theme='snow'
+                    modules={ReactQuill.modules}
+                    formats={ReactQuill.formats}
+                    {...auxAnnotation}
+                    disabled={true}
+                  />
+                )}
               </div>
               <div className='mt-16 mb-4 md:my-4 flex justify-center w-full'>
                 {!disableButton && (

@@ -17,6 +17,7 @@ export default {
     'app.welcomeO': 'Bienvenide',
     'app.success': '¡Éxitoso!',
     'app.error': '¡Error!',
+    'app.nocomplete': 'No se ha podido completar la operación seleccionada',
     //LANGUAGE
     'lang.selectedLang': 'Idioma',
     'lang.spanish': 'Español',
@@ -150,7 +151,7 @@ export default {
     'getOneGeneralMedicalFeatures.error':
       'Ha ocurrido un error inesperado al obtener las caracteristicas medicas generales',
     'insertGeneralMedicalFeatures.success':
-      'Se han creado las caracteristicas medicas generales correctamente',
+      'Se han insertado las caracteristicas medicas generales correctamente',
     'insertGeneralMedicalFeatures.error':
       'Ha ocurrido un error inesperado creando las caracteristicas medicas generales',
     'updateGeneralMedicalFeatures.success':

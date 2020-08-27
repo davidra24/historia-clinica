@@ -28,6 +28,7 @@ import { TableHealthCenter } from '../../components/Dashboard/TableHealthCenter'
 import { IAttentionCenter } from '../../data/IAttentionCenter';
 import { IViewAttentionCenter } from '../../data/IViewAttentionCenter';
 import { IUser } from '../../data/IUser';
+import { IPerson } from '../../data/IPerson';
 
 export const DashBoardHealthCenter = () => {
   const [loading, setLoading] = useState(false);
@@ -50,14 +51,10 @@ export const DashBoardHealthCenter = () => {
   );
   const user: IUser = useSelector((state: IStore) => state.user);
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     const finalValidator = validate();
     if (finalValidator) {
-      const response = post<Array<IAttentionCenter>>(
-        HTTP_ATTENTIONS_CENTER,
-        token
-      );
       cleanFields();
     }
   };

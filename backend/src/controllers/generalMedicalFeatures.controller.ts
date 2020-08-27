@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { db } from '../database';
 import generalMedicalFeaturesDB from '../database/GeneralMedicalFeatures.database';
+import peopleDB from '../database/People.database';
 import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class GeneralMedicalFeaturesController {
@@ -66,23 +67,26 @@ export class GeneralMedicalFeaturesController {
       );
   }
   async insertGeneralMedicalFeatures(req: Request, res: Response) {
-    const { generalMedicalFeatures } = await decryptRequest(req);
+    const { generalMedicalFeatures, document } = await decryptRequest(req);
     await db
       .none(() =>
         generalMedicalFeaturesDB.insertGeneralMedicalFeatures(
           generalMedicalFeatures
         )
       )
-      .then((MedicalFeatures) =>
-        cryptedResponse(res, 200, {
+      .then(async () => {
+        const MedicalFeatures = await db.one(() =>
+          peopleDB.selectFormViewPerson(document)
+        );
+        return cryptedResponse(res, 200, {
           ok: true,
           status: 200,
           message: 'insertGeneralMedicalFeatures.success',
           data: MedicalFeatures,
-        })
-      )
+        });
+      })
       .catch((error) => {
-        cryptedResponse(res, 500, {
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'insertGeneralMedicalFeatures.error',
@@ -92,7 +96,7 @@ export class GeneralMedicalFeaturesController {
   }
   async updateGeneralMedicalFeatures(req: Request, res: Response) {
     const { id } = req.params;
-    const { generalMedicalFeatures } = await decryptRequest(req);
+    const { generalMedicalFeatures, document } = await decryptRequest(req);
     await db
       .none(() =>
         generalMedicalFeaturesDB.updateGeneralMedicalFeatures(
@@ -100,22 +104,28 @@ export class GeneralMedicalFeaturesController {
           generalMedicalFeatures
         )
       )
-      .then((MedicalFeatures) =>
-        cryptedResponse(res, 200, {
+      .then(async () => {
+        const MedicalFeatures = await db.one(() =>
+          peopleDB.selectFormViewPerson(document)
+        );
+        return cryptedResponse(res, 200, {
           ok: true,
           status: 200,
           message: 'updateGeneralMedicalFeatures.success',
           data: MedicalFeatures,
-        })
-      )
-      .catch((error) =>
-        cryptedResponse(res, 500, {
+        });
+      })
+      .catch((error) => {
+        console.log('err', error);
+        console.log('generalMedicalFeatures', generalMedicalFeatures);
+
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'updateGeneralMedicalFeatures.error',
           data: error.toString(),
-        })
-      );
+        });
+      });
   }
   async deleteGeneralMedicalFeatures(req: Request, res: Response) {
     const { id } = req.params;

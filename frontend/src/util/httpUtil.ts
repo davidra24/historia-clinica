@@ -55,7 +55,8 @@ export const getOneOrMany = async <T>(
 export const post = async <T>(
   service: string,
   body: any,
-  token?: string
+  token?: string,
+  secondParameter = ''
 ): Promise<IResponse<T>> => {
   try {
     const options = {
@@ -68,7 +69,7 @@ export const post = async <T>(
       }),
     };
     const response = await fetch(
-      `${HTTP_SERVICE}/${service}`,
+      `${HTTP_SERVICE}/${service}/${secondParameter}`,
       options
     ).then((response) => response.text());
     const data = await decrypt(response);

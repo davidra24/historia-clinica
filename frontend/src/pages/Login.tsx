@@ -8,6 +8,7 @@ import {
   SnackMsg,
   auth,
   setUser,
+  setToken,
 } from '../redux/actions';
 import { FormSign } from '../components/FormSign';
 import { useHistory } from 'react-router';
@@ -66,6 +67,7 @@ export const Login = () => {
         if (response.ok) {
           const { token, user } = response.data;
           setCookie('token', token, { path: '/' });
+          dispatch(setToken(token));
           dispatch(setUser(user));
           dispatch(auth(true));
           dispatch(Loading(false));

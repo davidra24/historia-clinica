@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import { db } from '../database';
 import healthCenterDB from '../database/HealthCenters.database';
-import peopleDB from '../database/People.database';
 import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class HealthCenterController {
