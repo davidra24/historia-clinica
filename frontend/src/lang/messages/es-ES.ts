@@ -51,7 +51,10 @@ export default {
     'document.required': 'El documento es requerido',
     'document.invalid':
       'La longitud mínima del documento es de 6 dígitos y la máxima de 15 dígitos.',
-    'password.required': 'La contraseña es requerida es requerida',
+    'password.required': 'La contraseña es requerida',
+    'password.second-required': 'La confirmación de la contraseña es requerida',
+    'password.no-match':
+      'La contraseña no requiere con su verificación, por favor corrija',
     'password.invalid':
       'Se debe diligenciar el dato de la contraseña, con las siguientes recomendaciones: \n 1.Debe contener al menos 8 caracteres. \n 2. Contener mayúsculas y minúsculas. \n 3. Contener números. \n 4.Contener caracteres especiales.',
     //USERS

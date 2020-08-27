@@ -28,8 +28,8 @@ export const FormSign = ({
   setPerson,
   inputDocument,
   inputPassword,
+  inputSecondPassword,
 }: signTypes) => {
-  const { handleSubmit, register, errors } = useForm();
   const loading = useSelector((state: IStore) => state.loading);
 
   return (
@@ -37,7 +37,7 @@ export const FormSign = ({
       {loading ? (
         <Loading />
       ) : (
-        <div className='h-12 w-auto w-12/12 md:w-10/12 lg:w-8/12 xl:w-6/12'>
+        <div className='h-full w-auto w-12/12 md:w-10/12 lg:w-8/12 xl:w-6/12'>
           <Card className='flex flex-col justify-center'>
             <div className='flex justify-center pt-2'>
               <img src={logo} alt='heartbeat' />
@@ -47,13 +47,12 @@ export const FormSign = ({
                 <strong>{title}</strong>
               </h1>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
               <div className='flex flex-col justify-center space-y-2 px-10 mb-5'>
                 <FormControl>
                   <TextField
                     id='float-document'
                     name='document'
-                    inputRef={register(validationsDocument)}
                     variant='outlined'
                     label={TextMessage('signForm.document')}
                     type={person !== undefined && person ? 'number' : 'text'}
@@ -62,13 +61,12 @@ export const FormSign = ({
                   />
                 </FormControl>
                 <span className='text-red-600'>
-                  {errors.document && errors.document.message}
+                  {!inputDocument.validator && TextMessage('document.required')}
                 </span>
                 <FormControl className='login__input'>
                   <TextField
                     id='float-password'
                     name='password'
-                    inputRef={register(validationsPasswordUser)}
                     variant='outlined'
                     type='password'
                     label={TextMessage('signForm.password')}
@@ -77,7 +75,7 @@ export const FormSign = ({
                   />
                 </FormControl>
                 <span className='text-red-600'>
-                  {errors.password && errors.password.message}
+                  {!inputDocument.validator && TextMessage('password.required')}
                 </span>
                 {person !== undefined && setPerson && (
                   <>
@@ -85,16 +83,16 @@ export const FormSign = ({
                       <TextField
                         id='float-password'
                         name='password'
-                        inputRef={register(validationsPasswordUser)}
                         variant='outlined'
                         type='password'
                         label={TextMessage('signForm.verify-password')}
                         disabled={loading}
-                        {...inputPassword}
+                        {...inputSecondPassword}
                       />
                     </FormControl>
                     <span className='text-red-600'>
-                      {errors.password && errors.password.message}
+                      {!inputSecondPassword.validator &&
+                        TextMessage('password.second-required')}
                     </span>
                   </>
                 )}
