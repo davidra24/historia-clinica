@@ -12,6 +12,7 @@ export const AnotationModal = ({
   onSaveAnnotation,
   saveText,
   readOnly,
+  disableButton,
 }: propsAnnotationModal) => {
   const [open, setOpen] = React.useState(false);
 
@@ -86,7 +87,7 @@ export const AnotationModal = ({
                 />
               </div>
               <div className='mt-16 mb-4 md:my-4 flex justify-center w-full'>
-                {!readOnly && (
+                {!disableButton && (
                   <Button
                     variant='outlined'
                     color='primary'

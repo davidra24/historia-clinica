@@ -20,8 +20,8 @@ export const DashBoardPatient = () => {
   const specialties: Array<ISpecialty> = useSelector(
     (state: IStore) => state.specialties
   );
+  const token: string = useSelector((state: IStore) => state.token);
   const dispatch = useDispatch();
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,6 @@ export const DashBoardPatient = () => {
 
   const getSpecialties = async () => {
     setLoading(true);
-    const { token } = cookie;
     const response = await get<Array<ISpecialty>>(HTTP_SPECIALTIES, token);
     if (response) {
       const { ok, data } = response;
@@ -65,6 +64,7 @@ export const DashBoardPatient = () => {
                 )
                 .map((specialty: ISpecialty) => (
                   <CardSpecialty
+                    key={specialty.id}
                     id={specialty.id}
                     name={specialty.name}
                     description={specialty.description}

@@ -105,6 +105,27 @@ export class PeopleController {
         })
       );
   }
+  async getViewDataQueriesSpecialty(req: Request, res: Response) {
+    const { document, specialty } = req.params;
+    await db
+      .any(() => peopleDB.selectFormViewQueriesSpecialties(document, specialty))
+      .then((people) =>
+        cryptedResponse(res, 200, {
+          ok: true,
+          status: 200,
+          message: 'getPeople.success',
+          data: people,
+        })
+      )
+      .catch((error) =>
+        cryptedResponse(res, 500, {
+          ok: false,
+          status: 500,
+          message: 'getPeople.error',
+          data: error.toString(),
+        })
+      );
+  }
   async getPeople(req: Request, res: Response) {
     await db
       .any(peopleDB.getAllPeople)

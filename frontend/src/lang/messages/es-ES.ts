@@ -15,6 +15,8 @@ export default {
     'app.welcomeM': 'Bienvenido',
     'app.welcomeF': 'Bienvenida',
     'app.welcomeO': 'Bienvenide',
+    'app.success': '¡Éxitoso!',
+    'app.error': '¡Error!',
     //LANGUAGE
     'lang.selectedLang': 'Idioma',
     'lang.spanish': 'Español',
@@ -180,12 +182,17 @@ export default {
     'deleteHealthCenter.error':
       'Ha ocurrido un error inesperado al eliminar el centro de salud correctamente',
     //PEOPLE
+    'getPeople.get-Patient':
+      'Se ha encontrado la información del paciente correctamente',
+    'getPeople.err-get-Patient':
+      'No se ha podido obtener la información del paciente o no existe en el sistema',
     'getPeople.success':
       'Se han obtenido todas las personas de la base de datos',
     'getPeople.error':
       'Ha ocurrido un error inesperado al obtener todas las personas',
     'getPerson.success': 'Se han obtenido la persona',
-    'getPerson.error': 'Ha ocurrido un error inesperado al obtener la persona',
+    'getPerson.error':
+      'Ha ocurrido un error inesperado al obtener la información de la persona',
     'insertPerson.success': 'Se han creado la persona correctamente',
     'insertPerson.error': 'Ha ocurrido un error inesperado creando la persona',
     'updatePerson.success': 'Se han actualizado la persona correctamente',
@@ -394,6 +401,8 @@ export default {
     'dashboard-health.professional-openAnotation': 'Abrir anotación',
     'dashboard-health.professional-history':
       'A continuación encontrará el historial completo de anotaciones de paciente, para conocer, de esta forma podrá conocer la evolución que ha tenido el proceso del paciente',
+    'dashboard-health.professional-no-history':
+      'Hasta el día de hoy, no se han realizado anotaciones en esta especialidad',
     //Evolution
     'evolution.generalfeature-height': 'Altura',
     'evolution.generalfeature-weight': 'Peso',

@@ -20,6 +20,8 @@ import {
   SET_VIEW_ATTENTION_CENTER,
   SET_ONE_ATTENTION_CENTER,
   SET_SELECTION_HEALTH_PROFESSIONAL,
+  DEFAULT_STATE,
+  SET_TOKEN,
 } from './constants.redux';
 
 const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
@@ -62,6 +64,10 @@ const store: any = (state: IStore = defaultStore, action: IAction): IStore => {
       return { ...state, selectedAttentionCenter: action.payload };
     case SET_SELECTION_HEALTH_PROFESSIONAL:
       return { ...state, selectedDashProfessional: action.payload };
+    case SET_TOKEN:
+      return { ...state, token: action.payload };
+    case DEFAULT_STATE:
+      return { ...action.payload };
     default:
       return state;
   }

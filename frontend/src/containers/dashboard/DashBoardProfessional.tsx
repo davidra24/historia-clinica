@@ -19,7 +19,7 @@ export const DashBoardProfessional = () => {
   const viewAttentionCenter = useSelector(
     (state: IStore) => state.viewAttentionCenter
   );
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const token: string = useSelector((state: IStore) => state.token);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,6 @@ export const DashBoardProfessional = () => {
 
   const getViewAttentionCenter = async () => {
     setLoading(true);
-    const { token } = cookie;
     const { document } = person;
     const response = await getOneOrMany<Array<IViewAttentionCenter>>(
       HTTP_VIEW_AC_BY_PS,
@@ -80,9 +79,6 @@ export const DashBoardProfessional = () => {
                 <NoSpecialties isHealthProfessional />
               )}
             </div>
-            {/* <div className='mt-16 mr-auto ml-auto w-screen md:w-11/12'>
-              <MedicalConsultation />
-              </div>*/}
           </>
         )}
       </div>

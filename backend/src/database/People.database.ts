@@ -168,6 +168,7 @@ export default {
     ${TABLE_PROFESSIONAL}.${COL_SECOND_NAME} as professional_second_name, 
     ${TABLE_PROFESSIONAL}.${COL_LAST_NAME} as professional_lastname, 
     ${TABLE_PROFESSIONAL}.${COL_LAST_SECOND_NAME} as professional_last_second_name, 
+    ${TABLE_SPECIALTIES}.${COL_SPECIALTY_PARAMETER} as specialty_id, 
     ${TABLE_SPECIALTIES}.${COL_SPECIALTY_NAME} as specialty_name, 
     ${TABLE_QUERIES}.${COL_QUERY_ANNOTATION} as query_annotation
      FROM ${TABLE_NAME} JOIN ${TABLE_QUERIES} ON 
@@ -182,4 +183,9 @@ export default {
      (${TABLE_ATTENTIONCENTERS}.${COL_ATTENTIONCENTER_PARAMETER_SPECIALTY}=${TABLE_SPECIALTIES}.${COL_SPECIALTY_PARAMETER})`,
   selectFormViewQueries: (document: string): string =>
     `SELECT * FROM ${VIEW_QUERIES} WHERE pacient_document = '${document}'`,
+  selectFormViewQueriesSpecialties: (
+    document: string,
+    specialty: string
+  ): string =>
+    `SELECT * FROM ${VIEW_QUERIES} WHERE pacient_document = '${document}' and specialty_id = '${specialty}'`,
 };

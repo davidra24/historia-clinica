@@ -5,13 +5,7 @@ import { MenuListHealthCenter } from './MenuListHealthCenter';
 import { IStore } from '../../redux/types';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  auth,
-  setUser,
-  menu,
-  setPerson,
-  setHealthCenter,
-} from '../../redux/actions';
+import { defaultState } from '../../redux/actions';
 import { TextMessage } from '../../lang/TextMessage';
 import { Link } from 'react-router-dom';
 import { ItemDrawer } from './ItemDrawer';
@@ -26,11 +20,7 @@ export const MenuController = () => {
 
   const logout = () => {
     removeCookie('token');
-    dispatch(setUser(null));
-    dispatch(setPerson(null));
-    dispatch(setHealthCenter(null));
-    dispatch(auth(false));
-    dispatch(menu(false));
+    dispatch(defaultState());
   };
 
   return (

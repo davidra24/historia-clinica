@@ -29,7 +29,8 @@ export const get = async <T>(
 export const getOneOrMany = async <T>(
   service: string,
   id: any,
-  token?: string
+  token?: string,
+  secondParameter = ''
 ): Promise<IResponse<T>> => {
   try {
     const options = {
@@ -41,7 +42,7 @@ export const getOneOrMany = async <T>(
       }),
     };
     const response = await fetch(
-      `${HTTP_SERVICE}/${service}/${id}`,
+      `${HTTP_SERVICE}/${service}/${id}/${secondParameter}`,
       options
     ).then((response) => response.text());
     const data = await decrypt(response);
@@ -82,7 +83,8 @@ export const put = async <T>(
   service: string,
   id: any,
   body: any,
-  token?: string
+  token?: string,
+  secondParameter = ''
 ): Promise<IResponse<T>> => {
   try {
     const options = {
@@ -95,36 +97,7 @@ export const put = async <T>(
       }),
     };
     const response = await fetch(
-      `${HTTP_SERVICE}/${service}/${id}`,
-      options
-    ).then((response) => response.text());
-    const data = await decrypt(response);
-    return data;
-  } catch (error) {
-    console.log('error??', error);
-    return error;
-  }
-};
-
-export const putMultiPK = async <T>(
-  service: string,
-  id_1: any,
-  id_2: any,
-  body: any,
-  token?: string
-): Promise<IResponse<T>> => {
-  try {
-    const options = {
-      method: 'PUT',
-      body: encrypt(body),
-      headers: new Headers({
-        'Content-Type': 'text/plain',
-        'Access-Control-Allow-Origin': '*',
-        Authorization: token ? `Bearer ${token}` : '',
-      }),
-    };
-    const response = await fetch(
-      `${HTTP_SERVICE}/${service}/${id_1}/${id_2}`,
+      `${HTTP_SERVICE}/${service}/${id}/${secondParameter}`,
       options
     ).then((response) => response.text());
     const data = await decrypt(response);

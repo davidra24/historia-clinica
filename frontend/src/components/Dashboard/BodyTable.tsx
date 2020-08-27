@@ -16,7 +16,7 @@ export const BodyTable = ({ attentionCenter }: any) => {
     setLoading(true);
     const { id_health_center } = attentionCenter;
     //todo
-    //const response = await putMultiPK<IHealthAttentionCenter>(HTTP_ATTENTIONS_CENTER, | )
+    //const response = await put<IHealthAttentionCenter>(HTTP_ATTENTIONS_CENTER, | )
     setChecked(!checked);
     setLoading(false);
   };

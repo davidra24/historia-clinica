@@ -15,7 +15,6 @@ export const ProfileHealthCenter = () => {
   const healthCareCenter: IHealthCareCenter = useSelector(
     (state: IStore) => state.healthCenter
   );
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
   const [loading, setLoading] = useState(false);
 

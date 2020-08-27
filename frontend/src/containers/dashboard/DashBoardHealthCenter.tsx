@@ -32,12 +32,13 @@ import { IUser } from '../../data/IUser';
 export const DashBoardHealthCenter = () => {
   const [loading, setLoading] = useState(false);
   const [valide, setValide] = useState(false);
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+
   const dispatch = useDispatch();
 
   const specialties: Array<ISpecialty> = useSelector(
     (state: IStore) => state.specialties
   );
+  const token: string = useSelector((state: IStore) => state.token);
   const viewAttentionCenter: Array<IViewAttentionCenter> = useSelector(
     (state: IStore) => state.viewAttentionCenter
   );
@@ -52,7 +53,6 @@ export const DashBoardHealthCenter = () => {
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     const finalValidator = validate();
-    const { token } = cookie;
     if (finalValidator) {
       const response = post<Array<IAttentionCenter>>(
         HTTP_ATTENTIONS_CENTER,
@@ -93,7 +93,6 @@ export const DashBoardHealthCenter = () => {
 
   const getSpecialties = async () => {
     setLoading(true);
-    const { token } = cookie;
     const response = await get<Array<ISpecialty>>(HTTP_SPECIALTIES, token);
     if (response) {
       const { ok, data } = response;
@@ -106,7 +105,6 @@ export const DashBoardHealthCenter = () => {
 
   const getViewAttentionCenter = async () => {
     setLoading(true);
-    const { token } = cookie;
     const response = await getOneOrMany<Array<IViewAttentionCenter>>(
       HTTP_VIEW_AC_BY_HC,
       user.document,

@@ -5,4 +5,5 @@ export interface propsAnnotationModal {
   onSaveAnnotation: any;
   saveText: string;
   readOnly?: boolean;
+  disableButton?: boolean;
 }

@@ -20,9 +20,8 @@ export const Dashboard = () => {
   const person = useSelector((state: IStore) => state.person);
   const healthCenter = useSelector((state: IStore) => state.healthCenter);
   const reloadRoute = useSelector((state: IStore) => state.reloadRoute);
+  const token: string = useSelector((state: IStore) => state.token);
   const history = useHistory();
-
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
   //TODO -> Eliminar en producción
   //history.push(reloadRoute);
@@ -31,20 +30,19 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { token } = cookie;
     dispatch(menu(false));
     if (user.document_type) {
       if (!person) {
-        getPerson(token);
+        getPerson();
       }
     } else {
       if (!healthCenter) {
-        getHealthCareCenter(token);
+        getHealthCareCenter();
       }
     }
   }, []);
 
-  const getPerson = async (token: string) => {
+  const getPerson = async () => {
     setLoading(true);
     const response = await getOneOrMany<IPerson>(
       HTTP_PEOPLE,
@@ -63,7 +61,7 @@ export const Dashboard = () => {
     setLoading(false);
   };
 
-  const getHealthCareCenter = async (token: string) => {
+  const getHealthCareCenter = async () => {
     setLoading(true);
     const response = await getOneOrMany<IHealthCareCenter>(
       HTTP_HEALTH_CENTER,

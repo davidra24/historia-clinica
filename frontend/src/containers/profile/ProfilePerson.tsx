@@ -17,7 +17,7 @@ import { resolve } from 'url';
 export const ProfilePerson = () => {
   const [show, setShow] = useState(true);
   const person: IPerson = useSelector((state: IStore) => state.person);
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const token: string = useSelector((state: IStore) => state.token);
 
   const [nameEPS, setNameEPS] = useState('');
   const [nameProfession, setNameProfession] = useState('');
@@ -48,7 +48,6 @@ export const ProfilePerson = () => {
 
   const getAllInfo = async (): Promise<boolean> => {
     setLoading(true);
-    const { token } = cookie;
     const [ContactInfo, EPSInfo, ProfessionInfo] = await Promise.all([
       await getOneOrMany<Array<IContact>>(
         HTTP_CONTACTS_BY_PERSON,

@@ -5,11 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { AnotationModal } from './AnotationModal';
 import { IViewGeneralFeatures } from '../../../data/IViewGeneralFeatures';
 import { useInputValue, useCheckValue } from '../../../hooks/useInput';
-
-interface propsFeatures {
-  infoGeneral: IViewGeneralFeatures;
-  readOnly: boolean;
-}
+import { propsFeatures } from '../../../data/propsFeatures';
 
 export const GeneralMedicalFeatures = ({
   infoGeneral,
@@ -80,6 +76,7 @@ export const GeneralMedicalFeatures = ({
         <div className='flex flex-wrap w-full h-full justify-around'>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage('evolution.generalfeature-vices')}
             valueAnnotation={infoGeneral?.pacient_vices}
             buttonText={TextMessage(
@@ -90,6 +87,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage('evolution.generalfeature-manias')}
             valueAnnotation={infoGeneral?.pacient_manias}
             buttonText={TextMessage(
@@ -100,6 +98,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage(
               'evolution.generalfeature-family-background'
             )}
@@ -112,6 +111,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage('evolution.generalfeature-medical')}
             valueAnnotation={infoGeneral?.pacient_medical_history}
             buttonText={TextMessage(
@@ -122,6 +122,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage('evolution.generalfeature-quirurjical')}
             valueAnnotation={infoGeneral?.pacient_surgery_history}
             buttonText={TextMessage(
@@ -132,6 +133,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage(
               'evolution.generalfeature-traimatic_background'
             )}
@@ -144,6 +146,7 @@ export const GeneralMedicalFeatures = ({
           ></AnotationModal>
           <AnotationModal
             readOnly={readOnly}
+            disableButton
             titleCard={TextMessage('evolution.generalfeature-allergy-history')}
             valueAnnotation={infoGeneral?.pacient_allergy_history}
             buttonText={TextMessage(

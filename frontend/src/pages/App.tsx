@@ -5,19 +5,10 @@ import { IStore } from '../redux/types';
 import { Router } from '../router';
 import { Footer } from '../components/Footer';
 import { LOCALES, LangProvider } from '../lang';
-import {
-  changeLang,
-  setUser,
-  auth,
-  setReloadPath,
-  setMsgSuccessVisbility,
-  setMsgErrorVisbility,
-} from '../redux/actions';
+import { changeLang, setUser, auth, setToken } from '../redux/actions';
 import { useCookies } from 'react-cookie';
 import { post } from '../util/httpUtil';
 import { HTTP_VERIFY } from '../util/constants';
-import { SnackBarAlert } from '../util/Alert';
-import { TextMessage } from '../lang/TextMessage';
 import { SnackAlert } from '../components/App/SnackAlert';
 
 function App() {
@@ -57,6 +48,7 @@ function App() {
           data: { user },
         } = response;
         if (status === 200) {
+          dispatch(setToken(token));
           dispatch(auth(true));
           dispatch(setUser(user));
         } else {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IStore } from '../redux/types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IPerson } from '../data/IPerson';
 import { getOneOrMany } from '../util/httpUtil';
 import {
@@ -8,75 +8,46 @@ import {
   DEFAULT_PROFILE_PIC,
   HTTP_VIEW_CONSULT_GENERAL,
   HTTP_VIEW_CONSULT_PERSON,
+  HTTP_VIEW_CONSULT_PERSON_SPECIALTY,
 } from '../util/constants';
 import { useCookies } from 'react-cookie';
-import {
-  FormControl,
-  TextField,
-  Card,
-  Button,
-  Avatar,
-  Divider,
-} from '@material-ui/core';
+import { FormControl, TextField, Card, Button } from '@material-ui/core';
 import { TextMessage } from '../lang/TextMessage';
 import { useInputValue } from '../hooks/useInput';
 import { Loading } from '../components/Loading';
-import { toRedableDate, birthday } from '../util/Util';
 import { MedicalConsultation } from '../components/Dashboard/MedicalConsultation';
-import { IViewGeneralFeatures } from '../data/IViewGeneralFeatures';
-import { IViewQueries } from '../data/IViewQueries';
 import { CardConsultInfoPatient } from '../components/Dashboard/medicalConsultation/CardConsultInfoPatient';
+import { IViewAttentionCenter } from '../data/IViewAttentionCenter';
+import { useAlert } from '../hooks/useAlert';
 
 export const AttentionPatient = () => {
-  const [patient, setPatient] = useState<IPerson>();
+  const [patient, setPatient] = useState<IPerson | any>(null);
   const [loading, setLoading] = useState(false);
-  const [cookie, setCookie, removeCookie] = useCookies(['token']);
-  const [infoGeneral, setInfoGeneral] = useState<IViewGeneralFeatures | any>(
-    null
-  );
-  const [infoQueries, setInfoQueries] = useState<Array<IViewQueries>>([]);
+  const token: string = useSelector((state: IStore) => state.token);
+  const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   const personDocument = useInputValue('');
 
-  const selectedAttentionCenter = useSelector(
+  const selectedAttentionCenter: IViewAttentionCenter = useSelector(
     (state: IStore) => state.selectedAttentionCenter
   );
 
   const getPatient = async (document: string) => {
     setLoading(true);
-    const { token } = cookie;
     const response = await getOneOrMany<IPerson>(HTTP_PEOPLE, document, token);
     if (response) {
       const { ok, data } = response;
       if (ok) {
         setPatient(data);
-        await getInfoConsult(data.document, token);
+        alert('app.success', 'getPeople.get-Patient', 'success');
+      } else {
+        alert('app.error', 'getPeople.err-get-Patient', 'error');
+        setPatient(null);
       }
-    }
-    setLoading(false);
-  };
-
-  const getInfoConsult = async (id: string, token: string) => {
-    console.log('entra a promises.all');
-
-    setLoading(true);
-    const [infoGeneralView, infoQueriesView] = await Promise.all([
-      getOneOrMany<IViewGeneralFeatures>(HTTP_VIEW_CONSULT_GENERAL, id, token),
-      getOneOrMany<Array<IViewQueries>>(HTTP_VIEW_CONSULT_PERSON, id, token),
-    ]);
-    if (infoGeneralView) {
-      const { ok, data } = infoGeneralView;
-      if (ok) {
-        console.log('data', data);
-
-        setInfoGeneral(data);
-      }
-    }
-    if (infoQueriesView) {
-      const { ok, data } = infoQueriesView;
-      if (ok) {
-        setInfoQueries(data);
-      }
+    } else {
+      alert('app.error', 'getPeople.err-get-Patient', 'error');
+      setPatient(null);
     }
     setLoading(false);
   };
@@ -131,9 +102,9 @@ export const AttentionPatient = () => {
           {patient && (
             <div className='mt-16 mr-auto ml-auto w-full md:w-11/12'>
               <MedicalConsultation
-                infoGeneral={infoGeneral}
-                infoQueries={infoQueries}
+                patient={patient}
                 readOnly={false}
+                specialtyId={selectedAttentionCenter.specialty_id}
               />
             </div>
           )}

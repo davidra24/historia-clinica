@@ -18,6 +18,8 @@ import {
   SET_VIEW_ATTENTION_CENTER,
   SET_ONE_ATTENTION_CENTER,
   SET_SELECTION_HEALTH_PROFESSIONAL,
+  DEFAULT_STATE,
+  SET_TOKEN,
 } from './constants.redux';
 import { IUser } from '../data/IUser';
 import { IPerson } from '../data/IPerson';
@@ -27,6 +29,7 @@ import { IEPS } from '../data/IEPS';
 import { IProfessions } from '../data/IProfessions';
 import { IAttentionCenter } from '../data/IAttentionCenter';
 import { IViewAttentionCenter } from '../data/IViewAttentionCenter';
+import { defaultStore } from './types';
 
 export const Loading = (payload: boolean) => ({ type: LOADING, payload });
 
@@ -115,4 +118,14 @@ export const setViewAttenttionCenter = (
 export const selectDashboardProfessional = (payload: number) => ({
   type: SET_SELECTION_HEALTH_PROFESSIONAL,
   payload,
+});
+
+export const setToken = (payload: string) => ({
+  type: SET_TOKEN,
+  payload,
+});
+
+export const defaultState = () => ({
+  type: DEFAULT_STATE,
+  payload: defaultStore,
 });

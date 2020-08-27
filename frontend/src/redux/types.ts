@@ -27,6 +27,7 @@ export interface IStore {
   listEPS: Array<IEPS>;
   listProfessions: Array<IProfessions>;
   listAttentionsCenter: Array<IAttentionCenter>;
+  token: string;
 }
 
 export const defaultStore: IStore = {
@@ -43,12 +44,13 @@ export const defaultStore: IStore = {
   person: null,
   healthCenter: null,
   selectedAttentionCenter: null,
-  selectedDashProfessional: 0,
+  selectedDashProfessional: 2, //0,
   viewAttentionCenter: [],
   specialties: [],
   listEPS: [],
   listProfessions: [],
   listAttentionsCenter: [],
+  token: '',
 };
 
 export interface IAction {
