@@ -9,7 +9,7 @@ import { get } from '../../util/httpUtil';
 import { HTTP_SPECIALTIES } from '../../util/constants';
 import { ISpecialty } from '../../data/ISpecialty';
 import { Card, Divider } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { IPerson } from '../../data/IPerson';
 import { HeaderWelcomePerson } from '../../components/Dashboard/HeaderWelcomePerson';
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
@@ -23,6 +23,7 @@ export const DashBoardPatient = () => {
   const token: string = useSelector((state: IStore) => state.token);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (specialties.length === 0) {
@@ -65,10 +66,10 @@ export const DashBoardPatient = () => {
                 .map((specialty: ISpecialty) => (
                   <CardSpecialty
                     key={specialty.id}
-                    id={specialty.id}
                     name={specialty.name}
                     description={specialty.description}
-                    linkTo={'specialty'}
+                    active={true}
+                    onClick={history.push(`specialty/${specialty.id}`)}
                   />
                 ))
             ) : (

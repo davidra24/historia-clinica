@@ -148,6 +148,8 @@ export class AttentionCenterController {
   async updateAttentionCenter(req: Request, res: Response) {
     const { id, document } = req.params;
     const { attentionCenter } = await decryptRequest(req);
+    console.log('params', req.params);
+
     await db
       .none(() =>
         attentionCenterDB.updateAttentionCenter(id, document, attentionCenter)
@@ -161,6 +163,8 @@ export class AttentionCenterController {
         })
       )
       .catch((error) => {
+        console.log(error);
+
         return cryptedResponse(res, 500, {
           ok: false,
           status: 500,

@@ -13,6 +13,7 @@ import {
 import { Loading } from '../../components/Loading';
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
 import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
+import { useHistory } from 'react-router';
 
 export const DashBoardProfessional = () => {
   const person = useSelector((state: IStore) => state.person);
@@ -22,6 +23,7 @@ export const DashBoardProfessional = () => {
   const token: string = useSelector((state: IStore) => state.token);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (viewAttentionCenter.length === 0) {
@@ -65,14 +67,16 @@ export const DashBoardProfessional = () => {
                 viewAttentionCenter.map((attentionCenter) => (
                   <CardSpecialty
                     key={`${attentionCenter.id_health_center}-${attentionCenter.document_health_professional}`}
-                    id={attentionCenter.specialty_id}
                     name={attentionCenter.specialty_name}
                     description={attentionCenter.specialty_description}
-                    linkTo={'attention'}
                     healtCenter={attentionCenter.health_center_name}
-                    onClick={() =>
-                      dispatch(setOneCenterAttention(attentionCenter))
-                    }
+                    active={attentionCenter.active_attention_center}
+                    onClick={() => {
+                      if (attentionCenter.active_attention_center) {
+                        dispatch(setOneCenterAttention(attentionCenter));
+                        history.push('attention');
+                      }
+                    }}
                   />
                 ))
               ) : (

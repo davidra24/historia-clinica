@@ -23,19 +23,23 @@ export const BodyTable = ({ aCenter }: propsBody) => {
 
   const handleChangeEnabled = async () => {
     setLoading(true);
-    const { specialty_id, document_health_professional } = aCenter;
+    const {
+      id_health_center,
+      specialty_id,
+      document_health_professional,
+    } = aCenter;
     const attentionCenter: IAttentionCenter = {
-      id: specialty_id,
+      id: id_health_center,
       document: document_health_professional,
       id_specialty: specialty_id,
       active: !checked,
     };
     const response = await put<IHealthAttentionCenter>(
       HTTP_ATTENTIONS_CENTER,
-      document_health_professional,
+      id_health_center,
       { attentionCenter },
       token,
-      specialty_id
+      document_health_professional
     );
     if (response) {
       const { ok, data, message } = response;
