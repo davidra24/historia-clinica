@@ -44,7 +44,7 @@ export const defaultStore: IStore = {
   person: null,
   healthCenter: null,
   selectedAttentionCenter: null,
-  selectedDashProfessional: 2, //0,
+  selectedDashProfessional: 0,
   viewAttentionCenter: [],
   specialties: [],
   listEPS: [],
