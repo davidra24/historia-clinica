@@ -1,7 +1,7 @@
-import { ProfessionModel } from "src/models/Profession";
-const TABLE_NAME = "PROFESSIONS";
-const COL_ID = "id";
-const COL_NAME = "name";
+import { ProfessionModel } from '../models/Profession';
+const TABLE_NAME = 'PROFESSIONS';
+const COL_ID = 'id';
+const COL_NAME = 'name';
 
 export default {
   createTable: (): string => `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COL_ID} UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(), 

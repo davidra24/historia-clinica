@@ -1,7 +1,7 @@
 import promise from 'bluebird';
 import pgPromise from 'pg-promise';
 import config from '../config';
-import { UserController } from 'src/controllers/user.controller';
+import { UserController } from '../controllers/user.controller';
 
 const options = {
   promiseLib: promise,

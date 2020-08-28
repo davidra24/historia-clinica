@@ -1,4 +1,4 @@
-import { AttentionCenterModel } from 'src/models/AttentionCenter';
+import { AttentionCenterModel } from '../models/AttentionCenter';
 
 const TABLE_NAME = 'ATTENTIONCENTERS';
 const COL_ID_CENTER = 'id';

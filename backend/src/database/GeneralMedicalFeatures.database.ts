@@ -1,4 +1,4 @@
-import { GeneralMedicalFeaturesModel } from 'src/models/GeneralMedicalFeatures';
+import { GeneralMedicalFeaturesModel } from '../models/GeneralMedicalFeatures';
 
 const TABLE_NAME = 'GENERALMEDICALFEATURES';
 const COL_ID = 'id';

@@ -1,6 +1,6 @@
 import express from 'express';
-import { GeneralMedicalFeaturesController } from 'src/controllers/generalMedicalFeatures.controller';
-import { auth } from 'src/middlewares/passport';
+import { GeneralMedicalFeaturesController } from '../controllers/generalMedicalFeatures.controller';
+import { auth } from '../middlewares/passport';
 
 const generalMedicalFeaturescontroller = new GeneralMedicalFeaturesController();
 const api = express.Router();

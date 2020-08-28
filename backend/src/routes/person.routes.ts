@@ -1,6 +1,6 @@
 import express from 'express';
-import { PeopleController } from 'src/controllers/people.controller';
-import { auth } from 'src/middlewares/passport';
+import { PeopleController } from '../controllers/people.controller';
+import { auth } from '../middlewares/passport';
 
 const personcontroller = new PeopleController();
 const api = express.Router();

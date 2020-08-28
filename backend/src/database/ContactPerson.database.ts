@@ -1,4 +1,4 @@
-import { ContactPersonModel } from 'src/models/ContactPerson';
+import { ContactPersonModel } from '../models/ContactPerson';
 
 const TABLE_NAME = 'CONTACT_PERSON';
 const COL_USER_DOCUMENT = 'user_document';

@@ -1,6 +1,6 @@
 import express from 'express';
-import { ContactPersonController } from 'src/controllers/contactPerson.controller';
-import { auth } from 'src/middlewares/passport';
+import { ContactPersonController } from '../controllers/contactPerson.controller';
+import { auth } from '../middlewares/passport';
 
 const contactPersoncontroller = new ContactPersonController();
 const api = express.Router();

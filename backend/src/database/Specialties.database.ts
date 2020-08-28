@@ -1,9 +1,9 @@
-import { SpecialtyModel } from "src/models/Specialty";
+import { SpecialtyModel } from '../models/Specialty';
 
-const TABLE_NAME = "SPECIALTIES";
-const COL_ID = "id";
-const COL_NAME = "name";
-const COL_DESCRIPTION = "description";
+const TABLE_NAME = 'SPECIALTIES';
+const COL_ID = 'id';
+const COL_NAME = 'name';
+const COL_DESCRIPTION = 'description';
 
 export default {
   createTable: (): string => `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COL_ID} UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(), 

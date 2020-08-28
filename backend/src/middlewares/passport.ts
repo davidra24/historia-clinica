@@ -2,10 +2,10 @@ import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import config from '../config';
 import { db } from '../database';
 import userDB from '../database/users.database';
-import { UserModel } from 'src/models/User';
+import { UserModel } from '../models/User';
 import { authenticate } from 'passport';
 import { Request, Response, NextFunction } from 'express';
-import { cryptedResponse } from 'src/util/cryptedConnection';
+import { cryptedResponse } from '../util/cryptedConnection';
 
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

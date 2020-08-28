@@ -1,4 +1,4 @@
-import { UserModel } from 'src/models/User';
+import { UserModel } from '../models/User';
 import { hashSync } from 'bcrypt';
 import { SALT } from '../util/constants';
 

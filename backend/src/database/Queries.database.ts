@@ -1,4 +1,4 @@
-import { QueryModel } from 'src/models/Query';
+import { QueryModel } from '../models/Query';
 
 const TABLE_NAME = 'QUERIES';
 const COL_ID = 'id';

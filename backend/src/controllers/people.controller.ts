@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { db } from '../database';
 import peopleDB from '../database/People.database';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class PeopleController {
   app = express();

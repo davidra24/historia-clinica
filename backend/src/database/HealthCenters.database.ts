@@ -1,4 +1,4 @@
-import { HealthCenterModel } from 'src/models/HealthCenter';
+import { HealthCenterModel } from '../models/HealthCenter';
 
 const TABLE_NAME = 'HEALTHCENTERS';
 const COL_DOCUMENT = 'id';

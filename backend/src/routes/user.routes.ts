@@ -1,5 +1,5 @@
 import express from 'express';
-import { UserController } from 'src/controllers/user.controller';
+import { UserController } from '../controllers/user.controller';
 
 const usercontroller = new UserController();
 const api = express.Router();

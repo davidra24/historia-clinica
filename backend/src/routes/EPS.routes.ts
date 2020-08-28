@@ -1,6 +1,6 @@
 import express from 'express';
-import { EPSController } from 'src/controllers/EPS.controller';
-import { auth } from 'src/middlewares/passport';
+import { EPSController } from '../controllers/EPS.controller';
+import { auth } from '../middlewares/passport';
 
 const EPScontroller = new EPSController();
 const api = express.Router();

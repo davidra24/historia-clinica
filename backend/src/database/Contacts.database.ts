@@ -1,11 +1,11 @@
-import { ContactModel } from "src/models/Contact";
+import { ContactModel } from '../models/Contact';
 
-const TABLE_NAME = "CONTACTS";
-const COL_DOCUMENT = "document";
-const COL_NAME = "name";
-const COL_PHONE = "phone";
-const COL_EMAIL = "email";
-const COL_DIRECTION = "direction";
+const TABLE_NAME = 'CONTACTS';
+const COL_DOCUMENT = 'document';
+const COL_NAME = 'name';
+const COL_PHONE = 'phone';
+const COL_EMAIL = 'email';
+const COL_DIRECTION = 'direction';
 export default {
   createTable: (): string => `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COL_DOCUMENT} TEXT PRIMARY KEY NOT NULL, 
         ${COL_NAME} TEXT NOT NULL, ${COL_PHONE} TEXT NOT NULL, ${COL_EMAIL} TEXT, ${COL_DIRECTION} TEXT)`,

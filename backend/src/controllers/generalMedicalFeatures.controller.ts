@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { db } from '../database';
 import generalMedicalFeaturesDB from '../database/GeneralMedicalFeatures.database';
 import peopleDB from '../database/People.database';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class GeneralMedicalFeaturesController {
   app = express();

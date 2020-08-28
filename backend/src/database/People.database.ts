@@ -1,4 +1,4 @@
-import { PersonModel } from 'src/models/Person';
+import { PersonModel } from '../models/Person';
 
 const TABLE_NAME = 'PEOPLE';
 const COL_DOCUMENT = 'document';

@@ -1,6 +1,6 @@
 import express from 'express';
-import { QueryController } from 'src/controllers/query.controller';
-import { auth } from 'src/middlewares/passport';
+import { QueryController } from '../controllers/query.controller';
+import { auth } from '../middlewares/passport';
 
 const querycontroller = new QueryController();
 const api = express.Router();

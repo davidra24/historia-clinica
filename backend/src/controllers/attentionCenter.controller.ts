@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { db } from '../database';
 import attentionCenterDB from '../database/AttentionCenters.database';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class AttentionCenterController {
   app = express();

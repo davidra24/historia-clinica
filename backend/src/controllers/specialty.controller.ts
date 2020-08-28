@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import specialtyDB from "../database/Specialties.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import specialtyDB from '../database/Specialties.database';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class SpecialtyController {
   app = express();
@@ -13,13 +13,13 @@ export class SpecialtyController {
       .none(specialtyDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "specialty table created",
+        status: 'success creating table',
+        message: 'specialty table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -31,7 +31,7 @@ export class SpecialtyController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
-          message:'getSpecialties.success',
+          message: 'getSpecialties.success',
           data: Specialties,
         })
       )

@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import EPSDB from "../database/EPS.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import EPSDB from '../database/EPS.database';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class EPSController {
   app = express();
@@ -13,13 +13,13 @@ export class EPSController {
       .none(EPSDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "EPS table created",
+        status: 'success creating table',
+        message: 'EPS table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));

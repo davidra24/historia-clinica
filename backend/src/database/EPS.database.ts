@@ -1,8 +1,8 @@
-import { EPSModel } from "src/models/EPS";
+import { EPSModel } from '../models/EPS';
 
-const TABLE_NAME = "EPS";
-const COL_ID = "id";
-const COL_NAME = "name";
+const TABLE_NAME = 'EPS';
+const COL_ID = 'id';
+const COL_NAME = 'name';
 
 export default {
   createTable: (): string =>

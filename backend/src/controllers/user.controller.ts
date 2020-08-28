@@ -2,9 +2,9 @@ import express, { Request, Response } from 'express';
 import { db } from '../database';
 import userDB from '../database/users.database';
 import { compareSync } from 'bcrypt';
-import { UserModel } from 'src/models/User';
-import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
-import { signToken, verifyToken } from 'src/token';
+import { UserModel } from '../models/User';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
+import { signToken, verifyToken } from '../token';
 import config from '../config';
 
 export class UserController {

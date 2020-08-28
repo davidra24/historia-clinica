@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import professionDB from "../database/Professions.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import professionDB from '../database/Professions.database';
+import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';
 
 export class ProfessionController {
   app = express();
@@ -13,13 +13,13 @@ export class ProfessionController {
       .none(professionDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "profession table created",
+        status: 'success creating table',
+        message: 'profession table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -123,7 +123,7 @@ export class ProfessionController {
       .catch((error) =>
         cryptedResponse(res, 500, {
           ok: false,
-          status: "unsuccess deleting profession",
+          status: 'unsuccess deleting profession',
           message: 'deleteProfession.error',
           data: error.toString(),
         })

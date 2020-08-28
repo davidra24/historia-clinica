@@ -1,6 +1,6 @@
 import express from 'express';
-import { HealthCenterController } from 'src/controllers/HealthCenter.controller';
-import { auth } from 'src/middlewares/passport';
+import { HealthCenterController } from '../controllers/HealthCenter.controller';
+import { auth } from '../middlewares/passport';
 
 const healthCentercontroller = new HealthCenterController();
 const api = express.Router();
