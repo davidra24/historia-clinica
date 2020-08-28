@@ -406,6 +406,8 @@ export default {
       'A continuación encontrará el historial completo de anotaciones de paciente, para conocer, de esta forma podrá conocer la evolución que ha tenido el proceso del paciente',
     'dashboard-health.professional-no-history':
       'Hasta el día de hoy, no se han realizado anotaciones en esta especialidad',
+    'dashboard-health.success-title': 'Consulta existosa',
+    'dashboard-health.error-title': 'Fallo al consultar profesional',
     //Evolution
     'evolution.generalfeature-height': 'Altura',
     'evolution.generalfeature-weight': 'Peso',
@@ -424,8 +426,3 @@ export default {
     'infoProfessional.assign-what-specialty': 'Asignar a: ',
   },
 };
-
-/**
- * hello: 'Hola',
-    hi: 'Yo soy {valueHi} y que bien conocerte',
- */

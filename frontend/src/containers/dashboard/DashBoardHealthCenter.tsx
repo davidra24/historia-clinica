@@ -22,6 +22,7 @@ import {
   HTTP_EPS,
   HTTP_PROFESSION,
   HTTP_PEOPLE,
+  HTTP_ATTENTIONS_CENTER,
 } from '../../util/constants';
 import { get, post, getOneOrMany } from '../../util/httpUtil';
 import {
@@ -37,6 +38,7 @@ import { IProfessions } from '../../data/IProfessions';
 import { IPerson } from '../../data/IPerson';
 import { IEPS } from '../../data/IEPS';
 import { IAttentionCenter } from '../../data/IAttentionCenter';
+import { useAlert } from '../../hooks/useAlert';
 
 export const DashBoardHealthCenter = () => {
   const [show, setShow] = useState(true);
@@ -45,6 +47,7 @@ export const DashBoardHealthCenter = () => {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
 
   const specialties: Array<ISpecialty> = useSelector(
     (state: IStore) => state.specialties
@@ -66,6 +69,7 @@ export const DashBoardHealthCenter = () => {
   const [nameProfession, setNameProfession] = useState('');
 
   const handleSubmit = async () => {
+    setLoading(true);
     const document = professionalValue.value;
     const id_specialty = specialtyValue.value;
     const attentionCenter: IAttentionCenter = {
@@ -74,8 +78,23 @@ export const DashBoardHealthCenter = () => {
       id_specialty,
       active: true,
     };
-    //cuando todo ok
-    //getViewAttentionCenter();
+    const response = await post<IAttentionCenter>(
+      HTTP_ATTENTIONS_CENTER,
+      { attentionCenter },
+      token
+    );
+    if (response) {
+      const { ok, message, data } = response;
+      if (ok) {
+        alert('register.success-title', message, 'success');
+      } else {
+        alert('register.error-title', message, 'error');
+      }
+    } else {
+      alert('register.error-title', 'app.not-server', 'error');
+    }
+    setLoading(false);
+    getViewAttentionCenter();
   };
 
   const getData = async (event: SyntheticEvent) => {
@@ -92,8 +111,6 @@ export const DashBoardHealthCenter = () => {
       if (response) {
         const { ok, data } = response;
         if (ok) {
-          console.log('specialtyValue', specialtyValue);
-
           setSpecialty(
             specialties.find(
               (specialty) => specialty.id === specialtyValue.value
@@ -105,12 +122,16 @@ export const DashBoardHealthCenter = () => {
           if (infoOk) {
             setOpen(true);
           }
-          //mensanjito encontrado
+          alert(
+            'dashboard-healt.success-title',
+            'getPerson.success',
+            'success'
+          );
         } else {
-          //mensanjito no existe
+          alert('dashboard-healt.error-title', 'getPerson.error', 'error');
         }
       } else {
-        //mensanjito no existe
+        alert('dashboard-healt.error-title', 'app.not-server', 'error');
       }
       setLoading(false);
     }
