@@ -52,12 +52,13 @@ export const AttentionPatient = () => {
     setLoading(false);
   };
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (!personDocument.value) {
       return;
     }
-    getPatient(personDocument.value);
+    await getPatient(personDocument.value);
+    personDocument.clean();
   };
 
   return (

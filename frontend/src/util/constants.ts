@@ -15,7 +15,7 @@ export const HTTP_PROFESSION = 'professions';
 export const HTTP_CONTACTS = 'contacts';
 export const HTTP_CONTACTS_PERSON = 'contactsperson';
 export const HTTP_SPECIALTIES = 'specialties';
-export const HTTP_ATTENTIONS_CENTER = 'attentioncenters';
+export const HTTP_ATTENTIONS_CENTER = 'attentionCenters';
 export const HTTP_CONTACTS_BY_PERSON = 'contactsPersonView';
 export const HTTP_VIEW_AC_BY_HC = 'attentionCentersViewByHealthCenter';
 export const HTTP_VIEW_AC_BY_PS = 'attentionCentersViewByProfessionalDocument';
@@ -24,6 +24,9 @@ export const HTTP_VIEW_CONSULT_PERSON = 'peopleViewQueries';
 export const HTTP_VIEW_CONSULT_PERSON_SPECIALTY = 'peopleViewQueriesSpecialty';
 export const HTTP_GENERAL_FEATURES = 'generalMedicalFeatures';
 export const HTTP_QUERIES = 'queries';
+
+export const IGNORE_EVOLUTION =
+  '0BX8k5]"MjU+9mq7#2f30PR4nR&KA`iZR89UqlA=2HRljc+|3Ck<WdR|3M@J@dY';
 
 export const PATTERN_EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PATTERN_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*+-])(?=.*[^\da-zA-ZÀ-ÿ\u00f1\u00d1]).{8,}$/;

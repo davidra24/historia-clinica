@@ -23,6 +23,7 @@ import { getOneOrMany } from '../../util/httpUtil';
 import { Loading } from '../Loading';
 import { IPerson } from '../../data/IPerson';
 import { IQueries } from '../../data/IQueries';
+import { IResponse } from '../../data/IResponse';
 
 export const MedicalConsultation = ({
   readOnly,
@@ -45,6 +46,25 @@ export const MedicalConsultation = ({
     getInfoConsult(patient.document, token);
   }, []);
 
+  const getConsultHistory = (document: string, token: string) => {
+    return getOneOrMany<Array<IViewQueries>>(
+      HTTP_VIEW_CONSULT_PERSON_SPECIALTY,
+      document,
+      token,
+      specialtyId
+    );
+  };
+  const onHistoryResponse = (
+    infoQueriesView: IResponse<Array<IViewQueries>>
+  ) => {
+    if (infoQueriesView) {
+      const { ok, data } = infoQueriesView;
+      if (ok) {
+        setInfoQueries(data);
+      }
+    }
+  };
+
   const getInfoConsult = async (document: string, token: string) => {
     setLoading(true);
     const [infoGeneralView, infoQueriesView] = await Promise.all([
@@ -53,27 +73,16 @@ export const MedicalConsultation = ({
         document,
         token
       ),
-      getOneOrMany<Array<IViewQueries>>(
-        HTTP_VIEW_CONSULT_PERSON_SPECIALTY,
-        document,
-        token,
-        specialtyId
-      ),
+      getConsultHistory(document, token),
     ]);
     if (infoGeneralView) {
       const { ok, data } = infoGeneralView;
       if (ok) {
         console.log('data', data);
-
         setInfoGeneral(data);
       }
     }
-    if (infoQueriesView) {
-      const { ok, data } = infoQueriesView;
-      if (ok) {
-        setInfoQueries(data);
-      }
-    }
+    onHistoryResponse(infoQueriesView);
     setLoading(false);
   };
 
@@ -148,7 +157,13 @@ export const MedicalConsultation = ({
               </AccordionSummary>
               <Divider></Divider>
               <AccordionDetails>
-                <AddEvolution makeQuery={makeQuery} />
+                <AddEvolution
+                  makeQuery={makeQuery}
+                  setLoading={setLoading}
+                  getConsultHistory={getConsultHistory}
+                  onHistoryResponse={onHistoryResponse}
+                  document={patient.document}
+                />
               </AccordionDetails>
             </Accordion>
           )}

@@ -13,7 +13,11 @@ import { post, put } from '../../../util/httpUtil';
 import { IViewGeneralFeatures } from '../../../data/IViewGeneralFeatures';
 import { IGeneralFeatures } from '../../../data/IGeneralFeatures';
 import { IQueries } from '../../../data/IQueries';
-import { HTTP_QUERIES, HTTP_GENERAL_FEATURES } from '../../../util/constants';
+import {
+  HTTP_QUERIES,
+  HTTP_GENERAL_FEATURES,
+  IGNORE_EVOLUTION,
+} from '../../../util/constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../../../redux/types';
 import { useAlert } from '../../../hooks/useAlert';
@@ -77,7 +81,7 @@ export const GeneralMedicalFeatures = ({
 
   const postGeneralMedicalFeatures = async () => {
     setLoading(true);
-    const query = makeQuery('CMG');
+    const query = makeQuery(IGNORE_EVOLUTION);
     const response = await post<string>(HTTP_QUERIES, { query }, token);
     if (response) {
       const { ok, data, message } = response;

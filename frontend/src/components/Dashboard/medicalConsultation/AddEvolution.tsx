@@ -2,13 +2,46 @@ import React from 'react';
 import { TextMessage } from '../../../lang/TextMessage';
 import { AnotationModal } from './AnotationModal';
 import { useQuillValue } from '../../../hooks/useInput';
+import { HTTP_QUERIES } from '../../../util/constants';
+import { post } from '../../../util/httpUtil';
+import { useSelector } from 'react-redux';
+import { IStore } from '../../../redux/types';
 
 interface propsEvolution {
   makeQuery: any;
+  setLoading: Function;
+  getConsultHistory: any;
+  onHistoryResponse: any;
+  document: any;
 }
 
-export const AddEvolution = ({ makeQuery }: propsEvolution) => {
+export const AddEvolution = ({
+  makeQuery,
+  setLoading,
+  getConsultHistory,
+  onHistoryResponse,
+  document,
+}: propsEvolution) => {
+  const token: string = useSelector((state: IStore) => state.token);
   const annotation = useQuillValue('');
+  const handleSubmit = async () => {
+    setLoading(true);
+    const query = makeQuery(annotation.value);
+    const response = await post<string>(HTTP_QUERIES, { query }, token);
+    if (response) {
+      const { ok, data, message } = response;
+      if (ok) {
+        const infoQueriesView = await getConsultHistory(document, token);
+        onHistoryResponse(infoQueriesView);
+        ////mensaje ok
+      } else {
+        //mensaje no actualizado
+      }
+    } else {
+      //mensaje no actualizado
+    }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -19,7 +52,7 @@ export const AddEvolution = ({ makeQuery }: propsEvolution) => {
           buttonText={TextMessage(
             'dashboard-health.professional-openAnotation'
           )}
-          onSaveAnnotation={() => {}}
+          onSaveAnnotation={handleSubmit}
           saveText={TextMessage('evolution.generalfeature-save-or-update')}
         ></AnotationModal>
       </div>

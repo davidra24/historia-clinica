@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { db } from "../database";
-import attentionCenterDB from "../database/AttentionCenters.database";
-import { cryptedResponse, decryptRequest } from "src/util/cryptedConnection";
+import express, { Request, Response } from 'express';
+import { db } from '../database';
+import attentionCenterDB from '../database/AttentionCenters.database';
+import { cryptedResponse, decryptRequest } from 'src/util/cryptedConnection';
 
 export class AttentionCenterController {
   app = express();
@@ -14,13 +14,13 @@ export class AttentionCenterController {
       .none(attentionCenterDB.createTable)
       .then(() => ({
         ok: true,
-        status: "success creating table",
-        message: "Attention center table created",
+        status: 'success creating table',
+        message: 'Attention center table created',
         data: null,
       }))
       .catch((error) => ({
         ok: false,
-        status: "unsuccess creating table",
+        status: 'unsuccess creating table',
         message: error,
         data: null,
       }));
@@ -54,7 +54,7 @@ export class AttentionCenterController {
         })
       )
       .catch((error) =>
-      cryptedResponse(res, 500, {
+        cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'getAttentionCenters.error',
@@ -75,7 +75,7 @@ export class AttentionCenterController {
         })
       )
       .catch((error) =>
-      cryptedResponse(res, 500, {
+        cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'getAttentionCenters.error',
@@ -90,8 +90,7 @@ export class AttentionCenterController {
         cryptedResponse(res, 200, {
           ok: true,
           status: 200,
-          message:
-            'getAttentionCenters.success',
+          message: 'getAttentionCenters.success',
           data: centrosDeAtencion,
         })
       )
@@ -147,15 +146,11 @@ export class AttentionCenterController {
       });
   }
   async updateAttentionCenter(req: Request, res: Response) {
-    const { idCenter, document } = req.params;
+    const { id, document } = req.params;
     const { attentionCenter } = await decryptRequest(req);
     await db
       .none(() =>
-        attentionCenterDB.updateAttentionCenter(
-          idCenter,
-          document,
-          attentionCenter
-        )
+        attentionCenterDB.updateAttentionCenter(id, document, attentionCenter)
       )
       .then((centroDeAtencion) =>
         cryptedResponse(res, 200, {
@@ -165,14 +160,14 @@ export class AttentionCenterController {
           data: centroDeAtencion,
         })
       )
-      .catch((error) =>
-        cryptedResponse(res, 500, {
+      .catch((error) => {
+        return cryptedResponse(res, 500, {
           ok: false,
           status: 500,
           message: 'updateAttentionCenter.error',
           data: error.toString(),
-        })
-      );
+        });
+      });
   }
   async deleteAttentionCenter(req: Request, res: Response) {
     const { id, document } = req.params;

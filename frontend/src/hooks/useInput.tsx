@@ -16,8 +16,8 @@ export const useQuillValue = (initialValue: any) => {
     setValue(e);
   };
   const clean = () => setValue('');
-  const defaultValue = () => setValue(initialValue);
-  return { value, onChange, clean, defaultValue };
+  const onDefaultValue = () => setValue(initialValue);
+  return { value, onChange, clean, onDefaultValue };
 };
 
 export const useInputValidator = (initialValue: any) => {

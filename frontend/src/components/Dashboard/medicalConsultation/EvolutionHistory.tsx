@@ -3,6 +3,7 @@ import { TextMessage } from '../../../lang/TextMessage';
 import { IViewQueries } from '../../../data/IViewQueries';
 import { AnotationModal } from './AnotationModal';
 import { toRedableDate } from '../../../util/Util';
+import { IGNORE_EVOLUTION } from '../../../util/constants';
 
 interface propsHistory {
   infoQueries: Array<IViewQueries>;
@@ -26,7 +27,7 @@ export const EvolutionHistory = ({ infoQueries }: propsHistory) => {
                 )
                 .map(
                   (consult: IViewQueries) =>
-                    consult.query_annotation !== 'CMG' && (
+                    consult.query_annotation !== IGNORE_EVOLUTION && (
                       <AnotationModal
                         key={consult.query_annotation}
                         readOnly

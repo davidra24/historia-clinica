@@ -362,6 +362,8 @@ export default {
       'Y recuerde su ética profesional es nuestra prioridad.',
     'dashboard-professional.no-specialties':
       'En el momento no existen registros de especialidades que requieran de su atención.',
+    'dashboard-health.no-specialties':
+      'En el momento no existen registros de especialidades y profesionales en su unidad médica.',
     'dashboard-professional.title-consult': 'Consulta de paciente',
     'dashboard-professional.title-info': 'Información de paciente',
     'dashboard-professional.patient-document': 'Documento de paciente',

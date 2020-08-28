@@ -41,8 +41,8 @@ export const TableHealthCenter = ({
             <TableBody>
               {arrayAttentionCenter.map((attentionCenter) => (
                 <BodyTable
-                  key={attentionCenter}
-                  attentionCenter={attentionCenter}
+                  key={attentionCenter.specialty_description}
+                  aCenter={attentionCenter}
                 />
               ))}
             </TableBody>

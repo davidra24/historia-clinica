@@ -307,7 +307,13 @@ export const DashBoardHealthCenter = () => {
             </Card>
           </div>
           <div className='flex justify-center'>
-            <TableHealthCenter arrayAttentionCenter={viewAttentionCenter} />
+            {viewAttentionCenter.length !== 0 ? (
+              <TableHealthCenter arrayAttentionCenter={viewAttentionCenter} />
+            ) : (
+              <h3 className='text-xl text-center font-semibold mt-4 text-gray-700'>
+                {TextMessage('dashboard-health.no-specialties')}
+              </h3>
+            )}
           </div>
         </div>
       )}
