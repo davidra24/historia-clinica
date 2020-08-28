@@ -8,10 +8,13 @@ import { IContact } from '../../data/IContact';
 import { IEPS } from '../../data/IEPS';
 import { IProfessions } from '../../data/IProfessions';
 import { getOneOrMany } from '../../util/httpUtil';
-import { HTTP_CONTACTS_BY_PERSON } from '../../util/constants';
+import {
+  HTTP_CONTACTS_BY_PERSON,
+  HTTP_EPS,
+  HTTP_PROFESSION,
+} from '../../util/constants';
 import { useCookies } from 'react-cookie';
 import { Loading } from '../../components/Loading';
-import { HTTP_EPS, HTTP_PROFESSION } from '../../util/constants';
 import { resolve } from 'url';
 
 export const ProfilePerson = () => {
