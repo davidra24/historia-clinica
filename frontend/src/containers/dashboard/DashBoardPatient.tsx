@@ -39,8 +39,10 @@ export const DashBoardPatient = () => {
       if (ok) {
         dispatch(setSpecialties(data));
       } else {
+        //mensaje no se encontraron especialidades
       }
     } else {
+      //mensaje no se encontraron especialidades
     }
     setLoading(false);
   };

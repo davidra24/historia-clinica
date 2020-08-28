@@ -201,7 +201,11 @@ export const DashBoardHealthCenter = () => {
       const { ok, data } = response;
       if (ok) {
         dispatch(setSpecialties(data));
+      } else {
+        //mensaje no hay especialidades disponibles
       }
+    } else {
+      //mensaje no hay especialidades disponibles
     }
     setLoading(false);
   };

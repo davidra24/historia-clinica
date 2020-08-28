@@ -53,7 +53,6 @@ export const Dashboard = () => {
       const { ok, data } = response;
       if (ok) {
         dispatch(setPerson(data));
-        console.log('person', data);
       } else {
         history.push('/completeRegister');
       }
