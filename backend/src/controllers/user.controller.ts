@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { db } from '../database';
-import userDB from '../database/users.database';
+import userDB from '../database/Users.database';
 import { compareSync } from 'bcrypt';
 import { UserModel } from '../models/User';
 import { cryptedResponse, decryptRequest } from '../util/cryptedConnection';

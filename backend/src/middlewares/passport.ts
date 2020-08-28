@@ -1,7 +1,7 @@
 import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
 import config from '../config';
 import { db } from '../database';
-import userDB from '../database/users.database';
+import userDB from '../database/Users.database';
 import { UserModel } from '../models/User';
 import { authenticate } from 'passport';
 import { Request, Response, NextFunction } from 'express';
