@@ -14,6 +14,7 @@ import { IPerson } from '../../data/IPerson';
 import { HeaderWelcomePerson } from '../../components/Dashboard/HeaderWelcomePerson';
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
 import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
+import { useAlert } from '../../hooks/useAlert';
 
 export const DashBoardPatient = () => {
   const person: IPerson = useSelector((state: IStore) => state.person);
@@ -24,7 +25,7 @@ export const DashBoardPatient = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
+  const alert = useAlert(dispatch);
   useEffect(() => {
     if (specialties.length === 0) {
       getSpecialties();
@@ -39,10 +40,14 @@ export const DashBoardPatient = () => {
       if (ok) {
         dispatch(setSpecialties(data));
       } else {
-        //mensaje no se encontraron especialidades
+        alert(
+          'dashboard-health.success-title',
+          'getSpecialty.success',
+          'success'
+        );
       }
     } else {
-      //mensaje no se encontraron especialidades
+      alert('dashboard-health.error-title', 'getSpecialty.error', 'error');
     }
     setLoading(false);
   };

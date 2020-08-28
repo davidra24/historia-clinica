@@ -202,10 +202,14 @@ export const DashBoardHealthCenter = () => {
       if (ok) {
         dispatch(setSpecialties(data));
       } else {
-        //mensaje no hay especialidades disponibles
+        alert(
+          'dashboard-health.success-title',
+          'getSpecialty.success',
+          'success'
+        );
       }
     } else {
-      //mensaje no hay especialidades disponibles
+      alert('dashboard-health.error-title', 'getSpecialty.error', 'error');
     }
     setLoading(false);
   };

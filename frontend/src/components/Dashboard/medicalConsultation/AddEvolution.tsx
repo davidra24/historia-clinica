@@ -4,8 +4,9 @@ import { AnotationModal } from './AnotationModal';
 import { useQuillValue } from '../../../hooks/useInput';
 import { HTTP_QUERIES } from '../../../util/constants';
 import { post } from '../../../util/httpUtil';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../../../redux/types';
+import { useAlert } from '../../../hooks/useAlert';
 
 interface propsEvolution {
   makeQuery: any;
@@ -14,6 +15,9 @@ interface propsEvolution {
   onHistoryResponse: any;
   document: any;
 }
+
+const dispatch = useDispatch();
+const alert = useAlert(dispatch);
 
 export const AddEvolution = ({
   makeQuery,
@@ -33,12 +37,12 @@ export const AddEvolution = ({
       if (ok) {
         const infoQueriesView = await getConsultHistory(document, token);
         onHistoryResponse(infoQueriesView);
-        ////mensaje ok
+        alert('evolution.success-title', 'evolution.success-body', 'success');
       } else {
-        //mensaje no actualizado
+        alert('evolution.error-title', 'evolution.erro-body', 'error');
       }
     } else {
-      //mensaje no actualizado
+      alert('evolution.error-title', 'app.not-server', 'error');
     }
     setLoading(false);
   };

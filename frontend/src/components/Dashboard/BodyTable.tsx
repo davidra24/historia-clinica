@@ -5,14 +5,18 @@ import { MiniLoading } from '../Loading/MiniLoading';
 import { put } from '../../util/httpUtil';
 import { HTTP_ATTENTIONS_CENTER } from '../../util/constants';
 import { AnyNaptrRecord } from 'dns';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IStore } from '../../redux/types';
 import { IHealthAttentionCenter } from '../../data/IHealthAttentionCenter';
 import { IAttentionCenter } from '../../data/IAttentionCenter';
+import { useAlert } from '../../hooks/useAlert';
 
 interface propsBody {
   aCenter: IViewAttentionCenter;
 }
+
+const dispatch = useDispatch();
+const alert = useAlert(dispatch);
 
 export const BodyTable = ({ aCenter }: propsBody) => {
   const token: string = useSelector((state: IStore) => state.token);
@@ -45,12 +49,24 @@ export const BodyTable = ({ aCenter }: propsBody) => {
       const { ok, data, message } = response;
       if (ok) {
         setChecked(!checked);
-        //mensaje actualizado
+        alert(
+          'dashboard-health-update.success-title',
+          'updateAttentionCenter.success',
+          'success'
+        );
       } else {
-        //mensaje no actualizado
+        alert(
+          'dashboard-health-update.error-title',
+          'updateAttentionCenter.error',
+          'error'
+        );
       }
     } else {
-      //mensaje no actualizado
+      alert(
+        'dashboard-health-update.success-title',
+        'app.not-server',
+        'success'
+      );
     }
 
     setLoading(false);
