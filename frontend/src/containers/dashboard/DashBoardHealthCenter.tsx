@@ -13,26 +13,36 @@ import {
   Select,
   MenuItem,
 } from '@material-ui/core';
+import { ModalInfoProfessional } from '../../components/Dashboard/ModalInfoProfessional';
 import { useInputValidator } from '../../hooks/useInput';
 import { ISpecialty } from '../../data/ISpecialty';
-import { useCookies } from 'react-cookie';
 import {
   HTTP_SPECIALTIES,
-  HTTP_ATTENTIONS_CENTER,
   HTTP_VIEW_AC_BY_HC,
+  HTTP_EPS,
+  HTTP_PROFESSION,
+  HTTP_PEOPLE,
 } from '../../util/constants';
 import { get, post, getOneOrMany } from '../../util/httpUtil';
-import { setSpecialties, setViewAttenttionCenter } from '../../redux/actions';
+import {
+  setSpecialties,
+  setViewAttenttionCenter,
+  setPerson,
+} from '../../redux/actions';
 import { Loading } from '../../components/Loading';
 import { TableHealthCenter } from '../../components/Dashboard/TableHealthCenter';
-import { IAttentionCenter } from '../../data/IAttentionCenter';
 import { IViewAttentionCenter } from '../../data/IViewAttentionCenter';
 import { IUser } from '../../data/IUser';
+import { IProfessions } from '../../data/IProfessions';
 import { IPerson } from '../../data/IPerson';
+import { IEPS } from '../../data/IEPS';
+import { IAttentionCenter } from '../../data/IAttentionCenter';
 
 export const DashBoardHealthCenter = () => {
+  const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
   const [valide, setValide] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -50,16 +60,91 @@ export const DashBoardHealthCenter = () => {
     (state: IStore) => state.healthCenter
   );
   const user: IUser = useSelector((state: IStore) => state.user);
+  const [professional, setProfessional] = useState<IPerson | any>(null);
+  const [specialty, setSpecialty] = useState<ISpecialty | any>(null);
+  const [nameEPS, setNameEPS] = useState('');
+  const [nameProfession, setNameProfession] = useState('');
 
-  const handleSubmit = async (event: SyntheticEvent) => {
+  const handleSubmit = async () => {
+    const document = professionalValue.value;
+    const id_specialty = specialtyValue.value;
+    const attentionCenter: IAttentionCenter = {
+      id: user.document,
+      document,
+      id_specialty,
+      active: true,
+    };
+    //cuando todo ok
+    //getViewAttentionCenter();
+  };
+
+  const getData = async (event: SyntheticEvent) => {
     event.preventDefault();
     const finalValidator = validate();
     if (finalValidator) {
-      cleanFields();
+      setLoading(true);
+      const document = professionalValue.value;
+      const response = await getOneOrMany<IPerson>(
+        HTTP_PEOPLE,
+        document,
+        token
+      );
+      if (response) {
+        const { ok, data } = response;
+        if (ok) {
+          console.log('specialtyValue', specialtyValue);
+
+          setSpecialty(
+            specialties.find(
+              (specialty) => specialty.id === specialtyValue.value
+            )
+          );
+          setProfessional(data);
+          const infoOk = await getAllInfo(data.id_eps, data.id_profesion);
+          console.log('infoOk', infoOk);
+          if (infoOk) {
+            setOpen(true);
+          }
+          //mensanjito encontrado
+        } else {
+          //mensanjito no existe
+        }
+      } else {
+        //mensanjito no existe
+      }
+      setLoading(false);
     }
   };
 
   useEffect(() => {}, [valide]);
+
+  const getAllInfo = async (
+    id_eps: string,
+    id_profession: string
+  ): Promise<boolean> => {
+    setLoading(true);
+    return new Promise(async (resolve) => {
+      const [EPSInfo, ProfessionInfo] = await Promise.all([
+        await getOneOrMany<IEPS>(HTTP_EPS, id_eps, token),
+        await getOneOrMany<IProfessions>(HTTP_PROFESSION, id_profession, token),
+      ]);
+      console.log('EPSINFO', EPSInfo);
+      console.log('ProfessionInfo', ProfessionInfo);
+
+      if (EPSInfo.ok) {
+        setNameEPS(EPSInfo.data.name);
+      } else {
+        setNameEPS('');
+      }
+      if (ProfessionInfo.ok) {
+        setNameProfession(ProfessionInfo.data.name);
+      } else {
+        setNameProfession('');
+      }
+      setLoading(false);
+      resolve(true);
+    });
+  };
 
   const validate = (): boolean => {
     const professionalValidator =
@@ -151,7 +236,7 @@ export const DashBoardHealthCenter = () => {
           </div>
           <div className='flex justify-center'>
             <Card className='flex flex-col w-8/12 h-full rounded-full m-4 p-10'>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={getData}>
                 <div className='flex flex-col justify-center space-y-3'>
                   <div className='flex flex-col md:flex-row space-y-1 justify-around sm:items-center lg:items-baseline'>
                     <FormControl className='w-12/12 md:w-5/12'>
@@ -169,7 +254,6 @@ export const DashBoardHealthCenter = () => {
                           TextMessage('dashboard-health.professional-required')}
                       </span>
                     </FormControl>
-
                     <FormControl
                       variant='outlined'
                       className='w-12/12 md:w-5/12'
@@ -208,6 +292,15 @@ export const DashBoardHealthCenter = () => {
                     >
                       {TextMessage('dashboard-health.add-professional')}
                     </Button>
+                    <ModalInfoProfessional
+                      professional={professional}
+                      specialty={specialty}
+                      open={open}
+                      handleClose={() => setOpen(false)}
+                      EPSName={nameEPS}
+                      ProfessionName={nameProfession}
+                      handleSubmit={handleSubmit}
+                    />
                   </div>
                 </div>
               </form>

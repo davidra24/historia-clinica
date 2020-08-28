@@ -5,8 +5,11 @@ import { MiniLoading } from '../Loading/MiniLoading';
 import { put } from '../../util/httpUtil';
 import { HTTP_ATTENTIONS_CENTER } from '../../util/constants';
 import { AnyNaptrRecord } from 'dns';
+import { useSelector } from 'react-redux';
+import { IStore } from '../../redux/types';
 
 export const BodyTable = ({ attentionCenter }: any) => {
+  const token: string = useSelector((state: IStore) => state.token);
   const [checked, setChecked] = useState<boolean>(
     attentionCenter.active_attention_center
   );
@@ -16,8 +19,9 @@ export const BodyTable = ({ attentionCenter }: any) => {
     setLoading(true);
     const { id_health_center } = attentionCenter;
     //todo
-    //const response = await put<IHealthAttentionCenter>(HTTP_ATTENTIONS_CENTER, | )
-    setChecked(!checked);
+    //const response = await put<IHealthAttentionCenter>(HTTP_ATTENTIONS_CENTER, id, {atte}, token )
+    //if ok setChecked(!checked);
+
     setLoading(false);
   };
 

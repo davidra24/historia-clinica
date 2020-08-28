@@ -245,8 +245,8 @@ export const RegisterPerson = ({
     setLoading(true);
     const response = await post<IPerson>(HTTP_PEOPLE, { person }, token);
     if (response) {
-      const { message, data } = response;
-      if (response.ok) {
+      const { ok, message, data } = response;
+      if (ok) {
         alert('register.success-title', message, 'success');
         dispatch(setPerson(data));
       } else {

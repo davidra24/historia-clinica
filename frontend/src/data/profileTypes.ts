@@ -2,11 +2,12 @@ import { IPerson } from './IPerson';
 import { IContact } from './IContact';
 
 export interface profilePersonShowTypes {
-  setShow: Function;
-  arrayContacts: Array<IContact>;
+  setShow?: Function;
   person: IPerson;
-  EPSName: string;
-  ProfessionName: string;
+  EPSName?: string;
+  ProfessionName?: string;
+  handleSubmit?: any;
+  speacialtyName?: string;
 }
 
 export interface profilePersonEditTypes {

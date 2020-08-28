@@ -16,4 +16,5 @@ export interface IPerson {
   deceased: boolean;
   deceased_date?: Date;
   is_healt_care_team: boolean;
+  profession?: string;
 }

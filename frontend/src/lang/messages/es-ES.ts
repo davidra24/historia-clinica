@@ -418,6 +418,8 @@ export default {
     'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
     'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
     'evolution.generalfeature-save-or-update': 'Guardar',
+    'infoProfessional.assign-specialty': 'Asignar a especialidad',
+    'infoProfessional.assign-what-specialty': 'Asignar a: ',
   },
 };
 

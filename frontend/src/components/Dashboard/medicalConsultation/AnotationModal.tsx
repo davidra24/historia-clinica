@@ -62,7 +62,7 @@ export const AnotationModal = ({
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
         BackdropProps={{
-          timeout: 500,
+          timeout: 1000,
         }}
       >
         <div className='flex w-10/12 h-auto justify-center border-none bg-gray-100 m-auto p-10'>
