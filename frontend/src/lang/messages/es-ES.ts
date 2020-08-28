@@ -407,7 +407,9 @@ export default {
     'dashboard-health.professional-no-history':
       'Hasta el día de hoy, no se han realizado anotaciones en esta especialidad',
     'dashboard-health.success-title': 'Consulta existosa',
-    'dashboard-health.error-title': 'Fallo al consultar profesional',
+    'dashboard-health.error-title': 'Fallo al realizar consulta',
+    'dashboard-health-update.success-title': 'Actualizado correctamente',
+    'dashboard-health-update.error-title': 'Error al actualizar',
     //Evolution
     'evolution.generalfeature-height': 'Altura',
     'evolution.generalfeature-weight': 'Peso',
@@ -422,6 +424,10 @@ export default {
     'evolution.generalfeature-traimatic_background': 'Antecedentes traumáticos',
     'evolution.generalfeature-allergy-history': 'Antecedentes alérgicos',
     'evolution.generalfeature-save-or-update': 'Guardar',
+    'evolution.success-title': 'Exito al guardar',
+    'evolution.success-body': 'La anotacion se ha almacenado con exito',
+    'evolution.error-title': 'Error al guardar',
+    'evolution.error-body': 'La anotacion no se ha podido almacenar',
     'infoProfessional.assign-specialty': 'Asignar a especialidad',
     'infoProfessional.assign-what-specialty': 'Asignar a: ',
   },
