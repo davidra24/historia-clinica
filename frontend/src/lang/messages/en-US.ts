@@ -3,8 +3,30 @@ import { LOCALES } from '../locales';
 export default {
   [LOCALES.ENGLISH]: {
     //APP
-    '': '',
     'app.title': 'DIGITAL CLINICAL HISTORY',
+    'app.login-title': 'Sign In',
+    'app.login-subtitle':
+      'Sign in to your digital medical history and know your health status.',
+    'app.signup-title': 'Sign Up',
+    'app.signup-subtitle':
+      'Sign up and enjoy your medical history in one place',
+    'app.404-title': '404',
+    'app.404-subtitle': 'Finish your registration to enjoy the privileges',
+    'app.profile-title': 'Your user profile',
+    'app.profile-subtitle': 'Here you can view and modify your information',
+    'app.specialties-title': 'The spaecialties',
+    'app.specialties-subtitle':
+      'Here you can see the specialties available in the system',
+    'app.selection-title': 'Selecciona your role rol',
+    'app.selection-subtitle':
+      "Here you can select the role you're going to play today",
+    'app.dashboard-title': 'Hello',
+    'app.dashboard-subtitle': 'This is your user dashboard',
+    'app.attention-title': 'Patient care',
+    'app.attention-subtitle':
+      'Here you can provide all the care your patients need',
+
+    '': '',
     'app.not-server': 'Server not found',
     'app.loading': 'Loading...',
     'app.start': 'Home',
@@ -23,7 +45,7 @@ export default {
     'lang.spanish': 'Spanish',
     'lang.english': 'English',
     //LOGIN
-    'login.title': 'Login',
+    'login.title': 'Sign In',
     'login.document': 'Document',
     'login.signup': 'Sign up',
     'login.signin': 'Login',

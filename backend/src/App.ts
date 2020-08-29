@@ -13,7 +13,7 @@ import { passportMiddleware } from './middlewares/passport';
 
 // Init express
 const app = express();
-
+//pm2 start npm -- start
 /************************************************************************************
  *                              Set basic express settings
  ***********************************************************************************/

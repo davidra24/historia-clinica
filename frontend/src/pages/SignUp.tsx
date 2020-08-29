@@ -15,6 +15,8 @@ import { HTTP_USERS, PATTERN_PASSWORD } from '../util/constants';
 import { post } from '../util/httpUtil';
 import { IUser } from '../data/IUser';
 import { useAlert } from '../hooks/useAlert';
+import { Helmet } from 'react-helmet';
+import { Layout } from '../components/App/Layout';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -115,25 +117,27 @@ export const SignUp = () => {
 
   return (
     <>
-      <div className='flex justify-center pt-10 w-12/12 h-full mb-4'>
-        <FormSign
-          title={TextMessage('signup.title')}
-          leftButton={{
-            onClick: volver,
-            label: TextMessage('signup.back'),
-            className: 'p-button-warning',
-          }}
-          rightButton={{
-            label: TextMessage('signup.signup'),
-          }}
-          onSubmit={signup}
-          person={person}
-          setPerson={setPerson}
-          inputDocument={inputDocument}
-          inputPassword={inputPassword}
-          inputSecondPassword={inputSecondPassword}
-        />
-      </div>
+      <Layout title={'app.signup-title'} subtitle={'app.signup-subtitle'}>
+        <div className='flex justify-center pt-10 w-12/12 h-full mb-4'>
+          <FormSign
+            title={TextMessage('signup.title')}
+            leftButton={{
+              onClick: volver,
+              label: TextMessage('signup.back'),
+              className: 'p-button-warning',
+            }}
+            rightButton={{
+              label: TextMessage('signup.signup'),
+            }}
+            onSubmit={signup}
+            person={person}
+            setPerson={setPerson}
+            inputDocument={inputDocument}
+            inputPassword={inputPassword}
+            inputSecondPassword={inputSecondPassword}
+          />
+        </div>
+      </Layout>
     </>
   );
 };

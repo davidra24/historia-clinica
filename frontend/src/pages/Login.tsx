@@ -1,15 +1,7 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { TextMessage } from '../lang/TextMessage';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Loading,
-  setMsgErrorVisbility,
-  SnackTitleMsg,
-  SnackMsg,
-  auth,
-  setUser,
-  setToken,
-} from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { Loading, auth, setUser, setToken } from '../redux/actions';
 import { FormSign } from '../components/FormSign';
 import { useHistory } from 'react-router';
 import { IUser } from '../data/IUser';
@@ -19,6 +11,7 @@ import { useInputValidator } from '../hooks/useInput';
 import { useCookies } from 'react-cookie';
 import { ILogin } from '../data/ILoginResponse';
 import { useAlert } from '../hooks/useAlert';
+import { Layout } from '../components/App/Layout';
 
 export const Login = () => {
   const inputDocument = useInputValidator('');
@@ -89,20 +82,22 @@ export const Login = () => {
 
   return (
     <>
-      <div className='flex justify-center pt-10 w-12/12 h-screen'>
-        <FormSign
-          title={TextMessage('login.title')}
-          leftButton={{
-            onClick: volver,
-            label: TextMessage('login.signup'),
-            className: 'p-button-success',
-          }}
-          onSubmit={login}
-          rightButton={{ label: TextMessage('login.signin') }}
-          inputDocument={inputDocument}
-          inputPassword={inputPassword}
-        />
-      </div>
+      <Layout title={'app.login-title'} subtitle={'app.login-subtitle'}>
+        <div className='flex justify-center pt-10 w-12/12 h-screen'>
+          <FormSign
+            title={TextMessage('login.title')}
+            leftButton={{
+              onClick: volver,
+              label: TextMessage('login.signup'),
+              className: 'p-button-success',
+            }}
+            onSubmit={login}
+            rightButton={{ label: TextMessage('login.signin') }}
+            inputDocument={inputDocument}
+            inputPassword={inputPassword}
+          />
+        </div>
+      </Layout>
     </>
   );
 };

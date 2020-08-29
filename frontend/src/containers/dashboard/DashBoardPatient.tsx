@@ -15,6 +15,7 @@ import { HeaderWelcomePerson } from '../../components/Dashboard/HeaderWelcomePer
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
 import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
 import { useAlert } from '../../hooks/useAlert';
+import { Layout } from '../../components/App/Layout';
 
 export const DashBoardPatient = () => {
   const person: IPerson = useSelector((state: IStore) => state.person);
@@ -54,37 +55,43 @@ export const DashBoardPatient = () => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className='flex flex-col h-full'>
-          <HeaderWelcomePerson
-            person={person}
-            principalTitle='dashboard-patient.specialties'
-            principalDescription='dashboard-patient.specialties-description'
-            ourPriority='dashboard-patient.specialties-description-end'
-          />
-          <div className='flex flex-wrap mt-4 justify-center'>
-            {specialties.length !== 0 ? (
-              specialties
-                .sort((a: ISpecialty, b: ISpecialty) =>
-                  a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-                )
-                .map((specialty: ISpecialty) => (
-                  <CardSpecialty
-                    key={specialty.id}
-                    name={specialty.name}
-                    description={specialty.description}
-                    active={true}
-                    onClick={history.push(`specialty/${specialty.id}`)}
-                  />
-                ))
-            ) : (
-              <NoSpecialties />
-            )}
+      <Layout
+        title={'app.dashboard-title'}
+        name={` ${person.first_name} ${person.last_name}`}
+        subtitle={'app.dashboard-subtitle'}
+      >
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className='flex flex-col h-full'>
+            <HeaderWelcomePerson
+              person={person}
+              principalTitle='dashboard-patient.specialties'
+              principalDescription='dashboard-patient.specialties-description'
+              ourPriority='dashboard-patient.specialties-description-end'
+            />
+            <div className='flex flex-wrap mt-4 justify-center'>
+              {specialties.length !== 0 ? (
+                specialties
+                  .sort((a: ISpecialty, b: ISpecialty) =>
+                    a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+                  )
+                  .map((specialty: ISpecialty) => (
+                    <CardSpecialty
+                      key={specialty.id}
+                      name={specialty.name}
+                      description={specialty.description}
+                      active={true}
+                      onClick={() => history.push(`specialty/${specialty.id}`)}
+                    />
+                  ))
+              ) : (
+                <NoSpecialties />
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </Layout>
     </>
   );
 };

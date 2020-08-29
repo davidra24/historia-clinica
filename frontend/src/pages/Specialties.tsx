@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { IPerson } from '../data/IPerson';
 import { Redirect } from 'react-router';
 import { SpecialtiesPatient } from '../containers/specialties/SpecialtiesPatient';
+import { Layout } from '../components/App/Layout';
 
 export const Specialties = () => {
   const person: IPerson = useSelector((state: IStore) => state.person);

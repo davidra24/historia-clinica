@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ada71a64.chunk.css",
+    "main.js": "/static/js/main.17c88024.chunk.js",
+    "main.js.map": "/static/js/main.17c88024.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.14f14aa8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.14f14aa8.js.map",
+    "static/css/2.3c515868.chunk.css": "/static/css/2.3c515868.chunk.css",
+    "static/js/2.0dd65647.chunk.js": "/static/js/2.0dd65647.chunk.js",
+    "static/js/2.0dd65647.chunk.js.map": "/static/js/2.0dd65647.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e73cc380cb096dcea4eff9db7a0ceaaf.js": "/precache-manifest.e73cc380cb096dcea4eff9db7a0ceaaf.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.3c515868.chunk.css.map": "/static/css/2.3c515868.chunk.css.map",
+    "static/css/main.ada71a64.chunk.css.map": "/static/css/main.ada71a64.chunk.css.map",
+    "static/js/2.0dd65647.chunk.js.LICENSE.txt": "/static/js/2.0dd65647.chunk.js.LICENSE.txt",
+    "static/media/colombia.svg": "/static/media/colombia.0e50dcfe.svg",
+    "static/media/error-404.png": "/static/media/error-404.a8cfb281.png",
+    "static/media/estados unidos.svg": "/static/media/estados unidos.36ab476e.svg",
+    "static/media/logo.svg": "/static/media/logo.cd370853.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.14f14aa8.js",
+    "static/css/2.3c515868.chunk.css",
+    "static/js/2.0dd65647.chunk.js",
+    "static/css/main.ada71a64.chunk.css",
+    "static/js/main.17c88024.chunk.js"
+  ]
+}

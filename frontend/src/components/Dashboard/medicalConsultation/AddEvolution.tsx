@@ -16,9 +16,6 @@ interface propsEvolution {
   document: any;
 }
 
-const dispatch = useDispatch();
-const alert = useAlert(dispatch);
-
 export const AddEvolution = ({
   makeQuery,
   setLoading,
@@ -26,6 +23,8 @@ export const AddEvolution = ({
   onHistoryResponse,
   document,
 }: propsEvolution) => {
+  const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
   const token: string = useSelector((state: IStore) => state.token);
   const annotation = useQuillValue('');
   const handleSubmit = async () => {

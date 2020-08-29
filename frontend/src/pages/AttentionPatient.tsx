@@ -19,6 +19,7 @@ import { MedicalConsultation } from '../components/Dashboard/MedicalConsultation
 import { CardConsultInfoPatient } from '../components/Dashboard/medicalConsultation/CardConsultInfoPatient';
 import { IViewAttentionCenter } from '../data/IViewAttentionCenter';
 import { useAlert } from '../hooks/useAlert';
+import { Layout } from '../components/App/Layout';
 
 export const AttentionPatient = () => {
   const [patient, setPatient] = useState<IPerson | any>(null);
@@ -63,55 +64,57 @@ export const AttentionPatient = () => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className='flex flex-col justify-center w-screen'>
-          <div className='flex flex-col md:flex-row justify-center md:justify-around w-full mr-auto ml-auto'>
-            <Card className='flex flex-col justify-center w-10/12 md:w-4/12 rounded-full mt-6 ml-auto md:ml-2 mr-auto md:mr-1 p-10 h-full'>
-              <h3 className='text-center text-xl mt-2 mb-4'>
-                <strong>
-                  {TextMessage('dashboard-professional.title-consult')}
-                </strong>
-              </h3>
-              <form className='w-full' onSubmit={handleSubmit}>
-                <div className='flex flex-col justify-center items-center space-y-2 w-full'>
-                  <FormControl className='w-full'>
-                    <TextField
-                      id='float-document'
-                      name='document'
+      <Layout title={'app.attention-title'} subtitle={'app.attention-subtitle'}>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className='flex flex-col justify-center w-screen'>
+            <div className='flex flex-col md:flex-row justify-center md:justify-around w-full mr-auto ml-auto'>
+              <Card className='flex flex-col justify-center w-10/12 md:w-4/12 rounded-full mt-6 ml-auto md:ml-2 mr-auto md:mr-1 p-10 h-full'>
+                <h3 className='text-center text-xl mt-2 mb-4'>
+                  <strong>
+                    {TextMessage('dashboard-professional.title-consult')}
+                  </strong>
+                </h3>
+                <form className='w-full' onSubmit={handleSubmit}>
+                  <div className='flex flex-col justify-center items-center space-y-2 w-full'>
+                    <FormControl className='w-full'>
+                      <TextField
+                        id='float-document'
+                        name='document'
+                        variant='outlined'
+                        label={TextMessage(
+                          'dashboard-professional.patient-document'
+                        )}
+                        {...personDocument}
+                      />
+                    </FormControl>
+                    <Button
+                      className='w-10/12'
                       variant='outlined'
-                      label={TextMessage(
-                        'dashboard-professional.patient-document'
-                      )}
-                      {...personDocument}
-                    />
-                  </FormControl>
-                  <Button
-                    className='w-10/12'
-                    variant='outlined'
-                    color='primary'
-                    type='submit'
-                  >
-                    {TextMessage('dashboard-professional.patient-consult')}
-                  </Button>
-                </div>
-              </form>
-            </Card>
-            <CardConsultInfoPatient patient={patient} />
-          </div>
-          {patient && (
-            <div className='mt-16 mr-auto ml-auto w-full md:w-11/12'>
-              <MedicalConsultation
-                patient={patient}
-                readOnly={false}
-                selectedAttentionCenter={selectedAttentionCenter}
-                specialtyId={selectedAttentionCenter.specialty_id}
-              />
+                      color='primary'
+                      type='submit'
+                    >
+                      {TextMessage('dashboard-professional.patient-consult')}
+                    </Button>
+                  </div>
+                </form>
+              </Card>
+              <CardConsultInfoPatient patient={patient} />
             </div>
-          )}
-        </div>
-      )}
+            {patient && (
+              <div className='mt-16 mr-auto ml-auto w-full md:w-11/12'>
+                <MedicalConsultation
+                  patient={patient}
+                  readOnly={false}
+                  selectedAttentionCenter={selectedAttentionCenter}
+                  specialtyId={selectedAttentionCenter.specialty_id}
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </Layout>
     </>
   );
 };

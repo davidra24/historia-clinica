@@ -14,6 +14,7 @@ import { Loading } from '../../components/Loading';
 import { CardSpecialty } from '../../components/Dashboard/CardSpecialty';
 import { NoSpecialties } from '../../components/Dashboard/NoSpecialties';
 import { useHistory } from 'react-router';
+import { Layout } from '../../components/App/Layout';
 
 export const DashBoardProfessional = () => {
   const person = useSelector((state: IStore) => state.person);
@@ -51,41 +52,47 @@ export const DashBoardProfessional = () => {
 
   return (
     <>
-      <div className='flex flex-col h-full'>
-        <HeaderWelcomePerson
-          person={person}
-          principalTitle='dashboard-professional.specialties'
-          principalDescription='dashboard-professional.specialties-description'
-          ourPriority='dashboard-professional.specialties-description-end'
-        />
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <div className='flex flex-wrap mt-4 justify-center'>
-              {viewAttentionCenter.length !== 0 ? (
-                viewAttentionCenter.map((attentionCenter) => (
-                  <CardSpecialty
-                    key={`${attentionCenter.id_health_center}-${attentionCenter.document_health_professional}`}
-                    name={attentionCenter.specialty_name}
-                    description={attentionCenter.specialty_description}
-                    healtCenter={attentionCenter.health_center_name}
-                    active={attentionCenter.active_attention_center}
-                    onClick={() => {
-                      if (attentionCenter.active_attention_center) {
-                        dispatch(setOneCenterAttention(attentionCenter));
-                        history.push('attention');
-                      }
-                    }}
-                  />
-                ))
-              ) : (
-                <NoSpecialties isHealthProfessional />
-              )}
-            </div>
-          </>
-        )}
-      </div>
+      <Layout
+        title={'app.dashboard-title'}
+        name={` ${person.first_name} ${person.last_name}`}
+        subtitle={'app.dashboard-subtitle'}
+      >
+        <div className='flex flex-col h-full'>
+          <HeaderWelcomePerson
+            person={person}
+            principalTitle='dashboard-professional.specialties'
+            principalDescription='dashboard-professional.specialties-description'
+            ourPriority='dashboard-professional.specialties-description-end'
+          />
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <div className='flex flex-wrap mt-4 justify-center'>
+                {viewAttentionCenter.length !== 0 ? (
+                  viewAttentionCenter.map((attentionCenter) => (
+                    <CardSpecialty
+                      key={`${attentionCenter.id_health_center}-${attentionCenter.document_health_professional}`}
+                      name={attentionCenter.specialty_name}
+                      description={attentionCenter.specialty_description}
+                      healtCenter={attentionCenter.health_center_name}
+                      active={attentionCenter.active_attention_center}
+                      onClick={() => {
+                        if (attentionCenter.active_attention_center) {
+                          dispatch(setOneCenterAttention(attentionCenter));
+                          history.push('attention');
+                        }
+                      }}
+                    />
+                  ))
+                ) : (
+                  <NoSpecialties isHealthProfessional />
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </Layout>
     </>
   );
 };

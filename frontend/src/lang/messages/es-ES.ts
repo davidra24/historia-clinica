@@ -3,8 +3,33 @@ import { LOCALES } from '../locales';
 export default {
   [LOCALES.SPANISH]: {
     //APP
-    '': '',
     'app.title': 'HISTORIA CLÍNICA DIGITAL',
+    'app.login-title': 'Iniciar Sesión',
+    'app.login-subtitle':
+      'Inicia sesión en tu historia clínica digital y conoce tu estado de salud.',
+    'app.signup-title': 'Registrarse',
+    'app.signup-subtitle':
+      'Registrate y disfruta de tu historial medico en un sólo lugar',
+    'app.404-title': '404',
+    'app.404-subtitle': '¡Error 404! página no encontrada',
+    'app.register-title': 'Terminar registro',
+    'app.register-subtitle':
+      'Termina tu registro para disfrutar de los privilegios',
+    'app.profile-title': 'Tu perfil de usuario',
+    'app.profile-subtitle': 'Acá puedes ver y modificar tu información',
+    'app.specialties-title': 'Las especialidades',
+    'app.specialties-subtitle':
+      'Acá puedes ver las especialidades disponibles en el sistema',
+    'app.selection-title': 'Selecciona tu rol',
+    'app.selection-subtitle':
+      'Acá puedes seleccionar el rol que vas a desempeñar hoy',
+    'app.dashboard-title': 'Hola',
+    'app.dashboard-subtitle': 'Este es tu dashboard de usuario',
+    'app.attention-title': 'Atención al paciente',
+    'app.attention-subtitle':
+      'Acá podrás brindar toda la atención que necesitan tus pacientes',
+
+    '': '',
     'app.not-server': 'No se ha encontrado el servidor',
     'app.loading': 'Cargando...',
     'app.start': 'Inicio',

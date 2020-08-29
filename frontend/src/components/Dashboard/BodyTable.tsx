@@ -15,10 +15,9 @@ interface propsBody {
   aCenter: IViewAttentionCenter;
 }
 
-const dispatch = useDispatch();
-const alert = useAlert(dispatch);
-
 export const BodyTable = ({ aCenter }: propsBody) => {
+  const dispatch = useDispatch();
+  const alert = useAlert(dispatch);
   const token: string = useSelector((state: IStore) => state.token);
   const [checked, setChecked] = useState<boolean>(
     aCenter.active_attention_center

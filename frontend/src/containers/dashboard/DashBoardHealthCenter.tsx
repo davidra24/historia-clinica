@@ -39,6 +39,7 @@ import { IPerson } from '../../data/IPerson';
 import { IEPS } from '../../data/IEPS';
 import { IAttentionCenter } from '../../data/IAttentionCenter';
 import { useAlert } from '../../hooks/useAlert';
+import { Layout } from '../../components/App/Layout';
 
 export const DashBoardHealthCenter = () => {
   const [show, setShow] = useState(true);
@@ -237,115 +238,128 @@ export const DashBoardHealthCenter = () => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className='flex flex-col h-full'>
-          <h2 className='text-4xl font-semibold text-center mb-4'>
-            {TextMessage('app.welcomeM')}
-            <p className='font-bold'>
-              {healthCenter && ` ${healthCenter.name}`}
+      <Layout
+        title={'app.dashboard-title'}
+        name={` ${healthCenter && healthCenter.name}`}
+        subtitle={'app.dashboard-subtitle'}
+      >
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className='flex flex-col h-full'>
+            <h2 className='text-4xl font-semibold text-center mb-4'>
+              {TextMessage('app.welcomeM')}
+              <p className='font-bold'>
+                {healthCenter && ` ${healthCenter.name}`}
+              </p>
+            </h2>
+            <div className='flex justify-center'>
+              <Divider className='w-12/12 md:w-6/12' />
+            </div>
+            <h3 className='text-2xl text-center mt-4'>
+              <strong>{TextMessage('dashboard-health.professional')}</strong>
+            </h3>
+            <p className='flex w-10/12 md:w-8/12 lg:w-6/12 justify-center font-semibold mt-4 mr-auto ml-auto text-center text-gray-800 text-lg'>
+              {TextMessage('dashboard-health.professional-description')}
+              <br />
             </p>
-          </h2>
-          <div className='flex justify-center'>
-            <Divider className='w-12/12 md:w-6/12' />
-          </div>
-          <h3 className='text-2xl text-center mt-4'>
-            <strong>{TextMessage('dashboard-health.professional')}</strong>
-          </h3>
-          <p className='flex w-10/12 md:w-8/12 lg:w-6/12 justify-center font-semibold mt-4 mr-auto ml-auto text-center text-gray-800 text-lg'>
-            {TextMessage('dashboard-health.professional-description')}
-            <br />
-          </p>
-          <p className='font-bold text-base text-center mx-auto my-4'>
-            {TextMessage('dashboard-health.professional-description-end')}
-          </p>
-          <div className='flex justify-center'>
-            <Divider className='w-10/12' />
-          </div>
-          <div className='flex justify-center'>
-            <Card className='flex flex-col w-8/12 h-full rounded-full m-4 p-10'>
-              <form onSubmit={getData}>
-                <div className='flex flex-col justify-center space-y-3'>
-                  <div className='flex flex-col md:flex-row space-y-1 justify-around sm:items-center lg:items-baseline'>
-                    <FormControl className='w-12/12 md:w-5/12'>
-                      <TextField
-                        id='float-document'
-                        name='document'
+            <p className='font-bold text-base text-center mx-auto my-4'>
+              {TextMessage('dashboard-health.professional-description-end')}
+            </p>
+            <div className='flex justify-center'>
+              <Divider className='w-10/12' />
+            </div>
+            <div className='flex justify-center'>
+              <Card className='flex flex-col w-8/12 h-full rounded-full m-4 p-10'>
+                <form onSubmit={getData}>
+                  <div className='flex flex-col justify-center space-y-3'>
+                    <div className='flex flex-col md:flex-row space-y-1 justify-around sm:items-center lg:items-baseline'>
+                      <FormControl className='w-12/12 md:w-5/12'>
+                        <TextField
+                          id='float-document'
+                          name='document'
+                          variant='outlined'
+                          label={TextMessage(
+                            'dashboard-health.professional-document'
+                          )}
+                          {...professionalValue}
+                        />
+                        <span className='text-red-600'>
+                          {!professionalValue.validator &&
+                            TextMessage(
+                              'dashboard-health.professional-required'
+                            )}
+                        </span>
+                      </FormControl>
+                      <FormControl
                         variant='outlined'
-                        label={TextMessage(
-                          'dashboard-health.professional-document'
-                        )}
-                        {...professionalValue}
-                      />
-                      <span className='text-red-600'>
-                        {!professionalValue.validator &&
-                          TextMessage('dashboard-health.professional-required')}
-                      </span>
-                    </FormControl>
-                    <FormControl
-                      variant='outlined'
-                      className='w-12/12 md:w-5/12'
-                    >
-                      <InputLabel id='form-select-eps'>
-                        {TextMessage('dashboard-health.specialties-array')}
-                      </InputLabel>
-                      <Select
-                        id='float-eps'
-                        labelId='float-eps'
-                        label='eps'
-                        {...specialtyValue}
+                        className='w-12/12 md:w-5/12'
                       >
-                        {specialties
-                          .sort((a, b) =>
-                            a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-                          )
-                          .map((speciality: ISpecialty) => (
-                            <MenuItem value={speciality.id} key={speciality.id}>
-                              {speciality.name}
-                            </MenuItem>
-                          ))}
-                      </Select>
-                      <span className='text-red-600'>
-                        {!specialtyValue.validator &&
-                          TextMessage('dashboard-health.specialties-required')}
-                      </span>
-                    </FormControl>
+                        <InputLabel id='form-select-eps'>
+                          {TextMessage('dashboard-health.specialties-array')}
+                        </InputLabel>
+                        <Select
+                          id='float-eps'
+                          labelId='float-eps'
+                          label='eps'
+                          {...specialtyValue}
+                        >
+                          {specialties
+                            .sort((a, b) =>
+                              a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+                            )
+                            .map((speciality: ISpecialty) => (
+                              <MenuItem
+                                value={speciality.id}
+                                key={speciality.id}
+                              >
+                                {speciality.name}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                        <span className='text-red-600'>
+                          {!specialtyValue.validator &&
+                            TextMessage(
+                              'dashboard-health.specialties-required'
+                            )}
+                        </span>
+                      </FormControl>
+                    </div>
+                    <div className='flex flex-col md:flex-row space-y-1 justify-center md:justify-end md:pr-8 items-center'>
+                      <Button
+                        className='w-12/12'
+                        variant='outlined'
+                        color='primary'
+                        type='submit'
+                      >
+                        {TextMessage('dashboard-health.add-professional')}
+                      </Button>
+                      <ModalInfoProfessional
+                        professional={professional}
+                        specialty={specialty}
+                        open={open}
+                        handleClose={() => setOpen(false)}
+                        EPSName={nameEPS}
+                        ProfessionName={nameProfession}
+                        handleSubmit={handleSubmit}
+                      />
+                    </div>
                   </div>
-                  <div className='flex flex-col md:flex-row space-y-1 justify-center md:justify-end md:pr-8 items-center'>
-                    <Button
-                      className='w-12/12'
-                      variant='outlined'
-                      color='primary'
-                      type='submit'
-                    >
-                      {TextMessage('dashboard-health.add-professional')}
-                    </Button>
-                    <ModalInfoProfessional
-                      professional={professional}
-                      specialty={specialty}
-                      open={open}
-                      handleClose={() => setOpen(false)}
-                      EPSName={nameEPS}
-                      ProfessionName={nameProfession}
-                      handleSubmit={handleSubmit}
-                    />
-                  </div>
-                </div>
-              </form>
-            </Card>
+                </form>
+              </Card>
+            </div>
+            <div className='flex justify-center'>
+              {viewAttentionCenter.length !== 0 ? (
+                <TableHealthCenter arrayAttentionCenter={viewAttentionCenter} />
+              ) : (
+                <h3 className='text-xl text-center font-semibold mt-4 text-gray-700'>
+                  {TextMessage('dashboard-health.no-specialties')}
+                </h3>
+              )}
+            </div>
           </div>
-          <div className='flex justify-center'>
-            {viewAttentionCenter.length !== 0 ? (
-              <TableHealthCenter arrayAttentionCenter={viewAttentionCenter} />
-            ) : (
-              <h3 className='text-xl text-center font-semibold mt-4 text-gray-700'>
-                {TextMessage('dashboard-health.no-specialties')}
-              </h3>
-            )}
-          </div>
-        </div>
-      )}
+        )}
+      </Layout>
     </>
   );
 };

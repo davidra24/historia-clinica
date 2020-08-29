@@ -1,7 +1,12 @@
 export const SECRET_PASS = process.env.SECRET_PASS || 'SECRET';
 
-export const HOST = 'http://localhost';
-export const PORT = '9000';
+//DESARROLLO
+//export const HOST = 'http://localhost';
+//export const PORT = '9000';
+
+//PRODUCCIÓN
+export const HOST = 'http://ec2-3-16-108-17.us-east-2.compute.amazonaws.com';
+export const PORT = '8081';
 
 export const HTTP_SERVICE = `${HOST}:${PORT}/api`;
 
