@@ -82,7 +82,7 @@ export default {
     'password.required': 'La contraseña es requerida',
     'password.second-required': 'La confirmación de la contraseña es requerida',
     'password.no-match':
-      'La contraseña no requiere con su verificación, por favor corrija',
+      'La contraseña no coincide con su verificación, por favor corrija',
     'password.invalid':
       'Se debe diligenciar el dato de la contraseña, con las siguientes recomendaciones: \n 1.Debe contener al menos 8 caracteres. \n 2. Contener mayúsculas y minúsculas. \n 3. Contener números. \n 4.Contener caracteres especiales.',
     //USERS

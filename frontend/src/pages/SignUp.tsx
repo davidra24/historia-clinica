@@ -70,7 +70,7 @@ export const SignUp = () => {
       }
 
       if (password !== secondPassword) {
-        alert('signup.authError-title', 'password.invalid', 'error');
+        alert('signup.authError-title', 'password.no-match', 'error');
         return resolve(false);
       }
 

@@ -80,7 +80,7 @@ export default {
     'document.invalid':
       'The minimum document length is 6 digits and the maximum 15 digits.',
     'password.no-match':
-      'Password is not required with your verification, please correct it.',
+      'Password is not match with your verification, please correct it.',
     //USERS
     'getUsers.success': 'All users of the database have been obtained',
     'getUsers.error': 'An unexpected error occurred while getting all users',
