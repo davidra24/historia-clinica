@@ -88,6 +88,7 @@ export const DashBoardHealthCenter = () => {
       const { ok, message, data } = response;
       if (ok) {
         alert('register.success-title', message, 'success');
+        setOpen(false);
       } else {
         alert('register.error-title', message, 'error');
       }

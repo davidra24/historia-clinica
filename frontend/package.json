@@ -66,7 +66,7 @@
     "dev": "yarn build:css && yarn start",
     "devnt": "yarn start",
     "prod": "yarn build:css && yarn build",
-    "deploy": "aws s3 sync build/ s3://historia-clinica-digital --acl public-read"
+    "deploy": "yarn build && aws s3 sync build/ s3://historia-clinica-digital --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
